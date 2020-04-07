@@ -36,7 +36,7 @@ let getSettings = function(){
 	    settings.mod_date = projectSettings.MOD_DATE
 	    settings.paywall = projectConfig.PAYWALL_SETTING
 	    settings.analytics_author = ""
-	    settings.twitter_text = storySettings.TWITTER_TEXT
+	    settings.twitter_text = projectSettings.TWITTER_TEXT
 	}
 
 	// These only show up in the config or are general settings
