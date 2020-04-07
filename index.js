@@ -40,6 +40,7 @@ let getSettings = function(){
 	settings.category = "news"
 	settings.URL = "https://projects.sfchronicle.com"
 	settings.author_array = projectSettings.AUTHORS
+	settings.embed = projectConfig.EMBEDDED
 
 	return settings
 }
