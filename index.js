@@ -37,6 +37,7 @@ let getSettings = function(){
 	    settings.analytics_author = ""
 	}
 
+	// These only show up in the config or are general settings
 	settings.category = "news"
 	settings.URL = "https://projects.sfchronicle.com"
 	settings.author_array = projectSettings.AUTHORS
