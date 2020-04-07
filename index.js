@@ -23,6 +23,7 @@ let getSettings = function(){
 	    settings.mod_date = storySettings.Mod_Date || storySettings.LastModDate_C2P
 	    settings.paywall = storySettings.Paywall
 	    settings.analytics_author = storySettings.Analytics_Credit
+	    settings.twitter_text = storySettings.Twitter_Text
 	} catch (err){
 	    // If there are no story settings, populate with project data
 	    settings.title = projectSettings.TITLE
@@ -35,6 +36,7 @@ let getSettings = function(){
 	    settings.mod_date = projectSettings.MOD_DATE
 	    settings.paywall = projectConfig.PAYWALL_SETTING
 	    settings.analytics_author = ""
+	    settings.twitter_text = storySettings.TWITTER_TEXT
 	}
 
 	// These only show up in the config or are general settings
