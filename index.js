@@ -1,6 +1,8 @@
 
-/* Handle the data/processing for the Hearst analytics and paywall configuration */
+// Convert date to computer-readable time
+import { DateTime } from 'luxon'
 
+/* Handle the data/processing for the Hearst analytics and paywall configuration */
 let projectConfig = require("../../project-config.json")
 let projectSettings = projectConfig.PROJECT
 
@@ -77,9 +79,6 @@ let appCheck = function(){
 let blendHDN = function(props){
 	// Get settings for project
 	const settings = getSettings()
-
-	// Convert date to computer-readable time
-	const { DateTime } = require('luxon')
 	const dt = DateTime.fromFormat(settings.date, "MMMM d, y h:mm a")
     const computerPubDate = dt.toISO()
 
