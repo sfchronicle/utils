@@ -1,10 +1,13 @@
 
-// Convert date to computer-readable time
-import { DateTime } from 'luxon'
-
 /* Handle the data/processing for the Hearst analytics and paywall configuration */
 let projectConfig = require("../../project-config.json")
 let projectSettings = projectConfig.PROJECT
+
+// Get dates from env
+let dates = process.env.GATSBY_DATES; 
+if (dates){
+  dates = JSON.parse(dates);
+}
 
 // Get settings off story_settings if it exists, otherwise fall back to projectConfig
 let getSettings = function(){
@@ -79,8 +82,6 @@ let appCheck = function(){
 let blendHDN = function(props){
 	// Get settings for project
 	const settings = getSettings()
-	const dt = DateTime.fromFormat(settings.date, "MMMM d, y h:mm a")
-    const computerPubDate = dt.toISO()
 
     // Check if we need a slash
     let slash = "";
@@ -107,7 +108,7 @@ let blendHDN = function(props){
 	  `${settings.category}`,
 	  'special projects',
 	]
-	HDN.dataLayer.content.pubDate = computerPubDate
+	HDN.dataLayer.content.pubDate = dates.ISO_PUBDATE
 	HDN.dataLayer.content.wordCount = ''
 	HDN.dataLayer.content.keywords = []
 	HDN.dataLayer.content.keySubjects = []
@@ -216,4 +217,4 @@ let blendHDN = function(props){
 	}
 }
 
-export { appCheck, blendHDN, getSettings }
+module.exports = { appCheck, blendHDN, getSettings }

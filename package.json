@@ -1,7 +1,4 @@
 {
   "name": "sfc-utils",
-  "version": "1.0.0",
-  "dependencies": {
-    "luxon": "1.21.3"
-  }
+  "version": "1.0.1"
 }
