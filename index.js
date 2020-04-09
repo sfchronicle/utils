@@ -4,9 +4,11 @@ let projectConfig = require("../../project-config.json")
 let projectSettings = projectConfig.PROJECT
 
 // Get dates from env
-let dates = process.env.GATSBY_DATES; 
+let dates = process.env.GATSBY_DATES
+let pubdate = "" // This will be unset if the var wasn't exported, but that's ok
 if (dates){
-  dates = JSON.parse(dates);
+  dates = JSON.parse(dates)
+  pubdate = dates.ISO_PUBDATE
 }
 
 // Get settings off story_settings if it exists, otherwise fall back to projectConfig
@@ -108,7 +110,7 @@ let blendHDN = function(props){
 	  `${settings.category}`,
 	  'special projects',
 	]
-	HDN.dataLayer.content.pubDate = dates.ISO_PUBDATE
+	HDN.dataLayer.content.pubDate = pubdate
 	HDN.dataLayer.content.wordCount = ''
 	HDN.dataLayer.content.keywords = []
 	HDN.dataLayer.content.keySubjects = []
