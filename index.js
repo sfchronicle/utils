@@ -36,11 +36,11 @@ let getSettings = function(){
 				"IMAGE": "https://s.hdnux.com/photos/0/0/0/0/"+storySettings.Social_ImageID+"/0/1600x0.jpg",
 				"DESCRIPTION": storySettings.SEO_Description,
 				"TWITTER_TEXT": storySettings.Twitter_Text,
-				"HEARST_CATEGORY": "news", 
 				"DATE": storySettings.Publish_Date,
 				"MOD_DATE": storySettings.Mod_Date || storySettings.LastModDate_C2P,
 				"AUTHORS": projectSettings.AUTHORS,
-				"ANALYTICS_CREDIT":  storySettings.Analytics_Credit
+				"ANALYTICS_CREDIT":  storySettings.Analytics_Credit,
+				"HEARST_CATEGORY": storySettings.Category || "news"
 			}
 		}
 
@@ -93,18 +93,10 @@ let blendHDN = function(props){
 	const settings = getSettings()
 
 	// Get dates from env
-	let pubdate = ""
-	let dates = process.env.GATSBY_DATES
-	if (dates){
-	  	dates = JSON.parse(dates)
-	  	pubdate = dates.ISO_PUBDATE
-	} 
+	let pubdate = getSettings.PROJECT.ISO_PUBDATE
 
     // Check if we need a slash
-    let slash = "";
-    if (settings.PROJECT.SUBFOLDER){
-    	slash = "/"
-    }
+    let slash = getSettings.PROJECT.OPT_SLASH
 
 	// Setting up vars
 	let HDN = {}
@@ -119,10 +111,10 @@ let blendHDN = function(props){
 	// HDN.dataLayer object for content and href data
 	HDN.dataLayer.content.title = settings.PROJECT.TITLE
 	HDN.dataLayer.content.subtitle = ''
-	HDN.dataLayer.content.objectId = `${settings.PROJECT.SUBFOLER}/${settings.PROJECT.SLUG}`
+	HDN.dataLayer.content.objectId = `${settings.PROJECT.SUBFOLDER}${slash}${settings.PROJECT.SLUG}`
 	HDN.dataLayer.content.objectType = 'project'
 	HDN.dataLayer.content.sectionPath = [
-	  `${settings.PROJECT.HEARST_CATEGORY}`,
+	  settings.PROJECT.HEARST_CATEGORY,
 	  'special projects',
 	]
 	HDN.dataLayer.content.pubDate = pubdate
@@ -151,12 +143,12 @@ let blendHDN = function(props){
 	HDN.dataLayer.source.sourceSite = 'sfgate'
 
 	// HDN.dataLayer object for sharing information
-	HDN.dataLayer.sharing.openGraphUrl = `${settings.PROJECT.URL}${slash}${settings.subfolder}/${settings.slug}/`
+	HDN.dataLayer.sharing.openGraphUrl = `${settings.PROJECT.URL}/${settings.PROJECT.SUBFOLDER}${slash}${settings.PROJECT.SLUG}/`
 	HDN.dataLayer.sharing.openGraphType = 'article'
 
 	// More page settings
-	HDN.dataLayer.href.pageUrl = `${settings.PROJECT.URL}${slash}${settings.PROJECT.SUBFOLDER}/${settings.PROJECT.SLUG}/`
-	HDN.dataLayer.href.canonicalUrl = `${settings.PROJECT.URL}${slash}${settings.PROJECT.SUBFOLDER}/${settings.PROJECT.SLUG}/`
+	HDN.dataLayer.href.pageUrl = `${settings.PROJECT.URL}/${settings.PROJECT.SUBFOLDER}${slash}${settings.PROJECT.SLUG}/`
+	HDN.dataLayer.href.canonicalUrl = `${settings.PROJECT.URL}/${settings.PROJECT.SUBFOLDER}${slash}${settings.PROJECT.SLUG}/`
 
 	// HDN.dataLayer object for presentation information
 	HDN.dataLayer.presentation.hasSlideshow = ''
@@ -167,7 +159,7 @@ let blendHDN = function(props){
 	// HDN.dataLayer object for paywall information
 	HDN.dataLayer.paywall.premiumStatus = 'isPremium'
 	HDN.dataLayer.paywall.premiumEndDate = ''
-	HDN.dataLayer.paywall.policy = settings.PROJECT.PAYWALL_SETTING
+	HDN.dataLayer.paywall.policy = settings.PAYWALL_SETTING
 
 	// Special site var
 	HDN.dataLayer.site = {
