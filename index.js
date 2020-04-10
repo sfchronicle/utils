@@ -93,10 +93,10 @@ let blendHDN = function(props){
 	const settings = getSettings()
 
 	// Get dates from env
-	let pubdate = getSettings.PROJECT.ISO_PUBDATE
+	let pubdate = settings.PROJECT.ISO_PUBDATE
 
     // Check if we need a slash
-    let slash = getSettings.PROJECT.OPT_SLASH
+    let slash = settings.PROJECT.OPT_SLASH
 
 	// Setting up vars
 	let HDN = {}
