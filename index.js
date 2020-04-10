@@ -49,8 +49,8 @@ let getSettings = function(){
 	}
 
 	// Send ISO dates into the data
-	settings['ISO_PUBDATE'] = pubdate
-	settings['ISO_MODDATE'] = moddate
+	settings.PROJECT['ISO_PUBDATE'] = pubdate
+	settings.PROJECT['ISO_MODDATE'] = moddate
 
 	// Check if we need a slash
     let slash = "";
