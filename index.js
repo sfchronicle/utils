@@ -3,18 +3,21 @@
 let projectConfig = require("../../project-config.json")
 let projectSettings = projectConfig.PROJECT
 
-// Get dates from env
-let dates = process.env.GATSBY_DATES
-let pubdate = "" // This will be unset if the var wasn't exported, but that's ok
-if (dates){
-  dates = JSON.parse(dates)
-  pubdate = dates.ISO_PUBDATE
-}
-
 // Get settings off story_settings if it exists, otherwise fall back to projectConfig
 let getSettings = function(){
 	let storySettings
 	let settings = projectConfig
+
+	// Get dates from env
+	let pubdate = ""
+	let moddate = ""
+	let dates = process.env.GATSBY_DATES
+	if (dates){
+	  	dates = JSON.parse(dates)
+	  	pubdate = dates.ISO_PUBDATE
+	  	moddate = dates.ISO_MODDATE
+	} 
+
 	try {
 	    // Populate with storySettings if they exist
 	    let [storySettings] = require("../../src/data/story_settings.sheet.json")
@@ -46,8 +49,15 @@ let getSettings = function(){
 	}
 
 	// Send ISO dates into the data
-	settings['ISO_PUBDATE'] = dates.ISO_PUBDATE
-	settings['ISO_MODDATE'] = dates.ISO_MODDATE
+	settings['ISO_PUBDATE'] = pubdate
+	settings['ISO_MODDATE'] = moddate
+
+	// Check if we need a slash
+    let slash = "";
+    if (settings.PROJECT.SUBFOLDER){
+    	slash = "/"
+    }
+    settings.PROJECT['OPT_SLASH'] = slash
 
 	return settings
 }
@@ -81,6 +91,14 @@ let appCheck = function(){
 let blendHDN = function(props){
 	// Get settings for project
 	const settings = getSettings()
+
+	// Get dates from env
+	let pubdate = ""
+	let dates = process.env.GATSBY_DATES
+	if (dates){
+	  	dates = JSON.parse(dates)
+	  	pubdate = dates.ISO_PUBDATE
+	} 
 
     // Check if we need a slash
     let slash = "";
