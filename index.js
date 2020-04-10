@@ -14,43 +14,40 @@ if (dates){
 // Get settings off story_settings if it exists, otherwise fall back to projectConfig
 let getSettings = function(){
 	let storySettings
-	let settings = {}
+	let settings = projectConfig
 	try {
 	    // Populate with storySettings if they exist
-	    storySettings = require("../../src/data/story_settings.sheet.json")
-	    storySettings = storySettings[0] // Only need first row
+	    let [storySettings] = require("../../src/data/story_settings.sheet.json")
 	    // Populate with sheet settings
-	    settings.title = storySettings.SEO_Title
-	    settings.description = storySettings.SEO_Description
-	    settings.social_imageid = storySettings.Social_ImageID
-	    settings.social_title = storySettings.Social_Title
-	    settings.subfolder = storySettings.Year
-	    settings.slug = storySettings.Slug
-	    settings.date = storySettings.Publish_Date
-	    settings.mod_date = storySettings.Mod_Date || storySettings.LastModDate_C2P
-	    settings.paywall = storySettings.Paywall
-	    settings.analytics_author = storySettings.Analytics_Credit
-	    settings.twitter_text = storySettings.Twitter_Text
+	    settings = {
+			"PAYWALL_SETTING": storySettings.Paywall,
+			"EMBEDDED": projectSettings.EMBEDDED,
+			"GOOGLE_SHEETS": projectSettings.GOOGLE_SHEETS,
+			"GOOGLE_DOCS": projectSettings.GOOGLE_DOCS,
+			"PROJECT": {
+				"SUBFOLDER": storySettings.Year,
+				"SLUG": storySettings.Slug,
+				"TITLE": storySettings.SEO_Title,
+				"SOCIAL_TITLE": storySettings.Social_Title,
+				"URL": "https://projects.sfchronicle.com",
+				"IMAGE": "https://s.hdnux.com/photos/0/0/0/0/"+storySettings.Social_ImageID+"/0/1600x0.jpg",
+				"DESCRIPTION": storySettings.SEO_Description,
+				"TWITTER_TEXT": storySettings.Twitter_Text,
+				"HEARST_CATEGORY": "news", 
+				"DATE": storySettings.Publish_Date,
+				"MOD_DATE": storySettings.Mod_Date || storySettings.LastModDate_C2P,
+				"AUTHORS": projectSettings.AUTHORS,
+				"ANALYTICS_CREDIT":  storySettings.Analytics_Credit
+			}
+		}
+
 	} catch (err){
-	    // If there are no story settings, populate with project data
-	    settings.title = projectSettings.TITLE
-	    settings.description = projectSettings.DESCRIPTION
-	    settings.social_imageid = projectSettings.IMAGE
-	    settings.social_title = projectSettings.SOCIAL_TITLE
-	    settings.subfolder = projectSettings.SUBFOLDER
-	    settings.slug = projectSettings.SLUG
-	    settings.date = projectSettings.DATE
-	    settings.mod_date = projectSettings.MOD_DATE
-	    settings.paywall = projectConfig.PAYWALL_SETTING
-	    settings.analytics_author = ""
-	    settings.twitter_text = projectSettings.TWITTER_TEXT
+	    // It's ok, we'll use project data	    
 	}
 
-	// These only show up in the config or are general settings
-	settings.category = "news"
-	settings.URL = "https://projects.sfchronicle.com"
-	settings.author_array = projectSettings.AUTHORS
-	settings.embed = projectConfig.EMBEDDED
+	// Send ISO dates into the data
+	settings['ISO_PUBDATE'] = dates.ISO_PUBDATE
+	settings['ISO_MODDATE'] = dates.ISO_MODDATE
 
 	return settings
 }
@@ -87,7 +84,7 @@ let blendHDN = function(props){
 
     // Check if we need a slash
     let slash = "";
-    if (settings.subfolder){
+    if (settings.PROJECT.SUBFOLDER){
     	slash = "/"
     }
 
@@ -102,12 +99,12 @@ let blendHDN = function(props){
 	HDN.dataLayer.paywall = {}
 
 	// HDN.dataLayer object for content and href data
-	HDN.dataLayer.content.title = settings.title
+	HDN.dataLayer.content.title = settings.PROJECT.TITLE
 	HDN.dataLayer.content.subtitle = ''
-	HDN.dataLayer.content.objectId = `${settings.subfolder}/${settings.slug}`
+	HDN.dataLayer.content.objectId = `${settings.PROJECT.SUBFOLER}/${settings.PROJECT.SLUG}`
 	HDN.dataLayer.content.objectType = 'project'
 	HDN.dataLayer.content.sectionPath = [
-	  `${settings.category}`,
+	  `${settings.PROJECT.HEARST_CATEGORY}`,
 	  'special projects',
 	]
 	HDN.dataLayer.content.pubDate = pubdate
@@ -136,12 +133,12 @@ let blendHDN = function(props){
 	HDN.dataLayer.source.sourceSite = 'sfgate'
 
 	// HDN.dataLayer object for sharing information
-	HDN.dataLayer.sharing.openGraphUrl = `${settings.URL}${slash}${settings.subfolder}/${settings.slug}/`
+	HDN.dataLayer.sharing.openGraphUrl = `${settings.PROJECT.URL}${slash}${settings.subfolder}/${settings.slug}/`
 	HDN.dataLayer.sharing.openGraphType = 'article'
 
 	// More page settings
-	HDN.dataLayer.href.pageUrl = `${settings.URL}${slash}${settings.subfolder}/${settings.slug}/`
-	HDN.dataLayer.href.canonicalUrl = `${settings.URL}${slash}${settings.subfolder}/${settings.slug}/`
+	HDN.dataLayer.href.pageUrl = `${settings.PROJECT.URL}${slash}${settings.PROJECT.SUBFOLDER}/${settings.PROJECT.SLUG}/`
+	HDN.dataLayer.href.canonicalUrl = `${settings.PROJECT.URL}${slash}${settings.PROJECT.SUBFOLDER}/${settings.PROJECT.SLUG}/`
 
 	// HDN.dataLayer object for presentation information
 	HDN.dataLayer.presentation.hasSlideshow = ''
@@ -152,7 +149,7 @@ let blendHDN = function(props){
 	// HDN.dataLayer object for paywall information
 	HDN.dataLayer.paywall.premiumStatus = 'isPremium'
 	HDN.dataLayer.paywall.premiumEndDate = ''
-	HDN.dataLayer.paywall.policy = settings.paywall
+	HDN.dataLayer.paywall.policy = settings.PROJECT.PAYWALL_SETTING
 
 	// Special site var
 	HDN.dataLayer.site = {
@@ -174,13 +171,13 @@ let blendHDN = function(props){
     let authorString = ""
     if (props.analytics_author){
       authorString = props.analytics_author
-    } else if (projectConfig.PROJECT.AUTHORS){
+    } else if (settings.PROJECT.AUTHORS){
       // If one wasn't specified, use the one in the config
-      for (var i = 0; i < projectConfig.PROJECT.AUTHORS.length; i++){
+      for (var i = 0; i < settings.PROJECT.AUTHORS.length; i++){
         // Add author to string
-        authorString += projectConfig.PROJECT.AUTHORS[i].AUTHOR_NAME
+        authorString += settings.PROJECT.AUTHORS[i].AUTHOR_NAME
         // Add comma if we're not done
-        if (i < projectConfig.PROJECT.AUTHORS.length-1){
+        if (i < settings.PROJECT.AUTHORS.length-1){
           authorString += ", "
         }
       }
