@@ -24,9 +24,9 @@ let getSettings = function(){
 	    // Populate with sheet settings
 	    settings = {
 			"PAYWALL_SETTING": storySettings.Paywall,
-			"EMBEDDED": projectSettings.EMBEDDED,
-			"GOOGLE_SHEETS": projectSettings.GOOGLE_SHEETS,
-			"GOOGLE_DOCS": projectSettings.GOOGLE_DOCS,
+			"EMBEDDED": projectConfig.EMBEDDED,
+			"GOOGLE_SHEETS": projectConfig.GOOGLE_SHEETS,
+			"GOOGLE_DOCS": projectConfig.GOOGLE_DOCS,
 			"PROJECT": {
 				"SUBFOLDER": storySettings.Year,
 				"SLUG": storySettings.Slug,
