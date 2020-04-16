@@ -5,8 +5,8 @@ let projectSettings = projectConfig.PROJECT
 
 // Get settings off story_settings if it exists, otherwise fall back to projectConfig
 let getSettings = function(){
-	let storySettings
 	let settings = projectConfig
+	settings.PROJECT['ANALYTICS_CREDIT'] = ''
 
 	// Get dates from env
 	let pubdate = ""
@@ -16,7 +16,8 @@ let getSettings = function(){
 	  	dates = JSON.parse(dates)
 	  	pubdate = dates.ISO_PUBDATE
 	  	moddate = dates.ISO_MODDATE
-	} 
+	}
+
 
 	try {
 	    // Populate with storySettings if they exist
@@ -88,15 +89,28 @@ let appCheck = function(){
 
 // Blend the HDN var with whatever is already present on the page
 // Returns a string for injection into the head of the page
-let blendHDN = function(props){
+let blendHDN = function({meta, url_add}){
 	// Get settings for project
-	const settings = getSettings()
+	const {
+		PAYWALL_SETTING,
+    PROJECT: {
+			AUTHORS,
+			ANALYTICS_CREDIT,
+      TITLE,
+			HEARST_CATEGORY,
+      URL,
+      SUBFOLDER,
+      OPT_SLASH,
+      SLUG,
+      ISO_PUBDATE,
+    },
+  } = meta
 
 	// Get dates from env
-	let pubdate = settings.PROJECT.ISO_PUBDATE
+	let pubdate = ISO_PUBDATE
 
-    // Check if we need a slash
-    let slash = settings.PROJECT.OPT_SLASH
+  // Check if we need a slash
+  let slash = OPT_SLASH
 
 	// Setting up vars
 	let HDN = {}
@@ -109,12 +123,12 @@ let blendHDN = function(props){
 	HDN.dataLayer.paywall = {}
 
 	// HDN.dataLayer object for content and href data
-	HDN.dataLayer.content.title = settings.PROJECT.TITLE
+	HDN.dataLayer.content.title = TITLE
 	HDN.dataLayer.content.subtitle = ''
-	HDN.dataLayer.content.objectId = `${settings.PROJECT.SUBFOLDER}${slash}${settings.PROJECT.SLUG}`
+	HDN.dataLayer.content.objectId = `${SUBFOLDER}${slash}${SLUG}`
 	HDN.dataLayer.content.objectType = 'project'
 	HDN.dataLayer.content.sectionPath = [
-	  settings.PROJECT.HEARST_CATEGORY,
+	  HEARST_CATEGORY,
 	  'special projects',
 	]
 	HDN.dataLayer.content.pubDate = pubdate
@@ -143,12 +157,12 @@ let blendHDN = function(props){
 	HDN.dataLayer.source.sourceSite = 'sfgate'
 
 	// HDN.dataLayer object for sharing information
-	HDN.dataLayer.sharing.openGraphUrl = `${settings.PROJECT.URL}/${settings.PROJECT.SUBFOLDER}${slash}${settings.PROJECT.SLUG}/`
+	HDN.dataLayer.sharing.openGraphUrl = `${URL}/${SUBFOLDER}${slash}${SLUG}/`
 	HDN.dataLayer.sharing.openGraphType = 'article'
 
 	// More page settings
-	HDN.dataLayer.href.pageUrl = `${settings.PROJECT.URL}/${settings.PROJECT.SUBFOLDER}${slash}${settings.PROJECT.SLUG}/`
-	HDN.dataLayer.href.canonicalUrl = `${settings.PROJECT.URL}/${settings.PROJECT.SUBFOLDER}${slash}${settings.PROJECT.SLUG}/`
+	HDN.dataLayer.href.pageUrl = `${URL}/${SUBFOLDER}${slash}${SLUG}/`
+	HDN.dataLayer.href.canonicalUrl = `${URL}/${SUBFOLDER}${slash}${SLUG}/`
 
 	// HDN.dataLayer object for presentation information
 	HDN.dataLayer.presentation.hasSlideshow = ''
@@ -159,7 +173,7 @@ let blendHDN = function(props){
 	// HDN.dataLayer object for paywall information
 	HDN.dataLayer.paywall.premiumStatus = 'isPremium'
 	HDN.dataLayer.paywall.premiumEndDate = ''
-	HDN.dataLayer.paywall.policy = settings.PAYWALL_SETTING
+	HDN.dataLayer.paywall.policy = PAYWALL_SETTING
 
 	// Special site var
 	HDN.dataLayer.site = {
@@ -179,18 +193,18 @@ let blendHDN = function(props){
 
 	// Create author for analytics here
     let authorString = ""
-    if (props.analytics_author){
-      authorString = props.analytics_author
-    } else if (settings.PROJECT.AUTHORS){
-      // If one wasn't specified, use the one in the config
-      for (var i = 0; i < settings.PROJECT.AUTHORS.length; i++){
-        // Add author to string
-        authorString += settings.PROJECT.AUTHORS[i].AUTHOR_NAME
+    if (ANALYTICS_CREDIT !== ''){
+      authorString = ANALYTICS_CREDIT
+    } else if (AUTHORS){
+			// If one wasn't specified, use the one in the config
+			AUTHORS.forEach((author, index) => {
+				// Add author to string
+        authorString += author.AUTHOR_NAME
         // Add comma if we're not done
-        if (i < settings.PROJECT.AUTHORS.length-1){
+        if (index < (AUTHORS.length - 1)){
           authorString += ", "
         }
-      }
+			})
     }
     // If we didn't get any author, sub in default
     if (authorString === ""){
@@ -199,10 +213,10 @@ let blendHDN = function(props){
 
 	blendedHDN = HDN
 	// Custom config for multiple pages
-	blendedHDN.dataLayer.content.title = props.title
-	blendedHDN.dataLayer.sharing.openGraphUrl = props.url + props.url_add
-	blendedHDN.dataLayer.href.pageUrl = props.url + props.url_add
-	blendedHDN.dataLayer.href.canonicalUrl = props.url + props.url_add
+	blendedHDN.dataLayer.content.title = TITLE
+	blendedHDN.dataLayer.sharing.openGraphUrl = URL + url_add
+	blendedHDN.dataLayer.href.pageUrl = URL + url_add
+	blendedHDN.dataLayer.href.canonicalUrl = URL + url_add
 	blendedHDN.dataLayer.source.authorName = authorString
 
 	let appVer = appCheck()
