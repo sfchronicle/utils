@@ -89,23 +89,32 @@ let appCheck = function(){
 
 // Blend the HDN var with whatever is already present on the page
 // Returns a string for injection into the head of the page
-let blendHDN = function({meta, url_add}){
-	// Get settings for project
+let blendHDN = function(meta){
+	
+	if (!meta.PROJECT){
+		// If we don't have a properly formatted meta var coming in, this is a legacy template and needs settings pulled
+		let url_add = meta.url_add || ""
+		meta = getSettings()
+		meta.URL_ADD = url_add
+	}
+
+	// Set vars with the new object
 	const {
 		PAYWALL_SETTING,
-    PROJECT: {
+		URL_ADD,
+		PROJECT: {
 			AUTHORS,
 			ANALYTICS_CREDIT,
-      TITLE,
+			TITLE,
 			HEARST_CATEGORY,
-      URL,
-      SUBFOLDER,
-      OPT_SLASH,
-      SLUG,
-      ISO_PUBDATE,
-    },
+			URL,
+			SUBFOLDER,
+			OPT_SLASH,
+			SLUG,
+			ISO_PUBDATE,
+		},
   } = meta
-
+	
 	// Get dates from env
 	let pubdate = ISO_PUBDATE
 
@@ -192,31 +201,31 @@ let blendHDN = function({meta, url_add}){
     let stringHDN = ""
 
 	// Create author for analytics here
-    let authorString = ""
-    if (ANALYTICS_CREDIT !== ''){
-      authorString = ANALYTICS_CREDIT
-    } else if (AUTHORS){
-			// If one wasn't specified, use the one in the config
-			AUTHORS.forEach((author, index) => {
-				// Add author to string
-        authorString += author.AUTHOR_NAME
-        // Add comma if we're not done
-        if (index < (AUTHORS.length - 1)){
-          authorString += ", "
-        }
-			})
-    }
-    // If we didn't get any author, sub in default
-    if (authorString === ""){
-      authorString = "San Francisco Chronicle Staff"
-    }
+  let authorString = ""
+  if (ANALYTICS_CREDIT !== ''){
+    authorString = ANALYTICS_CREDIT
+  } else if (AUTHORS){
+		// If one wasn't specified, use the one in the config
+		AUTHORS.forEach((author, index) => {
+			// Add author to string
+      authorString += author.AUTHOR_NAME
+      // Add comma if we're not done
+      if (index < (AUTHORS.length - 1)){
+        authorString += ", "
+      }
+		})
+  }
+  // If we didn't get any author, sub in default
+  if (authorString === ""){
+    authorString = "San Francisco Chronicle Staff"
+  }
 
 	blendedHDN = HDN
 	// Custom config for multiple pages
 	blendedHDN.dataLayer.content.title = TITLE
-	blendedHDN.dataLayer.sharing.openGraphUrl = URL + url_add
-	blendedHDN.dataLayer.href.pageUrl = URL + url_add
-	blendedHDN.dataLayer.href.canonicalUrl = URL + url_add
+	blendedHDN.dataLayer.sharing.openGraphUrl = `${URL}/${SUBFOLDER}${slash}${SLUG}/${URL_ADD}`
+	blendedHDN.dataLayer.href.pageUrl = `${URL}/${SUBFOLDER}${slash}${SLUG}/${URL_ADD}`
+	blendedHDN.dataLayer.href.canonicalUrl = `${URL}/${SUBFOLDER}${slash}${SLUG}/${URL_ADD}`
 	blendedHDN.dataLayer.source.authorName = authorString
 
 	let appVer = appCheck()
