@@ -8,22 +8,11 @@ let getSettings = function(){
 	let settings = projectConfig
 	settings.PROJECT['ANALYTICS_CREDIT'] = ''
 
-	// Get dates from env
-	let pubdate = ""
-	let moddate = ""
-	let dates = process.env.GATSBY_DATES
-	if (dates){
-	  	dates = JSON.parse(dates)
-	  	pubdate = dates.ISO_PUBDATE
-	  	moddate = dates.ISO_MODDATE
-	}
-
-
 	try {
-	    // Populate with storySettings if they exist
-	    let [storySettings] = require("../../src/data/story_settings.sheet.json")
-	    // Populate with sheet settings
-	    settings = {
+    // Populate with storySettings if they exist
+    let [storySettings] = require("../../src/data/story_settings.sheet.json")
+    // Populate with sheet settings
+    settings = {
 			"PAYWALL_SETTING": storySettings.Paywall,
 			"EMBEDDED": projectConfig.EMBEDDED,
 			"GOOGLE_SHEETS": projectConfig.GOOGLE_SHEETS,
@@ -41,17 +30,14 @@ let getSettings = function(){
 				"MOD_DATE": storySettings.Mod_Date || storySettings.LastModDate_C2P,
 				"AUTHORS": projectSettings.AUTHORS,
 				"ANALYTICS_CREDIT":  storySettings.Analytics_Credit,
-				"HEARST_CATEGORY": storySettings.Category || "news"
+				"HEARST_CATEGORY": storySettings.Category || "news",
+				"MARKET_KEY":  storySettings.Market_Key
 			}
 		}
 
 	} catch (err){
 	    // It's ok, we'll use project data	    
 	}
-
-	// Send ISO dates into the data
-	settings.PROJECT['ISO_PUBDATE'] = pubdate
-	settings.PROJECT['ISO_MODDATE'] = moddate
 
 	// Check if we need a slash
     let slash = "";
