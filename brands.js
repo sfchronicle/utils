@@ -3,7 +3,7 @@
 let getBrands = function(market){
 	// We can add any Hearst global overrides here:
 	let defaultObj = {
-		"@alert-red": "#d20000"
+		"@alert-red": "#d20000",
 		// Defaults
 		"@hed-black": '"Lora Bold", Georgia, serif',
 		"@hed-light": '"Lora Regular", Georgia, serif',
