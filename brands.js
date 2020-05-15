@@ -25,7 +25,7 @@ let getBrands = function(market){
 		/* Houston Chronicle */
 		Houston: {
 			"@brand": "#ff7500",
-			"@hed-black": '"Marr Sans Condensed Semibold", Georgia, serif'
+			"@hed-black": '"Marr Sans Condensed Semibold", Georgia, serif',
 			"@hed-light": '"Publico Headline Medium", Georgia, serif',
 			"@serif-book": '"Publico Text Roman", Georgia, serif',
 			"@serif-bold": '"Publico Text Bold", Georgia, serif',
