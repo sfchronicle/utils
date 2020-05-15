@@ -240,4 +240,7 @@ let blendHDN = function(meta){
 	}
 }
 
-module.exports = { appCheck, blendHDN, getSettings }
+// Grab brands from neighbor file
+let { getBrands } = require('./brands')
+
+module.exports = { appCheck, blendHDN, getSettings, getBrands }
