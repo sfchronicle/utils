@@ -6,6 +6,7 @@ let projectSettings = projectConfig.PROJECT
 // Get settings off story_settings if it exists, otherwise fall back to projectConfig
 let getSettings = function(){
 	let settings = projectConfig
+	// This needs to be set even if the "try" below fails
 	settings.PROJECT['ANALYTICS_CREDIT'] = ''
 
 	try {
@@ -29,22 +30,25 @@ let getSettings = function(){
 				"DATE": storySettings.Publish_Date,
 				"MOD_DATE": storySettings.Mod_Date || storySettings.LastModDate_C2P,
 				"AUTHORS": projectSettings.AUTHORS,
-				"ANALYTICS_CREDIT":  storySettings.Analytics_Credit,
+				"ANALYTICS_CREDIT": storySettings.Analytics_Credit,
 				"HEARST_CATEGORY": storySettings.Category || "news",
-				"MARKET_KEY":  storySettings.Market_Key
+				"MARKET_KEY": storySettings.Market_Key,
+				"NEWSLETTER_ID": storySettings.NewsletterID || storySettings.Custom_Sailthru_ID,
+				"NEWSLETTER_PROMO": storySettings.NewsletterPromo || storySettings.Custom_Signup_Text,
+				"NEWSLETTER_LEGAL": storySettings.NewsletterLegal || storySettings.TOS_Text,
 			}
 		}
 
 	} catch (err){
-	    // It's ok, we'll use project data	    
+	   // It's ok, we'll use project data	    
 	}
 
 	// Check if we need a slash
-    let slash = "";
-    if (settings.PROJECT.SUBFOLDER){
-    	slash = "/"
-    }
-    settings.PROJECT['OPT_SLASH'] = slash
+  let slash = "";
+  if (settings.PROJECT.SUBFOLDER){
+  	slash = "/"
+  }
+  settings.PROJECT['OPT_SLASH'] = slash
 
 	return settings
 }
