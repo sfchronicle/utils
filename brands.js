@@ -2,8 +2,18 @@
 // Set brand object to override CSS based on this market's styles
 let getBrands = function(market){
 	// We can add any Hearst global overrides here:
-	let globalObj = {
+	let defaultObj = {
 		"@alert-red": "#d20000"
+		// Defaults
+		"@hed-black": '"Lora Bold", Georgia, serif',
+		"@hed-light": '"Lora Regular", Georgia, serif',
+		"@serif-book": '"Lora Regular", Georgia, serif',
+		"@serif-bold": '"Lora Regular", Georgia, serif',
+
+		"@sans-light": '"Source Sans Pro Regular", Helvetica, sans-serif',
+		"@sans-med": '"Source Sans Pro Regular", Helvetica, sans-serif',
+		"@sans-book": '"Source Sans Pro Semibold", Helvetica, sans-serif',
+		"@sans-bold": '"Source Sans Pro Bold", Helvetica, sans-serif',
 	}
 
 	// Handle market-specific styles here:
@@ -36,50 +46,59 @@ let getBrands = function(market){
 			"@sans-bold": '"Marr Sans Semibold", Helvetica, sans-serif',
 		},
 
-		/* San Antonio Express News */
-		SanAntonio: {
-			"@brand": "#ff7500",
-		},
-
 		/* Albany Times Union */
 		Albany: {
-			"@brand": "#ff7500",
+			"@brand": "#0095c7",
+			"@hed-black": '"ChronicleDispCond-Black", Georgia, serif',
+			"@hed-light": '"ChronicleDispCond-Roman", Georgia, serif',
+			"@serif-book": '"ChronicleTextG2-Roman", Georgia, serif',
+			"@serif-bold": '"ChronicleTextG2-Bold", Georgia, serif',
+
+			"@sans-light": '"HelveticaNeue-Roman", Helvetica, sans-serif',
+			"@sans-med": '"HelveticaNeue-Roman", Helvetica, sans-serif',
+			"@sans-book": '"HelveticaNeue-Roman", Helvetica, sans-serif',
+			"@sans-bold": '"HelveticaNeue-HeavyCond", Helvetica, sans-serif',
+		},
+
+		/* San Antonio Express News */
+		SanAntonio: {
+			"@brand": "#ba141a",
 		},
 
 		/* Connecticut Post */
 		CTPost: {
-			"@brand": "#ff7500",
+			"@brand": "#900900",
 		},
 
-		/* New Haven */
+		/* New Haven Register */
 		NewHaven: {
-			"@brand": "#ff7500",
+			"@brand": "#39547a",
 		},
 
-		/* Greenwich Time */
+		/* Greenwich Times */
 		Greenwich: {
-			"@brand": "#ff7500",
+			"@brand": "#175647",
 		},
 
 		/* Stamford Advocate */
 		Stamford: {
-			"@brand": "#ff7500",
+			"@brand": "#0154a5",
 		},
 
 		/* The Norwalk Hour */
 		TheHour: {
-			"@brand": "#ff7500",
+			"@brand": "#2e5687",
 		},
 
 		/* The News-Times */
 		NewsTimes: {
-			"@brand": "#ff7500",
+			"@brand": "#468cae",
 		},
 
 	}
 
 	// Combine global and market styles to return the final object
-	let combinedStyles = Object.assign(globalObj, marketObj[market])
+	let combinedStyles = Object.assign(defaultObj, marketObj[market])
 	return combinedStyles
 }
 
