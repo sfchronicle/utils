@@ -5,8 +5,8 @@ let getBrands = function(market){
 	let defaultObj = {
 		"@alert-red": "#d20000",
 		// Defaults
-		"@hed-black": '"Lora Bold", Georgia, serif',
-		"@hed-light": '"Lora Regular", Georgia, serif',
+		"@hed": '"Lora Bold", Georgia, serif',
+		"@hed-alt": '"Lora Regular", Georgia, serif',
 		"@serif-book": '"Lora Regular", Georgia, serif',
 		"@serif-bold": '"Lora Regular", Georgia, serif',
 
@@ -21,8 +21,8 @@ let getBrands = function(market){
 		/* San Franicsco Chronicle */
 		SFC: {
 			"@brand": "#2cb9bf",
-			"@hed-black": '"Tiempos Headline Black", Georgia, serif',
-			"@hed-light": '"Tiempos Headline Light", Georgia, serif',
+			"@hed": '"Tiempos Headline Light", Georgia, serif',
+			"@hed-alt": '"Tiempos Headline Black", Georgia, serif',
 			"@serif-book": '"Tiempos Regular", Georgia, serif',
 			"@serif-bold": '"Tiempos Bold", Georgia, serif',
 
@@ -35,8 +35,8 @@ let getBrands = function(market){
 		/* Houston Chronicle */
 		Houston: {
 			"@brand": "#ff7500",
-			"@hed-black": '"Marr Sans Condensed Semibold", Georgia, serif',
-			"@hed-light": '"Publico Headline Medium", Georgia, serif',
+			"@hed": '"Marr Sans Condensed Semibold", Georgia, serif',
+			"@hed-alt": '"Publico Headline Medium", Georgia, serif',
 			"@serif-book": '"Publico Text Roman", Georgia, serif',
 			"@serif-bold": '"Publico Text Bold", Georgia, serif',
 
@@ -49,8 +49,8 @@ let getBrands = function(market){
 		/* Albany Times Union */
 		Albany: {
 			"@brand": "#0095c7",
-			"@hed-black": '"ChronicleDispCond-Black", Georgia, serif',
-			"@hed-light": '"ChronicleDispCond-Roman", Georgia, serif',
+			"@hed": '"ChronicleDispCond-Black", Georgia, serif',
+			"@hed-alt": '"ChronicleDispCond-Roman", Georgia, serif',
 			"@serif-book": '"ChronicleTextG2-Roman", Georgia, serif',
 			"@serif-bold": '"ChronicleTextG2-Bold", Georgia, serif',
 
