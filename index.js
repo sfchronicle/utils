@@ -242,7 +242,7 @@ let blendHDN = function(meta){
 
 // Grab neighbor files
 let { getBrands } = require('./brands')
-let { getNav } = require('./nav')
-let { getFooter } = require('./footer')
+//let { getNav } = require('./nav')
+//let { getFooter } = require('./footer')
 
-module.exports = { appCheck, blendHDN, getSettings, getBrands, getNav, getFooter }
+module.exports = { appCheck, blendHDN, getSettings, getBrands, /*getNav, getFooter*/ }
