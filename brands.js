@@ -20,81 +20,131 @@ let getBrands = function(market){
 	let marketObj = {
 		/* San Franicsco Chronicle */
 		SFC: {
-			"@brand": "#2cb9bf",
-			"@hed": '"Tiempos Headline Light", Georgia, serif',
-			"@hed-alt": '"Tiempos Headline Black", Georgia, serif',
-			"@serif-book": '"Tiempos Regular", Georgia, serif',
-			"@serif-bold": '"Tiempos Bold", Georgia, serif',
+			styles: {
+				"@brand": "#2cb9bf",
+				"@hed": '"Tiempos Headline Light", Georgia, serif',
+				"@hed-alt": '"Tiempos Headline Black", Georgia, serif',
+				"@serif-book": '"Tiempos Regular", Georgia, serif',
+				"@serif-bold": '"Tiempos Bold", Georgia, serif',
 
-			"@sans-light": '"National Light", Helvetica, sans-serif',
-			"@sans-med": '"National Medium", Helvetica, sans-serif',
-			"@sans-book": '"National Book", Helvetica, sans-serif',
-			"@sans-bold": '"National Bold", Helvetica, sans-serif',
+				"@sans-light": '"National Light", Helvetica, sans-serif',
+				"@sans-med": '"National Medium", Helvetica, sans-serif',
+				"@sans-book": '"National Book", Helvetica, sans-serif',
+				"@sans-bold": '"National Bold", Helvetica, sans-serif',
+			},
+			
+			// Also include other things tied to the brand
+			"homepageLink": "https://www.sfchronicle.com",
+			"marketPrefix": "sf",
 		},
 
 		/* Houston Chronicle */
 		Houston: {
-			"@brand": "#ff7500",
-			"@hed": '"Marr Sans Condensed Semibold", Georgia, serif',
-			"@hed-alt": '"Publico Headline Medium", Georgia, serif',
-			"@serif-book": '"Publico Text Roman", Georgia, serif',
-			"@serif-bold": '"Publico Text Bold", Georgia, serif',
+			styles: {
+				"@brand": "#ff7500",
+				"@hed": '"Marr Sans Condensed Semibold", Georgia, serif',
+				"@hed-alt": '"Publico Headline Medium", Georgia, serif',
+				"@serif-book": '"Publico Text Roman", Georgia, serif',
+				"@serif-bold": '"Publico Text Bold", Georgia, serif',
 
-			"@sans-light": '"Marr Sans Regular", Helvetica, sans-serif',
-			"@sans-med": '"Marr Sans Regular", Helvetica, sans-serif',
-			"@sans-book": '"Marr Sans Regular", Helvetica, sans-serif',
-			"@sans-bold": '"Marr Sans Semibold", Helvetica, sans-serif',
+				"@sans-light": '"Marr Sans Regular", Helvetica, sans-serif',
+				"@sans-med": '"Marr Sans Regular", Helvetica, sans-serif',
+				"@sans-book": '"Marr Sans Regular", Helvetica, sans-serif',
+				"@sans-bold": '"Marr Sans Semibold", Helvetica, sans-serif',
+			},
+
+			"homepageLink": "https://www.houstonchronicle.com",
+			"marketPrefix": "hc",
 		},
 
 		/* Albany Times Union */
 		Albany: {
-			"@brand": "#0095c7",
-			"@hed": '"ChronicleDispCond-Black", Georgia, serif',
-			"@hed-alt": '"ChronicleDispCond-Roman", Georgia, serif',
-			"@serif-book": '"ChronicleTextG2-Roman", Georgia, serif',
-			"@serif-bold": '"ChronicleTextG2-Bold", Georgia, serif',
+			styles: {
+				"@brand": "#0095c7",
+				"@hed": '"ChronicleDispCond-Black", Georgia, serif',
+				"@hed-alt": '"ChronicleDispCond-Roman", Georgia, serif',
+				"@serif-book": '"ChronicleTextG2-Roman", Georgia, serif',
+				"@serif-bold": '"ChronicleTextG2-Bold", Georgia, serif',
 
-			"@sans-light": '"HelveticaNeue-Roman", Helvetica, sans-serif',
-			"@sans-med": '"HelveticaNeue-Roman", Helvetica, sans-serif',
-			"@sans-book": '"HelveticaNeue-Roman", Helvetica, sans-serif',
-			"@sans-bold": '"HelveticaNeue-HeavyCond", Helvetica, sans-serif',
+				"@sans-light": '"HelveticaNeue-Roman", Helvetica, sans-serif',
+				"@sans-med": '"HelveticaNeue-Roman", Helvetica, sans-serif',
+				"@sans-book": '"HelveticaNeue-Roman", Helvetica, sans-serif',
+				"@sans-bold": '"HelveticaNeue-HeavyCond", Helvetica, sans-serif',
+			},
+
+			"homepageLink": "https://www.timesunion.com",
+			"marketPrefix": "tu",
 		},
 
 		/* San Antonio Express News */
 		SanAntonio: {
-			"@brand": "#ba141a",
+			styles: {
+				"@brand": "#ba141a",
+			},
+			
+			"homepageLink": "https://www.expressnews.com",
+			"marketPrefix": "sa",
 		},
 
 		/* Connecticut Post */
 		CTPost: {
-			"@brand": "#900900",
+			styles: {
+				"@brand": "#900900",
+			},
+			
+			"homepageLink": "https://www.ctpost.com/",
+			"marketPrefix": "ct",
 		},
 
 		/* New Haven Register */
 		NewHaven: {
-			"@brand": "#39547a",
+			styles: {
+				"@brand": "#39547a",
+			},
+			
+			"homepageLink": "https://www.nhregister.com/",
+			"marketPrefix": "nh",
 		},
 
 		/* Greenwich Times */
 		Greenwich: {
-			"@brand": "#175647",
+			styles: {
+				"@brand": "#175647",
+			},
+			
+			"homepageLink": "https://www.nhregister.com/",
+			"marketPrefix": "nh",
 		},
 
 		/* Stamford Advocate */
 		Stamford: {
-			"@brand": "#0154a5",
+			styles: {
+				"@brand": "#0154a5",
+			},
+
+			"homepageLink": "https://www.stamfordadvocate.com/",
+			"marketPrefix": "st",
 		},
 
 		/* The Norwalk Hour */
 		TheHour: {
-			"@brand": "#2e5687",
+			styles: {
+				"@brand": "#2e5687",
+			},
+
+			"homepageLink": "https://www.thehour.com",
+			"marketPrefix": "th",
 		},
 
 		/* The News-Times */
 		NewsTimes: {
-			"@brand": "#468cae",
-		},
+			styles: {
+				"@brand": "#468cae",
+			},
 
+			"homepageLink": "https://www.newstimes.com",
+			"marketPrefix": "nt",
+		},
 	}
 
 	// Combine global and market styles to return the final object

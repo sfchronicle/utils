@@ -189,7 +189,7 @@ let blendHDN = function(meta){
 
 
 	let blendedHDN = {}
-    let stringHDN = ""
+  let stringHDN = ""
 
 	// Create author for analytics here
   let authorString = ""
@@ -240,7 +240,9 @@ let blendHDN = function(meta){
 	}
 }
 
-// Grab brands from neighbor file
+// Grab neighbor files
 let { getBrands } = require('./brands')
+let { getNav } = require('./nav')
+let { getFooter } = require('./footer')
 
-module.exports = { appCheck, blendHDN, getSettings, getBrands }
+module.exports = { appCheck, blendHDN, getSettings, getBrands, getNav, getFooter }
