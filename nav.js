@@ -27,6 +27,11 @@ let getNav = function(inverted, navLink, navArray){
 		color = "black"
 	}
 
+	let subfolder = ""
+	if (settings.PROJECT.SUBFOLDER){
+		subfolder = settings.PROJECT.SUBFOLDER + "/"
+	}
+
 	let navHTML = `<nav class="topper-nav-container ${invertClass}">
     <div class="topper-nav-left">
       <a
@@ -60,7 +65,7 @@ let getNav = function(inverted, navLink, navArray){
         <a
           id="topper-nav-mail-icon"
           title="Share via email"
-          href="mailto:?subject=${ settings.PROJECT.TITLE }&body=${ settings.PROJECT.DESCRIPTION }%0A%0A${settings.MAIN_DOMAIN}%2F${ settings.PROJECT.SUBFOLDER }%2F${ settings.PROJECT.SLUG }%2F">
+          href="mailto:?subject=${ settings.PROJECT.TITLE }&body=${ settings.PROJECT.DESCRIPTION }%0A%0A${settings.MAIN_DOMAIN}%2F${ subfolder }${ settings.PROJECT.SLUG }%2F">
           <svg
 					  width="24"
 					  height="24"
@@ -84,7 +89,7 @@ let getNav = function(inverted, navLink, navArray){
           href="https://www.facebook.com"
           target="_blank"
           rel="noopener noreferrer"
-          onclick="function openFB(){ console.log('hi!'); window.open('https://www.facebook.com/sharer/sharer.php?u=${projectConfig.MAIN_DOMAIN}%2F${subfolder}${storySettings.Slug}%2F${this.props.url_add}','facebook-share-dialog','width=627,height=436');return false;} openFB()"
+          onclick="function openFB(){ window.open('https://www.facebook.com/sharer/sharer.php?u=${projectConfig.MAIN_DOMAIN}%2F${subfolder}${storySettings.Slug}%2F${this.props.url_add}','facebook-share-dialog','width=627,height=436');return false;} openFB()"
         >
           <svg
 					  width="24"
@@ -102,7 +107,7 @@ let getNav = function(inverted, navLink, navArray){
       </div>
 
       <div class="topper-nav-social">
-        <a target="_blank" rel="noopener noreferrer" id="twitter-icon" title="Share on Twitter" href="https://twitter.com/intent/tweet?url=${settings.MAIN_DOMAIN}%2F${ settings.PROJECT.SUBFOLDER }%2F${ settings.PROJECT.SLUG }%2F&text=${ settings.PROJECT.TWITTER_TEXT }">
+        <a target="_blank" rel="noopener noreferrer" id="twitter-icon" title="Share on Twitter" href="https://twitter.com/intent/tweet?url=${settings.MAIN_DOMAIN}%2F${ subfolder }${ settings.PROJECT.SLUG }%2F&text=${ settings.PROJECT.TWITTER_TEXT }">
           <svg
 					  width="24"
 					  height="24"
