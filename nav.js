@@ -84,7 +84,7 @@ let getNav = function(inverted, navLink, navArray){
           href="https://www.facebook.com"
           target="_blank"
           rel="noopener noreferrer"
-          onClick="(function(){ e.preventDefault(); window.open('https://www.facebook.com/sharer/sharer.php?u=${projectConfig.MAIN_DOMAIN}%2F${subfolder}${storySettings.Slug}%2F${this.props.url_add},'facebook-share-dialog','width=626,height=436');return false;)();return false;"
+          onclick="function openFB(){ console.log('hi!'); window.open('https://www.facebook.com/sharer/sharer.php?u=${projectConfig.MAIN_DOMAIN}%2F${subfolder}${storySettings.Slug}%2F${this.props.url_add}','facebook-share-dialog','width=627,height=436');return false;} openFB()"
         >
           <svg
 					  width="24"
