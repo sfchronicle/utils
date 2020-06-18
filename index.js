@@ -3,58 +3,6 @@
 let projectConfig = require("../../project-config.json")
 let projectSettings = projectConfig.PROJECT
 
-// Get settings off story_settings if it exists, otherwise fall back to projectConfig
-let getSettings = function(){
-	let settings = projectConfig
-	// This needs to be set even if the "try" below fails
-	settings.PROJECT['ANALYTICS_CREDIT'] = ''
-
-	try {
-    // Populate with storySettings if they exist
-    let [storySettings] = require("../../src/data/story_settings.sheet.json")
-    // Populate with sheet settings
-    settings = {
-			"PAYWALL_SETTING": storySettings.Paywall,
-			"EMBEDDED": projectConfig.EMBEDDED,
-			"GOOGLE_SHEETS": projectConfig.GOOGLE_SHEETS,
-			"GOOGLE_DOCS": projectConfig.GOOGLE_DOCS,
-			"PROJECT": {
-				"SUBFOLDER": storySettings.Year,
-				"SLUG": storySettings.Slug,
-				"TITLE": storySettings.SEO_Title,
-				"SOCIAL_TITLE": storySettings.Social_Title,
-				"URL": "https://projects.sfchronicle.com",
-				"IMAGE": "https://s.hdnux.com/photos/0/0/0/0/"+storySettings.Social_ImageID+"/0/1600x0.jpg",
-				"DESCRIPTION": storySettings.SEO_Description,
-				"TWITTER_TEXT": storySettings.Twitter_Text,
-				"DATE": storySettings.Publish_Date,
-				"MOD_DATE": storySettings.Mod_Date || storySettings.LastModDate_C2P,
-				"AUTHORS": projectSettings.AUTHORS,
-				"ANALYTICS_CREDIT": storySettings.Analytics_Credit,
-				"HEARST_CATEGORY": storySettings.Category || "news",
-				"MARKET_KEY": storySettings.Market_Key,
-				// Surveys have slightly different naming, so catch that below for backwards compat
-				"NEWSLETTER_ID": storySettings.NewsletterID || storySettings.Custom_Sailthru_ID,
-				"NEWSLETTER_PROMO": storySettings.NewsletterPromo || storySettings.Custom_Signup_Text,
-				"NEWSLETTER_LEGAL": storySettings.NewsletterLegal || storySettings.TOS_Text,
-			}
-		}
-
-	} catch (err){
-	   // It's ok, we'll use project data	    
-	}
-
-	// Check if we need a slash
-  let slash = "";
-  if (settings.PROJECT.SUBFOLDER){
-  	slash = "/"
-  }
-  settings.PROJECT['OPT_SLASH'] = slash
-
-	return settings
-}
-
-
 // Check to see if this should serve the app version of the project
 let appCheck = function(){
 	// Save current env
@@ -98,7 +46,7 @@ let blendHDN = function(meta){
 			ANALYTICS_CREDIT,
 			TITLE,
 			HEARST_CATEGORY,
-			URL,
+			MAIN_DOMAIN,
 			SUBFOLDER,
 			OPT_SLASH,
 			SLUG,
@@ -157,12 +105,12 @@ let blendHDN = function(meta){
 	HDN.dataLayer.source.sourceSite = 'sfgate'
 
 	// HDN.dataLayer object for sharing information
-	HDN.dataLayer.sharing.openGraphUrl = `${URL}/${SUBFOLDER}${slash}${SLUG}/`
+	HDN.dataLayer.sharing.openGraphUrl = `${MAIN_DOMAIN}/${SUBFOLDER}${slash}${SLUG}/`
 	HDN.dataLayer.sharing.openGraphType = 'article'
 
 	// More page settings
-	HDN.dataLayer.href.pageUrl = `${URL}/${SUBFOLDER}${slash}${SLUG}/`
-	HDN.dataLayer.href.canonicalUrl = `${URL}/${SUBFOLDER}${slash}${SLUG}/`
+	HDN.dataLayer.href.pageUrl = `${MAIN_DOMAIN}/${SUBFOLDER}${slash}${SLUG}/`
+	HDN.dataLayer.href.canonicalUrl = `${MAIN_DOMAIN}/${SUBFOLDER}${slash}${SLUG}/`
 
 	// HDN.dataLayer object for presentation information
 	HDN.dataLayer.presentation.hasSlideshow = ''
@@ -214,9 +162,9 @@ let blendHDN = function(meta){
 	blendedHDN = HDN
 	// Custom config for multiple pages
 	blendedHDN.dataLayer.content.title = TITLE
-	blendedHDN.dataLayer.sharing.openGraphUrl = `${URL}/${SUBFOLDER}${slash}${SLUG}/${URL_ADD}`
-	blendedHDN.dataLayer.href.pageUrl = `${URL}/${SUBFOLDER}${slash}${SLUG}/${URL_ADD}`
-	blendedHDN.dataLayer.href.canonicalUrl = `${URL}/${SUBFOLDER}${slash}${SLUG}/${URL_ADD}`
+	blendedHDN.dataLayer.sharing.openGraphUrl = `${MAIN_DOMAIN}/${SUBFOLDER}${slash}${SLUG}/${URL_ADD}`
+	blendedHDN.dataLayer.href.pageUrl = `${MAIN_DOMAIN}/${SUBFOLDER}${slash}${SLUG}/${URL_ADD}`
+	blendedHDN.dataLayer.href.canonicalUrl = `${MAIN_DOMAIN}/${SUBFOLDER}${slash}${SLUG}/${URL_ADD}`
 	blendedHDN.dataLayer.source.authorName = authorString
 
 	let appVer = appCheck()
@@ -242,7 +190,8 @@ let blendHDN = function(meta){
 
 // Grab neighbor files
 let { getBrands } = require('./brands')
-//let { getNav } = require('./nav')
-//let { getFooter } = require('./footer')
+let { getSettings } = require('./settings')
+let { getNav } = require('./nav')
+let { getFooter } = require('./footer')
 
-module.exports = { appCheck, blendHDN, getSettings, getBrands, /*getNav, getFooter*/ }
+module.exports = { appCheck, blendHDN, getSettings, getBrands, getNav, getFooter }

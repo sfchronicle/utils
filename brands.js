@@ -3,17 +3,19 @@
 let getBrands = function(market){
 	// We can add any Hearst global overrides here:
 	let defaultObj = {
-		"@alert-red": "#d20000",
-		// Defaults
-		"@hed": '"Lora Bold", Georgia, serif',
-		"@hed-alt": '"Lora Regular", Georgia, serif',
-		"@serif-book": '"Lora Regular", Georgia, serif',
-		"@serif-bold": '"Lora Regular", Georgia, serif',
+		styles: {
+			"@alert-red": "#d20000",
+			// Defaults
+			"@hed": '"Lora Bold", Georgia, serif',
+			"@hed-alt": '"Lora Regular", Georgia, serif',
+			"@serif-book": '"Lora Regular", Georgia, serif',
+			"@serif-bold": '"Lora Regular", Georgia, serif',
 
-		"@sans-light": '"Source Sans Pro Regular", Helvetica, sans-serif',
-		"@sans-med": '"Source Sans Pro Regular", Helvetica, sans-serif',
-		"@sans-book": '"Source Sans Pro Semibold", Helvetica, sans-serif',
-		"@sans-bold": '"Source Sans Pro Bold", Helvetica, sans-serif',
+			"@sans-light": '"Source Sans Pro Regular", Helvetica, sans-serif',
+			"@sans-med": '"Source Sans Pro Regular", Helvetica, sans-serif',
+			"@sans-book": '"Source Sans Pro Semibold", Helvetica, sans-serif',
+			"@sans-bold": '"Source Sans Pro Bold", Helvetica, sans-serif',
+		}
 	}
 
 	// Handle market-specific styles here:
@@ -22,8 +24,8 @@ let getBrands = function(market){
 		SFC: {
 			styles: {
 				"@brand": "#2cb9bf",
-				"@hed": '"Tiempos Headline Light", Georgia, serif',
-				"@hed-alt": '"Tiempos Headline Black", Georgia, serif',
+				"@hed": '"Tiempos Headline Black", Georgia, serif',
+				"@hed-alt": '"Tiempos Headline Light", Georgia, serif',
 				"@serif-book": '"Tiempos Regular", Georgia, serif',
 				"@serif-bold": '"Tiempos Bold", Georgia, serif',
 
@@ -148,7 +150,9 @@ let getBrands = function(market){
 	}
 
 	// Combine global and market styles to return the final object
-	let combinedStyles = Object.assign(defaultObj, marketObj[market])
+	let combinedStyles = {
+		styles: Object.assign(defaultObj.styles, marketObj[market].styles)
+	}
 	return combinedStyles
 }
 
