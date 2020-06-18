@@ -89,7 +89,7 @@ let getNav = function(inverted, navLink, navArray){
           href="https://www.facebook.com"
           target="_blank"
           rel="noopener noreferrer"
-          onclick="alert(${settings.PROJECT.MAIN_DOMAIN}%2F${subfolder}${settings.PROJECT.SLUG}%2F${this.props.url_add})"
+          
         >
           <svg
 					  width="24"
