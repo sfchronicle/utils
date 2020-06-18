@@ -8,10 +8,10 @@ let getBrands = function(market){
 			// Defaults
 			"@hed": '"Lora Bold", Georgia, serif',
 			"@hed-alt": '"Lora Regular", Georgia, serif',
-			"@serif-book": '"Lora Regular", Georgia, serif',
-			"@serif-bold": '"Lora Regular", Georgia, serif',
+			"@serif-book": '"Lora Light", Georgia, serif',
+			"@serif-bold": '"Lora Light", Georgia, serif',
 
-			"@sans-light": '"Source Sans Pro Regular", Helvetica, sans-serif',
+			"@sans-light": '"Source Sans Pro Light", Helvetica, sans-serif',
 			"@sans-med": '"Source Sans Pro Regular", Helvetica, sans-serif',
 			"@sans-book": '"Source Sans Pro Semibold", Helvetica, sans-serif',
 			"@sans-bold": '"Source Sans Pro Bold", Helvetica, sans-serif',
