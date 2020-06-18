@@ -13,7 +13,7 @@ let getBrands = function(market){
 
 			"@sans-light": '"Source Sans Pro Light", Helvetica, sans-serif',
 			"@sans-med": '"Source Sans Pro Regular", Helvetica, sans-serif',
-			"@sans-book": '"Source Sans Pro Semibold", Helvetica, sans-serif',
+			"@sans-book": '"Source Sans Pro Regular", Helvetica, sans-serif',
 			"@sans-bold": '"Source Sans Pro Bold", Helvetica, sans-serif',
 		}
 	}
