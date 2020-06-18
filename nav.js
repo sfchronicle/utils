@@ -89,7 +89,7 @@ let getNav = function(inverted, navLink, navArray){
           href="https://www.facebook.com"
           target="_blank"
           rel="noopener noreferrer"
-          onclick="function openFB(){ window.open('https://www.facebook.com/sharer/sharer.php?u=${settings.PROJECT.MAIN_DOMAIN}%2F${subfolder}${settings.PROJECT.SLUG}%2F${this.props.url_add}','facebook-share-dialog','width=627,height=436');} openFB()"
+          onclick="alert(${settings.PROJECT.MAIN_DOMAIN}%2F${subfolder}${settings.PROJECT.SLUG}%2F${this.props.url_add})"
         >
           <svg
 					  width="24"
