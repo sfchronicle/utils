@@ -36,7 +36,6 @@ let getBrands = function(market){
 			},
 			
 			// Also include other things tied to the brand
-			"homepageLink": "https://www.sfchronicle.com",
 			"marketPrefix": "sf",
 		},
 
@@ -55,7 +54,6 @@ let getBrands = function(market){
 				"@sans-bold": '"Marr Sans Semibold", Helvetica, sans-serif',
 			},
 
-			"homepageLink": "https://www.houstonchronicle.com",
 			"marketPrefix": "hc",
 		},
 
@@ -74,7 +72,6 @@ let getBrands = function(market){
 				"@sans-bold": '"HelveticaNeue-HeavyCond", Helvetica, sans-serif',
 			},
 
-			"homepageLink": "https://www.timesunion.com",
 			"marketPrefix": "tu",
 		},
 
@@ -84,7 +81,6 @@ let getBrands = function(market){
 				"@brand": "#ba141a",
 			},
 			
-			"homepageLink": "https://www.expressnews.com",
 			"marketPrefix": "sa",
 		},
 
@@ -94,7 +90,6 @@ let getBrands = function(market){
 				"@brand": "#900900",
 			},
 			
-			"homepageLink": "https://www.ctpost.com/",
 			"marketPrefix": "ct",
 		},
 
@@ -104,7 +99,6 @@ let getBrands = function(market){
 				"@brand": "#39547a",
 			},
 			
-			"homepageLink": "https://www.nhregister.com/",
 			"marketPrefix": "nh",
 		},
 
@@ -114,8 +108,7 @@ let getBrands = function(market){
 				"@brand": "#175647",
 			},
 			
-			"homepageLink": "https://www.nhregister.com/",
-			"marketPrefix": "nh",
+			"marketPrefix": "gt",
 		},
 
 		/* Stamford Advocate */
@@ -124,7 +117,6 @@ let getBrands = function(market){
 				"@brand": "#0154a5",
 			},
 
-			"homepageLink": "https://www.stamfordadvocate.com/",
 			"marketPrefix": "st",
 		},
 
@@ -134,7 +126,6 @@ let getBrands = function(market){
 				"@brand": "#2e5687",
 			},
 
-			"homepageLink": "https://www.thehour.com",
 			"marketPrefix": "th",
 		},
 
@@ -144,14 +135,20 @@ let getBrands = function(market){
 				"@brand": "#468cae",
 			},
 
-			"homepageLink": "https://www.newstimes.com",
 			"marketPrefix": "nt",
 		},
+
+		/* Misc */
+		TK: {
+			styles: {},
+			"marketPrefix": "tk"
+		}
 	}
 
 	// Combine global and market styles to return the final object
 	let combinedStyles = {
-		styles: Object.assign(defaultObj.styles, marketObj[market].styles)
+		styles: Object.assign(defaultObj.styles, marketObj[market].styles),
+		marketPrefix: marketObj[market].marketPrefix
 	}
 	return combinedStyles
 }
