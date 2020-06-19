@@ -1,20 +1,27 @@
 
-let { getSettings } = require('./settings')
-let settings = getSettings()
-
-let { getMarketConfig } = require('./marketconfig')
+let { getBrands } = require('./brands')
 
 // Handle nav for various markets and include nav options for other links
-let getFooter = function(inverted){
+let getFooter = function(meta, inverted){
+
+	// If we aren't passing meta in, we have to call getSettings here
+	if (!meta){
+		let {getSettings} = require('./settings')
+		meta = getSettings()
+	}
 
 	let year = new Date().getFullYear()
  
- 	let [marketPrefix, invert] = getMarketConfig(inverted)
+ 	let {attributes: {marketPrefix, invert}} = getBrands(meta.PROJECT.MARKET_KEY)
+ 	// Do the opposite of default if spec'd
+	if (inverted){
+		invert = !invert
+	}
 
 	// If inverted, do black on white nav
 	let invertClass = ""
 	let color = "white"
-	if (inverted){
+	if (invert){
 		invertClass = "invert"
 		color = "black"
 	}
@@ -286,7 +293,7 @@ let getFooter = function(inverted){
 		}
 	}
 
-	const marketLinks = footerLinks[settings.PROJECT.MARKET_KEY]
+	const marketLinks = footerLinks[meta.PROJECT.MARKET_KEY]
 	let linkHTML = ""
 	Object.keys(marketLinks).forEach(function(key,index) {
 		// Open the new section
@@ -326,7 +333,7 @@ let getFooter = function(inverted){
         <div class="pageFooter--right">
           <div class="pageFooter--right-topLine">
             <button id="scrollTop" class="return">
-              Return to top
+              To Top
             </button>
           </div>
           <div class="pageFooter--right-links">

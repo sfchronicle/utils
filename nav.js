@@ -1,12 +1,15 @@
 
-let { getSettings } = require('./settings')
-let settings = getSettings()
-
-let { getMarketConfig } = require('./marketconfig')
+let { getBrands } = require('./brands')
 
 // Handle nav for various markets and include nav options for other links
-let getNav = function(inverted, urlAdd, navLink, navArray){
+let getNav = function(meta, urlAdd, inverted, navLink, navArray){
 	// TODO: Support navArray and create submenu
+
+	// If we aren't passing meta in, we have to call getSettings here
+	if (!meta){
+		let {getSettings} = require('./settings')
+		meta = getSettings()
+	}
 
 	// If a link object was not provided, make one
 	if (!navLink){
@@ -22,7 +25,22 @@ let getNav = function(inverted, urlAdd, navLink, navArray){
 		urlAdd = ""
 	}
 
-	let [marketPrefix, invert] = getMarketConfig(inverted)
+	let {attributes: {marketPrefix, invert}} = getBrands(meta.PROJECT.MARKET_KEY)
+	// Do the opposite of default if spec'd
+	if (inverted){
+		invert = !invert
+	}
+	// Handle various CT domains
+	if (typeof window !== "undefined"){
+		switch(window.location.origin){
+			case "https://www.ctpost.com/": marketPrefix = "ct"; break;
+			case "https://www.nhregister.com/": marketPrefix = "nh"; break;
+			case "https://www.greenwichtime.com/": marketPrefix = "gt"; break;
+			case "https://www.stamfordadvocate.com/": marketPrefix = "st"; break;
+			case "https://www.thehour.com": marketPrefix = "th"; break;
+			case "https://www.newstimes.com": marketPrefix = "nt"; break;
+		}
+	}
 
 	// If inverted, do black on white nav
 	let invertClass = ""
@@ -33,8 +51,8 @@ let getNav = function(inverted, urlAdd, navLink, navArray){
 	}
 
 	let subfolder = ""
-	if (settings.PROJECT.SUBFOLDER){
-		subfolder = settings.PROJECT.SUBFOLDER + "/"
+	if (meta.PROJECT.SUBFOLDER){
+		subfolder = meta.PROJECT.SUBFOLDER + "/"
 	}
 
 	let navHTML = `<nav class="topper-nav-container ${invertClass}">
@@ -70,7 +88,7 @@ let getNav = function(inverted, urlAdd, navLink, navArray){
         <a
           id="topper-nav-mail-icon"
           title="Share via email"
-          href="mailto:?subject=${ settings.PROJECT.TITLE }&body=${ settings.PROJECT.DESCRIPTION }%0A%0A${settings.MAIN_DOMAIN}%2F${ subfolder }${ settings.PROJECT.SLUG }%2F${urlAdd}">
+          href="mailto:?subject=${ meta.PROJECT.TITLE }&body=${ meta.PROJECT.DESCRIPTION }%0A%0A${meta.MAIN_DOMAIN}%2F${ subfolder }${ meta.PROJECT.SLUG }%2F${urlAdd}">
           <svg
 					  width="24"
 					  height="24"
@@ -111,7 +129,7 @@ let getNav = function(inverted, urlAdd, navLink, navArray){
       </div>
 
       <div class="topper-nav-social">
-        <a target="_blank" rel="noopener noreferrer" id="twitter-icon" title="Share on Twitter" href="https://twitter.com/intent/tweet?url=${settings.MAIN_DOMAIN}%2F${ subfolder }${ settings.PROJECT.SLUG }%2F${urlAdd}&text=${ settings.PROJECT.TWITTER_TEXT }">
+        <a target="_blank" rel="noopener noreferrer" id="twitter-icon" title="Share on Twitter" href="https://twitter.com/intent/tweet?url=${meta.MAIN_DOMAIN}%2F${ subfolder }${ meta.PROJECT.SLUG }%2F${urlAdd}&text=${ meta.PROJECT.TWITTER_TEXT }">
           <svg
 					  width="24"
 					  height="24"

@@ -15,7 +15,8 @@ let getBrands = function(market){
 			"@sans-med": '"Source Sans Pro Regular", Helvetica, sans-serif',
 			"@sans-book": '"Source Sans Pro Regular", Helvetica, sans-serif',
 			"@sans-bold": '"Source Sans Pro Bold", Helvetica, sans-serif',
-		}
+		},
+		attributes: {}
 	}
 
 	// Handle market-specific styles here:
@@ -34,9 +35,9 @@ let getBrands = function(market){
 				"@sans-book": '"National Book", Helvetica, sans-serif',
 				"@sans-bold": '"National Bold", Helvetica, sans-serif',
 			},
-			
-			// Also include other things tied to the brand
-			"marketPrefix": "sf",
+			attributes: {
+				"marketPrefix": "sf"
+			}
 		},
 
 		/* Houston Chronicle */
@@ -53,8 +54,10 @@ let getBrands = function(market){
 				"@sans-book": '"Marr Sans Regular", Helvetica, sans-serif',
 				"@sans-bold": '"Marr Sans Semibold", Helvetica, sans-serif',
 			},
-
-			"marketPrefix": "hc",
+			attributes: {
+				"marketPrefix": "hc",
+				"invert": true
+			}
 		},
 
 		/* Albany Times Union */
@@ -71,8 +74,9 @@ let getBrands = function(market){
 				"@sans-book": '"HelveticaNeue-Roman", Helvetica, sans-serif',
 				"@sans-bold": '"HelveticaNeue-HeavyCond", Helvetica, sans-serif',
 			},
-
-			"marketPrefix": "tu",
+			attributes: {
+				"marketPrefix": "tu"
+			}
 		},
 
 		/* San Antonio Express News */
@@ -80,75 +84,33 @@ let getBrands = function(market){
 			styles: {
 				"@brand": "#ba141a",
 			},
-			
-			"marketPrefix": "sa",
+			attributes: {
+				"marketPrefix": "sa",
+				"invert": true
+			}
 		},
 
-		/* Connecticut Post */
-		CTPost: {
-			styles: {
-				"@brand": "#900900",
-			},
-			
-			"marketPrefix": "ct",
-		},
-
-		/* New Haven Register */
-		NewHaven: {
-			styles: {
-				"@brand": "#39547a",
-			},
-			
-			"marketPrefix": "nh",
-		},
-
-		/* Greenwich Times */
-		Greenwich: {
-			styles: {
-				"@brand": "#175647",
-			},
-			
-			"marketPrefix": "gt",
-		},
-
-		/* Stamford Advocate */
-		Stamford: {
-			styles: {
-				"@brand": "#0154a5",
-			},
-
-			"marketPrefix": "st",
-		},
-
-		/* The Norwalk Hour */
-		TheHour: {
-			styles: {
-				"@brand": "#2e5687",
-			},
-
-			"marketPrefix": "th",
-		},
-
-		/* The News-Times */
-		NewsTimes: {
-			styles: {
-				"@brand": "#468cae",
-			},
-
-			"marketPrefix": "nt",
+		/* Connecticut */
+		CT: {
+			styles: {},
+			attributes: {
+				"marketPrefix": "ct"
+			}
 		},
 
 		/* Misc */
 		TK: {
 			styles: {},
-			"marketPrefix": "tk"
+			attributes: {
+				"marketPrefix": "tk"
+			}
 		}
 	}
 
 	// Combine global and market styles to return the final object
 	let combinedStyles = {
 		styles: Object.assign(defaultObj.styles, marketObj[market].styles),
-		marketPrefix: marketObj[market].marketPrefix
+		attributes: Object.assign(defaultObj.attributes, marketObj[market].attributes)
 	}
 	return combinedStyles
 }
