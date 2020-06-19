@@ -18,6 +18,7 @@ let getSettings = function(){
 			"EMBEDDED": projectConfig.EMBEDDED,
 			"GOOGLE_SHEETS": projectConfig.GOOGLE_SHEETS,
 			"GOOGLE_DOCS": projectConfig.GOOGLE_DOCS,
+			"MAIN_DOMAIN": projectConfig.MAIN_DOMAIN,
 			"PROJECT": {
 				"SUBFOLDER": storySettings.Year,
 				"SLUG": storySettings.Slug,
@@ -33,7 +34,6 @@ let getSettings = function(){
 				"ANALYTICS_CREDIT": storySettings.Analytics_Credit,
 				"HEARST_CATEGORY": storySettings.Category || "news",
 				"MARKET_KEY": storySettings.Market_Key,
-				"MAIN_DOMAIN": projectConfig.PROJECT.MAIN_DOMAIN,
 				// Surveys have slightly different naming, so catch that below for backwards compat
 				"NEWSLETTER_ID": storySettings.NewsletterID || storySettings.Custom_Sailthru_ID,
 				"NEWSLETTER_PROMO": storySettings.NewsletterPromo || storySettings.Custom_Signup_Text,

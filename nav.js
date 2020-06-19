@@ -70,7 +70,7 @@ let getNav = function(inverted, urlAdd, navLink, navArray){
         <a
           id="topper-nav-mail-icon"
           title="Share via email"
-          href="mailto:?subject=${ settings.PROJECT.TITLE }&body=${ settings.PROJECT.DESCRIPTION }%0A%0A${settings.PROJECT.MAIN_DOMAIN}%2F${ subfolder }${ settings.PROJECT.SLUG }%2F${urlAdd}">
+          href="mailto:?subject=${ settings.PROJECT.TITLE }&body=${ settings.PROJECT.DESCRIPTION }%0A%0A${settings.MAIN_DOMAIN}%2F${ subfolder }${ settings.PROJECT.SLUG }%2F${urlAdd}">
           <svg
 					  width="24"
 					  height="24"
@@ -111,7 +111,7 @@ let getNav = function(inverted, urlAdd, navLink, navArray){
       </div>
 
       <div class="topper-nav-social">
-        <a target="_blank" rel="noopener noreferrer" id="twitter-icon" title="Share on Twitter" href="https://twitter.com/intent/tweet?url=${settings.PROJECT.MAIN_DOMAIN}%2F${ subfolder }${ settings.PROJECT.SLUG }%2F${urlAdd}&text=${ settings.PROJECT.TWITTER_TEXT }">
+        <a target="_blank" rel="noopener noreferrer" id="twitter-icon" title="Share on Twitter" href="https://twitter.com/intent/tweet?url=${settings.MAIN_DOMAIN}%2F${ subfolder }${ settings.PROJECT.SLUG }%2F${urlAdd}&text=${ settings.PROJECT.TWITTER_TEXT }">
           <svg
 					  width="24"
 					  height="24"
