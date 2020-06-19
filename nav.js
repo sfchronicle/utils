@@ -5,7 +5,7 @@ let settings = getSettings()
 let { getMarketConfig } = require('./marketconfig')
 
 // Handle nav for various markets and include nav options for other links
-let getNav = function(inverted, navLink, navArray){
+let getNav = function(inverted, urlAdd, navLink, navArray){
 	// TODO: Support navArray and create submenu
 
 	// If a link object was not provided, make one
@@ -15,6 +15,11 @@ let getNav = function(inverted, navLink, navArray){
 			text: "Special Report",
 			target: "_self"
 		}
+	}
+
+	// Extension to URL if passed in
+	if (!urlAdd){
+		urlAdd = ""
 	}
 
 	let [marketPrefix, invert] = getMarketConfig(inverted)
@@ -65,7 +70,7 @@ let getNav = function(inverted, navLink, navArray){
         <a
           id="topper-nav-mail-icon"
           title="Share via email"
-          href="mailto:?subject=${ settings.PROJECT.TITLE }&body=${ settings.PROJECT.DESCRIPTION }%0A%0A${settings.PROJECT.MAIN_DOMAIN}%2F${ subfolder }${ settings.PROJECT.SLUG }%2F">
+          href="mailto:?subject=${ settings.PROJECT.TITLE }&body=${ settings.PROJECT.DESCRIPTION }%0A%0A${settings.PROJECT.MAIN_DOMAIN}%2F${ subfolder }${ settings.PROJECT.SLUG }%2F${urlAdd}">
           <svg
 					  width="24"
 					  height="24"
@@ -89,7 +94,6 @@ let getNav = function(inverted, navLink, navArray){
           href="https://www.facebook.com"
           target="_blank"
           rel="noopener noreferrer"
-          
         >
           <svg
 					  width="24"
@@ -107,7 +111,7 @@ let getNav = function(inverted, navLink, navArray){
       </div>
 
       <div class="topper-nav-social">
-        <a target="_blank" rel="noopener noreferrer" id="twitter-icon" title="Share on Twitter" href="https://twitter.com/intent/tweet?url=${settings.PROJECT.MAIN_DOMAIN}%2F${ subfolder }${ settings.PROJECT.SLUG }%2F&text=${ settings.PROJECT.TWITTER_TEXT }">
+        <a target="_blank" rel="noopener noreferrer" id="twitter-icon" title="Share on Twitter" href="https://twitter.com/intent/tweet?url=${settings.PROJECT.MAIN_DOMAIN}%2F${ subfolder }${ settings.PROJECT.SLUG }%2F${urlAdd}&text=${ settings.PROJECT.TWITTER_TEXT }">
           <svg
 					  width="24"
 					  height="24"
