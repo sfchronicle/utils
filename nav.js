@@ -33,10 +33,10 @@ let getNav = function(meta, urlAdd, inverted, navLink, navArray){
 	// Handle various CT domains
 	if (typeof window !== "undefined"){
 		switch(window.location.origin){
-			case "https://www.ctpost.com/": marketPrefix = "ct"; break;
-			case "https://www.nhregister.com/": marketPrefix = "nh"; break;
-			case "https://www.greenwichtime.com/": marketPrefix = "gt"; break;
-			case "https://www.stamfordadvocate.com/": marketPrefix = "st"; break;
+			case "https://www.ctpost.com": marketPrefix = "ct"; break;
+			case "https://www.nhregister.com": marketPrefix = "nh"; break;
+			case "https://www.greenwichtime.com": marketPrefix = "gt"; break;
+			case "https://www.stamfordadvocate.com": marketPrefix = "st"; break;
 			case "https://www.thehour.com": marketPrefix = "th"; break;
 			case "https://www.newstimes.com": marketPrefix = "nt"; break;
 		}
