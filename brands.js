@@ -92,7 +92,9 @@ let getBrands = function(market){
 
 		/* Connecticut */
 		CT: {
-			styles: {},
+			styles: {
+				"@brand": "#900900",
+			},
 			attributes: {
 				"marketPrefix": "ct"
 			}
@@ -100,7 +102,9 @@ let getBrands = function(market){
 
 		/* Misc */
 		TK: {
-			styles: {},
+			styles: {
+				"@brand": "#900900",
+			},
 			attributes: {
 				"marketPrefix": "tk"
 			}

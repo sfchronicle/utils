@@ -13,6 +13,20 @@ let getFooter = function(meta, inverted){
 	let year = new Date().getFullYear()
  
  	let {attributes: {marketPrefix, invert}} = getBrands(meta.PROJECT.MARKET_KEY)
+
+ 	// Handle various CT domains
+ 	let eedition = "";
+	if (typeof window !== "undefined"){
+		switch(window.location.origin){
+			case "https://www.ctpost.com/": marketPrefix = "ct"; eedition = "CT_PO"; break;
+			case "https://www.nhregister.com/": marketPrefix = "nh"; eedition = "CT_NHR"; break;
+			case "https://www.greenwichtime.com/": marketPrefix = "gt"; eedition = "CT_GT";  break;
+			case "https://www.stamfordadvocate.com/": marketPrefix = "st"; eedition = "CT_AD"; break;
+			case "https://www.thehour.com": marketPrefix = "th"; eedition = "CT_HR"; break;
+			case "https://www.newstimes.com": marketPrefix = "nt"; eedition = "CT_NT"; break;
+		}
+	}
+
  	// Do the opposite of default if spec'd
 	if (inverted){
 		invert = !invert
@@ -56,7 +70,7 @@ let getFooter = function(meta, inverted){
 			],
 			"Services": [
 				{text:"Subscriber Services",link:"https://subscription.sfchronicle.com/"},
-				{text:"e-edition",link:"https://www.sfchronicle.com/e-edition"},
+				{text:"e-Edition",link:"https://www.sfchronicle.com/e-edition"},
 				{text:"Reprints & Permissions",link:"https://www.parsintl.com/publication/sfchronicle/"},
 				{text:"Corporate Subscriptions",link:"https://www.sfchronicle.com/corporatesubscriptions/"},
 				{text:"App",link:"https://www.sfchronicle.com/mobile-apps/"},
@@ -288,6 +302,66 @@ let getFooter = function(meta, inverted){
 		    {
 		      "text": "e-Edition",
 		      "link": "https://subscription.timesunion.com/eedition/"
+		    }
+		  ]
+		}
+		"CT": {
+		  "About": [
+		    {
+		      "text": "Newspaper Delivery Safety Procedures",
+		      "link": "/article/How-Hearst-Newspapers-is-delivering-information-15152129.php",
+		    },
+		    {
+		      "text": "Privacy Notice",
+		      "link": "/privacy-policy/"
+		    },
+		    {
+		      "text": "Your California Privacy Rights",
+		      "link": "/privacy-policy/#additionalinformationforcaliforniaresidents"
+		    },
+		    {
+		      "text": "Interest Based Ads",
+		      "link": "/privacy-policy/#interestbasedads"
+		    },
+		    {
+		      "text": "Terms of Use",
+		      "link": "/tos/"
+		    },
+		    {
+		      "text": "Advertising",
+		      "link": "https://hearstmediact.com/"
+		    },
+		    {
+		      "text": "Careers",
+		      "link": "http://www.hearst.com/careers"
+		    }
+		  ],
+		  "Contact": [
+		    {
+		      "text": "FAQ",
+		      "link": "/faq/"
+		    },
+		    {
+		      "text": "Customer Service",
+		      "link": "/feedback/"
+		    },
+		    {
+		      "text": "Today's e-Edition",
+		      "link": "https://subscription.hearstmediact.com/eEdition?siteID="+eedition
+		    },
+		    {
+		      "text": "Contact Us",
+		      "link": "/contact/"
+		    }
+		  ],
+		  "Connect": [
+		    {
+		      "text": "RSS",
+		      "link": "/rss/"
+		    },
+		    {
+		      "text": "Newsletter Sign-Up",
+		      "link": "/newsletters/"
 		    }
 		  ]
 		}
