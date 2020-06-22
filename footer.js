@@ -18,10 +18,10 @@ let getFooter = function(meta, inverted){
  	let eedition = "";
 	if (typeof window !== "undefined"){
 		switch(window.location.origin){
-			case "https://www.ctpost.com/": marketPrefix = "ct"; eedition = "CT_PO"; break;
-			case "https://www.nhregister.com/": marketPrefix = "nh"; eedition = "CT_NHR"; break;
-			case "https://www.greenwichtime.com/": marketPrefix = "gt"; eedition = "CT_GT";  break;
-			case "https://www.stamfordadvocate.com/": marketPrefix = "st"; eedition = "CT_AD"; break;
+			case "https://www.ctpost.com": marketPrefix = "ct"; eedition = "CT_PO"; break;
+			case "https://www.nhregister.com": marketPrefix = "nh"; eedition = "CT_NHR"; break;
+			case "https://www.greenwichtime.com": marketPrefix = "gt"; eedition = "CT_GT";  break;
+			case "https://www.stamfordadvocate.com": marketPrefix = "st"; eedition = "CT_AD"; break;
 			case "https://www.thehour.com": marketPrefix = "th"; eedition = "CT_HR"; break;
 			case "https://www.newstimes.com": marketPrefix = "nt"; eedition = "CT_NT"; break;
 		}
