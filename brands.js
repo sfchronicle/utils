@@ -75,7 +75,8 @@ let getBrands = function(market){
 				"@sans-bold": '"HelveticaNeue-HeavyCond", Helvetica, sans-serif',
 			},
 			attributes: {
-				"marketPrefix": "tu"
+				"marketPrefix": "tu",
+				"invert": true
 			}
 		},
 
@@ -96,7 +97,8 @@ let getBrands = function(market){
 				"@brand": "#900900",
 			},
 			attributes: {
-				"marketPrefix": "ct"
+				"marketPrefix": "ct",
+				"invert": true
 			}
 		},
 
@@ -106,7 +108,8 @@ let getBrands = function(market){
 				"@brand": "#900900",
 			},
 			attributes: {
-				"marketPrefix": "tk"
+				"marketPrefix": "tk",
+				"invert": true
 			}
 		}
 	}
