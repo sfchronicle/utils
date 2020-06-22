@@ -304,7 +304,7 @@ let getFooter = function(meta, inverted){
 		      "link": "https://subscription.timesunion.com/eedition/"
 		    }
 		  ]
-		}
+		},
 		"CT": {
 		  "About": [
 		    {
