@@ -42,6 +42,7 @@ let getNav = function(meta, urlAdd, inverted, navLink, navArray){
 			case "https://www.newstimes.com": marketPrefix = "nt"; break;
 		}
 	}
+	console.log("marketPrefix", marketPrefix);
 
 	// If inverted, do black on white nav
 	let invertClass = ""
