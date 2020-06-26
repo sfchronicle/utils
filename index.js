@@ -28,7 +28,7 @@ let appCheck = function(){
 
 // Blend the HDN var with whatever is already present on the page
 // Returns a string for injection into the head of the page
-let blendHDN = function(meta){
+let blendHDN = function(meta, relative){
 	
 	if (!meta.PROJECT){
 		// If we don't have a properly formatted meta var coming in, this is a legacy template and needs settings pulled
@@ -38,21 +38,25 @@ let blendHDN = function(meta){
 	}
 
 	// Set vars with the new object
-	const {
+	let {
 		PAYWALL_SETTING,
 		URL_ADD,
+		MAIN_DOMAIN,
 		PROJECT: {
 			AUTHORS,
 			ANALYTICS_CREDIT,
 			TITLE,
 			HEARST_CATEGORY,
-			MAIN_DOMAIN,
 			SUBFOLDER,
 			OPT_SLASH,
 			SLUG,
 			ISO_PUBDATE,
 		},
   } = meta
+
+  if (relative){
+  	MAIN_DOMAIN = ""
+  }
 	
 	// Get dates from env
 	let pubdate = ISO_PUBDATE
