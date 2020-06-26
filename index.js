@@ -28,7 +28,7 @@ let appCheck = function(){
 
 // Blend the HDN var with whatever is already present on the page
 // Returns a string for injection into the head of the page
-let blendHDN = function(meta, relative){
+let blendHDN = function(meta){
 	
 	if (!meta.PROJECT){
 		// If we don't have a properly formatted meta var coming in, this is a legacy template and needs settings pulled
@@ -50,12 +50,14 @@ let blendHDN = function(meta, relative){
 			SUBFOLDER,
 			OPT_SLASH,
 			SLUG,
+			MARKET_KEY,
 			ISO_PUBDATE,
 		},
   } = meta
 
-  if (relative){
-  	MAIN_DOMAIN = ""
+  BASE_DOMAIN = MAIN_DOMAIN
+  if (MARKET_KEY === "CT"){
+  	BASE_DOMAIN = ""
   }
 	
 	// Get dates from env
@@ -103,18 +105,43 @@ let blendHDN = function(meta, relative){
 
 	// HDN.dataLayer object for source information
 	HDN.dataLayer.source.authorName = ''
-	HDN.dataLayer.source.authorTitle = 'San Francisco Chronicle Staff'
-	HDN.dataLayer.source.originalSourceSite = 'SF'
-	HDN.dataLayer.source.publishingSite = 'premiumsfgate'
-	HDN.dataLayer.source.sourceSite = 'sfgate'
+	
+	HDN.dataLayer.source.authorTitle = '';
+	HDN.dataLayer.source.originalSourceSite = '';
+	HDN.dataLayer.source.publishingSite = '';
+	HDN.dataLayer.source.sourceSite = '';
+	switch(MARKET_KEY){
+  	case "SFC": 
+  		HDN.dataLayer.source.authorTitle = 'San Francisco Chronicle Staff';
+  		HDN.dataLayer.source.originalSourceSite = 'SF';
+			HDN.dataLayer.source.publishingSite = 'premiumsfgate';
+			HDN.dataLayer.source.sourceSite = 'sfgate';
+			break;
+		case "Houston": 
+  		HDN.dataLayer.source.authorTitle = 'Houston Chronicle Staff';
+  		HDN.dataLayer.source.originalSourceSite = 'HC';
+			break;
+		case "SanAntonio": 
+  		HDN.dataLayer.source.authorTitle = 'Express News Staff';
+  		HDN.dataLayer.source.originalSourceSite = 'EN';
+			break;
+		case "Albany": 
+  		HDN.dataLayer.source.authorTitle = 'Times Union Staff';
+  		HDN.dataLayer.source.originalSourceSite = 'TU';
+			break;
+		case "CT": 
+  		HDN.dataLayer.source.authorTitle = 'Connecticut Digital Staff';
+  		HDN.dataLayer.source.originalSourceSite = 'CT';
+			break;
+  }
 
 	// HDN.dataLayer object for sharing information
-	HDN.dataLayer.sharing.openGraphUrl = `${MAIN_DOMAIN}/${SUBFOLDER}${slash}${SLUG}/`
+	HDN.dataLayer.sharing.openGraphUrl = `${BASE_DOMAIN}/${SUBFOLDER}${slash}${SLUG}/`
 	HDN.dataLayer.sharing.openGraphType = 'article'
 
 	// More page settings
-	HDN.dataLayer.href.pageUrl = `${MAIN_DOMAIN}/${SUBFOLDER}${slash}${SLUG}/`
-	HDN.dataLayer.href.canonicalUrl = `${MAIN_DOMAIN}/${SUBFOLDER}${slash}${SLUG}/`
+	HDN.dataLayer.href.pageUrl = `${BASE_DOMAIN}/${SUBFOLDER}${slash}${SLUG}/`
+	HDN.dataLayer.href.canonicalUrl = `${BASE_DOMAIN}/${SUBFOLDER}${slash}${SLUG}/`
 
 	// HDN.dataLayer object for presentation information
 	HDN.dataLayer.presentation.hasSlideshow = ''
@@ -129,13 +156,13 @@ let blendHDN = function(meta, relative){
 
 	// Special site var
 	HDN.dataLayer.site = {
-	  domain: 'projects.sfchronicle.com',
-	  domainRoot: 'sfchronicle',
+	  domain: MAIN_DOMAIN.replace("https://www.",""),
+	  domainRoot: MAIN_DOMAIN.replace(".com",""),
 	  subDomain: 'www',
-	  name: 'premiumsfgate',
-	  property: 'HC',
+	  name: HDN.dataLayer.source.publishingSite,
+	  property: HDN.dataLayer.source.originalSourceSite,
 	  siteId: '35',
-	  siteUrl: 'https://www.projects.sfchronicle.com/',
+	  siteUrl: MAIN_DOMAIN,
 	  timeZone: 'Pacific',
 	}
 
@@ -160,15 +187,15 @@ let blendHDN = function(meta, relative){
   }
   // If we didn't get any author, sub in default
   if (authorString === ""){
-    authorString = "San Francisco Chronicle Staff"
+    authorString = HDN.dataLayer.source.authorTitle
   }
 
 	blendedHDN = HDN
 	// Custom config for multiple pages
 	blendedHDN.dataLayer.content.title = TITLE
-	blendedHDN.dataLayer.sharing.openGraphUrl = `${MAIN_DOMAIN}/${SUBFOLDER}${slash}${SLUG}/${URL_ADD}`
-	blendedHDN.dataLayer.href.pageUrl = `${MAIN_DOMAIN}/${SUBFOLDER}${slash}${SLUG}/${URL_ADD}`
-	blendedHDN.dataLayer.href.canonicalUrl = `${MAIN_DOMAIN}/${SUBFOLDER}${slash}${SLUG}/${URL_ADD}`
+	blendedHDN.dataLayer.sharing.openGraphUrl = `${BASE_DOMAIN}/${SUBFOLDER}${slash}${SLUG}/${URL_ADD}`
+	blendedHDN.dataLayer.href.pageUrl = `${BASE_DOMAIN}/${SUBFOLDER}${slash}${SLUG}/${URL_ADD}`
+	blendedHDN.dataLayer.href.canonicalUrl = `${BASE_DOMAIN}/${SUBFOLDER}${slash}${SLUG}/${URL_ADD}`
 	blendedHDN.dataLayer.source.authorName = authorString
 
 	let appVer = appCheck()
