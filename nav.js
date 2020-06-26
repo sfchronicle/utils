@@ -109,7 +109,7 @@ let getNav = function(meta, urlAdd, inverted, navLink, navArray){
         <a
           id="topper-nav-facebook-icon"
           title="Share on Facebook"
-          href="https://www.facebook.com/sharer/sharer.php?u=${projectConfig.MAIN_DOMAIN}%2Fprojects%2F${subfolder}${storySettings.Slug}%2F${this.props.url_add}"
+          href="https://www.facebook.com/sharer/sharer.php?u=${meta.MAIN_DOMAIN}%2Fprojects%2F${ subfolder }${ meta.PROJECT.SLUG }%2F${urlAdd}"
           target="_blank"
           rel="noopener noreferrer"
         >
