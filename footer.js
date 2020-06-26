@@ -364,6 +364,18 @@ let getFooter = function(meta, inverted){
 		      "link": "/newsletters/"
 		    }
 		  ]
+		},
+		"TK": {
+		  "About": [
+		    {
+		      "text": "Advertising",
+		      "link": "https://hearstmediact.com/"
+		    },
+		    {
+		      "text": "Careers",
+		      "link": "http://www.hearst.com/careers"
+		    }
+		  ]
 		}
 	}
 

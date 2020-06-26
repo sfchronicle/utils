@@ -32,6 +32,7 @@ let getNav = function(meta, urlAdd, inverted, navLink, navArray){
 	}
 	// Handle various CT domains
 	if (typeof window !== "undefined"){
+		console.log("window.location.origin", window.location.origin);
 		switch(window.location.origin){
 			case "https://www.ctpost.com": marketPrefix = "ct"; break;
 			case "https://www.nhregister.com": marketPrefix = "nh"; break;
