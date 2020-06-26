@@ -157,7 +157,7 @@ let blendHDN = function(meta){
 	// Special site var
 	HDN.dataLayer.site = {
 	  domain: MAIN_DOMAIN.replace("https://www.",""),
-	  domainRoot: MAIN_DOMAIN.replace(".com",""),
+	  domainRoot: MAIN_DOMAIN.replace("https://www.","").replace(".com",""),
 	  subDomain: 'www',
 	  name: HDN.dataLayer.source.publishingSite,
 	  property: HDN.dataLayer.source.originalSourceSite,
