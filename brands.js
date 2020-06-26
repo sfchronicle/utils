@@ -36,7 +36,9 @@ let getBrands = function(market){
 				"@sans-bold": '"National Bold", Helvetica, sans-serif',
 			},
 			attributes: {
-				"marketPrefix": "sf"
+				"marketPrefix": "sf",
+				"siteName": "The San Francisco Chronicle",
+				"twitter": "sfchronicle"
 			}
 		},
 
@@ -56,6 +58,8 @@ let getBrands = function(market){
 			},
 			attributes: {
 				"marketPrefix": "hc",
+				"siteName": "The Houston Chronicle",
+				"twitter": "HoustonChron",
 				"invert": true
 			}
 		},
@@ -76,6 +80,8 @@ let getBrands = function(market){
 			},
 			attributes: {
 				"marketPrefix": "tu",
+				"siteName": "Times Union",
+				"twitter": "timesunion",
 				"invert": true
 			}
 		},
@@ -87,6 +93,8 @@ let getBrands = function(market){
 			},
 			attributes: {
 				"marketPrefix": "sa",
+				"siteName": "Express News",
+				"twitter": "ExpressNews",
 				"invert": true
 			}
 		},
@@ -98,6 +106,8 @@ let getBrands = function(market){
 			},
 			attributes: {
 				"marketPrefix": "ct",
+				"siteName": "Connecticut Post",
+				"twitter": "connpost",
 				"invert": true
 			}
 		},
@@ -109,6 +119,8 @@ let getBrands = function(market){
 			},
 			attributes: {
 				"marketPrefix": "tk",
+				"siteName": "Hearst Digital News",
+				"twitter": "Hearst",
 				"invert": true
 			}
 		}
