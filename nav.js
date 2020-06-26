@@ -88,7 +88,7 @@ let getNav = function(meta, urlAdd, inverted, navLink, navArray){
         <a
           id="topper-nav-mail-icon"
           title="Share via email"
-          href="mailto:?subject=${ meta.PROJECT.TITLE }&body=${ meta.PROJECT.DESCRIPTION }%0A%0A${meta.MAIN_DOMAIN}%2F${ subfolder }${ meta.PROJECT.SLUG }%2F${urlAdd}">
+          href="mailto:?subject=${ meta.PROJECT.TITLE }&body=${ meta.PROJECT.DESCRIPTION }%0A%0A${meta.MAIN_DOMAIN}%2Fprojects%2F${ subfolder }${ meta.PROJECT.SLUG }%2F${urlAdd}">
           <svg
 					  width="24"
 					  height="24"
@@ -109,7 +109,7 @@ let getNav = function(meta, urlAdd, inverted, navLink, navArray){
         <a
           id="topper-nav-facebook-icon"
           title="Share on Facebook"
-          href="https://www.facebook.com"
+          href="https://www.facebook.com/sharer/sharer.php?u=${projectConfig.MAIN_DOMAIN}%2Fprojects%2F${subfolder}${storySettings.Slug}%2F${this.props.url_add}"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -129,7 +129,7 @@ let getNav = function(meta, urlAdd, inverted, navLink, navArray){
       </div>
 
       <div class="topper-nav-social">
-        <a target="_blank" rel="noopener noreferrer" id="twitter-icon" title="Share on Twitter" href="https://twitter.com/intent/tweet?url=${meta.MAIN_DOMAIN}%2F${ subfolder }${ meta.PROJECT.SLUG }%2F${urlAdd}&text=${ meta.PROJECT.TWITTER_TEXT }">
+        <a target="_blank" rel="noopener noreferrer" id="twitter-icon" title="Share on Twitter" href="https://twitter.com/intent/tweet?url=${meta.MAIN_DOMAIN}%2Fprojects%2F${ subfolder }${ meta.PROJECT.SLUG }%2F${urlAdd}&text=${ meta.PROJECT.TWITTER_TEXT }">
           <svg
 					  width="24"
 					  height="24"
