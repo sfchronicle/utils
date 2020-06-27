@@ -1,8 +1,4 @@
 
-/* Handle the data/processing for the Hearst analytics and paywall configuration */
-let projectConfig = require("../../project-config.json")
-let projectSettings = projectConfig.PROJECT
-
 // Check to see if this should serve the app version of the project
 let appCheck = function(){
 	// Save current env
