@@ -1,6 +1,11 @@
 
 /* Handle the data/processing for the Hearst analytics and paywall configuration */
-let projectConfig = require("../../project-config.json")
+let projectConfig;
+try {
+	projectConfig = require("../../project-config.json")
+} catch (err){
+	projectConfig = require("../../project.json")
+}
 let projectSettings = projectConfig.PROJECT
 
 // Get settings off story_settings if it exists, otherwise fall back to projectConfig
