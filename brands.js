@@ -16,7 +16,9 @@ let getBrands = function(market){
 			"@sans-book": '"Source Sans Pro Regular", Helvetica, sans-serif',
 			"@sans-bold": '"Source Sans Pro Bold", Helvetica, sans-serif',
 		},
-		attributes: {}
+		attributes: {
+			"subscribeLink": "https://www.hearst.com/newspapers"
+		}
 	}
 
 	// Handle market-specific styles here:
@@ -38,7 +40,8 @@ let getBrands = function(market){
 			attributes: {
 				"marketPrefix": "sf",
 				"siteName": "The San Francisco Chronicle",
-				"twitter": "sfchronicle"
+				"twitter": "sfchronicle",
+				"subscribeLink": "https://offers.sfchronicle.com/subscribe"
 			}
 		},
 
@@ -60,7 +63,8 @@ let getBrands = function(market){
 				"marketPrefix": "hc",
 				"siteName": "The Houston Chronicle",
 				"twitter": "HoustonChron",
-				"invert": true
+				"invert": true,
+				"subscribeLink": "https://offers.sfchronicle.com/subscribe"
 			}
 		},
 
@@ -82,7 +86,8 @@ let getBrands = function(market){
 				"marketPrefix": "tu",
 				"siteName": "Times Union",
 				"twitter": "timesunion",
-				"invert": true
+				"invert": true,
+				"subscribeLink": "https://offers.sfchronicle.com/subscribe"
 			}
 		},
 
@@ -95,7 +100,8 @@ let getBrands = function(market){
 				"marketPrefix": "sa",
 				"siteName": "Express News",
 				"twitter": "ExpressNews",
-				"invert": true
+				"invert": true,
+				"subscribeLink": "https://offers.sfchronicle.com/subscribe"
 			}
 		},
 
@@ -108,7 +114,8 @@ let getBrands = function(market){
 				"marketPrefix": "ct",
 				"siteName": "Connecticut Post",
 				"twitter": "connpost",
-				"invert": true
+				"invert": true,
+				"subscribeLink": "https://offers.sfchronicle.com/subscribe"
 			}
 		},
 
@@ -121,7 +128,7 @@ let getBrands = function(market){
 				"marketPrefix": "tk",
 				"siteName": "Hearst Digital News",
 				"twitter": "Hearst",
-				"invert": true
+				"invert": true,
 			}
 		}
 	}
