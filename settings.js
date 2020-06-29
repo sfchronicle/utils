@@ -4,7 +4,11 @@ let projectConfig;
 try {
 	projectConfig = require("../../project-config.json")
 } catch (err){
-	projectConfig = require("../../project.json")
+	try {
+		projectConfig = require("../../project.json")
+	} catch(err){
+		// It's ok
+	}
 }
 let projectSettings = projectConfig.PROJECT
 
