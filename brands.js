@@ -64,7 +64,7 @@ let getBrands = function(market){
 				"siteName": "The Houston Chronicle",
 				"twitter": "HoustonChron",
 				"invert": true,
-				"subscribeLink": "https://offers.sfchronicle.com/subscribe"
+				"subscribeLink": "https://offers.houstonchronicle.com/"
 			}
 		},
 
@@ -87,7 +87,7 @@ let getBrands = function(market){
 				"siteName": "Times Union",
 				"twitter": "timesunion",
 				"invert": true,
-				"subscribeLink": "https://offers.sfchronicle.com/subscribe"
+				"subscribeLink": "https://offers.timesunion.com/"
 			}
 		},
 
@@ -101,7 +101,7 @@ let getBrands = function(market){
 				"siteName": "Express News",
 				"twitter": "ExpressNews",
 				"invert": true,
-				"subscribeLink": "https://offers.sfchronicle.com/subscribe"
+				"subscribeLink": "https://offers.expressnews.com/"
 			}
 		},
 
@@ -115,7 +115,7 @@ let getBrands = function(market){
 				"siteName": "Connecticut Post",
 				"twitter": "connpost",
 				"invert": true,
-				"subscribeLink": "https://offers.sfchronicle.com/subscribe"
+				"subscribeLink": "https://www.ctinsider.com/"
 			}
 		},
 
