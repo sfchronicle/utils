@@ -25,8 +25,12 @@ let getSettings = function(){
     	// Check for classic story_settings sheet
     	[storySettings] = require("../../src/data/story_settings.sheet.json")
     } catch(err){
-    	// May be an Archie doc, try grabbing from there
-    	storySettings = require("../../data/project_data.json").story_settings
+			try {
+				// May be an Archie doc, try grabbing from there
+				storySettings = require("../../data/project_data.json").story_settings
+			} catch(err) {
+				// hacking this to bypass??
+			}
     }
     // Populate with sheet settings
     settings = {
