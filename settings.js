@@ -30,6 +30,7 @@ let getSettings = function(){
 				storySettings = require("../../data/project_data.json").story_settings
 			} catch(err) {
 				// hacking this to bypass??
+				// Evan: This hack has my approval
 			}
     }
     // Populate with sheet settings
