@@ -55,7 +55,7 @@ let getBrands = function(market){
 				"@serif-bold": '"Publico Text Bold", Georgia, serif',
 
 				"@sans-light": '"Marr Sans Regular", Helvetica, sans-serif',
-				"@sans-med": '"Marr Sans Regular", Helvetica, sans-serif',
+				"@sans-med": '"Marr Sans Semibold", Helvetica, sans-serif',
 				"@sans-book": '"Marr Sans Regular", Helvetica, sans-serif',
 				"@sans-bold": '"Marr Sans Semibold", Helvetica, sans-serif',
 			},
