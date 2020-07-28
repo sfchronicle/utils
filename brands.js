@@ -17,7 +17,7 @@ let getBrands = function(market){
 			"@sans-bold": '"Source Sans Pro Bold", Helvetica, sans-serif',
 		},
 		attributes: {
-			"subscribeLink": "https://www.hearst.com/newspapers"
+			"subscribeLink": "https://www.hearst.com/newspapers?projects=true"
 		}
 	}
 
@@ -41,7 +41,7 @@ let getBrands = function(market){
 				"marketPrefix": "sf",
 				"siteName": "The San Francisco Chronicle",
 				"twitter": "sfchronicle",
-				"subscribeLink": "https://offers.sfchronicle.com/subscribe"
+				"subscribeLink": "https://offers.sfchronicle.com/?offerID=120"
 			}
 		},
 
@@ -64,7 +64,7 @@ let getBrands = function(market){
 				"siteName": "The Houston Chronicle",
 				"twitter": "HoustonChron",
 				"invert": true,
-				"subscribeLink": "https://offers.houstonchronicle.com/"
+				"subscribeLink": "https://offers.houstonchronicle.com/?projects=true"
 			}
 		},
 
@@ -87,7 +87,7 @@ let getBrands = function(market){
 				"siteName": "Times Union",
 				"twitter": "timesunion",
 				"invert": true,
-				"subscribeLink": "https://offers.timesunion.com/"
+				"subscribeLink": "https://offers.timesunion.com/?projects=true"
 			}
 		},
 
@@ -101,7 +101,7 @@ let getBrands = function(market){
 				"siteName": "Express News",
 				"twitter": "ExpressNews",
 				"invert": true,
-				"subscribeLink": "https://offers.expressnews.com/"
+				"subscribeLink": "https://offers.expressnews.com/?projects=true"
 			}
 		},
 
@@ -115,7 +115,7 @@ let getBrands = function(market){
 				"siteName": "Connecticut Post",
 				"twitter": "connpost",
 				"invert": true,
-				"subscribeLink": "https://www.ctinsider.com/"
+				"subscribeLink": "https://www.ctinsider.com/?projects=true"
 			}
 		},
 
