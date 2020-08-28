@@ -17,7 +17,7 @@ let getBrands = function(market){
 			"@sans-bold": '"Source Sans Pro Bold", Helvetica, sans-serif',
 		},
 		attributes: {
-			"subscribeLink": "https://www.hearst.com/newspapers"
+			"subscribeLink": "https://www.hearst.com/newspapers?projects=true"
 		}
 	}
 
@@ -42,7 +42,7 @@ let getBrands = function(market){
 				"siteName": "The San Francisco Chronicle",
 				"twitter": "sfchronicle",
 				"gaAccount": "UA-1616916-26",
-				"subscribeLink": "https://offers.sfchronicle.com/subscribe"
+				"subscribeLink": "https://offers.sfchronicle.com/?offerID=120"
 			}
 		},
 
@@ -56,7 +56,7 @@ let getBrands = function(market){
 				"@serif-bold": '"Publico Text Bold", Georgia, serif',
 
 				"@sans-light": '"Marr Sans Regular", Helvetica, sans-serif',
-				"@sans-med": '"Marr Sans Regular", Helvetica, sans-serif',
+				"@sans-med": '"Marr Sans Semibold", Helvetica, sans-serif',
 				"@sans-book": '"Marr Sans Regular", Helvetica, sans-serif',
 				"@sans-bold": '"Marr Sans Semibold", Helvetica, sans-serif',
 			},
@@ -66,7 +66,7 @@ let getBrands = function(market){
 				"twitter": "HoustonChron",
 				"invert": true,
 				"gaAccount": "UA-1616916-24",
-				"subscribeLink": "https://offers.houstonchronicle.com/"
+				"subscribeLink": "https://offers.houstonchronicle.com/?projects=true"
 			}
 		},
 
@@ -90,7 +90,7 @@ let getBrands = function(market){
 				"twitter": "timesunion",
 				"invert": true,
 				"gaAccount": "UA-1616916-7",
-				"subscribeLink": "https://offers.timesunion.com/"
+				"subscribeLink": "https://offers.timesunion.com/?projects=true"
 			}
 		},
 
@@ -105,7 +105,7 @@ let getBrands = function(market){
 				"twitter": "ExpressNews",
 				"invert": true,
 				"gaAccount": "UA-1616916-27",
-				"subscribeLink": "https://offers.expressnews.com/"
+				"subscribeLink": "https://offers.expressnews.com/?projects=true"
 			}
 		},
 
@@ -120,7 +120,7 @@ let getBrands = function(market){
 				"twitter": "connpost",
 				"invert": true,
 				"gaAccount": "UA-1616916-8",
-				"subscribeLink": "https://www.ctinsider.com/"
+				"subscribeLink": "https://www.ctinsider.com/?projects=true"
 			}
 		},
 

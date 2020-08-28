@@ -395,7 +395,7 @@ let getFooter = function(meta, inverted){
 	  linkHTML += '</ul></li>'
 	});
 
-	let navHTML = `<footer class="pageFooter ${invertClass}">
+	let footerHTML = `<footer class="pageFooter ${invertClass}">
     <div class="lock">
       <div class="pageFooter--wrapper">
         <div class="pageFooter--left">
@@ -445,7 +445,7 @@ let getFooter = function(meta, inverted){
     </div>
   </footer>`
 
-  return navHTML
+  return footerHTML
 }
 
 module.exports = { getFooter }

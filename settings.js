@@ -20,7 +20,19 @@ let getSettings = function(){
 
 	try {
     // Populate with storySettings if they exist
-    let [storySettings] = require("../../src/data/story_settings.sheet.json")
+    let storySettings
+    try {
+    	// Check for classic story_settings sheet
+    	[storySettings] = require("../../src/data/story_settings.sheet.json")
+    } catch(err){
+			try {
+				// May be an Archie doc, try grabbing from there
+				storySettings = require("../../data/project_data.json").story_settings
+			} catch(err) {
+				// hacking this to bypass??
+				// Evan: This hack has my approval
+			}
+    }
     // Populate with sheet settings
     settings = {
 			"PAYWALL_SETTING": storySettings.Paywall,
