@@ -26,7 +26,7 @@ let getBrands = function(market){
 		/* San Franicsco Chronicle */
 		SFC: {
 			styles: {
-				"@brand": "#2cb9bf",
+				"@brand": "#26A0A5",
 				"@hed": '"Tiempos Headline Black", Georgia, serif',
 				"@hed-alt": '"Tiempos Headline Light", Georgia, serif',
 				"@serif-book": '"Tiempos Regular", Georgia, serif',
