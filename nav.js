@@ -2,7 +2,7 @@
 let { getBrands } = require('./brands')
 
 // Handle nav for various markets and include nav options for other links
-let getNav = function(meta, urlAdd, inverted, navLink, navArray){
+let getNav = function(meta, urlAdd, forceColor, navLink, navArray){
 	// TODO: Support navArray and create submenu
 
 	// If we aren't passing meta in, we have to call getSettings here
@@ -26,10 +26,6 @@ let getNav = function(meta, urlAdd, inverted, navLink, navArray){
 	}
 
 	let {attributes: {marketPrefix, invert}} = getBrands(meta.PROJECT.MARKET_KEY)
-	// Do the opposite of default if spec'd
-	if (inverted){
-		invert = !invert
-	}
 	// Handle various CT domains
 	if (typeof window !== "undefined"){
 		switch(window.location.origin){
@@ -42,10 +38,12 @@ let getNav = function(meta, urlAdd, inverted, navLink, navArray){
 		}
 	}
 
-	// If inverted, do black on white nav
+	// Default is white text on black nav (SFC style)
 	let invertClass = ""
 	let color = "white"
-	if (invert){
+	// If inverted, do black on white nav
+	// Only change things if color isn't forced to white
+	if (invert || forceColor === "white"){
 		invertClass = "invert"
 		color = "black"
 	}

@@ -2,7 +2,7 @@
 let { getBrands } = require('./brands')
 
 // Handle nav for various markets and include nav options for other links
-let getFooter = function(meta, inverted){
+let getFooter = function(meta, forceColor){
 
 	// If we aren't passing meta in, we have to call getSettings here
 	if (!meta){
@@ -26,16 +26,10 @@ let getFooter = function(meta, inverted){
 			case "https://www.newstimes.com": marketPrefix = "nt"; eedition = "CT_NT"; break;
 		}
 	}
-
- 	// Do the opposite of default if spec'd
-	if (inverted){
-		invert = !invert
-	}
-
 	// If inverted, do black on white nav
 	let invertClass = ""
 	let color = "white"
-	if (invert){
+	if (invert || forceColor === "white"){
 		invertClass = "invert"
 		color = "black"
 	}
