@@ -20,6 +20,16 @@ let getNav = function(meta, urlAdd, forceColor, navLink, navArray){
 		}
 	}
 
+	// If a navArray was provided, create the subnav
+	let subnav = ""
+	if (navArray){
+		subnav = `<ul id="subnav">`
+		for (let i = 0; i <navArray.length; i++){
+			subnav += `<li><a class="active" href="${navArray[i].link}" target="${navArray[i].target}"><span class="arrow-bullet">▶</span> ${navArray[i].text}</a></li>`
+		}
+		subnav += `</ul>`
+	}
+
 	// Extension to URL if passed in
 	if (!urlAdd){
 		urlAdd = ""
@@ -145,6 +155,7 @@ let getNav = function(meta, urlAdd, forceColor, navLink, navArray){
         </a>
       </div>
     </div>
+    ${subnav}
   </nav>`
 
   return navHTML
