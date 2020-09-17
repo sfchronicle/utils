@@ -85,6 +85,7 @@ let getNav = function(meta, urlAdd, forceColor, navLink, navArray){
       </a>
       <a
         class="topper-nav-title"
+        id="nav-title"
         href="${navLink.url}"
         target="${navLink.target || "_blank"}"
       >
