@@ -25,7 +25,7 @@ let getNav = function(meta, urlAdd, forceColor, navLink, navArray){
 	if (navArray){
 		subnav = `<ul id="subnav">`
 		for (let i = 0; i <navArray.length; i++){
-			subnav += `<li><a class="active" href="${navArray[i].link}" target="${navArray[i].target}"><span class="arrow-bullet">▶</span> ${navArray[i].text}</a></li>`
+			subnav += `<li><a class="active" href="${navArray[i].url}" target="${navArray[i].target}"><span class="arrow-bullet">▶</span> ${navArray[i].text}</a></li>`
 		}
 		subnav += `</ul>`
 	}
