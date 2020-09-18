@@ -22,7 +22,7 @@ let getNav = function(meta, urlAdd, forceColor, navLink, navArray){
 	// If a navArray was provided, create the subnav
 	let subnav = ""
 	let dropdownIcon = ""
-	if (navArray){
+	if (navArray && navArray.length > 0){
 		subnav = `<ul id="subnav">`
 		for (let i = 0; i <navArray.length; i++){
 			subnav += `<li><a class="active" href="${navArray[i].url}" target="${navArray[i].target}"><span class="arrow-bullet">▶</span> ${navArray[i].text}</a></li>`
