@@ -57,8 +57,11 @@ let blendHDN = function(meta){
   }
 	
 	// Get dates from env
-	let pubdate = ISO_PUBDATE
-
+	let pubdate = ""
+	if (ISO_PUBDATE){
+		pubdate = ISO_PUBDATE.toString().split('T')[0] + " 00:00:00"
+	}
+	
   // Check if we need a slash
   let slash = OPT_SLASH
 
