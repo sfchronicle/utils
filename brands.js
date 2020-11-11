@@ -42,7 +42,7 @@ let getBrands = function(market){
 				"siteName": "The San Francisco Chronicle",
 				"twitter": "sfchronicle",
 				"gaAccount": "UA-1616916-26",
-				"subscribeLink": "https://offers.sfchronicle.com/?offerID=120"
+				"subscribeLink": "https://subscription.sfchronicle.com/checkout/439/883/?siteID=SFC&origin=button&ipid=project"
 			}
 		},
 
