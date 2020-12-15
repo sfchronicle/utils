@@ -26,7 +26,7 @@ let getBrands = function(market){
 		/* San Franicsco Chronicle */
 		SFC: {
 			styles: {
-				"@brand": "#2cb9bf",
+				"@brand": "#26A0A5",
 				"@hed": '"Tiempos Headline Black", Georgia, serif',
 				"@hed-alt": '"Tiempos Headline Light", Georgia, serif',
 				"@serif-book": '"Tiempos Regular", Georgia, serif',
@@ -42,7 +42,7 @@ let getBrands = function(market){
 				"siteName": "The San Francisco Chronicle",
 				"twitter": "sfchronicle",
 				"gaAccount": "UA-1616916-26",
-				"subscribeLink": "https://offers.sfchronicle.com/?offerID=120"
+				"subscribeLink": "https://subscription.sfchronicle.com/checkout/439/883/?siteID=SFC&origin=button&ipid=project"
 			}
 		},
 
@@ -56,7 +56,7 @@ let getBrands = function(market){
 				"@serif-bold": '"Publico Text Bold", Georgia, serif',
 
 				"@sans-light": '"Marr Sans Regular", Helvetica, sans-serif',
-				"@sans-med": '"Marr Sans Semibold", Helvetica, sans-serif',
+				"@sans-med": '"Marr Sans Regular", Helvetica, sans-serif',
 				"@sans-book": '"Marr Sans Regular", Helvetica, sans-serif',
 				"@sans-bold": '"Marr Sans Semibold", Helvetica, sans-serif',
 			},

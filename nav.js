@@ -2,8 +2,7 @@
 let { getBrands } = require('./brands')
 
 // Handle nav for various markets and include nav options for other links
-let getNav = function(meta, urlAdd, inverted, navLink, navArray){
-	// TODO: Support navArray and create submenu
+let getNav = function(meta, urlAdd, forceColor, navLink, navArray){
 
 	// If we aren't passing meta in, we have to call getSettings here
 	if (!meta){
@@ -20,16 +19,25 @@ let getNav = function(meta, urlAdd, inverted, navLink, navArray){
 		}
 	}
 
+	// If a navArray was provided, create the subnav
+	let subnav = ""
+	let dropdownIcon = ""
+	if (navArray && navArray.length > 0){
+		subnav = `<ul id="subnav">`
+		for (let i = 0; i <navArray.length; i++){
+			subnav += `<li><a class="active" href="${navArray[i].url}" target="${navArray[i].target}"><span class="arrow-bullet">▶</span> ${navArray[i].text}</a></li>`
+		}
+		subnav += `</ul>`
+		// Add a dropdown icon
+		dropdownIcon = `<div class="dropdown-icon">▾</div>`
+	}
+
 	// Extension to URL if passed in
 	if (!urlAdd){
 		urlAdd = ""
 	}
 
 	let {attributes: {marketPrefix, invert}} = getBrands(meta.PROJECT.MARKET_KEY)
-	// Do the opposite of default if spec'd
-	if (inverted){
-		invert = !invert
-	}
 	// Handle various CT domains
 	if (typeof window !== "undefined"){
 		switch(window.location.origin){
@@ -42,10 +50,12 @@ let getNav = function(meta, urlAdd, inverted, navLink, navArray){
 		}
 	}
 
-	// If inverted, do black on white nav
+	// Default is white text on black nav (SFC style)
 	let invertClass = ""
 	let color = "white"
-	if (invert){
+	// If inverted, do black on white nav
+	// Only change things if color isn't forced to white
+	if (invert || forceColor === "white"){
 		invertClass = "invert"
 		color = "black"
 	}
@@ -77,10 +87,11 @@ let getNav = function(meta, urlAdd, inverted, navLink, navArray){
       </a>
       <a
         class="topper-nav-title"
+        id="nav-title"
         href="${navLink.url}"
         target="${navLink.target || "_blank"}"
       >
-        ${navLink.text}
+        ${navLink.text}${dropdownIcon}
       </a>
     </div>
     <div class="topper-nav-right">
@@ -147,6 +158,7 @@ let getNav = function(meta, urlAdd, inverted, navLink, navArray){
         </a>
       </div>
     </div>
+    ${subnav}
   </nav>`
 
   return navHTML
