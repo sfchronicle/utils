@@ -307,15 +307,15 @@ let getFooter = function(meta, forceColor){
 		    },
 		    {
 		      "text": "Privacy Notice",
-		      "link": "/privacy-policy/"
+		      "link": "/privacy/"
 		    },
 		    {
 		      "text": "Your California Privacy Rights",
-		      "link": "/privacy-policy/#additionalinformationforcaliforniaresidents"
+		      "link": "/privacy/#additionalinformationforcaliforniaresidents"
 		    },
 		    {
 		      "text": "Interest Based Ads",
-		      "link": "/privacy-policy/#interestbasedads"
+		      "link": "/privacy/#interestbasedads"
 		    },
 		    {
 		      "text": "Terms of Use",
