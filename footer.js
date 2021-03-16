@@ -24,6 +24,7 @@ let getFooter = function(meta, forceColor){
 			case "https://www.stamfordadvocate.com": marketPrefix = "st"; eedition = "CT_AD"; break;
 			case "https://www.thehour.com": marketPrefix = "th"; eedition = "CT_HR"; break;
 			case "https://www.newstimes.com": marketPrefix = "nt"; eedition = "CT_NT"; break;
+			case "https://www.middletownpress.com": marketPrefix = "mp"; eedition = "CT_MP"; break;
 		}
 	}
 	// If inverted, do black on white nav
