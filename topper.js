@@ -4,6 +4,8 @@ let { getBrands } = require('./brands')
 let getTopper = function(settings){
    
     let storySettings = settings[0];
+    let topperSettingsArray;
+    let topperClass = storySettings.Special_Topper ? storySettings.Special_Topper : 'sidebyside';
     let mediaChoice = ``;
     let topperImages = [];
     let animationDuration;
@@ -12,15 +14,10 @@ let getTopper = function(settings){
     let imageResolution = 960;
     if(storySettings.Topper_Mp4){
         mediaChoice = `
-        <video muted loop autoPlay playsInline poster=${storySettings.Topper_Mp4.trim().replace('.mp4', '.jpg')}>
+        <video id="topper-intro-video-sfc-utils" muted loop autoPlay playsInline poster=${storySettings.Topper_Mp4.trim().replace('.mp4', '.jpg')}>
           <source src=${storySettings.Topper_Mp4.trim().replace('.mp4', '.m3u8')} type="application/vnd.apple.mpegurl" />
           <source src=${storySettings.Topper_Mp4.trim()} type="video/mp4" />
         </video>`
-        // mediaChoice = `
-        // <video muted loop autoPlay playsInline poster=${storySettings.Topper_Mp4.trim().replace('.mp4', '.jpg')}>
-        // <source src = ${storySettings.Topper_Mp4.trim()} type=video/mp4 />
-        // </video>`
-
     }
     else if(storySettings.Topper_ImageID){
         
@@ -45,15 +42,15 @@ let getTopper = function(settings){
             //     else{
             //         currentImageIndex += 1;
             //     }
-            //     document.getElementById("topper-image").src = topperImageURLs[currentImageIndex]
+            //     document.getElementById("topper-intro-img-sfc-utils").src = topperImageURLs[currentImageIndex]
             // }, 5000)
             
             for (let i = 0; i < topperImages.length; i++){
-                mediaChoice += `<img class = "topper-image fade${i}" src=${topperImageURLs[i]}>`
+                mediaChoice += `<img class = "topper-intro-img-sfc-utils fade${i}" src=${topperImageURLs[i]}>`
             }
         }
             else if(topperImages.length == 1){
-                mediaChoice = `<img class="topper-image" src=${topperImageURLs[0]}>`
+                mediaChoice = `<img class="topper-intro-img-sfc-utils" src=${topperImageURLs[0]}>`
             }
         }
     //Split topper images
@@ -91,13 +88,13 @@ let getTopper = function(settings){
         }
     }
     let topperCSS = `
-    video, img {
+    #topper-intro-video-sfc-utils, .topper-intro-img-sfc-utils {
         max-width: 100%;
    }
    #topper-arrow{
        display: none;
    }
-   #topper-mediacontainer video{
+   #topper-intro-video-sfc-utils{
        width: 100%;
        object-fit: contain;
    }
@@ -129,7 +126,7 @@ let getTopper = function(settings){
    #topper-intro-container.opaque #topper-article-title, #topper-intro-container.opaque-black #topper-article-title, #topper-intro-container.transparent #topper-article-title, #topper-intro-container.transparent-black #topper-article-title{
     padding: 10px
    }
-    .topper-image{
+    .topper-intro-img-sfc-utils{
         position: absolute;
         top: 0;
         width: 100%;
@@ -245,7 +242,13 @@ let getTopper = function(settings){
    
        }
    }
-   let topperSettingsArray = storySettings.Special_Topper.split(" ");
+if(storySettings.Special_Topper){
+   topperSettingsArray = storySettings.Special_Topper.split(" ");
+}
+else{
+    topperSettingsArray = ['sidebyside']
+}
+
    for(let setting of topperSettingsArray){
        if(setting == "full"){
            topperCSS += `
@@ -277,15 +280,12 @@ let getTopper = function(settings){
             right: 0;
             height: calc(100vh - 37px);
        }
-       .topper-image, #topper-mediacontainer video{
+       .topper-intro-img-sfc-utils, #topper-intro-video-sfc-utils{
            object-fit: ${disableCover};
            width: 100%;
            height: 100%;
            position: absolute;
 
-       }
-       #topper-mediacontainer video{
-          
        }
        #topper-mediacontainer{
            position: absolute;
@@ -337,7 +337,7 @@ let getTopper = function(settings){
                 max-width: unset;
                 margin: 1em auto .5em auto;
            }
-           .topper-image, #topper-mediacontainer video{
+           .topper-intro-img-sfc-utils, #topper-intro-video-sfc-utils{
             object-fit: contain;
             width: 100%;
             margin: auto;
@@ -393,7 +393,7 @@ let getTopper = function(settings){
                 max-width: unset;
                 margin: 1em auto .5em auto;
            }
-           .topper-image, #topper-mediacontainer video{
+           .topper-intro-img-sfc-utils, #topper-intro-video-sfc-utils{
             object-fit: contain;
             width: 100%;
             margin: auto;
@@ -426,6 +426,15 @@ let getTopper = function(settings){
            width: 90%;
        }
         }`
+    }
+    else{
+        topperCSS += `
+        @media screen and (max-width: 700px){
+            #topper-article-title{
+                padding: 0 20px 50px 20px;
+            }
+        }
+        `
     }
        }
        else if(setting == "opaque"){
@@ -475,7 +484,7 @@ let getTopper = function(settings){
          bottom: 0px;
          color: white;
          background: #020024;
-         background: linear-gradient(0deg,#020024 0%,rgba(255,255,255,0) 100%);
+         background: linear-gradient(0deg,#000000 0%,rgba(255,255,255,0) 100%);
      }
      #topper-intro-container.gradient #topper-article-title time.dateline, #topper-intro-container.gradient #topper-article-title .topper-article-byline {
          color: lightgray;
@@ -616,7 +625,7 @@ let getTopper = function(settings){
             max-width: 55%;
             margin: 1em auto .5em auto;
        }
-       #topper-intro-container.half-stacked .topper-image, #topper-intro-container.half-stacked-reverse .topper-image {
+       #topper-intro-container.half-stacked .topper-intro-img-sfc-utils, #topper-intro-container.half-stacked-reverse .topper-intro-img-sfc-utils {
         object-fit: contain;
         height: 100% !important;
         width: 100%;
@@ -647,7 +656,7 @@ let getTopper = function(settings){
          margin-bottom: 30px;
     }
   
-    #topper-intro-container.wide-stacked .topper-image, #topper-intro-container.wide-stacked-reverse .topper-image {
+    #topper-intro-container.wide-stacked .topper-intro-img-sfc-utils, #topper-intro-container.wide-stacked-reverse .topper-intro-img-sfc-utils {
      object-fit: cover;
      height: 100% !important;
      width: 100%;
@@ -670,7 +679,7 @@ let getTopper = function(settings){
             width: 100%;
             height: 40vh;
         }
-        #topper-intro-container.wide-stacked .topper-image, #topper-intro-container.wide-stacked-reverse .topper-image {
+        #topper-intro-container.wide-stacked .topper-intro-img-sfc-utils, #topper-intro-container.wide-stacked-reverse .topper-intro-img-sfc-utils {
             object-fit: contain;
         }
         #topper-article-title{
@@ -694,7 +703,7 @@ let getTopper = function(settings){
              margin: 1em 0;
              height: 60vh;
         }
-         .topper-image {
+         .topper-intro-img-sfc-utils {
              width: 100%;
              height: 100%;
              
@@ -723,7 +732,7 @@ let getTopper = function(settings){
                 max-width: unset;
                 margin: 1em auto .5em auto;
            }
-           #topper-intro-container.sidebyside .topper-image, #topper-intro-container.sidebyside-reverse .topper-image {
+           #topper-intro-container.sidebyside .topper-intro-img-sfc-utils, #topper-intro-container.sidebyside-reverse .topper-intro-img-sfc-utils {
             object-fit: contain;
             height: 100% !important;
             width: 100%;
@@ -756,7 +765,7 @@ let getTopper = function(settings){
     
     
     </style>
-    <div id="topper-intro-container" class="${storySettings.Special_Topper}" style="">
+    <div id="topper-intro-container" class="${topperClass}" style="">
     <div id="topper-mediacontainer">
     ${mediaChoice}
     </div>
