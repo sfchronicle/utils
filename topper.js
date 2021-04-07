@@ -759,7 +759,6 @@ else{
        } 
    }
 	let topperHTML = `
-    <div class="container">
     <style>
     ${topperCSS}
     
@@ -779,7 +778,7 @@ else{
   <polyline points="6 9 12 15 18 9" />
 </svg>
     </div>
-    </div>`
+`
 
   return topperHTML
 }
