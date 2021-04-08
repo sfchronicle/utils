@@ -4,14 +4,17 @@ let { getBrands } = require('./brands')
 let getTopper = function(settings){
    
     let storySettings = settings[0];
-    let topperSettingsArray;
-    let topperClass = storySettings.Special_Topper ? storySettings.Special_Topper : 'sidebyside';
+    let topperLayout = storySettings.Topper_Layout ? storySettings.Topper_Layout : 'sidebyside';
+    let topperTextPosition = storySettings.Topper_Text_Position ? storySettings.Topper_Text_Position : "center-bottom";
+    let topperTextBackground = storySettings.Topper_Text_Background ? storySettings.Topper_Text_Background : "gradient";
+    let topperSettingsArray = [topperLayout, topperTextPosition, topperTextBackground];
+    let topperClass = topperLayout + " " + topperTextPosition + " " + topperTextBackground;
     let mediaChoice = ``;
     let topperImages = [];
     let animationDuration;
     let disableCover = storySettings.Topper_Contain == 'true' ? 'contain' : 'cover';
-    storySettings.Slideshow_Duration ? animationDuration = storySettings.Slideshow_Duration : animationDuration = false;
-    let imageResolution = 960;
+    storySettings.Slide_Duration ? animationDuration = storySettings.Slide_Duration : animationDuration = false;
+    let imageResolution = 1280;
     if(storySettings.Topper_Mp4){
         mediaChoice = `
         <video id="topper-intro-video-sfc-utils" muted loop autoPlay playsInline poster=${storySettings.Topper_Mp4.trim().replace('.mp4', '.jpg')}>
@@ -34,7 +37,7 @@ let getTopper = function(settings){
         let currentImageURL = topperImageURLs[0];
         
         if(topperImages.length > 1){
-            animationDuration ? animationDuration = topperImages.length * storySettings.Slideshow_Duration : animationDuration = topperImages.length * 5;
+            animationDuration ? animationDuration = topperImages.length * storySettings.Slide_Duration : animationDuration = topperImages.length * 5;
             
             for (let i = 0; i < topperImages.length; i++){
                 mediaChoice += `<img class = "topper-intro-img-sfc-utils fade${i}" src=${topperImageURLs[i]}>`
@@ -237,12 +240,6 @@ let getTopper = function(settings){
    
        }
    }
-if(storySettings.Special_Topper){
-   topperSettingsArray = storySettings.Special_Topper.split(" ");
-}
-else{
-    topperSettingsArray = ['sidebyside']
-}
 
    for(let setting of topperSettingsArray){
        if(setting == "full"){
@@ -435,7 +432,7 @@ else{
        }
        else if(setting == "opaque"){
         topperCSS += `
-        #topper-intro-container.opaque #topper-article-title {
+        #topper-intro-container.full.opaque #topper-article-title {
          background: #ffffff;
     }
         
@@ -443,20 +440,21 @@ else{
     }
     else if(setting == "transparent"){
          topperCSS += `
-         #topper-intro-container.transparent #topper-article-title {
+         #topper-intro-container.full.transparent #topper-article-title {
              background: rgba(255,255,255,0.8);
         }
          `
     }
     else if(setting == "opaque-black"){
      topperCSS += `
-     #topper-intro-container.opaque-black #topper-article-title {
+     #topper-intro-container.full.opaque-black #topper-article-title {
          background: #000000;
          color: white;
     }
-     #topper-intro-container.opaque-black #topper-article-title time.dateline, #topper-intro-container.opaque-black #topper-article-title .topper-article-byline {
+     #topper-intro-container.full.opaque-black #topper-article-title time.dateline, #topper-intro-container.full.opaque-black #topper-article-title .topper-article-byline {
          color: lightgray;
     }
+    
      
      `
     }
@@ -474,7 +472,7 @@ else{
     }
     else if (setting == "gradient"){
      topperCSS += `
-     #topper-intro-container.gradient #topper-article-title {
+     #topper-intro-container.full.gradient #topper-article-title {
          max-width: unset !important;
          width: 100%;
          bottom: 0px;
@@ -483,7 +481,7 @@ else{
          background: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 20%, rgba(255,255,255,0) 100%);
          padding-top: 50px;
      }
-     #topper-intro-container.gradient #topper-article-title time.dateline, #topper-intro-container.gradient #topper-article-title .topper-article-byline {
+     #topper-intro-container.full.gradient #topper-article-title time.dateline, #topper-intro-container.full.gradient #topper-article-title .topper-article-byline {
          color: lightgray;
      }
      
@@ -566,44 +564,56 @@ else{
     }
     else if(setting=="center"){
         topperCSS += `
-        #topper-intro-container.center{
+        #topper-intro-container.full.center{
             align-items: center;
         }
         `
     }
     else if(setting == "bottom-right"){
         topperCSS += `
-        #topper-intro-container.full.bottom-right #topper-article-title {
-            bottom: 0px;
-            right: 0;
+        #topper-intro-container.full.gradient.bottom-right #topper-article-title {
             text-align: right;
-            padding-bottom: 20px;
+            bottom: 0px !important;
+            padding-bottom: 20px !important;
+            right: 0 !important;
        }
-       #topper-intro-container.full.bottom-right #topper-article-title > *{
-        margin-right: 20px !important;
+       #topper-intro-container.full.gradient.bottom-right #topper-article-title > *{
+           margin-right: 20px !important;
+       }
+       #topper-intro-container.full.bottom-right #topper-article-title {
+        bottom: 40px;
+        right: 40px;
+   }
+       @media screen and (max-width: 700px){
+        #topper-intro-container.full.bottom-right #topper-article-title {
+            right: 0px;
+       }
+        #topper-intro-container.full.gradient.bottom-right #topper-article-title {
+            padding-bottom: 50px;
+       }
     }
-        #topper-intro-container.full.bottom-right #topper-article-title .topper-article-dek {
-            margin: 0 0 0 auto;
-       }
-        @media screen and (max-width: 700px){
-            #topper-intro-container.full.bottom-right #topper-article-title {
-                padding-bottom: 50px;
-           }
-        }
         `
     }
     else if(setting == "bottom-left"){
         topperCSS += `
-        #topper-intro-container.full.bottom-left #topper-article-title {
+        #topper-intro-container.full.gradient.bottom-left #topper-article-title {
             text-align: left;
-            bottom: 0px;
-            padding-bottom: 20px;
+            bottom: 0px !important;
+            padding-bottom: 20px !important;
+            left: 0 !important;
        }
-       #topper-intro-container.full.bottom-left #topper-article-title > *{
+       #topper-intro-container.full.gradient.bottom-left #topper-article-title > *{
            margin-left: 20px !important;
        }
+       #topper-intro-container.full.bottom-left #topper-article-title {
+        bottom: 40px;
+        left: 40px;
+   }
        @media screen and (max-width: 700px){
         #topper-intro-container.full.bottom-left #topper-article-title {
+            left: 0px;
+       }
+        #topper-intro-container.full.gradient.bottom-left #topper-article-title {
             padding-bottom: 50px;
        }
     }
@@ -719,12 +729,12 @@ else{
              flex-direction: row-reverse;
 
         }
-        #topper-intro-container.black{
+        #topper-intro-container.opaque-black{
             background-color: black;
             
             color: white
        }
-        #topper-intro-container.black .topper-article-byline{
+        #topper-intro-container.opaque-black .topper-article-byline{
        color: lightgray;
         }
         @media screen and (max-width: 700px){
