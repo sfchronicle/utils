@@ -695,11 +695,12 @@ else{
             align-items: center;
             max-width: unset !important;
              margin: 0;
+             height: 60vh;
         }
         #topper-mediacontainer{
             flex: 0 0 50%;
             max-width: 50%;
-             margin: 1em 2.5%;
+             margin: 1em 0;
              height: 60vh;
         }
          .topper-intro-img-sfc-utils {
@@ -711,7 +712,7 @@ else{
         #topper-intro-container.sidebyside > #topper-article-title, #topper-intro-container.sidebyside-reverse > #topper-article-title {
          flex: 0 0 50%;
          max-width: 40%;
-         margin: 1em 2.5%;
+         margin: 1em 5%;
          text-align: center;
      }
          #topper-intro-container.sidebyside-reverse{
