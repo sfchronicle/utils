@@ -126,7 +126,9 @@ let getTopper = function(settings){
     }
 
    `
-   topperCSS += storySettings.Topper_CustomCSS_Inject;
+   if(storySettings.Topper_CustomCSS_Inject){
+    topperCSS += storySettings.Topper_CustomCSS_Inject;
+   }
    if(topperImages.length > 1){
      
        let animationInterval = (100 / topperImages.length);
@@ -691,11 +693,13 @@ else{
         }
            #topper-intro-container.sidebyside, #topper-intro-container.sidebyside-reverse{
             align-items: center;
+            max-width: unset !important;
+             margin: 0;
         }
         #topper-mediacontainer{
             flex: 0 0 50%;
             max-width: 50%;
-             margin: 1em 0;
+             margin: 1em 2.5%;
              height: 60vh;
         }
          .topper-intro-img-sfc-utils {
@@ -707,11 +711,20 @@ else{
         #topper-intro-container.sidebyside > #topper-article-title, #topper-intro-container.sidebyside-reverse > #topper-article-title {
          flex: 0 0 50%;
          max-width: 40%;
-         margin: 1em 5%;
+         margin: 1em 2.5%;
          text-align: center;
      }
-         #topper-intro-container.sidebyside.sidebyside-reverse, #topper-intro-container.sidebyside-reverse.sidebyside-reverse {
+         #topper-intro-container.sidebyside-reverse{
              flex-direction: row-reverse;
+
+        }
+        #topper-intro-container.black{
+            background-color: black;
+            
+            color: white
+       }
+        #topper-intro-container.black .topper-article-byline{
+       color: lightgray;
         }
         @media screen and (max-width: 700px){
             #topper-intro-container.sidebyside {
