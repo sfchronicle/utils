@@ -556,7 +556,6 @@ let getTopper = function(settings){
             text-align: center;
             justify-content: center;
             bottom: 0px;
-            padding-bottom: 50px;
         }
         #topper-intro-container.transparent #topper-arrow, #topper-intro-container.opaque #topper-arrow{
             fill: black;
@@ -588,9 +587,6 @@ let getTopper = function(settings){
        @media screen and (max-width: 700px){
         #topper-intro-container.full.bottom-right #topper-article-title {
             right: 0px;
-       }
-        #topper-intro-container.full.gradient.bottom-right #topper-article-title {
-            padding-bottom: 50px;
        }
     }
         `
