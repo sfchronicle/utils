@@ -249,7 +249,7 @@ let getTopper = function(settings){
             flex: 0 0 50%;
         }
         #topper-arrow{
-            display: block;
+            display: none;
             position: absolute;
             left: 50%;
             transform: translate(-50%, 0%);
