@@ -247,6 +247,7 @@ let getTopper = function(settings){
 
            #topper-intro-container > * {
             flex: 0 0 50%;
+            overflow: hidden;
         }
         #topper-arrow{
             display: none;
