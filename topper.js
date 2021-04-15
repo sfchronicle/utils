@@ -147,6 +147,7 @@ let getTopper = function(settings){
                         opacity: 0;
                         position: absolute;
                         animation: animfade${i} ${animationDuration}s infinite;
+                        left: 0;
                     }
                     `
                 }
