@@ -84,6 +84,7 @@ let getTopper = function(settings){
     let topperCSS = `
     #topper-intro-video-sfc-utils, .topper-intro-img-sfc-utils {
         max-width: 100%;
+        left: 0;
    }
    #topper-arrow{
        display: none;
@@ -147,7 +148,6 @@ let getTopper = function(settings){
                         opacity: 0;
                         position: absolute;
                         animation: animfade${i} ${animationDuration}s infinite;
-                        left: 0;
                     }
                     `
                 }
@@ -714,7 +714,7 @@ let getTopper = function(settings){
          .topper-intro-img-sfc-utils {
              width: 100%;
              height: 100%;
-             
+             left: 0;
              object-fit: ${disableCover};
         }
         #topper-intro-container.sidebyside > #topper-article-title, #topper-intro-container.sidebyside-reverse > #topper-article-title {
