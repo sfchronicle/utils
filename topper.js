@@ -735,6 +735,9 @@ let getTopper = function(settings){
        color: lightgray;
         }
         @media screen and (max-width: 700px){
+            #topper-intro-container.sidebyside, #topper-intro-container.sidebyside-reverse{
+                height: unset !important;
+            }
             #topper-intro-container.sidebyside {
                 flex-direction: column-reverse;
                 margin-bottom: 30px;
