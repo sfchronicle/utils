@@ -67,14 +67,7 @@ let getTopper = function(settings){
         // Convert date to readable time
         let readablePubDate = convertDatesToAP(storySettings.Publish_Date);
         // Check safely for MOD_DATE
-        if (typeof storySettings.LastModDate_C2P !== "undefined"){
-          let readableModDate = convertDatesToAP(storySettings.LastModDate_C2P);
-
-        } else {
-          // If MOD_DATE does not exist, set false so it doesn't render
-          let readableModDate = false;
-        }
-
+        let readableModDate = storySettings.LastModDate_C2P ? convertDatesToAP(storySettings.LastModDate_C2P) : false;
     let getBylineText = (authorName, publishDate, modifyDate) =>{
         let newPubDateString = publishDate;
         try {
