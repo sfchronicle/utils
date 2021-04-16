@@ -15,6 +15,8 @@ let getTopper = function(settings){
     let disableCover = storySettings.Topper_Contain == 'true' ? 'contain' : 'cover';
     storySettings.Slide_Duration ? animationDuration = storySettings.Slide_Duration : animationDuration = false;
     let imageResolution = 1280;
+    let articleAuthorName = storySettings.Byline ? storySettings.Byline : storySettings.Author;
+
     if(storySettings.Topper_Mp4){
         mediaChoice = `
         <video id="topper-intro-video-sfc-utils" muted loop autoPlay playsInline poster=${storySettings.Topper_Mp4.trim().replace('.mp4', '.jpg')}>
@@ -72,12 +74,7 @@ let getTopper = function(settings){
           // If MOD_DATE does not exist, set false so it doesn't render
           let readableModDate = false;
         }
-    if(storySettings.Byline){
-        let articleAuthorName = storySettings.Byline
-    }
-    else if(storySettings.Author){
-        let articleAuthorName = storySettings.Author
-    }
+
     if(storySettings.LastModDate_C2P){
         let modDate = storySettings.LastModDate_C2P
     }
