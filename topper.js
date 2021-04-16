@@ -99,7 +99,6 @@ let getTopper = function(settings){
         margin: 0 auto;
    }
    #topper-article-title h1{
-    font-family: "Tiempos Headline Black", Georgia, serif;
     letter-spacing: 1px;
     font-size: 2em;
     margin-top: 0;
@@ -111,10 +110,8 @@ let getTopper = function(settings){
     margin: 0 auto 10px;
     line-height: 1.2;
     font-size: 1.2em;
-    font-family: "National Book", Helvetica, sans-serif;
    }
    #topper-article-title .topper-article-byline{
-    font-family: "National Medium", Helvetica, sans-serif;
     color: #222;
     line-height: 1.2;
    }
