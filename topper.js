@@ -15,11 +15,12 @@ let getTopper = function(settings){
     let disableCover = storySettings.Topper_Contain == 'true' ? 'contain' : 'cover';
     storySettings.Slide_Duration ? animationDuration = storySettings.Slide_Duration : animationDuration = false;
     let imageResolution = 1280;
-    if(storySettings.Topper_Mp4){
+    if(storySettings.Topper_Mp4 || storySettings.TopperVidURL){
+        let topperVideo = storySettings.Topper_Mp4 ? storySettings.Topper_Mp4 : storySettings.TopperVidURL
         mediaChoice = `
-        <video id="topper-intro-video-sfc-utils" muted loop autoPlay playsInline poster=${storySettings.Topper_Mp4.trim().replace('.mp4', '.jpg')}>
-          <source src=${storySettings.Topper_Mp4.trim().replace('.mp4', '.m3u8')} type="application/vnd.apple.mpegurl" />
-          <source src=${storySettings.Topper_Mp4.trim()} type="video/mp4" />
+        <video id="topper-intro-video-sfc-utils" muted loop autoPlay playsInline poster=${topperVideo.trim().replace('.mp4', '.jpg')}>
+          <source src=${storySettings.topperVideo.trim().replace('.mp4', '.m3u8')} type="application/vnd.apple.mpegurl" />
+          <source src=${storySettings.topperVideo.trim()} type="video/mp4" />
         </video>`
     }
     else if(storySettings.Topper_ImageID){
@@ -65,6 +66,12 @@ let getTopper = function(settings){
           // If MOD_DATE does not exist, set false so it doesn't render
           let readableModDate = false;
         }
+    if(storySettings.Byline){
+        let articleAuthorName = storySettings.Byline
+    }
+    else if(storySettings.Author){
+        let articleAuthorName = storySettings.Author
+    }
     let getBylineText = (authorName, publishDate, modifyDate) =>{
         let newPubDateString = publishDate;
         try {
@@ -791,7 +798,7 @@ let getTopper = function(settings){
     <div id="topper-article-title">
     <h1 class="topper-article-hed">${storySettings.Title}</h1>
     <h2 class="topper-article-dek">${storySettings.Deck}</h2>
-    <h3 class ="topper-article-byline">${getBylineText(storySettings.Byline, readablePubDate, storySettings.LastModDate_C2P)}</h3>
+    <h3 class ="topper-article-byline">${getBylineText(articleAuthorName, readablePubDate, storySettings.LastModDate_C2P)}</h3>
     </div>
     <svg id="topper-arrow" xmlns="http://www.w3.org/2000/svg" height="44px" viewBox="0 0 22 22" width="44px" fill="#FFFFFF"><path d="M24 24H0V0h24v24z" fill="none" opacity=".87"/><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6-1.41-1.41z"/></svg>
   <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
