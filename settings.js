@@ -61,18 +61,20 @@ let getSettings = function(){
 				"NEWSLETTER_LEGAL": storySettings.NewsletterLegal || storySettings.TOS_Text || projectSettings.NEWSLETTER_LEGAL,
 			}
 		}
+		
+		// Check if we need a slash
+		  let slash = "";
+		  if (settings.PROJECT.SUBFOLDER){
+			slash = "/"
+		  }
+		  settings.PROJECT['OPT_SLASH'] = slash
+		  settings.PROJECT.CANONICAL_URL = storySettings.Canonical_URL || projectConfig.MAIN_DOMAIN + settings.PROJECT.SUBFOLDER + slash + settings.PROJECT.SLUG
+
 
 	} catch (err){
 	   // It's ok, we'll use project data	    
 	}
 
-	// Check if we need a slash
-  let slash = "";
-  if (settings.PROJECT.SUBFOLDER){
-  	slash = "/"
-  }
-  settings.PROJECT['OPT_SLASH'] = slash
-  settings.PROJECT.CANONICAL_URL = storySettings.Canonical_URL || projectConfig.MAIN_DOMAIN + settings.PROJECT.SUBFOLDER + slash + settings.PROJECT.SLUG
 
 	return settings
 }
