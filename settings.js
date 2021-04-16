@@ -72,6 +72,7 @@ let getSettings = function(){
   	slash = "/"
   }
   settings.PROJECT['OPT_SLASH'] = slash
+  settings.PROJECT.CANONICAL_URL = storySettings.Canonical_URL || projectConfig.MAIN_DOMAIN + settings.PROJECT.SUBFOLDER + slash + settings.PROJECT.SLUG
 
 	return settings
 }
