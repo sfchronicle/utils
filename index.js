@@ -224,5 +224,6 @@ let { getBrands } = require('./brands')
 let { getSettings } = require('./settings')
 let { getNav } = require('./nav')
 let { getFooter } = require('./footer')
+let { getTopper } = require('./topper')
 
-module.exports = { appCheck, blendHDN, getSettings, getBrands, getNav, getFooter }
+module.exports = { appCheck, blendHDN, getSettings, getBrands, getNav, getFooter, getTopper }
