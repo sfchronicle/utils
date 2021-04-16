@@ -73,7 +73,7 @@ let getSettings = function(){
 	settings.PROJECT['OPT_SLASH'] = slash
 	// Set the canonical (either from the sheet override or constructed)
 	settings.PROJECT['CANONICAL_URL'] = projectConfig.MAIN_DOMAIN + settings.PROJECT.SUBFOLDER + slash + settings.PROJECT.SLUG + "/"
-	if (storySettings && storySettings.Canonical_URL){
+	if (typeof storySettings !== "undefined" && storySettings.Canonical_URL){
 		settings.PROJECT['CANONICAL_URL'] = storySettings.Canonical_URL
 	}
 
