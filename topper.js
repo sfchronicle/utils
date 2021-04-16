@@ -352,7 +352,7 @@ let getTopper = function(settings){
            background: none !important;
            color: black !important;
            position: static;
-           padding-bottom: unset !important;
+           padding: 0 40px !important
        }
        .topper-article-byline{
            color: #222 !important;
@@ -407,7 +407,7 @@ let getTopper = function(settings){
            background: none !important;
            color: black !important;
            position: static;
-           padding-bottom: unset !important;
+           padding: 0 40px !important;
        }
        .topper-article-byline{
            color: #222 !important;
