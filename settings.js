@@ -55,14 +55,12 @@ let getSettings = function(){
 				"ANALYTICS_CREDIT": storySettings.Analytics_Credit,
 				"HEARST_CATEGORY": storySettings.Category || "news",
 				"MARKET_KEY": storySettings.Market_Key,
-				"CANONICAL_URL": storySettings.Canonical_URL || projectConfig.MAIN_DOMAIN + settings.PROJECT.SUBFOLDER + slash + settings.PROJECT.SLUG + "/",
 				// Surveys have slightly different naming, so catch that below for backwards compat
 				"NEWSLETTER_ID": storySettings.NewsletterID || storySettings.Custom_Sailthru_ID || projectSettings.NEWSLETTER_ID,
 				"NEWSLETTER_PROMO": storySettings.NewsletterPromo || storySettings.Custom_Signup_Text || projectSettings.NEWSLETTER_PROMO,
 				"NEWSLETTER_LEGAL": storySettings.NewsletterLegal || storySettings.TOS_Text || projectSettings.NEWSLETTER_LEGAL,
 			}
 		}
-
 	} catch (err){
 	   // It's ok, we'll use project data	    
 	}
@@ -73,6 +71,11 @@ let getSettings = function(){
 		slash = "/"
   }
 	settings.PROJECT['OPT_SLASH'] = slash
+	// Set the canonical (either from the sheet override or constructed)
+	settings.PROJECT['CANONICAL_URL'] = projectConfig.MAIN_DOMAIN + settings.PROJECT.SUBFOLDER + slash + settings.PROJECT.SLUG + "/"
+	if (storySettings && storySettings.Canonical_URL){
+		settings.PROJECT['CANONICAL_URL'] = storySettings.Canonical_URL
+	}
 
 	return settings
 }
