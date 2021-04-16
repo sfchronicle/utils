@@ -710,6 +710,7 @@ let getTopper = function(settings){
             max-width: 50%;
              margin: 1em 0;
              height: 60vh;
+             position: relative;
         }
          .topper-intro-img-sfc-utils {
              width: 100%;
