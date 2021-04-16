@@ -39,7 +39,7 @@ let getTopper = function(settings){
         let currentImageIndex = 0;
         let topperImageURLs =[];
         for(let id of topperImages){
-            topperImageURLs.push("https://s.hdnux.com/photos/0/0/0/" + id + "/3/" + imageResolution + "x0.jpg")
+            topperImageURLs.push("https://s.hdnux.com/photos/0/0/0/" + id + "/1/" + imageResolution + "x0.jpg")
         }
         let currentImageURL = topperImageURLs[0];
         
