@@ -810,7 +810,7 @@ let getTopper = function(settings){
     <div id="topper-article-title">
     <h1 class="topper-article-hed">${storySettings.Title}</h1>
     <h2 class="topper-article-dek">${storySettings.Deck}</h2>
-    <h3 class ="topper-article-byline">${getBylineText(articleAuthorName, readablePubDate, modDate}</h3>
+    <h3 class ="topper-article-byline">${getBylineText(articleAuthorName, readablePubDate, modDate)}</h3>
     </div>
     <svg id="topper-arrow" xmlns="http://www.w3.org/2000/svg" height="44px" viewBox="0 0 22 22" width="44px" fill="#FFFFFF"><path d="M24 24H0V0h24v24z" fill="none" opacity=".87"/><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6-1.41-1.41z"/></svg>
   <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
