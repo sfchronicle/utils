@@ -101,7 +101,7 @@ let getTopper = function(settings){
    #topper-article-title h1{
     font-family: "Tiempos Headline Black", Georgia, serif;
     letter-spacing: 1px;
-    font-size: 55px;
+    font-size: 2em;
     margin-top: 0;
     font-weight: 400;
     line-height: 1;
