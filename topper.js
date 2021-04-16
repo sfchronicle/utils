@@ -15,12 +15,18 @@ let getTopper = function(settings){
     let disableCover = storySettings.Topper_Contain == 'true' ? 'contain' : 'cover';
     storySettings.Slide_Duration ? animationDuration = storySettings.Slide_Duration : animationDuration = false;
     let imageResolution = 1280;
-    if(storySettings.Topper_Mp4 || storySettings.TopperVidURL){
-        let topperVideo = storySettings.Topper_Mp4 ? storySettings.Topper_Mp4 : storySettings.TopperVidURL
+    if(storySettings.Topper_Mp4){
         mediaChoice = `
-        <video id="topper-intro-video-sfc-utils" muted loop autoPlay playsInline poster=${topperVideo.trim().replace('.mp4', '.jpg')}>
-          <source src=${storySettings.topperVideo.trim().replace('.mp4', '.m3u8')} type="application/vnd.apple.mpegurl" />
-          <source src=${storySettings.topperVideo.trim()} type="video/mp4" />
+        <video id="topper-intro-video-sfc-utils" muted loop autoPlay playsInline poster=${storySettings.Topper_Mp4.trim().replace('.mp4', '.jpg')}>
+          <source src=${storySettings.Topper_Mp4.trim().replace('.mp4', '.m3u8')} type="application/vnd.apple.mpegurl" />
+          <source src=${storySettings.Topper_Mp4.trim()} type="video/mp4" />
+        </video>`
+    }
+    else if(storySettings.TopperVidURL){
+        mediaChoice = `
+        <video id="topper-intro-video-sfc-utils" muted loop autoPlay playsInline poster=${storySettings.TopperVidURL.trim().replace('.mp4', '.jpg')}>
+          <source src=${storySettings.TopperVidURL.trim().replace('.mp4', '.m3u8')} type="application/vnd.apple.mpegurl" />
+          <source src=${storySettings.TopperVidURL.trim()} type="video/mp4" />
         </video>`
     }
     else if(storySettings.Topper_ImageID){
