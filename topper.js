@@ -35,7 +35,7 @@ let getTopper = function(settings){
         
 
         // Make sure it's a string before we do string ops
-        storySettings.Topper_ImageID = storySettings.Topper_ImageID.toString();
+        storySettings.Topper_ImageID = storySettings.Topper_ImageID.toString().trim();
         topperImages = storySettings.Topper_ImageID.split(", ");
         let currentImageID = topperImages[0]
         let currentImageIndex = 0;
