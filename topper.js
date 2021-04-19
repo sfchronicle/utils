@@ -249,10 +249,18 @@ let getTopper = function(settings){
    if(noImage){
        topperCSS += `
        #topper-mediacontainer{
-           display: none;
+           display: none !important;
+       }
+       #topper-intro-container{
+           justify-content: center;
+           align-items: center;
+       }
+       #topper-article-title{
+           text-align: center;
        }
        `
    }
+   else{
    for(let setting of topperSettingsArray){
        if(setting == "full"){
            topperCSS += `
@@ -794,6 +802,7 @@ let getTopper = function(settings){
            `
        } 
    }
+}
 	let topperHTML = `
     <style>
     ${topperCSS}
