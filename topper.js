@@ -168,26 +168,12 @@ let getTopper = function(settings){
                             position: relative;
                         }
                         ${interval - (animationInterval * 0.15)}%{
-                            opacity: 0;
+                            opacity: 1;
                         }
                         ${interval}%{
                             opacity: 1;
                             position: relative;
     
-                        }
-                         ${interval + (animationInterval * .7)}%{
-                            opacity: 1;
-                            position: relative;
-    
-                        }
-                        ${interval + (animationInterval * 0.81)}%{
-                            opacity: 0;
-                            position: relative;
-    
-                        }
-                        ${interval + (animationInterval * 0.82)}%{
-                            opacity: 0;
-                            position: absolute;
                         }
                     }
                         `
