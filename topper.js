@@ -156,35 +156,41 @@ let getTopper = function(settings){
                     }
                     `
                 }
-                // else{        
-                //     // set last image animation           
-                //         animationCSS += `
-                //         ${interval - (animationInterval * 0.17)}%{
-                //             opacity: 0;
-                //             position: absolute;
-                //         }
-                //         ${interval - (animationInterval * 0.16)}%{
-                //             opacity: 0;
-                //             position: relative;
-                //         }
-                //         ${interval - (animationInterval * 0.15)}%{
-                //             opacity: 1;
-                //         }
-                //         ${interval}%{
-                //             opacity: 1;
-                //             position: relative;
-    
-                //         }
-                //     }
-                //         `
-                    //     topperCSS += animationCSS;
-                    // topperCSS += `
-                    // .fade${i}{
-                    //     opacity: 0;
-                    //     animation: animfade${i} ${animationDuration}s infinite;
-                    // }
-                    // `
-                    // }
+                else{        
+                    // set last image animation           
+                        animationCSS += `
+                        ${interval - (animationInterval * 1.17)}%{
+                            opacity: 0;
+                            position: absolute;
+                        }
+                        ${interval - (animationInterval * 1.16)}%{
+                            opacity: 0;
+                            position: relative;
+                        }
+                        ${interval - (animationInterval * 1.15)}%{
+                            opacity: 1;
+                        }
+                        ${interval - animationInterval}%{
+                            opacity: 1;
+                            position: relative;
+                        ${interval - (animationInterval * 0.82)}%{
+                            opacity: 0;
+                        }
+                        ${interval - (animationInterval * 0.92)}%{
+                            opacity: 0;
+                            position: absolute;
+                        }
+                        }
+                    }
+                        `
+                        topperCSS += animationCSS;
+                    topperCSS += `
+                    .fade${i}{
+                        opacity: 0;
+                        animation: animfade${i} ${animationDuration}s infinite;
+                    }
+                    `
+                    }
                 }
                 else if(Math.round(((i) * animationInterval)) == Math.round(interval)){
                     animationCSS += `
