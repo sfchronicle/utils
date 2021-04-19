@@ -195,7 +195,7 @@ let blendHDN = function(meta){
 	blendedHDN.dataLayer.content.title = TITLE
 	blendedHDN.dataLayer.sharing.openGraphUrl = `${BASE_DOMAIN}/${SUBFOLDER}${slash}${SLUG}/${URL_ADD}`
 	blendedHDN.dataLayer.href.pageUrl = `${BASE_DOMAIN}/${SUBFOLDER}${slash}${SLUG}/${URL_ADD}`
-	blendedHDN.dataLayer.href.canonicalUrl = `${CANONICAL_URL}/${URL_ADD}`
+	blendedHDN.dataLayer.href.canonicalUrl = `${CANONICAL_URL}${URL_ADD}/`
 	blendedHDN.dataLayer.source.authorName = authorString
 
 	let appVer = appCheck()

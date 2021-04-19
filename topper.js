@@ -36,7 +36,7 @@ let getTopper = function(settings){
         
 
         // Make sure it's a string before we do string ops
-        storySettings.Topper_ImageID = storySettings.Topper_ImageID.toString();
+        storySettings.Topper_ImageID = storySettings.Topper_ImageID.toString().trim();
         topperImages = storySettings.Topper_ImageID.split(", ");
         let currentImageID = topperImages[0]
         let currentImageIndex = 0;
@@ -116,11 +116,12 @@ let getTopper = function(settings){
    #topper-article-title .topper-article-dek{
     margin: 0 auto 10px;
     line-height: 1.2;
-    font-size: 1.2em;
+    font-size: 1em;
    }
    #topper-article-title .topper-article-byline{
     color: #222;
     line-height: 1.2;
+    font-size: 0.8em;
    }
 
    #topper-intro-container.opaque #topper-article-title, #topper-intro-container.opaque-black #topper-article-title, #topper-intro-container.transparent #topper-article-title, #topper-intro-container.transparent-black #topper-article-title{
@@ -720,9 +721,11 @@ let getTopper = function(settings){
         #topper-mediacontainer{
             flex: 0 0 50%;
             max-width: 50%;
-             margin: 1em 0;
-             height: 60vh;
-             position: relative;
+            margin: 1em 0;
+            height: 60vh;
+            position: relative;
+            display: flex;
+            align-items: center;
         }
          .topper-intro-img-sfc-utils {
              width: 100%;
