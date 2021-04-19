@@ -15,7 +15,8 @@ let getTopper = function(settings){
     let disableCover = storySettings.Topper_Contain == 'true' ? 'contain' : 'cover';
     storySettings.Slide_Duration ? animationDuration = storySettings.Slide_Duration : animationDuration = false;
     let imageResolution = 1280;
-    let articleAuthorName = storySettings.Byline ? storySettings.Byline : storySettings.Author; 
+    let articleAuthorName = storySettings.Byline ? storySettings.Byline : storySettings.Author;
+    let noImage = false;
 
     if(storySettings.Topper_Mp4){
         mediaChoice = `
@@ -56,6 +57,9 @@ let getTopper = function(settings){
                 mediaChoice = `<img class="topper-intro-img-sfc-utils" src="${topperImageURLs[0]}">`
             }
         }
+    else{
+        noImage = true;
+    }
     //Split topper images
     const convertDatesToAP = (dateString) => {
         // Convert date string to AP style abbreviations
@@ -241,7 +245,13 @@ let getTopper = function(settings){
    
        }
    }
-
+   if(noImage){
+       topperCSS += `
+       #topper-mediacontainer{
+           display: none;
+       }
+       `
+   }
    for(let setting of topperSettingsArray){
        if(setting == "full"){
            topperCSS += `
