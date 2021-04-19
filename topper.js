@@ -257,6 +257,13 @@ let getTopper = function(settings){
        }
        #topper-article-title{
            text-align: center;
+           max-width: 50%;
+           margin: 20px auto;
+       }
+       @media screen and (max-width: 700px){
+           #topper-article-title{
+               max-width: 80%;
+           }
        }
        `
    }
