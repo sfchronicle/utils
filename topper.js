@@ -423,11 +423,10 @@ let getTopper = function(settings){
         flex: unset !important;
         width: 100%;
         height: 40vh;
-        position: static;
+        position: relative;
        }
        .topper-intro-img-sfc-utils, #topper-intro-video-sfc-utils{
         object-fit: contain !important;
-        position: relative;
     }
        #topper-intro-container.full #topper-article-title{
            text-align: left !important;
