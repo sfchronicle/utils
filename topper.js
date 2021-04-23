@@ -367,6 +367,7 @@ let getTopper = function(settings){
        }
        .topper-intro-img-sfc-utils, #topper-intro-video-sfc-utils{
            object-fit: contain !important;
+           positon: relative;
        }
        #topper-intro-container.full #topper-article-title{
            text-align: left !important;
@@ -426,6 +427,7 @@ let getTopper = function(settings){
        }
        .topper-intro-img-sfc-utils, #topper-intro-video-sfc-utils{
         object-fit: contain !important;
+        position: relative;
     }
        #topper-intro-container.full #topper-article-title{
            text-align: left !important;
