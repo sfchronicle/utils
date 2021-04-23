@@ -424,7 +424,7 @@ let getTopper = function(settings){
         width: 100%;
         height: 40vh;
         position: relative;
-        top: 20px !important
+        top: 0px !important
        }
        .topper-intro-img-sfc-utils, #topper-intro-video-sfc-utils{
         object-fit: contain !important;
