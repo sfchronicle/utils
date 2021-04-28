@@ -677,6 +677,7 @@ let getTopper = function(settings){
             flex: unset !important;
             width: 100%;
             height: 40vh;
+            position: relative;
         }
         #topper-article-title{
             width: 90%;
@@ -711,6 +712,7 @@ let getTopper = function(settings){
             flex: unset !important;
             width: 100%;
             height: 40vh;
+            position: relative;
         }
         #topper-intro-container.wide-stacked .topper-intro-img-sfc-utils, #topper-intro-container.wide-stacked-reverse .topper-intro-img-sfc-utils {
             object-fit: ${disableCover};
@@ -795,6 +797,7 @@ let getTopper = function(settings){
        #topper-mediacontainer{
         flex: unset !important;
         width: 100%;
+        position: relative
         height: 40vh;
        }
        #topper-intro-container.sidebyside > #topper-article-title, #topper-intro-container.sidebyside-reverse > #topper-article-title{
