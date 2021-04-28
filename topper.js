@@ -665,6 +665,7 @@ let getTopper = function(settings){
         margin: auto;
    }
    #topper-mediacontainer{
+       position: relative;
        width: 55%;
        height: 60vh;
    }
