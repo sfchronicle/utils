@@ -15,7 +15,8 @@ let getTopper = function(settings){
     let disableCover = storySettings.Topper_Contain == 'true' ? 'contain' : 'cover';
     storySettings.Slide_Duration ? animationDuration = storySettings.Slide_Duration : animationDuration = false;
     let imageResolution = 1280;
-    let articleAuthorName = storySettings.Byline ? storySettings.Byline : storySettings.Author; 
+    let articleAuthorName = storySettings.Byline ? storySettings.Byline : storySettings.Author;
+    let noImage = false;
 
     if(storySettings.Topper_Mp4){
         mediaChoice = `
@@ -56,6 +57,9 @@ let getTopper = function(settings){
                 mediaChoice = `<img class="topper-intro-img-sfc-utils" src="${topperImageURLs[0]}">`
             }
         }
+    else{
+        noImage = true;
+    }
     //Split topper images
     const convertDatesToAP = (dateString) => {
         // Convert date string to AP style abbreviations
@@ -155,35 +159,27 @@ let getTopper = function(settings){
                 else{        
                     // set last image animation           
                         animationCSS += `
-                        ${interval - (animationInterval * 0.17)}%{
+                        ${interval - (animationInterval * 1.17)}%{
                             opacity: 0;
                             position: absolute;
                         }
-                        ${interval - (animationInterval * 0.16)}%{
+                        ${interval - (animationInterval * 1.16)}%{
                             opacity: 0;
                             position: relative;
                         }
-                        ${interval - (animationInterval * 0.15)}%{
-                            opacity: 0;
+                        ${interval - (animationInterval * 1.15)}%{
+                            opacity: 1;
                         }
-                        ${interval}%{
+                        ${interval - animationInterval}%{
                             opacity: 1;
                             position: relative;
-    
-                        }
-                         ${interval + (animationInterval * .7)}%{
-                            opacity: 1;
-                            position: relative;
-    
-                        }
-                        ${interval + (animationInterval * 0.81)}%{
+                        ${interval - (animationInterval * 0.82)}%{
                             opacity: 0;
-                            position: relative;
-    
                         }
-                        ${interval + (animationInterval * 0.82)}%{
+                        ${interval - (animationInterval * 0.92)}%{
                             opacity: 0;
                             position: absolute;
+                        }
                         }
                     }
                         `
@@ -242,7 +238,28 @@ let getTopper = function(settings){
    
        }
    }
-
+   if(noImage){
+       topperCSS += `
+       #topper-mediacontainer{
+           display: none !important;
+       }
+       #topper-intro-container{
+           justify-content: center;
+           align-items: center;
+       }
+       #topper-article-title{
+           text-align: center;
+           max-width: 50%;
+           margin: 20px auto;
+       }
+       @media screen and (max-width: 700px){
+           #topper-article-title{
+               max-width: 80%;
+           }
+       }
+       `
+   }
+   else{
    for(let setting of topperSettingsArray){
        if(setting == "full"){
            topperCSS += `
@@ -348,6 +365,10 @@ let getTopper = function(settings){
         height: 40vh;
         position: static;
        }
+       .topper-intro-img-sfc-utils, #topper-intro-video-sfc-utils{
+           object-fit: contain !important;
+           positon: relative;
+       }
        #topper-intro-container.full #topper-article-title{
            text-align: left !important;
            background: none !important;
@@ -402,8 +423,12 @@ let getTopper = function(settings){
         flex: unset !important;
         width: 100%;
         height: 40vh;
-        position: static;
+        position: relative;
+        top: 0px !important
        }
+       .topper-intro-img-sfc-utils, #topper-intro-video-sfc-utils{
+        object-fit: contain !important;
+    }
        #topper-intro-container.full #topper-article-title{
            text-align: left !important;
            background: none !important;
@@ -640,6 +665,7 @@ let getTopper = function(settings){
         margin: auto;
    }
    #topper-mediacontainer{
+       position: relative;
        width: 55%;
        height: 60vh;
    }
@@ -652,6 +678,7 @@ let getTopper = function(settings){
             flex: unset !important;
             width: 100%;
             height: 40vh;
+            position: relative;
         }
         #topper-article-title{
             width: 90%;
@@ -686,6 +713,7 @@ let getTopper = function(settings){
             flex: unset !important;
             width: 100%;
             height: 40vh;
+            position: relative;
         }
         #topper-intro-container.wide-stacked .topper-intro-img-sfc-utils, #topper-intro-container.wide-stacked-reverse .topper-intro-img-sfc-utils {
             object-fit: ${disableCover};
@@ -770,6 +798,7 @@ let getTopper = function(settings){
        #topper-mediacontainer{
         flex: unset !important;
         width: 100%;
+        position: relative
         height: 40vh;
        }
        #topper-intro-container.sidebyside > #topper-article-title, #topper-intro-container.sidebyside-reverse > #topper-article-title{
@@ -784,6 +813,7 @@ let getTopper = function(settings){
            `
        } 
    }
+}
 	let topperHTML = `
     <style>
     ${topperCSS}
