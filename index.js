@@ -57,6 +57,9 @@ let blendHDN = function(meta){
   	BASE_DOMAIN = ""
   }
 
+  // Check if we need a slash
+  let slash = OPT_SLASH
+
   // Add the canonical here unless it's sent in
   if (!CANONICAL_URL){
   	CANONICAL_URL = `${BASE_DOMAIN}/${SUBFOLDER}${slash}${SLUG}`
@@ -82,9 +85,6 @@ let blendHDN = function(meta){
 	if (ISO_PUBDATE){
 		pubdate = ISO_PUBDATE.toString().split('T')[0] + " 00:00:00"
 	}
-	
-  // Check if we need a slash
-  let slash = OPT_SLASH
 
 	// Setting up vars
 	let HDN = {}
