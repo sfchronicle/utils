@@ -65,11 +65,6 @@ let blendHDN = function(meta){
   	CANONICAL_URL = `${BASE_DOMAIN}/${SUBFOLDER}${slash}${SLUG}`
   }
 
-  // If url add does not end with a /, add it
-  if (CANONICAL_URL.slice(-1) !== "/"){
-  	CANONICAL_URL += "/"
-  }
-
   // Add the url add here unless it's sent in
   if (!URL_ADD){
   	URL_ADD = ""
