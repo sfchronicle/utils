@@ -56,6 +56,26 @@ let blendHDN = function(meta){
   if (MARKET_KEY === "CT"){
   	BASE_DOMAIN = ""
   }
+
+  // Add the canonical here unless it's sent in
+  if (!CANONICAL_URL){
+  	CANONICAL_URL = `${BASE_DOMAIN}/${SUBFOLDER}${slash}${SLUG}`
+  }
+
+  // If url add does not end with a /, add it
+  if (CANONICAL_URL.slice(-1) !== "/"){
+  	CANONICAL_URL += "/"
+  }
+
+  // Add the url add here unless it's sent in
+  if (!URL_ADD){
+  	URL_ADD = "/"
+  }
+
+  // If canonical does not end with a /, add it
+  if (URL_ADD.slice(-1) !== "/"){
+  	URL_ADD += "/"
+  }
 	
 	// Get dates from env
 	let pubdate = ""
@@ -79,7 +99,7 @@ let blendHDN = function(meta){
 	// HDN.dataLayer object for content and href data
 	HDN.dataLayer.content.title = TITLE
 	HDN.dataLayer.content.subtitle = ''
-	HDN.dataLayer.content.objectId = `${SUBFOLDER}${slash}${SLUG}`
+	HDN.dataLayer.content.objectId = `${SUBFOLDER}${slash}${SLUG}/${URL_ADD}`
 	HDN.dataLayer.content.objectType = 'project'
 	HDN.dataLayer.content.sectionPath = [
 	  HEARST_CATEGORY,
@@ -136,12 +156,12 @@ let blendHDN = function(meta){
   }
 
 	// HDN.dataLayer object for sharing information
-	HDN.dataLayer.sharing.openGraphUrl = `${BASE_DOMAIN}/${SUBFOLDER}${slash}${SLUG}/`
+	HDN.dataLayer.sharing.openGraphUrl = `${BASE_DOMAIN}/${SUBFOLDER}${slash}${SLUG}/${URL_ADD}`
 	HDN.dataLayer.sharing.openGraphType = 'article'
 
 	// More page settings
-	HDN.dataLayer.href.pageUrl = `${BASE_DOMAIN}/${SUBFOLDER}${slash}${SLUG}/`
-	HDN.dataLayer.href.canonicalUrl = `${CANONICAL_URL}`
+	HDN.dataLayer.href.pageUrl = `${BASE_DOMAIN}/${SUBFOLDER}${slash}${SLUG}/${URL_ADD}`
+	HDN.dataLayer.href.canonicalUrl = `${CANONICAL_URL}${URL_ADD}`
 
 	// HDN.dataLayer object for presentation information
 	HDN.dataLayer.presentation.hasSlideshow = ''
@@ -195,7 +215,7 @@ let blendHDN = function(meta){
 	blendedHDN.dataLayer.content.title = TITLE
 	blendedHDN.dataLayer.sharing.openGraphUrl = `${BASE_DOMAIN}/${SUBFOLDER}${slash}${SLUG}/${URL_ADD}`
 	blendedHDN.dataLayer.href.pageUrl = `${BASE_DOMAIN}/${SUBFOLDER}${slash}${SLUG}/${URL_ADD}`
-	blendedHDN.dataLayer.href.canonicalUrl = `${CANONICAL_URL}${URL_ADD}/`
+	blendedHDN.dataLayer.href.canonicalUrl = `${CANONICAL_URL}${URL_ADD}`
 	blendedHDN.dataLayer.source.authorName = authorString
 
 	let appVer = appCheck()
