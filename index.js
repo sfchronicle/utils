@@ -60,10 +60,14 @@ let blendHDN = function(meta){
   // Check if we need a slash
   let slash = OPT_SLASH
 
+  console.log("UTILS1", CANONICAL_URL)
+
   // Add the canonical here unless it's sent in
   if (!CANONICAL_URL){
   	CANONICAL_URL = `${BASE_DOMAIN}/${SUBFOLDER}${slash}${SLUG}`
   }
+
+  console.log("UTILS2", CANONICAL_URL)
 
   // Add the url add here unless it's sent in
   if (!URL_ADD){
@@ -181,10 +185,6 @@ let blendHDN = function(meta){
 	  timeZone: 'Pacific',
 	}
 
-
-	let blendedHDN = {}
-  let stringHDN = ""
-
 	// Create author for analytics here
   let authorString = ""
   if (ANALYTICS_CREDIT !== ''){
@@ -204,29 +204,22 @@ let blendHDN = function(meta){
   if (authorString === ""){
     authorString = HDN.dataLayer.source.authorTitle
   }
-
-	blendedHDN = HDN
-	// Custom config for multiple pages
-	blendedHDN.dataLayer.content.title = TITLE
-	blendedHDN.dataLayer.sharing.openGraphUrl = `${BASE_DOMAIN}/${SUBFOLDER}${slash}${SLUG}/${URL_ADD}`
-	blendedHDN.dataLayer.href.pageUrl = `${BASE_DOMAIN}/${SUBFOLDER}${slash}${SLUG}/${URL_ADD}`
-	blendedHDN.dataLayer.href.canonicalUrl = `${CANONICAL_URL}/${URL_ADD}`
-	blendedHDN.dataLayer.source.authorName = authorString
+	HDN.dataLayer.source.authorName = authorString
 
 	let appVer = appCheck()
 	if (appVer){
-		blendedHDN.dataLayer.paywall.mode = "edbDisabled"
+		HDN.dataLayer.paywall.mode = "edbDisabled"
 	}
 
-	stringHDN = `
+	let stringHDN = `
 		var HDN = HDN || {};
 		HDN.dataLayer = HDN.dataLayer || {};
-		HDN.dataLayer.content = Object.assign(HDN.dataLayer.content || {}, ${JSON.stringify(blendedHDN.dataLayer.content)});
-		HDN.dataLayer.source = Object.assign(HDN.dataLayer.source || {}, ${JSON.stringify(blendedHDN.dataLayer.source)});
-		HDN.dataLayer.sharing = Object.assign(HDN.dataLayer.sharing || {}, ${JSON.stringify(blendedHDN.dataLayer.sharing)});
-		HDN.dataLayer.href = Object.assign(HDN.dataLayer.href || {}, ${JSON.stringify(blendedHDN.dataLayer.href)});
-		HDN.dataLayer.paywall = Object.assign(HDN.dataLayer.paywall || {}, ${JSON.stringify(blendedHDN.dataLayer.paywall)});
-		HDN.dataLayer.site = Object.assign(HDN.dataLayer.site || {}, ${JSON.stringify(blendedHDN.dataLayer.site)});
+		HDN.dataLayer.content = Object.assign(HDN.dataLayer.content || {}, ${JSON.stringify(HDN.dataLayer.content)});
+		HDN.dataLayer.source = Object.assign(HDN.dataLayer.source || {}, ${JSON.stringify(HDN.dataLayer.source)});
+		HDN.dataLayer.sharing = Object.assign(HDN.dataLayer.sharing || {}, ${JSON.stringify(HDN.dataLayer.sharing)});
+		HDN.dataLayer.href = Object.assign(HDN.dataLayer.href || {}, ${JSON.stringify(HDN.dataLayer.href)});
+		HDN.dataLayer.paywall = Object.assign(HDN.dataLayer.paywall || {}, ${JSON.stringify(HDN.dataLayer.paywall)});
+		HDN.dataLayer.site = Object.assign(HDN.dataLayer.site || {}, ${JSON.stringify(HDN.dataLayer.site)});
 	`
 
 	return {
