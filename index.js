@@ -67,6 +67,11 @@ let blendHDN = function(meta){
   	CANONICAL_URL = `${BASE_DOMAIN}/${SUBFOLDER}${slash}${SLUG}`
   }
 
+  // If canonical has a slash at the end, remove it
+  if (CANONICAL_URL.slice(-1) === "/"){
+  	CANONICAL_URL = CANONICAL_URL.slice(0, -1) 
+  }
+
   console.log("UTILS2", CANONICAL_URL)
 
   // Add the url add here unless it's sent in
