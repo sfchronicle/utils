@@ -69,11 +69,11 @@ let blendHDN = function(meta){
 
   // Add the url add here unless it's sent in
   if (!URL_ADD){
-  	URL_ADD = "/"
+  	URL_ADD = ""
   }
 
-  // If canonical does not end with a /, add it
-  if (URL_ADD.slice(-1) !== "/"){
+  // If url add does not end with a /, add it
+  if (URL_ADD && URL_ADD.slice(-1) !== "/"){
   	URL_ADD += "/"
   }
 	
@@ -161,7 +161,7 @@ let blendHDN = function(meta){
 
 	// More page settings
 	HDN.dataLayer.href.pageUrl = `${BASE_DOMAIN}/${SUBFOLDER}${slash}${SLUG}/${URL_ADD}`
-	HDN.dataLayer.href.canonicalUrl = `${CANONICAL_URL}${URL_ADD}`
+	HDN.dataLayer.href.canonicalUrl = `${CANONICAL_URL}/${URL_ADD}`
 
 	// HDN.dataLayer object for presentation information
 	HDN.dataLayer.presentation.hasSlideshow = ''
@@ -215,7 +215,7 @@ let blendHDN = function(meta){
 	blendedHDN.dataLayer.content.title = TITLE
 	blendedHDN.dataLayer.sharing.openGraphUrl = `${BASE_DOMAIN}/${SUBFOLDER}${slash}${SLUG}/${URL_ADD}`
 	blendedHDN.dataLayer.href.pageUrl = `${BASE_DOMAIN}/${SUBFOLDER}${slash}${SLUG}/${URL_ADD}`
-	blendedHDN.dataLayer.href.canonicalUrl = `${CANONICAL_URL}${URL_ADD}`
+	blendedHDN.dataLayer.href.canonicalUrl = `${CANONICAL_URL}/${URL_ADD}`
 	blendedHDN.dataLayer.source.authorName = authorString
 
 	let appVer = appCheck()
