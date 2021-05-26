@@ -1,12 +1,12 @@
 
-let { getBrands } = require('sfc-utils/brands')
+let { getBrands } = require('./brands')
 
 // Handle nav for various markets and include nav options for other links
 let getSpecialNav = function(meta, urlAdd, forceColor, navLink, navArray){
 
 	// If we aren't passing meta in, we have to call getSettings here
 	if (!meta){
-		let {getSettings} = require('sfc-utils/settings')
+		let {getSettings} = require('./settings')
 		meta = getSettings()
 	}
 
@@ -65,32 +65,58 @@ let getSpecialNav = function(meta, urlAdd, forceColor, navLink, navArray){
 	if (meta.PROJECT.SUBFOLDER){
 		subfolder = meta.PROJECT.SUBFOLDER + "/"
 	}
+	const getSubLink = () => {
+		let subscribeLink
+		switch(marketPrefix){
+			case "sf": subscribeLink = "https://subscription.sfchronicle.com/"; break;
+			case "hc": subscribeLink = "https://offers.houstonchronicle.com/"; break;
+			case "en": subscribeLink = "https://subscription.expressnews.com/"; break;
+			case "tu": subscribeLink = "https://subscription.timesunion.com/"; break;
+			case "ct": "https://subscription.hearstmediact.com/?siteid=CT_PO"; break;
+			case "nh": "https://subscription.hearstmediact.com/?siteid=CT_NHR"; break;
+			case "gt": "https://subscription.hearstmediact.com/?siteid=CT_GT"; break;
+			case "st": "https://subscription.hearstmediact.com/?siteid=CT_AD"; break;
+			case "th": "https://subscription.hearstmediact.com/?siteid=CT_HR"; break;
+			case "nt": "https://subscription.hearstmediact.com/?siteid=CT_NT"; break;
+			case "mp": "https://subscription.hearstmediact.com/?siteid=CT_MP"; break;
 
+		}
+		return subscribeLink
+	}
+	const subLink = getSubLink();
+	console.log(subLink)
 	let navHTML = `<nav class="topper-special-nav-container ${invertClass}">
-    <div class="topper-special-nav-center">
-      <a
-        href="/"
+	<div class="special-nav-left">
+	<a class="special-nav-back" 
+	href="/"
+	target="_blank"
+	rel="noopener noreferrer">
+		<svg class="special-nav-carrot" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+		viewBox="0 0 16.9 15" style="enable-background:new 0 0 16.9 15;" xml:space="preserve">
+		<polygon points="9,14.5 2,7.5 9,0.5 10.3,1.8 4.5,7.5 10.3,13.2 "/>
+		</svg>
+		<p class="special-nav-home">
+		Home
+		<p>
+	</a>
+	</div>
+	<div class="special-nav-center"> 
+	<a class = "special-nav-logo-link"
+		href="/"
         target="_blank"
-        rel="noopener noreferrer"
-      >
-        <div>
-          <img
-            class="topper-nav-desk-logo"
-            alt="Logo"
-            src="https://files.sfchronicle.com/static-assets/logos/${marketPrefix}-${color}.png"
-          ></img>
-          <img
-            class="topper-nav-mobile-logo"
-            alt="Logo"
-            src="https://files.sfchronicle.com/static-assets/logos/${marketPrefix}-square-${color}.png"
-          ></img>
-        </div>
-      </a>
-    </div>
-    <div class="topper-nav-right">
-      
-    </div>
-    ${subnav}
+        rel="noopener noreferrer">
+	  <img
+	  class="topper-special-nav-desk-logo"
+	  alt="Logo"
+	  src="https://files.sfchronicle.com/static-assets/logos/${marketPrefix}-${color}.png"
+	></img>
+	</a>
+	</div>
+	<div class="special-nav-right">
+	<a class="special-nav-subscribe-link" href=${subLink} target="_blank">
+	<p>Subscribe</p>
+	</a>
+	</div>
   </nav>`
 
   return navHTML
