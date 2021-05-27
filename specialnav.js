@@ -90,22 +90,22 @@ let getSpecialNav = function(meta, urlAdd, forceColor, navLink, navArray){
 		</a>`
 		if(prefix == "ct"){
 			htmlBlock += `<a class="special-nav-newsletter-link" href="https://link.ctpost.com/join/signup-po" target="_blank">
-			<p>Subscribe</p>
+			<p>Newsletter</p>
 			</a>`
 		}
 		else if(prefix == "sf"){
 			htmlBlock += `<a class="special-nav-newsletter-link" href="https://link.sfchronicle.com/join/signup" target="_blank">
-			<p>Subscribe</p>
+			<p>Newsletter</p>
 			</a>`
 		}
 		else if(prefix == "hc"){
 			htmlBlock += `<a class="special-nav-newsletter-link" href="hhttps://link.houstonchronicle.com/join/signup-hc" target="_blank">
-			<p>Subscribe</p>
+			<p>Newsletter</p>
 			</a>`
 	}
 	return htmlBlock
 }
-	let navRightHtml = getSubLink(marketPrefix)
+	let navRightHtml = getLinkHtml(marketPrefix)
 	console.log(subLink)
 	let navHTML = `<nav class="topper-special-nav-container ${invertClass}">
 	<div class="special-nav-left">
@@ -135,7 +135,7 @@ let getSpecialNav = function(meta, urlAdd, forceColor, navLink, navArray){
 	</a>
 	</div>
 	<div class="special-nav-right">
-	${navHTML}
+	${navRightHtml}
 	</div>
   </nav>`
 
