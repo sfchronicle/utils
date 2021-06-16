@@ -68,10 +68,10 @@ let getSpecialNav = function(meta, urlAdd, forceColor, navLink, navArray){
 	const getSubLink = () => {
 		let subscribeLink
 		switch(marketPrefix){
-			case "sf": subscribeLink = "https://subscription.sfchronicle.com/"; break;
-			case "hc": subscribeLink = "https://offers.houstonchronicle.com/"; break;
-			case "en": subscribeLink = "https://subscription.expressnews.com/"; break;
-			case "tu": subscribeLink = "https://subscription.timesunion.com/"; break;
+			case "sf": subscribeLink = "https://subscription.sfchronicle.com/checkout/430/866/?origin=button&ipid=specialprojects"; break;
+			case "hc": subscribeLink = "https://subscription.houstonchronicle.com/checkout/356/772/?origin=button&ipid=specialprojects"; break;
+			case "en": subscribeLink = "https://subscription.expressnews.com/checkout/379/793/?origin=button&ipid=specialprojects"; break;
+			case "tu": subscribeLink = "https://subscription.timesunion.com/checkout/337/730/?origin=button&ipid=specialprojects"; break;
 			case "ct": "https://subscription.hearstmediact.com/?siteid=CT_PO"; break;
 			case "nh": "https://subscription.hearstmediact.com/?siteid=CT_NHR"; break;
 			case "gt": "https://subscription.hearstmediact.com/?siteid=CT_GT"; break;
