@@ -72,13 +72,13 @@ let getSpecialNav = function(meta, urlAdd, forceColor, navLink, navArray){
 			case "hc": subscribeLink = "https://subscription.houstonchronicle.com/checkout/356/772/?origin=button&ipid=specialprojects"; break;
 			case "en": subscribeLink = "https://subscription.expressnews.com/checkout/379/793/?origin=button&ipid=specialprojects"; break;
 			case "tu": subscribeLink = "https://subscription.timesunion.com/checkout/337/730/?origin=button&ipid=specialprojects"; break;
-			case "ct": "https://subscription.hearstmediact.com/?siteid=CT_PO"; break;
-			case "nh": "https://subscription.hearstmediact.com/?siteid=CT_NHR"; break;
-			case "gt": "https://subscription.hearstmediact.com/?siteid=CT_GT"; break;
-			case "st": "https://subscription.hearstmediact.com/?siteid=CT_AD"; break;
-			case "th": "https://subscription.hearstmediact.com/?siteid=CT_HR"; break;
-			case "nt": "https://subscription.hearstmediact.com/?siteid=CT_NT"; break;
-			case "mp": "https://subscription.hearstmediact.com/?siteid=CT_MP"; break;
+			case "ct": subscribeLink = "https://subscription.hearstmediact.com/?siteid=CT_PO"; break;
+			case "nh": subscribeLink = "https://subscription.hearstmediact.com/?siteid=CT_NHR"; break;
+			case "gt": subscribeLink = "https://subscription.hearstmediact.com/?siteid=CT_GT"; break;
+			case "st": subscribeLink = "https://subscription.hearstmediact.com/?siteid=CT_AD"; break;
+			case "th": subscribeLink = "https://subscription.hearstmediact.com/?siteid=CT_HR"; break;
+			case "nt": subscribeLink = "https://subscription.hearstmediact.com/?siteid=CT_NT"; break;
+			case "mp": subscribeLink = "https://subscription.hearstmediact.com/?siteid=CT_MP"; break;
 
 		}
 		return subscribeLink
@@ -99,7 +99,7 @@ let getSpecialNav = function(meta, urlAdd, forceColor, navLink, navArray){
 			</a>`
 		}
 		else if(prefix == "hc"){
-			htmlBlock += `<a class="special-nav-newsletter-link" href="hhttps://link.houstonchronicle.com/join/signup-hc" target="_blank">
+			htmlBlock += `<a class="special-nav-newsletter-link" href="https://link.houstonchronicle.com/join/signup-hc" target="_blank">
 			<p>Newsletters</p>
 			</a>`
 	}
