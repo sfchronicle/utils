@@ -123,10 +123,6 @@ let getTopper = function(settings){
     line-height: 1.2;
     font-size: 0.8em;
    }
-
-   #topper-intro-container.opaque #topper-article-title, #topper-intro-container.opaque-black #topper-article-title, #topper-intro-container.transparent #topper-article-title, #topper-intro-container.transparent-black #topper-article-title{
-
-   }
     .topper-intro-img-sfc-utils{
         position: absolute;
         top: 0;
@@ -250,7 +246,7 @@ let getTopper = function(settings){
        #topper-article-title{
            text-align: center;
            max-width: 50%;
-           margin: 20px auto;
+           margin: 37px auto;
        }
        @media screen and (max-width: 700px){
            #topper-article-title{
@@ -460,9 +456,9 @@ let getTopper = function(settings){
         `
     }
        }
-       else if(setting == "opaque"){
+       else if(setting == "opaque" || setting =="opaque-white"){
         topperCSS += `
-        #topper-intro-container.full.opaque #topper-article-title {
+        #topper-intro-container.full.opaque #topper-article-title, #topper-intro-container.full.opaque-white #topper-article-title {
          background: #ffffff;
     }
         
