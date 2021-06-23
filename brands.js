@@ -42,7 +42,7 @@ let getBrands = function(market){
 				"siteName": "The San Francisco Chronicle",
 				"twitter": "sfchronicle",
 				"gaAccount": "UA-1616916-26",
-				"subscribeLink": "https://subscription.sfchronicle.com/checkout/439/883/?siteID=SFC&origin=button&ipid=project"
+				"subscribeLink": "https://www.sfchronicle.com/subproject"
 			}
 		},
 
@@ -66,7 +66,7 @@ let getBrands = function(market){
 				"twitter": "HoustonChron",
 				"invert": true,
 				"gaAccount": "UA-1616916-24",
-				"subscribeLink": "https://offers.houstonchronicle.com/?projects=true"
+				"subscribeLink": "https://www.houstonchronicle.com/subproject"
 			}
 		},
 
@@ -90,7 +90,7 @@ let getBrands = function(market){
 				"twitter": "timesunion",
 				"invert": true,
 				"gaAccount": "UA-1616916-7",
-				"subscribeLink": "https://offers.timesunion.com/?projects=true"
+				"subscribeLink": "https://www.timesunion.com/subproject"
 			}
 		},
 
@@ -105,7 +105,7 @@ let getBrands = function(market){
 				"twitter": "ExpressNews",
 				"invert": true,
 				"gaAccount": "UA-1616916-27",
-				"subscribeLink": "https://offers.expressnews.com/?projects=true"
+				"subscribeLink": "https://www.expressnews.com/subproject"
 			}
 		},
 
@@ -120,7 +120,7 @@ let getBrands = function(market){
 				"twitter": "connpost",
 				"invert": true,
 				"gaAccount": "UA-1616916-8",
-				"subscribeLink": "https://www.ctinsider.com/?projects=true"
+				"subscribeLink": "https://www.ctinsider.com/subproject"
 			}
 		},
 
