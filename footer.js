@@ -25,6 +25,7 @@ let getFooter = function(meta, forceColor){
 			case "https://www.thehour.com": marketPrefix = "th"; eedition = "CT_HR"; break;
 			case "https://www.newstimes.com": marketPrefix = "nt"; eedition = "CT_NT"; break;
 			case "https://www.middletownpress.com": marketPrefix = "mp"; eedition = "CT_MP"; break;
+			case "https://www.ctinsider.com": marketPrefix = "in"; break;
 		}
 	}
 	// If inverted, do black on white nav
@@ -374,7 +375,57 @@ let getFooter = function(meta, forceColor){
 		}
 	}
 
-	const marketLinks = footerLinks[meta.PROJECT.MARKET_KEY]
+	let marketLinks = footerLinks[meta.PROJECT.MARKET_KEY]
+	// Special case for ctinsider, which doesn't fit the normal CT mold
+	if (marketPrefix === "in"){
+		marketLinks = {
+			"About": [
+		    {
+		      "text": "Our Company",
+		      "link": "https://www.hearst.com/newspapers/hearst-connecticut-media-group",
+		    },
+		    {
+		      "text": "Ad Choices",
+		      "link": "https://optout.aboutads.info/?c=2&lang=EN"
+		    },
+		    {
+		      "text": "Careers",
+		      "link": "https://eevd.fa.us6.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1"
+		    },
+		    {
+		      "text": "Terms of Use",
+		      "link": "https://www.ctinsider.com/tos/"
+		    },
+		    {
+		      "text": "Advertising",
+		      "link": "https://hearstmediact.com/?_ga=2.121588744.1440353062.1624467793-1527008254.1622131828"
+		    },
+		    {
+		      "text": "Privacy Notice / Notice of Collection",
+		      "link": "https://www.ctinsider.com/privacy/"
+		    },
+		    {
+		      "text": "Your Privacy Rights",
+		      "link": "https://www.ctinsider.com/privacy/#your_rights"
+		    },
+		    {
+		      "text": "Your California Privacy Rights",
+		      "link": "https://www.ctinsider.com/privacy/#additionalinformationforcaliforniaresidents"
+		    }
+		  ],
+		  "Contact": [
+		    {
+		      "text": "Contact Us",
+		      "link": "https://www.ctinsider.com/contact/"
+		    },
+		    {
+		      "text": "FAQ",
+		      "link": "https://www.ctinsider.com/faq/"
+		    }
+		  ]
+		}
+	}
+
 	let linkHTML = ""
 	Object.keys(marketLinks).forEach(function(key,index) {
 		// Open the new section
