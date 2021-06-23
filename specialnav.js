@@ -106,7 +106,6 @@ let getSpecialNav = function(meta, urlAdd, forceColor, navLink, navArray){
 	return htmlBlock
 }
 	let navRightHtml = getLinkHtml(marketPrefix)
-	console.log(subLink)
 	let navHTML = `<nav class="topper-special-nav-container ${invertClass}">
 	<div class="special-nav-left">
 	<a class="special-nav-back" 
