@@ -48,6 +48,7 @@ let getNav = function(meta, urlAdd, forceColor, navLink, navArray){
 			case "https://www.thehour.com": marketPrefix = "th"; break;
 			case "https://www.newstimes.com": marketPrefix = "nt"; break;
 			case "https://www.middletownpress.com": marketPrefix = "mp"; break;
+			case "https://www.ctinsider.com": marketPrefix = "in"; break;
 		}
 	}
 
