@@ -38,6 +38,7 @@ let getSpecialNav = function(meta, urlAdd, forceColor, navLink, navArray){
 	}
 
 	let {attributes: {marketPrefix, invert, subscribeLink}} = getBrands(meta.PROJECT.MARKET_KEY)
+	
 	// Handle various CT domains
 	if (typeof window !== "undefined"){
 		switch(window.location.origin){
@@ -48,6 +49,7 @@ let getSpecialNav = function(meta, urlAdd, forceColor, navLink, navArray){
 			case "https://www.thehour.com": marketPrefix = "th"; break;
 			case "https://www.newstimes.com": marketPrefix = "nt"; break;
 			case "https://www.middletownpress.com": marketPrefix = "mp"; break;
+			case "https://www.ctinsider.com": marketPrefix = "in"; break;
 		}
 	}
 
@@ -65,25 +67,7 @@ let getSpecialNav = function(meta, urlAdd, forceColor, navLink, navArray){
 	if (meta.PROJECT.SUBFOLDER){
 		subfolder = meta.PROJECT.SUBFOLDER + "/"
 	}
-	// const getSubLink = () => {
-	// 	let subscribeLink
-	// 	// switch(marketPrefix){
-	// 	// 	case "sf": subscribeLink = "https://subscription.sfchronicle.com/checkout/430/866/?origin=button&ipid=specialprojects"; break;
-	// 	// 	case "hc": subscribeLink = "https://subscription.houstonchronicle.com/checkout/356/772/?origin=button&ipid=specialprojects"; break;
-	// 	// 	case "sa": subscribeLink = "https://subscription.expressnews.com/checkout/379/793/?origin=button&ipid=specialprojects"; break;
-	// 	// 	case "tu": subscribeLink = "https://subscription.timesunion.com/checkout/337/730/?origin=button&ipid=specialprojects"; break;
-	// 	// 	case "ct": subscribeLink = "https://subscription.hearstmediact.com/?siteid=CT_PO"; break;
-	// 	// 	case "nh": subscribeLink = "https://subscription.hearstmediact.com/?siteid=CT_NHR"; break;
-	// 	// 	case "gt": subscribeLink = "https://subscription.hearstmediact.com/?siteid=CT_GT"; break;
-	// 	// 	case "st": subscribeLink = "https://subscription.hearstmediact.com/?siteid=CT_AD"; break;
-	// 	// 	case "th": subscribeLink = "https://subscription.hearstmediact.com/?siteid=CT_HR"; break;
-	// 	// 	case "nt": subscribeLink = "https://subscription.hearstmediact.com/?siteid=CT_NT"; break;
-	// 	// 	case "mp": subscribeLink = "https://subscription.hearstmediact.com/?siteid=CT_MP"; break;
 
-	// 	// }
-	// 	// return subscribeLink
-	// 	return 
-	// }
 	const getLinkHtml = (prefix) =>{
 		let htmlBlock = `<a class="special-nav-subscribe-link" href=${subscribeLink} target="_blank">
 		<p>Subscribe</p>

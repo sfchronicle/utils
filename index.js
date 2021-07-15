@@ -55,7 +55,7 @@ let blendHDN = function(meta){
 
   BASE_DOMAIN = MAIN_DOMAIN
   if (MARKET_KEY === "CT"){
-  	BASE_DOMAIN = ""
+  	BASE_DOMAIN = "ctinsider.com"
   }
 
   // Check if we need a slash
