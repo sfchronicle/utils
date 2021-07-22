@@ -53,7 +53,8 @@ let getSettings = function(){
 				"MOD_DATE": storySettings.Mod_Date || storySettings.LastModDate_C2P,
 				"AUTHORS": projectSettings.AUTHORS,
 				"ANALYTICS_CREDIT": storySettings.Analytics_Credit,
-				"HEARST_CATEGORY": storySettings.Category || storySettings.Analytics_Section || "news",
+				"HEARST_CATEGORY": storySettings.Category || storySettings.Analytics_Section || "Bay Area",
+				"KEY_SUBJECTS": storySettings.Key_Subjects,
 				"MARKET_KEY": storySettings.Market_Key,
 				// Surveys have slightly different naming, so catch that below for backwards compat
 				"NEWSLETTER_ID": storySettings.NewsletterID || storySettings.Custom_Sailthru_ID || projectSettings.NEWSLETTER_ID,

@@ -43,6 +43,7 @@ let blendHDN = function(meta){
 			ANALYTICS_CREDIT,
 			TITLE,
 			HEARST_CATEGORY,
+			KEY_SUBJECTS,
 			SUBFOLDER,
 			OPT_SLASH,
 			SLUG,
@@ -101,10 +102,8 @@ let blendHDN = function(meta){
 	HDN.dataLayer.content.subtitle = ''
 	HDN.dataLayer.content.objectId = `${SUBFOLDER}${slash}${SLUG}/${URL_ADD}`
 	HDN.dataLayer.content.objectType = 'project'
-	HDN.dataLayer.content.sectionPath = [
-	  HEARST_CATEGORY,
-	  'special projects',
-	]
+	HDN.dataLayer.content.sectionPath = [HEARST_CATEGORY]
+	HDN.dataLayer.content.keySubjects = [KEY_SUBJECTS]
 	HDN.dataLayer.content.pubDate = pubdate
 	HDN.dataLayer.content.wordCount = ''
 	HDN.dataLayer.content.keywords = []
