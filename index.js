@@ -49,6 +49,7 @@ let blendHDN = function(meta){
 			SLUG,
 			MARKET_KEY,
 			ISO_PUBDATE,
+			ISO_MODDATE,
 			CANONICAL_URL
 		},
   } = meta
@@ -86,6 +87,10 @@ let blendHDN = function(meta){
 	if (ISO_PUBDATE){
 		pubdate = ISO_PUBDATE.toString().split('T')[0] + " 00:00:00"
 	}
+	let moddate = ""
+	if (ISO_MODDATE){
+		moddate = ISO_MODDATE.toString().split('T')[0] + " 00:00:00"
+	}
 
 	// Setting up vars
 	let HDN = {}
@@ -105,6 +110,7 @@ let blendHDN = function(meta){
 	HDN.dataLayer.content.sectionPath = [HEARST_CATEGORY]
 	HDN.dataLayer.content.keySubjects = [KEY_SUBJECTS]
 	HDN.dataLayer.content.pubDate = pubdate
+	HDN.dataLayer.content.lastModifiedDate = moddate
 	HDN.dataLayer.content.wordCount = ''
 	HDN.dataLayer.content.keywords = []
 	HDN.dataLayer.content.keySubjects = []
