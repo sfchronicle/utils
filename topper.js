@@ -12,7 +12,7 @@ let getTopper = function(settings){
     let mediaChoice = ``;
     let topperImages = [];
     let animationDuration;
-    let disableCover = storySettings.Topper_Contain == 'true' ? 'contain' : 'cover';
+    let disableCover = storySettings.Topper_Contain === true ? 'contain' : 'cover';
     storySettings.Slide_Duration ? animationDuration = storySettings.Slide_Duration : animationDuration = false;
     let imageResolution = 1280;
     let articleAuthorName = storySettings.Byline ? storySettings.Byline : storySettings.Author;
