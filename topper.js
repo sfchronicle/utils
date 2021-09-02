@@ -50,11 +50,11 @@ let getTopper = function(settings){
             animationDuration ? animationDuration = topperImages.length * storySettings.Slide_Duration : animationDuration = topperImages.length * 5;
             
             for (let i = 0; i < topperImages.length; i++){
-                mediaChoice += `<img class = "topper-intro-img-sfc-utils fade${i}" src="${topperImageURLs[i]}">`
+                mediaChoice += `<img class = "topper-image topper-intro-img-sfc-utils fade${i}" src="${topperImageURLs[i]}">`
             }
         }
             else if(topperImages.length == 1){
-                mediaChoice = `<img class="topper-intro-img-sfc-utils" src="${topperImageURLs[0]}">`
+                mediaChoice = `<img class="topper-image topper-intro-img-sfc-utils" src="${topperImageURLs[0]}">`
             }
         }
     else{
