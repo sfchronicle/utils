@@ -110,7 +110,7 @@ let getTopper = function(settings){
     font-size: 2em;
     margin-top: 0;
     font-weight: 400;
-    line-height: 1;
+    line-height: 1.1;
     margin-bottom: 15px
    }
    #topper-article-title .topper-article-dek{
