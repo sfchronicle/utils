@@ -696,6 +696,7 @@ let getTopper = function(settings){
 #topper-mediacontainer{
     width: 100%;
     height: 90vh;
+    pointer-events: none;
 }
     #topper-intro-container.wide-stacked > *, #topper-intro-container.wide-stacked-reverse > * {
      margin: 1em auto .5em auto;
