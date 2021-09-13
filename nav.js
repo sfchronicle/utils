@@ -1,77 +1,101 @@
-
-let { getBrands } = require('./brands')
+let { getBrands } = require("./brands");
 
 // Handle nav for various markets and include nav options for other links
-let getNav = function(meta, urlAdd, forceColor, navLink, navArray, subInstead){
-	// If we aren't passing meta in, we have to call getSettings here
-	if (!meta){
-		let {getSettings} = require('./settings')
-		meta = getSettings()
-	}
+let getNav = function (
+  meta,
+  urlAdd,
+  forceColor,
+  navLink,
+  navArray,
+  subInstead
+) {
+  // If we aren't passing meta in, we have to call getSettings here
+  if (!meta) {
+    let { getSettings } = require("./settings");
+    meta = getSettings();
+  }
 
-	// If a link object was not provided, make one
-	if (!navLink){
-		navLink = {
-			url: "#___gatsby",
-			text: "Special Report",
-			target: "_self"
-		}
-	}
+  // If a link object was not provided, make one
+  if (!navLink) {
+    navLink = {
+      url: "#___gatsby",
+      text: "Special Report",
+      target: "_self",
+    };
+  }
 
-	// If a navArray was provided, create the subnav
-	let subnav = ""
-	let dropdownIcon = ""
-	if (navArray && navArray.length > 0){
-		subnav = `<ul id="subnav">`
-		for (let i = 0; i <navArray.length; i++){
-			subnav += `<li><a class="active" href="${navArray[i].url}" target="${navArray[i].target}"><span class="arrow-bullet">▶</span> ${navArray[i].text}</a></li>`
-		}
-		subnav += `</ul>`
-		// Add a dropdown icon
-		dropdownIcon = `<div class="dropdown-icon">▾</div>`
-	}
+  // If a navArray was provided, create the subnav
+  let subnav = "";
+  let dropdownIcon = "";
+  if (navArray && navArray.length > 0) {
+    subnav = `<ul id="subnav">`;
+    for (let i = 0; i < navArray.length; i++) {
+      subnav += `<li><a class="active" href="${navArray[i].url}" target="${navArray[i].target}"><span class="arrow-bullet">▶</span> ${navArray[i].text}</a></li>`;
+    }
+    subnav += `</ul>`;
+    // Add a dropdown icon
+    dropdownIcon = `<div class="dropdown-icon">▾</div>`;
+  }
 
-	// Extension to URL if passed in
-	if (!urlAdd){
-		urlAdd = ""
-	}
+  // Extension to URL if passed in
+  if (!urlAdd) {
+    urlAdd = "";
+  }
 
-	let {attributes: {marketPrefix, invert, subscribeLink}} = getBrands(meta.PROJECT.MARKET_KEY)
-	// Handle various CT domains
-	if (typeof window !== "undefined"){
-		switch(window.location.origin){
-			case "https://www.ctpost.com": marketPrefix = "ct"; break;
-			case "https://www.nhregister.com": marketPrefix = "nh"; break;
-			case "https://www.greenwichtime.com": marketPrefix = "gt"; break;
-			case "https://www.stamfordadvocate.com": marketPrefix = "st"; break;
-			case "https://www.thehour.com": marketPrefix = "th"; break;
-			case "https://www.newstimes.com": marketPrefix = "nt"; break;
-			case "https://www.middletownpress.com": marketPrefix = "mp"; break;
-			case "https://www.ctinsider.com": marketPrefix = "in"; break;
-		}
-	}
+  let {
+    attributes: { marketPrefix, invert, subscribeLink },
+  } = getBrands(meta.PROJECT.MARKET_KEY);
+  // Handle various CT domains
+  if (typeof window !== "undefined") {
+    switch (window.location.origin) {
+      case "https://www.ctpost.com":
+        marketPrefix = "ct";
+        break;
+      case "https://www.nhregister.com":
+        marketPrefix = "nh";
+        break;
+      case "https://www.greenwichtime.com":
+        marketPrefix = "gt";
+        break;
+      case "https://www.stamfordadvocate.com":
+        marketPrefix = "st";
+        break;
+      case "https://www.thehour.com":
+        marketPrefix = "th";
+        break;
+      case "https://www.newstimes.com":
+        marketPrefix = "nt";
+        break;
+      case "https://www.middletownpress.com":
+        marketPrefix = "mp";
+        break;
+      case "https://www.ctinsider.com":
+        marketPrefix = "in";
+        break;
+    }
+  }
 
-	// Default is white text on black nav (SFC style)
-	let invertClass = ""
-	let color = "white"
-	// If inverted, do black on white nav
-	// Only change things if color isn't forced to white
-	if (invert || forceColor === "white"){
-		invertClass = "invert"
-		color = "black"
-	}
+  // Default is white text on black nav (SFC style)
+  let invertClass = "";
+  let color = "white";
+  // If inverted, do black on white nav
+  // Only change things if color isn't forced to white
+  if (invert || forceColor === "white") {
+    invertClass = "invert";
+    color = "black";
+  }
 
-	let subfolder = ""
-	if (meta.PROJECT.SUBFOLDER){
-		subfolder = meta.PROJECT.SUBFOLDER + "/"
-	}
+  let subfolder = "";
+  if (meta.PROJECT.SUBFOLDER) {
+    subfolder = meta.PROJECT.SUBFOLDER + "/";
+  }
 
-	let rightBlock = `
+  let rightBlock = `
 		<div class="topper-nav-social">
       <a
         id="topper-nav-mail-icon"
         title="Share via email"
-        href="mailto:?subject=${ meta.PROJECT.TITLE }&body=${ meta.PROJECT.DESCRIPTION }%0A%0A${meta.MAIN_DOMAIN}%2F${ subfolder }${ meta.PROJECT.SLUG }%2F${urlAdd}">
+        href="mailto:?subject=${meta.PROJECT.TITLE}&body=${meta.PROJECT.DESCRIPTION}%0A%0A${meta.MAIN_DOMAIN}%2F${subfolder}${meta.PROJECT.SLUG}%2F${urlAdd}">
         <svg
 				  width="24"
 				  height="24"
@@ -92,7 +116,7 @@ let getNav = function(meta, urlAdd, forceColor, navLink, navArray, subInstead){
       <a
         id="topper-nav-facebook-icon"
         title="Share on Facebook"
-        href="https://www.facebook.com/sharer/sharer.php?u=${meta.MAIN_DOMAIN}%2F${ subfolder }${ meta.PROJECT.SLUG }%2F${urlAdd}"
+        href="https://www.facebook.com/sharer/sharer.php?u=${meta.MAIN_DOMAIN}%2F${subfolder}${meta.PROJECT.SLUG}%2F${urlAdd}"
         target="_blank"
         rel="noopener noreferrer"
       >
@@ -112,34 +136,33 @@ let getNav = function(meta, urlAdd, forceColor, navLink, navArray, subInstead){
     </div>
 
     <div class="topper-nav-social">
-      <a target="_blank" rel="noopener noreferrer" id="twitter-icon" title="Share on Twitter" href="https://twitter.com/intent/tweet?url=${meta.MAIN_DOMAIN}%2F${ subfolder }${ meta.PROJECT.SLUG }%2F${urlAdd}&text=${ meta.PROJECT.TWITTER_TEXT }">
-        <svg
-				  width="24"
-				  height="24"
-				  viewBox="0 0 24 24"
-				  fill="none"
-				  xmlns="http://www.w3.org/2000/svg"
-				>
-				  <path
-				    fill-rule="evenodd"
-				    clip-rule="evenodd"
-				    d="M8 3C9.10457 3 10 3.89543 10 5V8H16C17.1046 8 18 8.89543 18 10C18 11.1046 17.1046 12 16 12H10V14C10 15.6569 11.3431 17 13 17H16C17.1046 17 18 17.8954 18 19C18 20.1046 17.1046 21 16 21H13C9.13401 21 6 17.866 6 14V5C6 3.89543 6.89543 3 8 3Z"
-				    fill="currentColor"
-				  />
-				</svg>
+      <a target="_blank" rel="noopener noreferrer" id="twitter-icon" title="Share on Twitter" href="https://twitter.com/intent/tweet?url=${meta.MAIN_DOMAIN}%2F${subfolder}${meta.PROJECT.SLUG}%2F${urlAdd}&text=${meta.PROJECT.TWITTER_TEXT}">
+		<svg
+			width="24"
+			height="24"
+			viewBox="0 0 248 204"	
+			fill="none"
+			xmlns="http://www.w3.org/2000/svg"
+		>
+		<path
+			data-name="Twitter Logo"
+			fill="currentColor"
+			d="M222 51.29c.15 2.16.15 4.34.15 6.52 0 66.74-50.8 143.69-143.69 143.69A142.91 142.91 0 0 1 1 178.82a102.72 102.72 0 0 0 12 .72 101.29 101.29 0 0 0 62.72-21.66 50.53 50.53 0 0 1-47.18-35.07 50.35 50.35 0 0 0 22.8-.86 50.53 50.53 0 0 1-40.52-49.5v-.64a50.25 50.25 0 0 0 22.92 6.32 50.55 50.55 0 0 1-15.6-67.42 143.38 143.38 0 0 0 104.08 52.77 50.55 50.55 0 0 1 86.06-46.06 101.19 101.19 0 0 0 32.06-12.26 50.66 50.66 0 0 1-22.2 27.93 100.89 100.89 0 0 0 29-7.94A102.84 102.84 0 0 1 222 51.29z"
+		/>
+		</svg>
       </a>
     </div>
-  `
+  `;
 
-  if (subInstead){
-  	rightBlock = `
+  if (subInstead) {
+    rightBlock = `
   		<a class="sub-box" href="${subscribeLink}" target="_blank">
   			<div>Subscribe</div>
   		</a>
-  	`
-  }	
+  	`;
+  }
 
-	let navHTML = `<nav class="topper-nav-container ${invertClass}">
+  let navHTML = `<nav class="topper-nav-container ${invertClass}">
     <div class="topper-nav-left">
       <a
         href="/"
@@ -172,9 +195,9 @@ let getNav = function(meta, urlAdd, forceColor, navLink, navArray, subInstead){
       ${rightBlock}
     </div>
     ${subnav}
-  </nav>`
+  </nav>`;
 
-  return navHTML
-}
+  return navHTML;
+};
 
-module.exports = { getNav }
+module.exports = { getNav };
