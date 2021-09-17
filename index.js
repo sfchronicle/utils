@@ -107,7 +107,10 @@ let blendHDN = function(meta){
 	HDN.dataLayer.content.subtitle = ''
 	HDN.dataLayer.content.objectId = `${SUBFOLDER}${slash}${SLUG}/${URL_ADD}`
 	HDN.dataLayer.content.objectType = 'project'
-	HDN.dataLayer.content.sectionPath = [HEARST_CATEGORY]
+
+	// Check if we have more than one HEARST_CATEGORY, split on commas
+	var categories = HEARST_CATEGORY.split(',').map(item=>item.trim())
+	HDN.dataLayer.content.sectionPath = categories
 	HDN.dataLayer.content.keySubjects = KEY_SUBJECTS
 	HDN.dataLayer.content.pubDate = pubdate
 	HDN.dataLayer.content.lastModifiedDate = moddate
