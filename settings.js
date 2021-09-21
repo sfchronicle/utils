@@ -17,10 +17,10 @@ let getSettings = function(){
 	let settings = projectConfig
 	// This needs to be set even if the "try" below fails
 	settings.PROJECT['ANALYTICS_CREDIT'] = ''
-
+	// Populate with storySettings if they exist
+	let storySettings
 	try {
-    // Populate with storySettings if they exist
-    let storySettings
+
     try {
     	// Check for classic story_settings sheet
     	[storySettings] = require("../../src/data/story_settings.sheet.json")
