@@ -112,7 +112,7 @@ let blendHDN = function(meta){
 	var categories = HEARST_CATEGORY.split(',').map(item=>item.trim())
 	HDN.dataLayer.content.sectionPath = categories
 
-	var key_subjects = KEY_SUBJECTS.split(',').map(item=>item.trim())
+	var key_subjects = KEY_SUBJECTS ? KEY_SUBJECTS.split(',').map(item=>item.trim()) : ""
 	HDN.dataLayer.content.keySubjects = key_subjects
 	HDN.dataLayer.content.pubDate = pubdate
 	HDN.dataLayer.content.lastModifiedDate = moddate
