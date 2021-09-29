@@ -111,7 +111,9 @@ let blendHDN = function(meta){
 	// Check if we have more than one HEARST_CATEGORY, split on commas
 	var categories = HEARST_CATEGORY.split(',').map(item=>item.trim())
 	HDN.dataLayer.content.sectionPath = categories
-	HDN.dataLayer.content.keySubjects = KEY_SUBJECTS
+
+	var key_subjects = KEY_SUBJECTS.split(',').map(item=>item.trim())
+	HDN.dataLayer.content.keySubjects = key_subjects
 	HDN.dataLayer.content.pubDate = pubdate
 	HDN.dataLayer.content.lastModifiedDate = moddate
 	HDN.dataLayer.content.wordCount = ''
