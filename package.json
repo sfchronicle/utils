@@ -1,4 +1,13 @@
 {
   "name": "sfc-utils",
-  "version": "1.0.9"
+  "version": "1.0.9",
+  "dependencies": {
+    "archieml": "^0.4.2",
+    "async": "^3.2.1",
+    "googleapis": "59.0.0",
+    "html-entities": "^2.3.2",
+    "htmlparser2": "^7.1.2",
+    "opn": "^6.0.0",
+    "write": "^2.0.0"
+  }
 }
