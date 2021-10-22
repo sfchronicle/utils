@@ -40,8 +40,7 @@ let getFooter = function(meta, forceColor){
 		"SFC": {
 			"About": [
 				{text:"Our Company",link:"http://www.hearst.com/newspapers/san-francisco-chronicle"},
-				{text:"Newspaper Delivery Safety Procedures",link:"https://www.sfchronicle.com/customer_service/article/How-Hearst-Newspapers-is-delivering-information-15151951.php"},
-				{text:"Privacy Notice",link:"https://www.sfchronicle.com/privacy_policy"},
+				{text:"Privacy Notice / Notice at Collection",link:"https://www.sfchronicle.com/privacy_policy"},
 				{text:"Your California Privacy Rights",link:"https://www.sfchronicle.com/privacy_policy/#caprivacyrights"},
 				{text:"Interest Based Ads",link:"https://www.sfchronicle.com/privacy_policy/#interestbasedads"},
 				{text:"Terms of Use",link:"https://www.sfchronicle.com/terms_of_use/"},
@@ -49,12 +48,11 @@ let getFooter = function(meta, forceColor){
 				{text:"Advertising",link:"https://marketing.sfgate.com/advertise-with-us-today"}
 			],
 			"Newsroom": [
-				{text:"Ethics Policy",link:"https://www.sfchronicle.com/file/519/1/5191-Chronicle%20ethics%2C%20standards%20and%20practices.pdf"},
-				{text:"Corrections Policy",link:"https://www.sfchronicle.com/file/518/8/5188-Correction%20policy.pdf"},
-				{text:"Visual Ethics Guidelines",link:"https://www.sfchronicle.com/file/519/0/5190-San%20Francisco%20Chronicle%20Photo%20Ethics.pdf"},
-				{text:"Anonymous Sources Policy",link:"https://www.sfchronicle.com/file/518/9/5189-SFChronicle%20anonymous%20source%20policy.pdf"},
+				{text:"Ethics Policy",link:"https://www.sfchronicle.com/file/759/0/7590-7528-Hearst_Newspaper_Group_Standards_and_Ethics_Policy.pdf"},
+				{text:"How We Cover Politics",link:"https://www.sfchronicle.com/local-politics/article/Election-2020-inside-the-newsroom-How-15519702.php"},
 				{text:"Endorsement Process",link:"https://www.sfchronicle.com/opinion/article/How-The-Chronicle-s-endorsement-process-works-14499467.php"},
-				{text:"News Tips",link:"https://newstips.sfchronicle.com/"}
+				{text:"News Tips",link:"https://www.sfchronicle.com/newstips/"},
+				{text:"Newsroom News", link:"https://www.sfchronicle.com/about/newsroomnews/"}
 			],
 			"Contact": [
 				{text:"Customer Service",link:"https://www.sfchronicle.com/customer_service"},
@@ -62,7 +60,7 @@ let getFooter = function(meta, forceColor){
 				{text:"Newsroom Contacts",link:"https://www.sfchronicle.com/newsroom_contacts"}
 			],
 			"CCPA": [
-				{text:"Do Not Sell My Info"}
+				{text:"Do Not Sell My Personal Information",link:"https://www.sfchronicle.com/mydata/"}
 			],
 			"Services": [
 				{text:"Subscriber Services",link:"https://subscription.sfchronicle.com/"},
@@ -70,10 +68,10 @@ let getFooter = function(meta, forceColor){
 				{text:"Reprints & Permissions",link:"https://www.parsintl.com/publication/sfchronicle/"},
 				{text:"Corporate Subscriptions",link:"https://www.sfchronicle.com/corporatesubscriptions/"},
 				{text:"App",link:"https://www.sfchronicle.com/mobile-apps/"},
-				{text:"Archives",link:"https://www.sfchronicle.com/archive"},
+				{text:"Archives",link:"https://www.sfchronicle.com/archive/search/subscriber/"},
 				{text:"Membership",link:"https://www.sfchronicle.com/membership"},
-				{text:"Store",link:"https://sfchronicle.myshopify.com/?_ga=2.16099766.1468984225.1592235434-1564600934.1588693453"},
-				{text:"Subscription Offers",link:"https://offers.sfchronicle.com/subscribe/?origin=sfc.footer&ipid=suboffers"},
+				{text:"Store",link:"https://sfchronicle.myshopify.com/?_ga=2.86091355.2125278198.1634578934-724761130.1630448969"},
+				{text:"Subscription Offers",link:"https://subscription.sfchronicle.com/checkout/430/866/?siteID=SFC&origin=footer"},
 				{text:"sfgate.com",link:"https://www.sfgate.com/"}
 			]
 		},
