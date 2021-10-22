@@ -44,7 +44,7 @@ let getFooter = function(meta, forceColor){
 				{text:"Your California Privacy Rights",link:"https://www.sfchronicle.com/privacy_policy/#caprivacyrights"},
 				{text:"Interest Based Ads",link:"https://www.sfchronicle.com/privacy_policy/#interestbasedads"},
 				{text:"Terms of Use",link:"https://www.sfchronicle.com/terms_of_use/"},
-				{text:"Careers",link:"http://www.sfchronicle.com/hr/"},
+				{text:"Careers",link:"https://eevd.fa.us6.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_15/pages/29004"},
 				{text:"Advertising",link:"https://marketing.sfgate.com/advertise-with-us-today"}
 			],
 			"Newsroom": [
