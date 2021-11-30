@@ -14,7 +14,6 @@ let getTopper = function(settings){
     let animationDuration;
     let disableCover = (storySettings.Topper_Contain === true || storySettings.Topper_Contain === "true") ? 'contain' : 'cover';
     storySettings.Slide_Duration ? animationDuration = storySettings.Slide_Duration : animationDuration = false;
-    let imageResolution = 1280;
     let articleAuthorName = storySettings.Byline ? storySettings.Byline : storySettings.Author;
     let noImage = false;
 
@@ -38,23 +37,34 @@ let getTopper = function(settings){
         // Make sure it's a string before we do string ops
         storySettings.Topper_ImageID = storySettings.Topper_ImageID.toString().trim();
         topperImages = storySettings.Topper_ImageID.split(", ");
-        let currentImageID = topperImages[0]
-        let currentImageIndex = 0;
-        let topperImageURLs =[];
-        for(let id of topperImages){
-            topperImageURLs.push("https://s.hdnux.com/photos/0/0/0/" + id + "/1/" + imageResolution + "x0.jpg")
-        }
-        let currentImageURL = topperImageURLs[0];
         
         if(topperImages.length > 1){
             animationDuration ? animationDuration = topperImages.length * storySettings.Slide_Duration : animationDuration = topperImages.length * 5;
             
-            for (let i = 0; i < topperImages.length; i++){
-                mediaChoice += `<img class = "topper-image topper-intro-img-sfc-utils fade${i}" src="${topperImageURLs[i]}">`
+            for (let i = 0; i < topperImages.length; i++) {
+                let imagePrefix = "https://s.hdnux.com/photos/0/0/0/" + topperImages[i] + "/1/"
+
+                mediaChoice += `<img class="topper-image topper-intro-img-sfc-utils fade${i}"
+                    src="${imagePrefix}325x0.jpg"
+                    srcSet="${imagePrefix}400x0.jpg 325w,
+                        ${imagePrefix}768x0.jpg 768w,
+                        ${imagePrefix}1366x0.jpg 1366w,
+                        ${imagePrefix}1920x0.jpg 1920w,
+                        ${imagePrefix}2560x0.jpg 2560w,
+                        ${imagePrefix}3840x0.jpg 3840w">`
             }
         }
-            else if(topperImages.length == 1){
-                mediaChoice = `<img class="topper-image topper-intro-img-sfc-utils" src="${topperImageURLs[0]}">`
+            else if(topperImages.length == 1) {
+                let imagePrefix = "https://s.hdnux.com/photos/0/0/0/" + topperImages[0] + "/1/"
+
+                mediaChoice += `<img class="topper-image topper-intro-img-sfc-utils"
+                    src="${imagePrefix}325x0.jpg"
+                    srcSet="${imagePrefix}400x0.jpg 325w,
+                        ${imagePrefix}768x0.jpg 768w,
+                        ${imagePrefix}1366x0.jpg 1366w,
+                        ${imagePrefix}1920x0.jpg 1920w,
+                        ${imagePrefix}2560x0.jpg 2560w,
+                        ${imagePrefix}3840x0.jpg 3840w">`
             }
         }
     else{
@@ -811,7 +821,7 @@ let getTopper = function(settings){
        } 
    }
 }
-	let topperHTML = `
+    let topperHTML = `
     <style>
     ${topperCSS}
     
