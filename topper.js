@@ -1,8 +1,6 @@
 
 let { getBrands } = require('./brands')
 
-console.log("testing on terminal");
-
 let getTopper = function(settings){
    
     let storySettings = settings[0];
@@ -20,8 +18,6 @@ let getTopper = function(settings){
     let articleAuthorName = storySettings.Byline ? storySettings.Byline : storySettings.Author;
     let articleAuthorLink = storySettings.Byline_Link ? storySettings.Byline_Link : storySettings.AUTHOR_PAGE;
     let noImage = false;
-    console.warn("i don't think this works");
-    console.log("HAAAALLLLLLLPPPPPPP");
 
     if(storySettings.Topper_Mp4){
         mediaChoice = `
