@@ -15,6 +15,7 @@ let getTopper = function(settings){
     let disableCover = (storySettings.Topper_Contain === true || storySettings.Topper_Contain === "true") ? 'contain' : 'cover';
     storySettings.Slide_Duration ? animationDuration = storySettings.Slide_Duration : animationDuration = false;
     let articleAuthorName = storySettings.Byline ? storySettings.Byline : storySettings.Author;
+    let articleAuthorLink = storySettings.Byline_Link ? storySettings.Byline_Link : storySettings.AUTHOR_PAGE;
     let noImage = false;
 
     if(storySettings.Topper_Mp4){
@@ -82,7 +83,7 @@ let getTopper = function(settings){
         let readablePubDate = convertDatesToAP(storySettings.Publish_Date);
         // Check safely for MOD_DATE
         let readableModDate = storySettings.LastModDate_C2P ? convertDatesToAP(storySettings.LastModDate_C2P) : false;
-    let getBylineText = (authorName, publishDate, modifyDate) =>{
+    let getBylineText = (authorName, authorLink, publishDate, modifyDate) =>{
         let newPubDateString = publishDate;
         try {
             newPubDateString = publishDate.match(/.*\d{4}/gm)[0];
@@ -90,7 +91,10 @@ let getTopper = function(settings){
             // That's fine
             console.log(err);
         }
-        let initialText = ("By " + authorName + " | " + newPubDateString);
+        let author = authorLink ? 
+          `<a class="byline-link" href=${authorLink.includes('http') ? `\"${authorLink}\"` : `\"https://${authorLink}\"`}>${authorName.trim()}</a>` 
+          : authorName.trim();
+        let initialText = (`By ${author} | ${newPubDateString}`);
         if(modifyDate){
             return initialText + (" | Updated: " + modifyDate);
         }
@@ -139,7 +143,6 @@ let getTopper = function(settings){
         width: 100%;
         height: 100%;
     }
-
    `
    if(storySettings.Topper_CustomCSS_Inject){
     topperCSS += storySettings.Topper_CustomCSS_Inject;
@@ -216,17 +219,14 @@ let getTopper = function(settings){
                     ${interval}%{
                         opacity: 1;
                         position: relative;
-
                     }
                      ${interval + (animationInterval * .7)}%{
                         opacity: 1;
                         position: relative;
-
                     }
                     ${interval + (animationInterval * 0.81)}%{
                         opacity: 0;
                         position: relative;
-
                     }
                     ${interval + (animationInterval * 0.82)}%{
                         opacity: 0;
@@ -269,7 +269,6 @@ let getTopper = function(settings){
    for(let setting of topperSettingsArray){
        if(setting == "full"){
            topperCSS += `
-
            #topper-intro-container > * {
             flex: 0 0 50%;
             overflow: hidden;
@@ -303,7 +302,6 @@ let getTopper = function(settings){
            width: 100%;
            height: 100%;
            position: absolute;
-
        }
        #topper-mediacontainer{
            position: absolute;
@@ -339,7 +337,6 @@ let getTopper = function(settings){
         console.log("mobile stacked")
         topperCSS += `     
         @media screen and (max-width: 700px){
-
             #topper-intro-container > * {
                 max-width: 55%;
                 margin: 1em auto .5em auto;
@@ -400,7 +397,6 @@ let getTopper = function(settings){
         console.log("mobile stacked reverse")
         topperCSS += `     
         @media screen and (max-width: 700px){
-
             #topper-intro-container > * {
                 max-width: 55%;
                 margin: 1em auto .5em auto;
@@ -766,7 +762,6 @@ let getTopper = function(settings){
      }
          #topper-intro-container.sidebyside-reverse{
              flex-direction: row-reverse;
-
         }
         #topper-intro-container.opaque-black{
             background-color: black;
@@ -834,7 +829,7 @@ let getTopper = function(settings){
     <div id="topper-article-title">
     <h1 class="topper-article-hed">${storySettings.Title}</h1>
     <h2 class="topper-article-dek">${storySettings.Deck}</h2>
-    <h3 class ="topper-article-byline">${getBylineText(articleAuthorName, readablePubDate, readableModDate)}</h3>
+    <h3 class ="topper-article-byline">${getBylineText(articleAuthorName, articleAuthorLink, readablePubDate, readableModDate)}</h3>
     </div>
     <svg id="topper-arrow" xmlns="http://www.w3.org/2000/svg" height="44px" viewBox="0 0 22 22" width="44px" fill="#FFFFFF"><path d="M24 24H0V0h24v24z" fill="none" opacity=".87"/><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6-1.41-1.41z"/></svg>
   <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
