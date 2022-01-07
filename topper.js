@@ -92,7 +92,7 @@ let getTopper = function(settings){
             console.log(err);
         }
         let author = authorLink ? 
-          `<a class="byline-link" href=${authorLink.includes('http') ? authorLink : 'https://'+authorLink}>${authorName.trim()}</a>` 
+          `<a class="byline-link" href=${authorLink.includes('http') ? `\"${authorLink}\"` : `\"https://${authorLink}\"`}>${authorName.trim()}</a>` 
           : authorName.trim();
         let initialText = (`By ${author} | ${newPubDateString}`);
         if(modifyDate){
