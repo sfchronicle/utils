@@ -50,7 +50,7 @@ let getBlueconic = function(domain){
 	
   // If we found a subdomain, swap in the new script
   if (subdomain){
-    blueconicURL = `https://${subdomain}.${domain}/script.js`
+    blueconicURL = `https://${subdomain}.${apex}/script.js`
   }
 
   console.log("ADDED URL", blueconicURL)
