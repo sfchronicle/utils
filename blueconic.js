@@ -6,6 +6,7 @@ let getBlueconic = function(domain){
 
   // Set subdomain based on URL
   let apex = domain.replace('www.', '')
+  console.log("ADDED APEX", apex)
   switch(apex){
     case "sfchronicle.com": subdomain = "q777"; break;
     case "beaumontenterprise.com": subdomain = "z680"; break;
@@ -50,6 +51,8 @@ let getBlueconic = function(domain){
   if (subdomain){
     blueconicURL = `https://${subdomain}.${domain}/script.js`
   }
+
+  console.log("ADDED URL", blueconicURL)
 
   return blueconicURL
 }
