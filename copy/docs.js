@@ -60,7 +60,7 @@ let grabDocs = (auth, config, directory = null, filenames = null) => {
 
     async.eachLimit(
       config.GOOGLE_DOCS,
-      2, // adjust this up or down based on rate limiting
+      3, // adjust this up or down based on rate limiting
       async function (fileId) {
         var meta = await drive.files
           .get({
