@@ -10,7 +10,6 @@ let getBrands = function(market){
 			"@hed-alt": '"Lora Regular", Georgia, serif',
 			"@serif-book": '"Lora Light", Georgia, serif',
 			"@serif-bold": '"Lora Light", Georgia, serif',
-			"@base-font-size": "18px",
 
 			"@sans-light": '"Source Sans Pro Light", Helvetica, sans-serif',
 			"@sans-med": '"Source Sans Pro Regular", Helvetica, sans-serif',
