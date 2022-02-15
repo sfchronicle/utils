@@ -10,6 +10,7 @@ let getBrands = function(market){
 			"@hed-alt": '"Lora Regular", Georgia, serif',
 			"@serif-book": '"Lora Light", Georgia, serif',
 			"@serif-bold": '"Lora Light", Georgia, serif',
+			"@base-font-size": "18px",
 
 			"@sans-light": '"Source Sans Pro Light", Helvetica, sans-serif',
 			"@sans-med": '"Source Sans Pro Regular", Helvetica, sans-serif',
@@ -78,6 +79,7 @@ let getBrands = function(market){
 				"@hed-alt": '"ChronicleDispCond-Roman", Georgia, serif',
 				"@serif-book": '"ChronicleTextG2-Roman", Georgia, serif',
 				"@serif-bold": '"ChronicleTextG2-Bold", Georgia, serif',
+				"@base-font-size": "20px",
 
 				"@sans-light": '"HelveticaNeue-Roman", Helvetica, sans-serif',
 				"@sans-med": '"HelveticaNeue-Roman", Helvetica, sans-serif',
