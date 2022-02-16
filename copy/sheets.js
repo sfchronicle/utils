@@ -13,47 +13,51 @@ var api = google.sheets("v4");
 var writeFile = require("write");
 var authObj = require("./googleauth");
 
-var cast = function (str) {
-  if (typeof str !== "string") {
-    if (typeof str.value == "string") {
-      str = str.value;
-    } else {
-      return str;
+var cast = function (str, forceStr) {
+  if (!forceStr){
+    if (typeof str !== "string") {
+      if (typeof str.value == "string") {
+        str = str.value;
+      } else {
+        return str;
+      }
     }
-  }
-  if (str.match(/^-?(0?\.|[1-9])[\d\.]*$/) || str == "0") {
-    var n = Number(str);
-    if (isNaN(n)) return str;
-    return n;
-  }
-  if (str.toLowerCase() == "true" || str.toLowerCase() == "false") {
-    return str.toLowerCase() == "true" ? true : false;
-  }
+    if (str.match(/^-?(0?\.|[1-9])[\d\.]*$/) || str == "0") {
+      var n = Number(str);
+      if (isNaN(n)) return str;
+      return n;
+    }
+    if (str.toLowerCase() == "true" || str.toLowerCase() == "false") {
+      return str.toLowerCase() == "true" ? true : false;
+    }
+  } 
+  // To force string, just return string
+
   return str;
 };
 
-let googleAuth = (project, directory = null) => {
+let googleAuth = (project, directory = null, forceStr = false) => {
   var auth = null;
   authObj
     .authenticate({ fallback: false })
     .then((resp) => {
       auth = resp;
-      grabSheets(auth, project, directory).catch(() => {
+      grabSheets(auth, project, directory, forceStr).catch(() => {
         // If the first attempt failed, then make another req using the fallback
         authObj.authenticate({ fallback: true }).then((resp) => {
           auth = resp;
-          grabSheets(auth, project, directory);
+          grabSheets(auth, project, directory, forceStr);
         });
       });
     })
     .catch(() => {
       // Failure if we fall back but there's no token
       auth = authObj.task();
-      grabSheets(auth, project, directory);
+      grabSheets(auth, project, directory, forceStr);
     });
 };
 
-let grabSheets = (auth, project, directory) => {
+let grabSheets = (auth, project, directory, forceStr) => {
   return new Promise((resolveAll, rejectAll) => {
     var sheetKeys = project.GOOGLE_SHEETS;
 
@@ -67,7 +71,7 @@ let grabSheets = (auth, project, directory) => {
     let promiseStack = [];
     for (var spreadsheetId of sheetKeys) {
       let promiseItem = new Promise((resolve, reject) => {
-        getSheet(resolve, reject, auth, spreadsheetId, directory);
+        getSheet(resolve, reject, auth, spreadsheetId, directory, forceStr);
       });
       promiseStack.push(promiseItem);
     }
@@ -84,7 +88,7 @@ let grabSheets = (auth, project, directory) => {
   });
 };
 
-let getSheet = async (resolve, reject, auth, spreadsheetId, directory) => {
+let getSheet = async (resolve, reject, auth, spreadsheetId, directory, forceStr) => {
   let output = await api.spreadsheets
     .get({
       auth,
@@ -118,7 +122,7 @@ let getSheet = async (resolve, reject, auth, spreadsheetId, directory) => {
       var obj = {};
       row.forEach(function (value, i) {
         var key = header[i];
-        obj[key] = cast(value);
+        obj[key] = cast(value, forceStr);
       });
       if (isKeyed) {
         out[obj.key] = isValued ? obj.value : obj;
