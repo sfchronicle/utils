@@ -78,6 +78,7 @@ let getBrands = function(market){
 				"@hed-alt": '"ChronicleDispCond-Roman", Georgia, serif',
 				"@serif-book": '"ChronicleTextG2-Roman", Georgia, serif',
 				"@serif-bold": '"ChronicleTextG2-Bold", Georgia, serif',
+				"@base-font-size": "20px",
 
 				"@sans-light": '"HelveticaNeue-Roman", Helvetica, sans-serif',
 				"@sans-med": '"HelveticaNeue-Roman", Helvetica, sans-serif',
