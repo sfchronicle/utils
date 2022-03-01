@@ -1,6 +1,6 @@
 {
   "name": "sfc-utils",
-  "version": "1.1.0",
+  "version": "1.2.1",
   "dependencies": {
     "archieml": "^0.4.2",
     "async": "^3.2.1",
