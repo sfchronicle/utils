@@ -116,12 +116,42 @@ let getBrands = function(market){
 				"@brand": "#900900",
 			},
 			attributes: {
-				"marketPrefix": "ct",
-				"siteName": "Connecticut Post",
-				"twitter": "connpost",
+				"marketPrefix": "in",
+				"siteName": "CTInsider",
+				"twitter": "insider_ct",
 				"invert": true,
-				"gaAccount": "UA-1616916-8",
+				"gaAccount": "UA-1616916-99",
 				"subscribeLink": "https://www.ctinsider.com/subproject"
+			}
+		},
+
+		/* Connecticut */
+		Texcom: {
+			styles: {
+				"@brand": "#900900",
+			},
+			attributes: {
+				"marketPrefix": "texcom/mrt",
+				"siteName": "Midland Reporter-Telegram",
+				"twitter": "mwtnews",
+				"invert": true,
+				"gaAccount": "UA-1616916-99",
+				"subscribeLink": "https://www.ctinsider.com/subproject"
+			}
+		},
+
+		/* Connecticut */
+		Midcom: {
+			styles: {
+				"@brand": "#900900",
+			},
+			attributes: {
+				"marketPrefix": "midcom/mid",
+				"siteName": "Midland Daily News",
+				"twitter": "MDN",
+				"invert": true,
+				"gaAccount": "UA-1616916-99",
+				"subscribeLink": "https://www.ourmidland.com/subproject"
 			}
 		},
 
