@@ -72,6 +72,50 @@ let getNav = function (
       case "https://www.ctinsider.com":
         marketPrefix = "in";
         break;
+
+      case "https://www.beaumontenterprise.com":
+        marketPrefix = "texcom/beau";
+        break;
+      case "https://www.lmtonline.com":
+        marketPrefix = "texcom/laredo";
+        break;
+      case "https://www.mrt.com":
+        marketPrefix = "texcom/mrt";
+        break;
+      case "https://www.myplainview.com":
+        marketPrefix = "texcom/plain";
+        break;
+
+      case "https://www.bigrapidsnews.com":
+        marketPrefix = "midcom/big";
+        break;
+      case "https://www.manisteenews.com":
+        marketPrefix = "midcom/mani";
+        break;
+      case "https://www.ourmidland.com":
+        marketPrefix = "midcom/mid";
+        break;
+      case "https://www.michigansthumb.com":
+        marketPrefix = "midcom/huron";
+        break;
+      case "https://www.recordpatriot.com":
+        marketPrefix = "midcom/benzie";
+        break;
+      case "https://www.theheraldreview.com":
+        marketPrefix = "midcom/hr";
+        break;
+      case "https://www.lakecountystar.com":
+        marketPrefix = "midcom/lc";
+        break;
+      case "https://www.thetelegraph.com":
+        marketPrefix = "midcom/alton";
+        break;
+      case "https://www.theintelligencer.com":
+        marketPrefix = "midcom/ed";
+        break;
+      case "https://www.myjournalcourier.com":
+        marketPrefix = "midcom/jv";
+        break;
     }
   }
 
