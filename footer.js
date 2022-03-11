@@ -359,6 +359,86 @@ let getFooter = function(meta, forceColor){
 		    }
 		  ]
 		},
+		"Midcom": {
+		  "About": [
+		    {
+		      "text": "Privacy Notice",
+		      "link": "/privacy/"
+		    },
+		    {
+		      "text": "Your California Privacy Rights",
+		      "link": "/privacy/#additionalinformationforcaliforniaresidents"
+		    },
+		    {
+		      "text": "Interest Based Ads",
+		      "link": "/privacy/#interestbasedads"
+		    },
+		    {
+		      "text": "Terms of Use",
+		      "link": "/tos/"
+		    },
+		    {
+		      "text": "Careers",
+		      "link": "http://www.hearst.com/careers"
+		    },
+				{
+		      "text": "Print Archive",
+		      "link": "/archives/"
+		    }
+		  ],
+		  "Contact": [
+				{
+		      "text": "Subscribe",
+		      "link": window.location.origin+"/subproject/"
+		    },
+		    {
+		      "text": "Newsroom Contacts",
+		      "link": "/contact/"
+		    },
+		    {
+		      "text": "Advertise",
+		      "link": "https://hearstmediamidwest.com/"
+		    }
+		  ]
+		},
+		"Texcom": {
+		  "About": [
+		    {
+		      "text": "Privacy Notice",
+		      "link": "/privacy/"
+		    },
+		    {
+		      "text": "Your California Privacy Rights",
+		      "link": "/privacy/#additionalinformationforcaliforniaresidents"
+		    },
+		    {
+		      "text": "Interest Based Ads",
+		      "link": "/privacy/#interestbasedads"
+		    },
+		    {
+		      "text": "Terms of Use",
+		      "link": "/tos/"
+		    },
+		    {
+		      "text": "Careers",
+		      "link": "http://www.hearst.com/careers"
+		    },
+				{
+		      "text": "Print Archive",
+		      "link": "/archives/"
+		    }
+		  ],
+		  "Contact": [
+				{
+		      "text": "Subscribe",
+		      "link": window.location.origin+"/subproject/"
+		    },
+		    {
+		      "text": "Newsroom Contacts",
+		      "link": "/contact/"
+		    }
+		  ]
+		},
 		"TK": {
 		  "About": [
 		    {
