@@ -389,7 +389,7 @@ let getFooter = function(meta, forceColor){
 		  "Contact": [
 				{
 		      "text": "Subscribe",
-		      "link": window.location.origin+"/subproject/"
+		      "link": "/subproject/"
 		    },
 		    {
 		      "text": "Newsroom Contacts",
@@ -431,7 +431,7 @@ let getFooter = function(meta, forceColor){
 		  "Contact": [
 				{
 		      "text": "Subscribe",
-		      "link": window.location.origin+"/subproject/"
+		      "link": "/subproject/"
 		    },
 		    {
 		      "text": "Newsroom Contacts",
