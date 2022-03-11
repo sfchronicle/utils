@@ -136,7 +136,7 @@ let getBrands = function(market){
 				"twitter": "mwtnews",
 				"invert": true,
 				"gaAccount": "UA-1616916-99",
-				"subscribeLink": "https://www.ctinsider.com/subproject"
+				"subscribeLink": "/subproject"
 			}
 		},
 
@@ -151,7 +151,7 @@ let getBrands = function(market){
 				"twitter": "MDN",
 				"invert": true,
 				"gaAccount": "UA-1616916-99",
-				"subscribeLink": "https://www.ourmidland.com/subproject"
+				"subscribeLink": "/subproject"
 			}
 		},
 
