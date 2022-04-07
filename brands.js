@@ -73,7 +73,7 @@ let getBrands = function(market){
 		/* Albany Times Union */
 		Albany: {
 			styles: {
-				"@brand": "#0095c7",
+				"@brand": "#006FBA",
 				"@hed": '"ChronicleDispCond-Black", Georgia, serif',
 				"@hed-alt": '"ChronicleDispCond-Roman", Georgia, serif',
 				"@serif-book": '"ChronicleTextG2-Roman", Georgia, serif',
