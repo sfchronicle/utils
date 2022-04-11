@@ -107,9 +107,6 @@ let getTopper = function(settings){
         max-width: 100%;
         left: 0;
    }
-   #topper-arrow{
-       display: none;
-   }
    #topper-intro-video-sfc-utils{
        width: 100%;
        object-fit: ${disableCover};
@@ -272,14 +269,6 @@ let getTopper = function(settings){
            #topper-intro-container > * {
             flex: 0 0 50%;
             overflow: hidden;
-        }
-        #topper-arrow{
-            display: none;
-            position: absolute;
-            left: 50%;
-            transform: translate(-50%, 0%);
-            bottom: 0;
-            animation: arrow-float 1s ease-in-out alternate infinite;
         }
         @keyframes arrow-float{
             from{
@@ -831,10 +820,6 @@ let getTopper = function(settings){
     <h2 class="topper-article-dek">${storySettings.Deck}</h2>
     <h3 class ="topper-article-byline">${getBylineText(articleAuthorName, articleAuthorLink, readablePubDate, readableModDate)}</h3>
     </div>
-    <svg id="topper-arrow" xmlns="http://www.w3.org/2000/svg" height="44px" viewBox="0 0 22 22" width="44px" fill="#FFFFFF"><path d="M24 24H0V0h24v24z" fill="none" opacity=".87"/><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6-1.41-1.41z"/></svg>
-  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-  <polyline points="6 9 12 15 18 9" />
-</svg>
     </div>
 `
 
