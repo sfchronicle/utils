@@ -425,7 +425,6 @@ let getTopper = function(settings){
            color: black !important;
            position: static;
            padding-top: unset !important;
-           padding: 0 40px !important;
        }
        .topper-article-byline{
            color: #222 !important;
