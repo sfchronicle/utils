@@ -424,10 +424,6 @@ let getFooter = function(meta, forceColor){
 		    {
 		      "text": "Careers",
 		      "link": "http://www.hearst.com/careers"
-		    },
-				{
-		      "text": "Print Archive",
-		      "link": "/archives/"
 		    }
 		  ],
 		  "Contact": [
@@ -466,10 +462,6 @@ let getFooter = function(meta, forceColor){
 		    {
 		      "text": "Careers",
 		      "link": "http://www.hearst.com/careers"
-		    },
-				{
-		      "text": "Print Archive",
-		      "link": "/archives/"
 		    }
 		  ],
 		  "Contact": [

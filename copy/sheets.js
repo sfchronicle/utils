@@ -60,6 +60,10 @@ let googleAuth = (project, directory = null, forceStr = false) => {
 let grabSheets = (auth, project, directory, forceStr) => {
   return new Promise((resolveAll, rejectAll) => {
     var sheetKeys = project.GOOGLE_SHEETS;
+    if (!sheetKeys){
+      // Try the old way
+      sheetKeys = project.sheets;
+    }
 
     if (!sheetKeys || !sheetKeys.length) {
       console.log(
