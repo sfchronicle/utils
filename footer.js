@@ -245,44 +245,44 @@ let getFooter = function(meta, forceColor){
 		      "text": "Our Company",
 		      "link": "http://www.hearst.com/newspapers/albany-times-union",
 		    },
+			{
+				"text": "General Standards and Practices",
+				"link": "https://www.timesunion.com/home/article/General-Standards-and-Practices-for-Hearst-15647242.php/"
+			  },
 		    {
 		      "text": "Newspaper Delivery Safety Procedures",
 		      "link": "https://www.timesunion.com/home/article/How-Hearst-Newspapers-is-delivering-information-15152131.php"
 		    },
 		    {
 		      "text": "Advertising",
-		      "link": "https://www.timesunion.com/advertising/"
+		      "link": "https://timesunionmediagroup.com/"
 		    },
 		    {
 		      "text": "Interest Based Ads",
-		      "link": "https://www.timesunion.com/privacypolicy/#interestbasedads"
+		      "link": "https://www.timesunion.com/help/article/Privacy-notice-highlights-16480619.php#interestbasedads"
 		    },
 		    {
 		      "text": "Terms of Use",
-		      "link": "https://www.timesunion.com/termsofservice/"
+		      "link": "https://www.timesunion.com/help/article/Terms-of-use-16468248.php "
 		    },
 		    {
 		      "text": "Privacy Notice",
-		      "link": "https://www.timesunion.com/privacypolicy/"
+		      "link": "https://www.timesunion.com/help/article/Privacy-notice-highlights-16480619.php "
 		    },
 		    {
 		      "text": "Your California Privacy Rights",
-		      "link": "https://www.timesunion.com/privacypolicy/#additionalinformationforcaliforniaresidents"
-		    },
-		    {
-		      "text": "Contact Us",
-		      "link": "https://www.timesunion.com/help/"
+		      "link": "https://www.timesunion.com/help/article/Privacy-notice-highlights-16480619.php#additionalinformationforcaliforniaresidents "
 		    },
 		    {
 		      "text": "Jobs at the TU",
-		      "link": "https://hearst.referrals.selectminds.com/hearst-capital-region"
+		      "link": "https://eevd.fa.us6.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_15/pages/28003 "
 		    }
 		  ],
 		  "Contact": [
-		    {
-		      "text": "Blogs",
-		      "link": "https://www.timesunion.com/blogs/"
-		    },
+			{
+				"text": "Contact Us",
+				"link": "https://www.timesunion.com/help/"
+			  },
 		    {
 		      "text": "Weather",
 		      "link": "https://www.timesunion.com/weather/"
@@ -293,27 +293,23 @@ let getFooter = function(meta, forceColor){
 		    },
 		    {
 		      "text": "Events Calendar",
-		      "link": "https://www.timesunion.com/events/"
+		      "link": "https://events.timesunion.com"
 		    },
 		    {
-		      "text": "Weddings/Celebrations",
-		      "link": "https://www.timesunion.com/celebrations/"
-		    },
-		    {
-		      "text": "Births",
+		      "text": "Celebrations",
 		      "link": "https://www.timesunion.com/celebrations/"
 		    },
 		    {
 		      "text": "Obituaries",
-		      "link": "http://www.legacy.com/obituaries/timesunion-albany/?_ga=2.192771562.1778481536.1592510469-1132101746.1591222524"
+		      "link": "https://www.legacy.com/obituaries/timesunion-albany/"
 		    },
 		    {
 		      "text": "Online Store",
-		      "link": "https://www.timesunion.com/onlinestore/"
+		      "link": "https://timesunionplus-store.myshopify.com/"
 		    },
 		    {
 		      "text": "Puzzles Palace",
-		      "link": "http://puzzles.timesunion.com/"
+		      "link": "https://www.timesunion.com/puzzles/"
 		    }
 		  ],
 		  "Services": [
@@ -323,24 +319,32 @@ let getFooter = function(meta, forceColor){
 		    },
 		    {
 		      "text": "Home Delivery",
-		      "link": "https://offers.timesunion.com/?offerid=254&origin=footer&variant=timesunion.com.footer"
+		      "link": "https://subscription.timesunion.com/checkout/337/730/?origin=footer"
 		    },
 		    {
 		      "text": "Become a Carrier",
-		      "link": "http://www.timesunion.com/carriers"
-		    },
-		    {
-		      "text": "iPad app",
-		      "link": "https://www.timesunion.com/ipad/"
-		    },
-		    {
-		      "text": "Copyright and Reprint",
-		      "link": "https://www.timesunion.com/copyright/"
+		      "link": "https://www.timesunion.com/carriers"
 		    },
 		    {
 		      "text": "e-Edition",
 		      "link": "https://subscription.timesunion.com/eedition/"
-		    }
+		    },
+			{
+				"text": "Corporate Subscriptions",
+				"link": "https://www.timesunion.com/corporatesubscriptions/"
+			  },
+			{
+				"text": "Mobile App",
+				"link": "https://www.timesunion.com/mobile-apps/"
+			},
+			{
+				"text": "Copyright and Reprint",
+				"link": "https://www.timesunion.com/help/article/Times-Union-copyright-and-reprint-policy-16417547.php"
+			  },
+			  {
+				"text": "Archives",
+				"link": "https://www.timesunion.com/archive"
+			  }
 		  ]
 		},
 		"CT": {
