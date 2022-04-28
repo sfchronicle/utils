@@ -169,7 +169,7 @@ let blendHDN = function(meta){
 	HDN.dataLayer.sharing.openGraphType = 'article'
 
 	// More page settings
-	HDN.dataLayer.href.pageUrl = `${BASE_DOMAIN}/${SUBFOLDER}${slash}${SLUG}/${URL_ADD}`
+	HDN.dataLayer.href.pageUrl = CANONICAL_URL ? `${CANONICAL_URL}` : `${BASE_DOMAIN}/${SUBFOLDER}${slash}${SLUG}/${URL_ADD}`
 	HDN.dataLayer.href.canonicalUrl = `${CANONICAL_URL}/${URL_ADD}`
 
 	// HDN.dataLayer object for presentation information
