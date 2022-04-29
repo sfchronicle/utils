@@ -65,6 +65,7 @@ let blendHDN = function(meta){
   else{
 	  siteDomain = MAIN_DOMAIN
   }
+  console.log(siteDomain)
   // Check if we need a slash
   let slash = OPT_SLASH
 
