@@ -60,6 +60,7 @@ let blendHDN = function(meta){
   }
   let siteDomain
   if(CANONICAL_URL){
+	  console.log('canonical url exists')
 	  siteDomain = CANONICAL_URL.match('^(.+?).com')[0]
   }
   else{
