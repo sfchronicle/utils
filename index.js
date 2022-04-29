@@ -58,10 +58,6 @@ let blendHDN = function(meta){
   if (MARKET_KEY === "CT"){
   	BASE_DOMAIN = "ctinsider.com"
   }
-  else if(MARKET_KEY === "Midcom"){
-	//   hard fix for the intelligencer - should expand to handle more midcom newsrooms
-	  BASE_DOMAIN = CANONICAL_URL.includes('theintelligencer') ? 'https://www.theintelligencer.com/' : MAIN_DOMAIN
-  }
 
   // Check if we need a slash
   let slash = OPT_SLASH
