@@ -165,11 +165,11 @@ let blendHDN = function(meta){
   }
 
 	// HDN.dataLayer object for sharing information
-	HDN.dataLayer.sharing.openGraphUrl = `${BASE_DOMAIN}/${SUBFOLDER}${slash}${SLUG}/${URL_ADD}`
+	HDN.dataLayer.sharing.openGraphUrl = CANONICAL_URL ? `${CANONICAL_URL}` : `${BASE_DOMAIN}/${SUBFOLDER}${slash}${SLUG}/${URL_ADD}`
 	HDN.dataLayer.sharing.openGraphType = 'article'
 
 	// More page settings
-	HDN.dataLayer.href.pageUrl = `${BASE_DOMAIN}/${SUBFOLDER}${slash}${SLUG}/${URL_ADD}`
+	HDN.dataLayer.href.pageUrl = CANONICAL_URL ? `${CANONICAL_URL}` : `${BASE_DOMAIN}/${SUBFOLDER}${slash}${SLUG}/${URL_ADD}`
 	HDN.dataLayer.href.canonicalUrl = `${CANONICAL_URL}/${URL_ADD}`
 
 	// HDN.dataLayer object for presentation information
@@ -183,15 +183,16 @@ let blendHDN = function(meta){
 	HDN.dataLayer.paywall.premiumEndDate = ''
 	HDN.dataLayer.paywall.policy = PAYWALL_SETTING
 
+	let siteDomain = CANONICAL_URL ? CANONICAL_URL.match('^(.+?).com') : MAIN_DOMAIN
 	// Special site var
 	HDN.dataLayer.site = {
-	  domain: MAIN_DOMAIN.replace("https://www.",""),
-	  domainRoot: MAIN_DOMAIN.replace("https://www.","").replace(".com",""),
+	  domain: siteDomain.replace("https://www.",""),
+	  domainRoot: siteDomain.replace("https://www.","").replace(".com",""),
 	  subDomain: 'www',
 	  name: HDN.dataLayer.source.publishingSite,
 	  property: HDN.dataLayer.source.originalSourceSite,
 	  siteId: '35',
-	  siteUrl: MAIN_DOMAIN,
+	  siteUrl: siteDomain,
 	  timeZone: 'Pacific',
 	}
 
