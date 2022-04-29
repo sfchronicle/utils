@@ -78,8 +78,7 @@ let getSettings = function(){
 	if (typeof storySettings !== "undefined" && storySettings.Canonical_URL){
 		settings.PROJECT['CANONICAL_URL'] = storySettings.Canonical_URL
 	}
-	console.log("CANONICAL_URL", settings.PROJECT['CANONICAL_URL'])
-
+	console.log("CANONICAL_URL", settings)
 	return settings
 }
 
