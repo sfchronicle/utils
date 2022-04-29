@@ -59,9 +59,10 @@ let blendHDN = function(meta){
   	BASE_DOMAIN = "ctinsider.com"
   }
   let siteDomain
+  console.log('canonical url is ' + CANONICAL_URL)
   if(CANONICAL_URL){
-	  console.log('canonical url exists')
 	  siteDomain = CANONICAL_URL.match('^(.+?).com')[0]
+	  console.log('canonical url exists')
   }
   else{
 	  siteDomain = MAIN_DOMAIN
