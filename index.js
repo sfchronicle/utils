@@ -58,6 +58,10 @@ let blendHDN = function(meta){
   if (MARKET_KEY === "CT"){
   	BASE_DOMAIN = "ctinsider.com"
   }
+  else if(MARKET_KEY === "Midcom"){
+	//   hard fix for the intelligencer - should expand to handle more midcom newsrooms
+	  BASE_DOMAIN = CANONICAL_URL.includes('theintelligencer') ? 'https://www.theintelligencer.com/' : MAIN_DOMAIN
+  }
 
   // Check if we need a slash
   let slash = OPT_SLASH
@@ -165,11 +169,11 @@ let blendHDN = function(meta){
   }
 
 	// HDN.dataLayer object for sharing information
-	HDN.dataLayer.sharing.openGraphUrl = CANONICAL_URL ? `${CANONICAL_URL}` : `${BASE_DOMAIN}/${SUBFOLDER}${slash}${SLUG}/${URL_ADD}`
+	HDN.dataLayer.sharing.openGraphUrl = `${BASE_DOMAIN}/${SUBFOLDER}${slash}${SLUG}/${URL_ADD}`
 	HDN.dataLayer.sharing.openGraphType = 'article'
 
 	// More page settings
-	HDN.dataLayer.href.pageUrl = CANONICAL_URL ? `${CANONICAL_URL}` : `${BASE_DOMAIN}/${SUBFOLDER}${slash}${SLUG}/${URL_ADD}`
+	HDN.dataLayer.href.pageUrl = `${BASE_DOMAIN}/${SUBFOLDER}${slash}${SLUG}/${URL_ADD}`
 	HDN.dataLayer.href.canonicalUrl = `${CANONICAL_URL}/${URL_ADD}`
 
 	// HDN.dataLayer object for presentation information
