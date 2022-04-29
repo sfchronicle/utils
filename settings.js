@@ -61,7 +61,6 @@ let getSettings = function(){
 				"NEWSLETTER_PROMO": storySettings.NewsletterPromo || storySettings.Custom_Signup_Text || projectSettings.NEWSLETTER_PROMO,
 				"NEWSLETTER_LEGAL": storySettings.NewsletterLegal || storySettings.TOS_Text || projectSettings.NEWSLETTER_LEGAL,
 				"RELATED_LINKS_HED": storySettings.Related_Links_Hed
-
 			}
 		}
 	} catch (err){
@@ -79,6 +78,7 @@ let getSettings = function(){
 	if (typeof storySettings !== "undefined" && storySettings.Canonical_URL){
 		settings.PROJECT['CANONICAL_URL'] = storySettings.Canonical_URL
 	}
+	console.log("CANONICAL_URL", settings.PROJECT['CANONICAL_URL'])
 
 	return settings
 }
