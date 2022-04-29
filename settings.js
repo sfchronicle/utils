@@ -60,8 +60,7 @@ let getSettings = function(){
 				"NEWSLETTER_ID": storySettings.NewsletterID || storySettings.Custom_Sailthru_ID || projectSettings.NEWSLETTER_ID,
 				"NEWSLETTER_PROMO": storySettings.NewsletterPromo || storySettings.Custom_Signup_Text || projectSettings.NEWSLETTER_PROMO,
 				"NEWSLETTER_LEGAL": storySettings.NewsletterLegal || storySettings.TOS_Text || projectSettings.NEWSLETTER_LEGAL,
-				"RELATED_LINKS_HED": storySettings.Related_Links_Hed,
-				"CANONICAL_URL": storySettings.Canonical_URL
+				"RELATED_LINKS_HED": storySettings.Related_Links_Hed
 
 			}
 		}
@@ -80,7 +79,7 @@ let getSettings = function(){
 	if (typeof storySettings !== "undefined" && storySettings.Canonical_URL){
 		settings.PROJECT['CANONICAL_URL'] = storySettings.Canonical_URL
 	}
-
+	console.log(settings)
 	return settings
 }
 
