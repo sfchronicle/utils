@@ -186,8 +186,8 @@ let blendHDN = function(meta){
 	let siteDomain = CANONICAL_URL ? CANONICAL_URL.match('^(.+?).com') : MAIN_DOMAIN
 	// Special site var
 	HDN.dataLayer.site = {
-	  domain: siteDomain.replace("https://www.",""),
-	  domainRoot: siteDomain.replace("https://www.","").replace(".com",""),
+	  domain: siteDomain.toString().replace("https://www.",""),
+	  domainRoot: siteDomain.toString().replace("https://www.","").replace(".com",""),
 	  subDomain: 'www',
 	  name: HDN.dataLayer.source.publishingSite,
 	  property: HDN.dataLayer.source.originalSourceSite,
