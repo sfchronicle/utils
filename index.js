@@ -53,7 +53,7 @@ let blendHDN = function(meta){
 			CANONICAL_URL
 		},
   } = meta
-
+  console.log(meta)
   BASE_DOMAIN = MAIN_DOMAIN
   if (MARKET_KEY === "CT"){
   	BASE_DOMAIN = "ctinsider.com"
