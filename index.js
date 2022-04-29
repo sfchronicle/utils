@@ -183,16 +183,15 @@ let blendHDN = function(meta){
 	HDN.dataLayer.paywall.premiumEndDate = ''
 	HDN.dataLayer.paywall.policy = PAYWALL_SETTING
 
-	let siteDomain = CANONICAL_URL ? CANONICAL_URL.match('^(.+?).com') : MAIN_DOMAIN
 	// Special site var
 	HDN.dataLayer.site = {
-	  domain: siteDomain.toString().replace("https://www.",""),
-	  domainRoot: siteDomain.toString().replace("https://www.","").replace(".com",""),
+	  domain: MAIN_DOMAIN.replace("https://www.",""),
+	  domainRoot: MAIN_DOMAIN.replace("https://www.","").replace(".com",""),
 	  subDomain: 'www',
 	  name: HDN.dataLayer.source.publishingSite,
 	  property: HDN.dataLayer.source.originalSourceSite,
 	  siteId: '35',
-	  siteUrl: siteDomain,
+	  siteUrl: MAIN_DOMAIN,
 	  timeZone: 'Pacific',
 	}
 
