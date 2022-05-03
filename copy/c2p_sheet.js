@@ -158,7 +158,7 @@ let createSheet = (auth, fallback, configData) => {
                   };
                   drive.permissions.create(
                     {
-                      resource: permission,
+                      resource: permission2,
                       fileId: resp.data.id, // Modify the created file
                     },
                     (permErr, permResp) => {
