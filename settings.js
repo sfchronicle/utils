@@ -53,7 +53,7 @@ let getSettings = function(){
 				"MOD_DATE": storySettings.Mod_Date || storySettings.LastModDate_C2P,
 				"AUTHORS": projectSettings.AUTHORS,
 				"ANALYTICS_CREDIT": storySettings.Analytics_Credit,
-				"HEARST_CATEGORY": storySettings.Category || storySettings.Analytics_Section || "Bay Area",
+				"HEARST_CATEGORY": storySettings.Category || storySettings.Analytics_Section || "News",
 				"KEY_SUBJECTS": storySettings.Key_Subjects || "",
 				"MARKET_KEY": storySettings.Market_Key,
 				// Surveys have slightly different naming, so catch that below for backwards compat
