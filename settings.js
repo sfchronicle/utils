@@ -45,6 +45,7 @@ let getSettings = function(){
 				"SLUG": storySettings.Slug,
 				"TITLE": storySettings.SEO_Title,
 				"SOCIAL_TITLE": storySettings.Social_Title,
+				"DECK": storySettings.Deck,
 				"URL": "https://projects.sfchronicle.com",
 				"IMAGE": "https://s.hdnux.com/photos/0/0/0/0/"+storySettings.Social_ImageID+"/0/1600x0.jpg",
 				"DESCRIPTION": storySettings.SEO_Description,
