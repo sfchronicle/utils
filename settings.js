@@ -44,6 +44,7 @@ let getSettings = function(){
 				"SUBFOLDER": storySettings.Year,
 				"SLUG": storySettings.Slug,
 				"TITLE": storySettings.SEO_Title,
+				"DISPLAY_TITLE": storySettings.Title,
 				"SOCIAL_TITLE": storySettings.Social_Title,
 				"DECK": storySettings.Deck,
 				"URL": "https://projects.sfchronicle.com",
