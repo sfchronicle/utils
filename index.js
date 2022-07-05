@@ -53,21 +53,17 @@ let blendHDN = function(meta){
 			CANONICAL_URL
 		},
   } = meta
-  console.log(meta)
   BASE_DOMAIN = MAIN_DOMAIN
   if (MARKET_KEY === "CT"){
   	BASE_DOMAIN = "ctinsider.com"
   }
   let siteDomain
-  console.log('canonical url is ' + CANONICAL_URL)
   if(CANONICAL_URL){
 	  siteDomain = CANONICAL_URL.match('^(.+?).com')[0]
-	  console.log('canonical url exists')
   }
   else{
 	  siteDomain = MAIN_DOMAIN
   }
-  console.log(siteDomain)
   // Check if we need a slash
   let slash = OPT_SLASH
 

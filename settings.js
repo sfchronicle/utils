@@ -47,14 +47,14 @@ let getSettings = function(){
 				"SOCIAL_TITLE": storySettings.Social_Title,
 				"DECK": storySettings.Deck,
 				"URL": "https://projects.sfchronicle.com",
-				"IMAGE": "https://s.hdnux.com/photos/0/0/0/0/"+storySettings.Social_ImageID+"/0/1600x0.jpg",
+				"IMAGE": "https://s.hdnux.com/photos/0/0/0/0/"+storySettings.Social_ImageID+"/1/1600x0.jpg",
 				"DESCRIPTION": storySettings.SEO_Description,
 				"TWITTER_TEXT": storySettings.Twitter_Text,
 				"DATE": storySettings.Publish_Date,
 				"MOD_DATE": storySettings.Mod_Date || storySettings.LastModDate_C2P,
 				"AUTHORS": projectSettings.AUTHORS,
 				"ANALYTICS_CREDIT": storySettings.Analytics_Credit,
-				"HEARST_CATEGORY": storySettings.Category || storySettings.Analytics_Section || "Bay Area",
+				"HEARST_CATEGORY": storySettings.Category || storySettings.Analytics_Section || "News",
 				"KEY_SUBJECTS": storySettings.Key_Subjects || "",
 				"MARKET_KEY": storySettings.Market_Key,
 				// Surveys have slightly different naming, so catch that below for backwards compat
@@ -62,7 +62,6 @@ let getSettings = function(){
 				"NEWSLETTER_PROMO": storySettings.NewsletterPromo || storySettings.Custom_Signup_Text || projectSettings.NEWSLETTER_PROMO,
 				"NEWSLETTER_LEGAL": storySettings.NewsletterLegal || storySettings.TOS_Text || projectSettings.NEWSLETTER_LEGAL,
 				"RELATED_LINKS_HED": storySettings.Related_Links_Hed
-
 			}
 		}
 	} catch (err){
@@ -80,7 +79,6 @@ let getSettings = function(){
 	if (typeof storySettings !== "undefined" && storySettings.Canonical_URL){
 		settings.PROJECT['CANONICAL_URL'] = storySettings.Canonical_URL
 	}
-	console.log(settings)
 	return settings
 }
 

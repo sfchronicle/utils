@@ -150,7 +150,29 @@ let createSheet = (auth, fallback, configData) => {
                   console.log(
                     `NOTE: It may take a few seconds before your gmail, ${gmail}, has access`
                   );
-                  resolveAll();
+                  // Now share with the service account
+                  const permission2 = {
+                    type: "user",
+                    role: "writer",
+                    emailAddress: "sfchronicle-gatsby@zinc-proton-250521.iam.gserviceaccount.com",
+                  };
+                  drive.permissions.create(
+                    {
+                      resource: permission2,
+                      fileId: resp.data.id, // Modify the created file
+                    },
+                    (permErr, permResp) => {
+                      if (permErr) {
+                        console.log("An error prevented the sharing of this sheet with the service account!");
+                        rejectAll();
+                      } else {
+                        console.log(
+                          `Sheet also shared with service account for quick deploying!`
+                        );
+                        resolveAll();
+                      }
+                    }
+                  )
                 }
               }
             );

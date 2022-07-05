@@ -323,7 +323,6 @@ let getTopper = function(settings){
     
    `
     if(storySettings.Topper_Mobile_Fallback == 'stacked'){
-        console.log("mobile stacked")
         topperCSS += `     
         @media screen and (max-width: 700px){
             #topper-intro-container > * {
@@ -382,7 +381,6 @@ let getTopper = function(settings){
         }`
     }
     else if(storySettings.Topper_Mobile_Fallback == 'stacked-reverse'){
-        console.log("mobile stacked reverse")
         topperCSS += `     
         @media screen and (max-width: 700px){
             #topper-intro-container > * {
