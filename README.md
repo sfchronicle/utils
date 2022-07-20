@@ -22,23 +22,43 @@ googleAuth(project, null, true)
 `specialnav.js` is a cool variant of `nav.js` that gives it a floating style for special projects, but works the same way.
 
 ## Install
+
+This package is now officially in the npm registry! Hopefully that means no more old versions being installed from the cache. You can install the latest like this:
+
 ```
-npm i git+https://github.com/sfchronicle/utils.git
+npm i sfc-utils
 ```
+
+You can still install what's on master by running `npm i git+https://github.com/sfchronicle/utils.git` but it will occasionally result in version problems.
+
+## Updating utils
+
+Ask Evan for the npm credentials for publishing. Once you have them, these are the steps:
+
+1. Make sure you've incremented the version number in package.json.
+
+1. Update the master branch with changes you want to push.
+
+1. Log in to npm via the terminal with `npm login`.
+
+1. Run `npm publish`.
+
 
 ## Import the functions
 
 ```
-import { blendHDN, getSettings, appCheck } from 'sfc-utils'
+import { blendHDN, getSettings } from 'sfc-utils'
 ```
 
 ## Use them
 
 ```
-let isApp = appCheck()
+let settings = getSettings()
 ```
 
 ## Troubleshooting
+
+Only an issue for the package installed directly from Github:
 
 If you get a message about a new function not existing in your project, you might need to force a reinstall of this package. The best way to do that is to completely uninstall it and then reinstall it:
 
