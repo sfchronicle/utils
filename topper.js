@@ -358,7 +358,7 @@ let getTopper = function(settings){
        }
        .topper-intro-img-sfc-utils, #topper-intro-video-sfc-utils{
            object-fit: contain !important;
-           positon: relative;
+           position: relative;
        }
        #topper-intro-container.full #topper-article-title{
            text-align: left !important;
