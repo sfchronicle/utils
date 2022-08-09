@@ -17,11 +17,7 @@ let getNav = function (
 
   // If a link object was not provided, make one
   if (!navLink) {
-    navLink = {
-      url: "#___gatsby",
-      text: "Special Report",
-      target: "_self",
-    };
+    navLink = "";
   }
 
   // If a navArray was provided, create the subnav
@@ -184,7 +180,7 @@ let getNav = function (
 		<svg
 			width="24"
 			height="24"
-			viewBox="0 0 248 204"	
+			viewBox="0 0 248 204"
 			fill="none"
 			xmlns="http://www.w3.org/2000/svg"
 		>
