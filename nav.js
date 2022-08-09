@@ -17,7 +17,10 @@ let getNav = function (
 
 let navTitle = "";
   // If a link object was not provided, leave it empty
-  if (navLink) {
+  if (navLink.text === undefined) {
+    navTitle = `<div></div>`
+  }
+  else {
     navTitle = `<a
       class="topper-nav-title"
       id="nav-title"
@@ -25,10 +28,7 @@ let navTitle = "";
       target="${navLink.target || "_blank"}"
     >
       ${navLink.text}${dropdownIcon}
-    </a>`
-  }
-  else {
-    navTitle = `<div></div>`;
+    </a>`;
   }
 
   // If a navArray was provided, create the subnav
