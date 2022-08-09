@@ -6,15 +6,11 @@ let getBrands = function(market){
 		styles: {
 			"@alert-red": "#d20000",
 			// Defaults
-			"@hed": '"Lora Bold", Georgia, serif',
-			"@hed-alt": '"Lora Regular", Georgia, serif',
-			"@serif-book": '"Lora Light", Georgia, serif',
-			"@serif-bold": '"Lora Light", Georgia, serif',
-
-			"@sans-light": '"Source Sans Pro Light", Helvetica, sans-serif',
-			"@sans-med": '"Source Sans Pro Regular", Helvetica, sans-serif',
-			"@sans-book": '"Source Sans Pro Regular", Helvetica, sans-serif',
-			"@sans-bold": '"Source Sans Pro Bold", Helvetica, sans-serif',
+			"@hed": '"Lora", Georgia, serif',
+			"@hed-secondary": '"Lora", Georgia, serif',
+			"@serif": '"Lora", Georgia, serif',
+			"@sans": '"Source Sans Pro", Helvetica, sans-serif',
+			"@sans-cond": '"Source Sans Pro", Helvetica, sans-serif',
 		},
 		attributes: {
 			"subscribeLink": "https://www.hearst.com/newspapers?projects=true"
@@ -27,15 +23,11 @@ let getBrands = function(market){
 		SFC: {
 			styles: {
 				"@brand": "#26A0A5",
-				"@hed": '"Tiempos Headline Black", Georgia, serif',
-				"@hed-alt": '"Tiempos Headline Light", Georgia, serif',
-				"@serif-book": '"Tiempos Regular", Georgia, serif',
-				"@serif-bold": '"Tiempos Bold", Georgia, serif',
-
-				"@sans-light": '"National Light", Helvetica, sans-serif',
-				"@sans-med": '"National Medium", Helvetica, sans-serif',
-				"@sans-book": '"National Book", Helvetica, sans-serif',
-				"@sans-bold": '"National Bold", Helvetica, sans-serif',
+				"@hed": '"Tiempos Headline", Georgia, serif',
+				"@hed-secondary": '"Tiempos Headline", Georgia, serif',
+				"@serif": '"Tiempos", Georgia, serif',
+				"@sans": '"National", Helvetica, sans-serif',
+				"@sans-cond": '"National", Helvetica, sans-serif',
 			},
 			attributes: {
 				"marketPrefix": "sf",
@@ -50,15 +42,11 @@ let getBrands = function(market){
 		Houston: {
 			styles: {
 				"@brand": "#ff7500",
-				"@hed": '"Marr Sans Condensed Semibold", Georgia, serif',
-				"@hed-alt": '"Publico Headline Medium", Georgia, serif',
-				"@serif-book": '"Publico Text Roman", Georgia, serif',
-				"@serif-bold": '"Publico Text Bold", Georgia, serif',
-
-				"@sans-light": '"Marr Sans Regular", Helvetica, sans-serif',
-				"@sans-med": '"Marr Sans Regular", Helvetica, sans-serif',
-				"@sans-book": '"Marr Sans Regular", Helvetica, sans-serif',
-				"@sans-bold": '"Marr Sans Semibold", Helvetica, sans-serif',
+				"@hed": '"Publico Headline", Georgia, serif',
+				"@hed-secondary": '"Marr Sans Condensed", Georgia, serif',
+				"@serif": '"Publico", Georgia, serif',
+				"@sans": '"Marr Sans", Helvetica, sans-serif',
+				"@sans-cond": '"Marr Sans Condensed", Georgia, serif',
 			},
 			attributes: {
 				"marketPrefix": "hc",
@@ -74,16 +62,13 @@ let getBrands = function(market){
 		Albany: {
 			styles: {
 				"@brand": "#006FBA",
-				"@hed": '"ChronicleDispCond-Black", Georgia, serif',
-				"@hed-alt": '"ChronicleDispCond-Roman", Georgia, serif',
-				"@serif-book": '"ChronicleTextG2-Roman", Georgia, serif',
-				"@serif-bold": '"ChronicleTextG2-Bold", Georgia, serif',
+				"@hed": '"ChronicleDispCond", Georgia, serif',
+				"@hed-secondary": '"ChronicleDispCond", Georgia, serif',
+				"@serif": '"ChronicleText", Georgia, serif',
+				"@sans": '"HelveticaNeue", Helvetica, sans-serif',
+				"@sans-cond": '"HelveticaNeueCond", Helvetica, sans-serif',
 				"@base-font-size": "20px",
 
-				"@sans-light": '"HelveticaNeue-Roman", Helvetica, sans-serif',
-				"@sans-med": '"HelveticaNeue-Roman", Helvetica, sans-serif',
-				"@sans-book": '"HelveticaNeue-Roman", Helvetica, sans-serif',
-				"@sans-bold": '"HelveticaNeue-HeavyCond", Helvetica, sans-serif',
 			},
 			attributes: {
 				"marketPrefix": "tu",
