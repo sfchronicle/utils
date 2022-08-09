@@ -17,8 +17,8 @@ let getNav = function (
 
 let navTitle = "";
   // If a link object was not provided, leave it empty
-  if (navLink.text === undefined) {
-    navTitle = `<div></div>`
+  if (!navLink) {
+    navTitle = null;
   }
   else {
     navTitle = `<a
