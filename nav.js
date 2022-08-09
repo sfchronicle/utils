@@ -15,13 +15,20 @@ let getNav = function (
     meta = getSettings();
   }
 
+let navTitle = "";
   // If a link object was not provided, leave it empty
-  if (!navLink) {
-    navLink = {
-      url: "",
-      text: "",
-      target: "",
-    };
+  if (navLink) {
+    navTitle = `<a
+      class="topper-nav-title"
+      id="nav-title"
+      href="${navLink.url}"
+      target="${navLink.target || "_blank"}"
+    >
+      ${navLink.text}${dropdownIcon}
+    </a>`
+  }
+  else {
+    navTitle = `<div></div>`;
   }
 
   // If a navArray was provided, create the subnav
@@ -226,14 +233,7 @@ let getNav = function (
           ></img>
         </div>
       </a>
-      <a
-        class="topper-nav-title"
-        id="nav-title"
-        href="${navLink.url}"
-        target="${navLink.target || "_blank"}"
-      >
-        ${navLink.text}${dropdownIcon}
-      </a>
+      ${navTitle}
     </div>
     <div class="topper-nav-right">
       ${rightBlock}
