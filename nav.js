@@ -204,24 +204,6 @@ let getNav = function (
   let navHTML = `<nav class="topper-nav-container ${invertClass}">
     <div class="topper-nav-left">
       <a
-        href="/"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <div>
-          <img
-            class="topper-nav-desk-logo"
-            alt="Logo"
-            src="https://files.sfchronicle.com/static-assets/logos/${marketPrefix}-${color}.png"
-          ></img>
-          <img
-            class="topper-nav-mobile-logo"
-            alt="Logo"
-            src="https://files.sfchronicle.com/static-assets/logos/${marketPrefix}-square-${color}.png"
-          ></img>
-        </div>
-      </a>
-      <a
         class="topper-nav-title"
         id="nav-title"
         href="${navLink.url}"
@@ -229,6 +211,26 @@ let getNav = function (
       >
         ${navLink.text}${dropdownIcon}
       </a>
+    </div>
+    <div class="topper-nav-center">
+    <a
+      href="/"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <div>
+        <img
+          class="topper-nav-desk-logo"
+          alt="Logo"
+          src="https://files.sfchronicle.com/static-assets/logos/${marketPrefix}-${color}.png"
+        ></img>
+        <img
+          class="topper-nav-mobile-logo"
+          alt="Logo"
+          src="https://files.sfchronicle.com/static-assets/logos/${marketPrefix}-square-${color}.png"
+        ></img>
+      </div>
+    </a>
     </div>
     <div class="topper-nav-right">
       ${rightBlock}
