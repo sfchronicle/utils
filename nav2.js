@@ -1,3 +1,4 @@
+import './css/nav.css'
 let { getBrands } = require("./brands");
 
 // Handle nav for various markets and include nav options for other links
@@ -129,8 +130,8 @@ let getNav2 = function (
   if (navLink) {
     navLinkInsert = `
       <a
-        class="topper-nav-title"
-        id="nav-title"
+        class="nav2-title"
+        id="nav2-title"
         href="${navLink.url}"
         target="${navLink.target || "_blank"}"
       >
@@ -140,17 +141,17 @@ let getNav2 = function (
   }
 
   let rightBlock = `
-    <a class="sub-box" href="${subscribeLink}" target="_blank">
+    <a id="nav2-sub-box" href="${subscribeLink}" target="_blank">
       <div>Subscribe</div>
     </a>
   `;
   
 
-  let navHTML = `<nav class="topper-nav-container ${invertClass}">
-    <div class="topper-nav-left">
+  let navHTML = `<nav class="nav2-container ${invertClass}">
+    <div class="nav2-left">
       ${navLinkInsert}
     </div>
-    <div class="topper-nav-center">
+    <div class="nav2-center">
     <a
       href="/"
       target="_blank"
@@ -158,19 +159,19 @@ let getNav2 = function (
     >
       <div>
         <img
-          class="topper-nav-desk-logo"
+          class="nav2-desk-logo"
           alt="Logo"
           src="https://files.sfchronicle.com/static-assets/logos/${marketPrefix}-${color}.png"
         ></img>
         <img
-          class="topper-nav-mobile-logo"
+          class="nav2-mobile-logo"
           alt="Logo"
           src="https://files.sfchronicle.com/static-assets/logos/${marketPrefix}-square-${color}.png"
         ></img>
       </div>
     </a>
     </div>
-    <div class="topper-nav-right">
+    <div class="nav2-right">
       ${rightBlock}
     </div>
     ${subnav}
