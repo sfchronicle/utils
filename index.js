@@ -246,9 +246,10 @@ let blendHDN = function(meta){
 let { getBrands } = require('./brands')
 let { getSettings } = require('./settings')
 let { getNav } = require('./nav')
+let { getNav2 } = require('./nav-updated')
 let { getSpecialNav } = require('./specialnav')
 let { getFooter } = require('./footer')
 let { getTopper } = require('./topper')
 let { getBlueconic } = require('./blueconic')
 
-module.exports = { appCheck, blendHDN, getSettings, getBrands, getNav, getSpecialNav, getFooter, getTopper, getBlueconic }
+module.exports = { appCheck, blendHDN, getSettings, getBrands, getNav, getNav2, getSpecialNav, getFooter, getTopper, getBlueconic }
