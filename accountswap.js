@@ -9,7 +9,7 @@ const pollForAccount = function(i){
     i = 0
   }
   // Safecheck for treg since it might not be global yet
-  if (window && window.treg && window.treg.identity && window.treg.identity.isEntitled){
+  if (window && window.treg && window.treg.identity && window.treg.identity.id){
     // We got a valid entitlement! Let's see if the button exists and swap our new one in
     const subButton = documment.querySelector('.sub-box')
     console.log("found and swapped")

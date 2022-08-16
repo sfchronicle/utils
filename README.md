@@ -13,6 +13,8 @@ googleAuth(project, null, true)
 
 `nav.js` and `footer.js` both export the HTML needed for each markets' nav and footer settings. The styles controlling the actual look of these features exists at the project level.
 
+`nav2.js` overhauls our existing nav and includes styles that are bundled in this repo, giving us an extra level of control.
+
 `topper.js` implements a cool standardized set of topper options. Great for templates! If story_settings is configured with the right columns, this should be standard across projects.
 
 `blueconic.js` handles the mapping of domains to the arbitrary string that the blueconic script lives on. Why is there an arbitrary string instead of a standard one? Maybe blueconic.houstonchronicle.com, for example? No one knows.
