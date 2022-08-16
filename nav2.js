@@ -1,5 +1,5 @@
-import './css/nav.css'
 let { getBrands } = require("./brands");
+require('./css/nav.css');
 
 // Handle nav for various markets and include nav options for other links
 let getNav2 = function (
