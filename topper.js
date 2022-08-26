@@ -96,10 +96,10 @@ let getTopper = function(settings){
         for (let i = 0; i<authorNames.length; i++){
             // If we have a matching link, build it
             if (authorLinks[i]){
-                authorHTML += `<a class="byline-link" href=${authorLinks[i].includes('http') ? `\"${authorLinks[i].trim()}\"` : `\"https://${authorLinks[i].trim()}\"`}>${authorNames[i].trim()}</a>`
+                authorHTML += `<a itemscope="" itemprop="author" itemtype="http://schema.org/Person" class="byline-link" href=${authorLinks[i].includes('http') ? `\"${authorLinks[i].trim()}\"` : `\"https://${authorLinks[i].trim()}\"`}>${authorNames[i].trim()}</a>`
             } else {
                 // If we don't just print the name
-                authorHTML += `<span>${authorNames[i].trim()}</span>`
+                authorHTML += `<span itemscope="" itemprop="author" itemtype="http://schema.org/Person">${authorNames[i].trim()}</span>`
             }
             if (i < authorNames.length - 1){
                 authorHTML += ", "
