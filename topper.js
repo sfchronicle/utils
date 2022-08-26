@@ -84,6 +84,29 @@ let getTopper = function(settings){
         // Check safely for MOD_DATE
         let readableModDate = storySettings.LastModDate_C2P ? convertDatesToAP(storySettings.LastModDate_C2P) : false;
     let getBylineText = (authorName, authorLink, publishDate, modifyDate) =>{
+        let authorNames = []
+        if (authorName) {
+            authorNames = authorName.split(',')
+        }
+        let authorLinks = []
+        if (authorLink) {
+            authorLinks = authorLink.split(',')
+        }
+        let authorHTML = ""
+        for (let i = 0; i<authorNames.length; i++){
+            // If we have a matching link, build it
+            if (authorLinks[i]){
+                authorHTML += `<a class="byline-link" href=${authorLinks[i].includes('http') ? `\"${authorLinks[i].trim()}\"` : `\"https://${authorLinks[i].trim()}\"`}>${authorNames[i].trim()}</a>`
+            } else {
+                // If we don't just print the name
+                authorHTML += `<span>${authorNames[i].trim()}</span>`
+            }
+            if (i < authorNames.length - 1){
+                authorHTML += ", "
+            } else if (i === authorNames.length - 1){
+                authorHTML += " and "
+            }
+        }
         let newPubDateString = publishDate;
         try {
             newPubDateString = publishDate.match(/.*\d{4}/gm)[0];
@@ -91,10 +114,10 @@ let getTopper = function(settings){
             // That's fine
             console.log(err);
         }
-        let author = authorLink ? 
-          `<a class="byline-link" href=${authorLink.includes('http') ? `\"${authorLink}\"` : `\"https://${authorLink}\"`}>${authorName.trim()}</a>` 
-          : authorName.trim();
-        let initialText = (`By ${author} | ${newPubDateString}`);
+        // let author = authorLink ? 
+        //   `<a class="byline-link" href=${authorLink.includes('http') ? `\"${authorLink}\"` : `\"https://${authorLink}\"`}>${authorName.trim()}</a>` 
+        //   : authorName.trim();
+        let initialText = (`By ${authorHTML} | ${newPubDateString}`);
         if(modifyDate){
             return initialText + (" | Updated: " + modifyDate);
         }
