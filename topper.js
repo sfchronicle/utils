@@ -102,9 +102,9 @@ let getTopper = function(settings){
                 // If we don't just print the name
                 authorHTML += `<span itemscope="" itemprop="author" itemtype="http://schema.org/Person">${authorNames[i].trim()}</span>`
             }
-            if (i < authorNames.length - 1){
+            if (i < authorNames.length - 2){
                 authorHTML += ", "
-            } else if (i === authorNames.length - 1){
+            } else if (i === authorNames.length - 2){
                 authorHTML += " and "
             }
         }
