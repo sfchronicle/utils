@@ -93,6 +93,7 @@ let getTopper = function(settings){
             authorLinks = authorLink.split(',')
         }
         let authorHTML = ""
+        consonle.log("authorNames", authorNames)
         for (let i = 0; i<authorNames.length; i++){
             // If we have a matching link, build it
             if (authorLinks[i]){
