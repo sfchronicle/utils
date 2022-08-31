@@ -1,3 +1,4 @@
+// NOTE: This relies on variables that are updated in brands.js
 // Styles for the nav
 .nav2-container {
   width: 100%;
@@ -6,7 +7,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-family: var(--brand-sans-med);
+  font-family: @sans-med;
 }
 
 .nav2-left, .nav2-right {
@@ -29,15 +30,11 @@
 }
 
 #nav2-sub-box {
-  border: 1px solid var(--brand-color);
-  border-radius: 3px;
-  color: var(--brand-color);
   font-size: 14px;
   letter-spacing: 0.05em;
   margin-right: 10px;
   padding: 3px 8px 2px;
   text-decoration: none;
-  text-transform: uppercase;
 }
 
 .nav2-desk-logo, .nav2-mobile-logo {
@@ -102,7 +99,7 @@
   #nav2-sub-box div {
     &::after {
       content: " ";
-      background: @sub-icon-invert;
+      background: @sub-icon;
     }
   }
 }
