@@ -10,10 +10,10 @@ try {
 		// It's ok
 	}
 }
-let projectSettings = projectConfig.PROJECT
 
 // Get settings off story_settings if it exists, otherwise fall back to projectConfig
 let getSettings = function(){
+	let projectSettings = projectConfig.PROJECT
 	let settings = projectConfig
 	// This needs to be set even if the "try" below fails
 	settings.PROJECT['ANALYTICS_CREDIT'] = ''

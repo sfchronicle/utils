@@ -1,8 +1,10 @@
 // Add SFC utils
-const { getSettings, getBrands, getNav, getFooter } = require('../index')
+const { getBrands, getNav, getFooter } = require('../index')
+const { getSettings } = require('./tempsettings')
 const { DateTime } = require('luxon');
 
 let settings = getSettings()
+
 let marketKeyArray = [
   {"markets": ["SFC"], "zone": "America/Los_Angeles"},
   {"markets": ["Houston","SanAntonio","Texcom"], "zone": "America/Chicago"},
