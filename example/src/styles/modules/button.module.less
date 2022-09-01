@@ -1,0 +1,94 @@
+@import (less) '../values.less';
+
+.btn-primary {
+  appearance: none;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  outline: none;
+  padding: 0;
+  transition: all 0.1s linear;
+  color: #fff;
+  background-color: @brand;
+  border: 1px solid @brand;
+  font-family: @sans-bold;
+  user-select: none;
+  font-size: @step--1;
+  line-height: unset;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  align-items: center;
+  border-radius: 2px;
+  box-sizing: border-box;
+  height: @step-4;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100px;
+
+  &:hover,
+  &:focus {
+    color: darken(@brand, 40%);
+    background-color: fade(@brand, 50%);
+    border: 1px solid darken(@brand, 10%);
+  }
+}
+
+.btn-secondary {
+  appearance: none;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  outline: none;
+  padding: 0;
+  transition: all 0.1s linear;
+  color: @brand;
+  background-color: @off-white;
+  border: 1px solid @brand;
+  font-family: @sans-bold;
+  user-select: none;
+  font-size: @step--1;
+  line-height: unset;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  align-items: center;
+  border-radius: 2px;
+  box-sizing: border-box;
+  height: @step-4;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100px;
+
+  &:hover,
+  &:focus {
+    color: @off-white;
+    background-color: @brand;
+    border-color: darken(@brand, 10%);
+  }
+}
+
+.btn-disabled {
+  appearance: none;
+  background-repeat: no-repeat;
+  cursor: default;
+  pointer-events: none;
+  outline: none;
+  padding: 0;
+  transition: all 0.1s linear;
+  color: @gray;
+  background-color: @off-white;
+  border: 1px solid @light-gray;
+  font-family: @sans-bold;
+  user-select: none;
+  font-size: @step--1;
+  line-height: unset;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  align-items: center;
+  border-radius: 2px;
+  box-sizing: border-box;
+  height: @step-4;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100px;
+}

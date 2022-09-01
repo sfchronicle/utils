@@ -1,0 +1,79 @@
+@import (less) "../values.less";
+
+//geocoder-------------------------------
+.wrapper {
+  z-index: 500;
+  position: relative;
+  max-width: 96vw;
+  padding: 0;
+  margin: @step-3 auto;
+  @media (orientation: landscape) {
+    max-width: 60ch;
+  }
+}
+
+.address-input {
+  width: 100%;
+  margin-top: @step--1;
+  display: flex;
+
+  input {
+    flex: 1 0 50%;
+    height: 30px;
+    font-family: @sans-light;
+    font-size: @step--1;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+    border: 2px solid #ccc;
+    padding-left: calc(@step--2 / 4);
+    font-variant-numeric: lining-nums;
+  }
+
+  button {
+    height: 30px;
+    width: 88px;
+    padding: calc(@step--2 / 2);
+    font-size: @step--1;
+    border: none;
+    border-radius: 3px;
+    background-color: #1b1b1b;
+    color: #fff;
+    font-family: 'National Medium', 'Source Sans Pro', Arial, Helvetica,
+      sans-serif;
+    text-transform: uppercase;
+    text-align: center;
+    line-height: 1;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+
+    img {
+      max-height: 100%;
+    }
+
+    &:hover {
+      background-color: @brand;
+    }
+
+    &:active {
+      background-color: @dark-gray;
+      color: @white;
+    }
+  }
+}
+
+.result-box {
+  position: absolute;
+  width: 100%;
+}
+
+.result {
+  border: 1px solid @black;
+  padding: calc(@step--2 / 2);
+  background-color: @light-gray;
+  font-family: @sans-light;
+  line-height: 1.2;
+
+  &:not(.empty):hover {
+    background-color: @gray;
+  }
+}

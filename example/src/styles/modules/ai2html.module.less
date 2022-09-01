@@ -1,0 +1,19 @@
+@import (less) '../values.less';
+.container {
+	margin: @step-3 auto;
+	padding: 0 @step--1;
+	@media @tablet {
+		max-width: 720px;
+	}
+}
+.sideBar {
+	float: left;
+	padding-right: @step-2;
+	margin: @step-3 2% @step-3 10%;
+	@media @tablet {
+		float: none;
+		width: 100%;
+		padding: 0px;
+		margin: @step-3 auto;
+	}
+}

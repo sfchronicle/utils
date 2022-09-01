@@ -1,0 +1,31 @@
+@import (less) "../values.less";
+
+.arrow {
+  position: relative;
+  color: @white;
+  width: 50px;
+  bottom: 12vw;
+  left: 50%;
+  height: 0;
+  transform: translate(-50%, 0%);
+  cursor: pointer;
+  animation: bounce 2s ease-in-out infinite;
+
+  div {
+    margin: 0 auto;
+  }
+}
+
+@keyframes bounce {
+  0% {
+    bottom: 12vw;
+  }
+
+  66% {
+    bottom: 14vw;
+  }
+
+  100% {
+    bottom: 12vw;
+  }
+}

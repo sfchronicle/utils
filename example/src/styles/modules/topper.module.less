@@ -1,0 +1,63 @@
+@import (less) "../values.less";
+
+.header {
+  width: 100%;
+  padding: 0 @step--1;
+  margin: @step-3 0;
+  height: auto;
+}
+
+.text-container {
+  margin: @step-0 auto;
+  font-kerning: normal;
+  font-variant-ligatures: normal;
+  text-rendering: geometricPrecision;
+  max-width: 900px;
+}
+
+.hed, .dek {
+  font-family: @hed;
+  font-size: @step-5;
+  margin-bottom: @step--2;
+  max-width: 900px;
+}
+
+.dek {
+  font-family: @serif-book;
+  font-size: @step-2;
+}
+
+.dateby {
+  font-size: @step-0;
+  font-family: @sans-light;
+  color: @black;
+  font-variant-numeric: lining-nums;
+}
+
+.figure {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+.topcap {
+  margin-top: calc(@step--2 / 2);
+  font-family: @sans-book;
+  color: @dark-gray;
+  padding: 0 @step--1;
+  line-height: 1.2;
+}
+
+.topcred {
+  color: @gray;
+}
+
+.image {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0;
+  padding: 0;
+}
