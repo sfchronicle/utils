@@ -12,9 +12,10 @@ const pollForAccount = function(i){
   if (window && window.treg && window.treg.identity && window.treg.identity.id){
     // We got a valid entitlement! Let's see if the button exists and swap our new one in
     const subButton = document.querySelector('#nav2-sub-box')
+    const subButtonText = subButton.querySelector('div')
     if (subButton){
       subButton.setAttribute("href", accountURL)
-      subButton.innerText = "Account"
+      subButtonText.innerText = "Account"
     }
   } else {
     if (i > 10){
