@@ -17,24 +17,24 @@ var path = require("path");
 // let configData = JSON.parse(config)
 
 let googleAuth = (configData) => {
-  return new Promise(resolve => {
-    var auth = null;
-    authObj.authenticate({ fallback: false }).then((resp) => {
+  var auth = null;
+  authObj
+    .authenticate({ fallback: false })
+    .then((resp) => {
       auth = resp;
-      createSheet(auth, false, configData).then(() => {resolve()}).catch(() => {
+      createSheet(auth, false, configData).catch(() => {
         // If the first attempt failed, then make another req using the fallback
         authObj.authenticate({ fallback: true }).then((resp) => {
           auth = resp;
-          createSheet(auth, true, configData).then(() => {resolve()});
+          createSheet(auth, true, configData);
         });
       });
     })
     .catch(() => {
       // Failure if we fall back but there's no token
       auth = authObj.task();
-      createSheet(auth, true, configData).then(() => {resolve()});
+      createSheet(auth, true, configData);
     });
-  })
 };
 
 let createSheet = (auth, fallback, configData) => {
