@@ -2,7 +2,7 @@
   "_comment": "The possible paywall values are 'meter' (hit the paywall after a certain number of free stories), 'paywall' (paywall immediately), 'free' (no wall), or 'meter-no-paywall' (count this against the reader's meter, but never show the paywall on this page)",
   "PAYWALL_SETTING": "meter",
   "EMBEDDED": false,
-  "GOOGLE_SHEETS": [],
+  "GOOGLE_SHEETS": ["1v2U2iG7lEZHaKRgGTeg6xKlyTjZnu_C5uQ1CLSD5iEw"],
   "GOOGLE_DOCS": [],
   
   "_domain_explainer": "NOTE: MAIN_DOMAIN will get swapped out based on the MARKEY_KEY when deployed on the server. If you are building it locally for a repo push, you need to set the domain manually here.",

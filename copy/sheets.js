@@ -41,18 +41,18 @@ let googleAuth = (project, directory = null, forceStr = false) => {
     var auth = null;
     authObj.authenticate({ fallback: false }).then((resp) => {
       auth = resp;
-      grabSheets(auth, project, directory, forceStr).catch(() => {
+      grabSheets(auth, project, directory, forceStr).then(() => resolveFinal()).catch(() => {
         // If the first attempt failed, then make another req using the fallback
         authObj.authenticate({ fallback: true }).then((resp) => {
           auth = resp;
-          grabSheets(auth, project, directory, forceStr).then(() => {console.log("RES 1"); return resolveFinal();});
+          grabSheets(auth, project, directory, forceStr).then(() => resolveFinal());
         });
-      }).then(() => {console.log("RES 2"); return resolveFinal();});
+      });
     })
     .catch(() => {
       // Failure if we fall back but there's no token
       auth = authObj.task();
-      grabSheets(auth, project, directory, forceStr).then(() => {console.log("RES 3"); return resolveFinal();});
+      grabSheets(auth, project, directory, forceStr).then(() => resolveFinal());
     });
   })
 };
@@ -79,7 +79,6 @@ let grabSheets = (auth, project, directory, forceStr) => {
       });
       promiseStack.push(promiseItem);
     }
-
     Promise.all(promiseStack)
       .then(() => {
         // Resolve the whole thing
@@ -144,8 +143,8 @@ let getSheet = async (resolve, reject, auth, spreadsheetId, directory, forceStr)
     console.log(`Saving sheet to ${file_path}`);
     // grunt.file.write(filename, JSON.stringify(out, null, 2));
     writeFile(file_path, JSON.stringify(out, null, 2));
-    resolve(file_path);
   }
+  resolve("Complete");
 };
 
 module.exports = { googleAuth };
