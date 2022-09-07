@@ -41,13 +41,13 @@ let googleAuth = (project, directory = null, forceStr = false) => {
     var auth = null;
     authObj.authenticate({ fallback: false }).then((resp) => {
       auth = resp;
-      grabSheets(auth, project, directory, forceStr).then(() => resolve()).catch(() => {
+      grabSheets(auth, project, directory, forceStr).catch(() => {
         // If the first attempt failed, then make another req using the fallback
         authObj.authenticate({ fallback: true }).then((resp) => {
           auth = resp;
           grabSheets(auth, project, directory, forceStr).then(() => resolve());
         });
-      });
+      }).then(() => resolve());
     })
     .catch(() => {
       // Failure if we fall back but there's no token
