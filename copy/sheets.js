@@ -54,7 +54,7 @@ let googleAuth = (project, directory = null, forceStr = false) => {
       auth = authObj.task();
       grabSheets(auth, project, directory, forceStr).then(() => resolve());
     });
-  }
+  })
 };
 
 let grabSheets = (auth, project, directory, forceStr) => {
