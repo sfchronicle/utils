@@ -37,7 +37,7 @@ var cast = function (str, forceStr) {
 };
 
 let googleAuth = (project, directory = null, forceStr = false) => {
-  return new Promise(resolve => {
+  return new Promise(resolveFinal => {
     var auth = null;
     authObj.authenticate({ fallback: false }).then((resp) => {
       auth = resp;
@@ -45,14 +45,14 @@ let googleAuth = (project, directory = null, forceStr = false) => {
         // If the first attempt failed, then make another req using the fallback
         authObj.authenticate({ fallback: true }).then((resp) => {
           auth = resp;
-          grabSheets(auth, project, directory, forceStr).then(() => resolve());
+          grabSheets(auth, project, directory, forceStr).then(() => {console.log("RES 1"); return resolveFinal();});
         });
-      }).then(() => resolve());
+      }).then(() => {console.log("RES 2"); return resolveFinal();});
     })
     .catch(() => {
       // Failure if we fall back but there's no token
       auth = authObj.task();
-      grabSheets(auth, project, directory, forceStr).then(() => resolve());
+      grabSheets(auth, project, directory, forceStr).then(() => {console.log("RES 3"); return resolveFinal();});
     });
   })
 };
