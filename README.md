@@ -35,15 +35,17 @@ You can still install what's on master by running `npm i git+https://github.com/
 
 ## Updating utils
 
-Ask Evan for the npm credentials for publishing. Once you have them, these are the steps:
+Create an npm account and ask Evan to add you as a maintainer. You MUST enable two-factor on your account to push updates. Once you are all set, these are the steps:
 
 1. Make sure you've incremented the version number in package.json.
 
 1. Update the master branch with changes you want to push.
 
-1. Log in to npm via the terminal with `npm login`.
+1. Log in to npm via the terminal with `npm login` (this only needs to be done once).
 
 1. Run `npm publish`.
+
+If you want to publish a version of utils that should only be `beta`, not the default install version, then run `npm publish --tag beta` instead. Then when installing, you must target the new version directly: `npm i sfc-utils@1.3.24` 
 
 
 ## Import the functions
