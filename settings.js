@@ -52,6 +52,10 @@ let getSettings = function(){
 				// Evan: This hack has my approval
 			}
     }
+		// Empty array is triggering truthy test, so let's nullify
+		if (fullAuthors.length === 0){
+			fullAuthors = null
+		}
     // Populate with sheet settings
     settings = {
 			"PAYWALL_SETTING": storySettings.Paywall,
