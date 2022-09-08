@@ -19,11 +19,30 @@ let getSettings = function(){
 	settings.PROJECT['ANALYTICS_CREDIT'] = ''
 	// Populate with storySettings if they exist
 	let storySettings
+	let fullAuthors = []
 	try {
-
     try {
     	// Check for classic story_settings sheet
     	[storySettings] = require("../../src/data/story_settings.sheet.json")
+			// If we got story_settings, try structuring the AUTHORS object
+			let authorNames = []
+			let authorLinks = []
+			try {
+				if (storySettings.Byline) {
+					authorNames = storySettings.Byline.split(',')
+				}
+				if (storySettings.Byline_Links) {
+					authorLinks = storySettings.Byline_Links.split(',')
+				}
+				for (let i in authorNames){
+					fullAuthors.push({
+						AUTHOR_NAME: authorNames[i],
+						AUTHOR_PAGE: authorLinks[i] || ""
+					})
+				}
+			} catch(err){
+				// It's ok, we'll fall back
+			}
     } catch(err){
 			try {
 				// May be an Archie doc, try grabbing from there
@@ -53,7 +72,7 @@ let getSettings = function(){
 				"TWITTER_TEXT": storySettings.Twitter_Text,
 				"DATE": storySettings.Publish_Date,
 				"MOD_DATE": storySettings.Mod_Date || storySettings.LastModDate_C2P,
-				"AUTHORS": projectSettings.AUTHORS,
+				"AUTHORS": fullAuthors || projectSettings.AUTHORS,
 				"ANALYTICS_CREDIT": storySettings.Analytics_Credit,
 				"HEARST_CATEGORY": storySettings.Category || storySettings.Analytics_Section || "News",
 				"KEY_SUBJECTS": storySettings.Key_Subjects || "",
