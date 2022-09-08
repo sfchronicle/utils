@@ -31,8 +31,8 @@ let getSettings = function(){
 				if (storySettings.Byline) {
 					authorNames = storySettings.Byline.split(',')
 				}
-				if (storySettings.Byline_Links) {
-					authorLinks = storySettings.Byline_Links.split(',')
+				if (storySettings.Byline_Link) {
+					authorLinks = storySettings.Byline_Link.split(',')
 				}
 				for (let i in authorNames){
 					fullAuthors.push({
