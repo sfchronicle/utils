@@ -85,11 +85,11 @@ let createSheet = (auth, fallback, configData) => {
               },
               {
                 range: "story_settings!B2",
-                values: [[configData.PROJECT.SLUG]],
+                values: [[configData.PROJECT.SUBFOLDER]],
               },
               {
                 range: "story_settings!C2",
-                values: [[configData.PROJECT.SUBFOLDER]],
+                values: [[configData.PROJECT.SLUG]],
               },
               {
                 range: "system_settings!A2",
