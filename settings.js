@@ -71,7 +71,7 @@ let getSettings = function(){
 				"SOCIAL_TITLE": storySettings.Social_Title,
 				"DECK": storySettings.Deck,
 				"URL": "https://projects.sfchronicle.com",
-				"IMAGE": "https://s.hdnux.com/photos/0/0/0/0/"+storySettings.Social_ImageID+"/1/1600x0.jpg",
+				"IMAGE": "https://s.hdnux.com/photos/0/0/0/0/"+storySettings.Social_ImageID+"/1/rawImage.jpg",
 				"DESCRIPTION": storySettings.SEO_Description,
 				"TWITTER_TEXT": storySettings.Twitter_Text,
 				"DATE": storySettings.Publish_Date,
