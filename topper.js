@@ -838,7 +838,7 @@ let getTopper = function(settings){
     <h1 class="topper-article-hed">${storySettings.Title}</h1>
     <h2 class="topper-article-dek">${storySettings.Deck}</h2>
     <h3 class ="topper-article-byline">${getBylineText(articleAuthorName, articleAuthorLink, readablePubDate, readableModDate)}</h3>
-    <div class="share-list" id="sharebutton-wrapper"></div>
+    <div class="articleHeader--shareTools"><div class="share-list" id="sharebutton-wrapper"></div></div>
     </div>
     </div>
 `
