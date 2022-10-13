@@ -71,7 +71,7 @@ let createSheet = (auth, fallback, configData) => {
         //'copyCollaborators': true // This doesn't work unfortunately
       },
       (err, resp) => {
-        console.log(resp);
+        console.log("SHEET RESP", resp);
         // Make edits to the sheet to match the repo details
         let resources = {
           auth: auth,
