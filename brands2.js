@@ -1,21 +1,16 @@
 
 // Set brand object to override CSS based on this market's styles
-let getBrands = function(market){
+let getBrands2 = function(market){
 	// We can add any Hearst global overrides here:
 	let defaultObj = {
 		styles: {
 			"@alert-red": "#d20000",
 			// Defaults
-			"@hed": '"Lora Bold", Georgia, serif',
-			"@hed-alt": '"Lora Regular", Georgia, serif',
-			"@serif-book": '"Lora Light", Georgia, serif',
-			"@serif-bold": '"Lora Light", Georgia, serif',
-
-			"@sans": '"Source Sans Pro Light", Helvetica, sans-serif',
-			"@sans-light": '"Source Sans Pro Light", Helvetica, sans-serif',
-			"@sans-med": '"Source Sans Pro Regular", Helvetica, sans-serif',
-			"@sans-book": '"Source Sans Pro Regular", Helvetica, sans-serif',
-			"@sans-bold": '"Source Sans Pro Bold", Helvetica, sans-serif',
+			"@hed": '"Lora", Georgia, serif',
+			"@hed-alt": '"Lora", Georgia, serif',
+			"@serif": '"Lora", Georgia, serif',
+			"@sans": '"Source Sans Pro", Helvetica, sans-serif',
+			"@sans-alt": '"Source Sans Pro", Helvetica, sans-serif',
 
 			// Icons
 			"@sub-icon": `url('data:image/svg+xml, <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="white"><path d="M160 416H96c-17.67 0-32-14.33-32-32V128c0-17.67 14.33-32 32-32h64c17.67 0 32-14.33 32-32S177.7 32 160 32H96C42.98 32 0 74.98 0 128v256c0 53.02 42.98 96 96 96h64c17.67 0 32-14.33 32-32S177.7 416 160 416zM502.6 233.4l-128-128c-12.51-12.51-32.76-12.49-45.25 0c-12.5 12.5-12.5 32.75 0 45.25L402.8 224H192C174.3 224 160 238.3 160 256s14.31 32 32 32h210.8l-73.38 73.38c-12.5 12.5-12.5 32.75 0 45.25s32.75 12.5 45.25 0l128-128C515.1 266.1 515.1 245.9 502.6 233.4z"/></svg>')`,
@@ -31,15 +26,12 @@ let getBrands = function(market){
 		SFC: {
 			styles: {
 				"@brand": "#26A0A5",
-				"@hed": '"Tiempos Headline Black", Georgia, serif',
-				"@hed-alt": '"Tiempos Headline Light", Georgia, serif',
-				"@serif-book": '"Tiempos Regular", Georgia, serif',
-				"@serif-bold": '"Tiempos Bold", Georgia, serif',
-
-				"@sans-light": '"National Light", Helvetica, sans-serif',
-				"@sans-med": '"National Medium", Helvetica, sans-serif',
-				"@sans-book": '"National Book", Helvetica, sans-serif',
-				"@sans-bold": '"National Bold", Helvetica, sans-serif',
+				"@brand-secondary": "#FFBC30",
+				"@hed": '"Tiempos Headline", Georgia, serif',
+				"@hed-alt": '"Tiempos Headline", Georgia, serif',
+				"@serif": '"Tiempos", Georgia, serif',
+				"@sans": '"National", Helvetica, sans-serif',
+				"@sans-alt": '"National", Helvetica, sans-serif'
 			},
 			attributes: {
 				"marketPrefix": "sf",
@@ -53,16 +45,13 @@ let getBrands = function(market){
 		/* Houston Chronicle */
 		Houston: {
 			styles: {
-				"@brand": "#ff7500",
-				"@hed": '"Marr Sans Condensed Semibold", Georgia, serif',
-				"@hed-alt": '"Publico Headline Medium", Georgia, serif',
-				"@serif-book": '"Publico Text Roman", Georgia, serif',
-				"@serif-bold": '"Publico Text Bold", Georgia, serif',
-
-				"@sans-light": '"Marr Sans Regular", Helvetica, sans-serif',
-				"@sans-med": '"Marr Sans Regular", Helvetica, sans-serif',
-				"@sans-book": '"Marr Sans Regular", Helvetica, sans-serif',
-				"@sans-bold": '"Marr Sans Semibold", Helvetica, sans-serif',
+				"@brand": "#FF7500",
+				"@brand-secondary": "#1874CB",
+				"@hed": '"Marr Sans", Georgia, serif',
+				"@hed-alt": '"Marr Sans Condensed", Georgia, serif',
+				"@serif": '"Publico", Georgia, serif',
+				"@sans": '"Marr Sans", Helvetica, sans-serif',
+				"@sans-alt": '"Marr Sans Condensed", Helvetica, sans-serif'
 			},
 			attributes: {
 				"marketPrefix": "hc",
@@ -78,16 +67,12 @@ let getBrands = function(market){
 		Albany: {
 			styles: {
 				"@brand": "#006FBA",
-				"@hed": '"ChronicleDispCond-Black", Georgia, serif',
-				"@hed-alt": '"ChronicleDispCond-Roman", Georgia, serif',
-				"@serif-book": '"ChronicleTextG2-Roman", Georgia, serif',
-				"@serif-bold": '"ChronicleTextG2-Bold", Georgia, serif',
-				"@base-font-size": "20px",
-
-				"@sans-light": '"HelveticaNeue-Roman", Helvetica, sans-serif',
-				"@sans-med": '"HelveticaNeue-Roman", Helvetica, sans-serif',
-				"@sans-book": '"HelveticaNeue-Roman", Helvetica, sans-serif',
-				"@sans-bold": '"HelveticaNeue-HeavyCond", Helvetica, sans-serif',
+				"@brand-secondary": "#E5A72C",
+				"@hed": '"ChronicleDispCond", Georgia, serif',
+				"@hed-alt": '"ChronicleDispCond", Georgia, serif',
+				"@serif": '"ChronicleText", Georgia, serif',
+				"@sans": '"HelveticaNeue", Helvetica, sans-serif',
+				"@sans-alt": '"HelveticaNeueCond", Helvetica, sans-serif'
 			},
 			attributes: {
 				"marketPrefix": "tu",
@@ -102,7 +87,8 @@ let getBrands = function(market){
 		/* San Antonio Express News */
 		SanAntonio: {
 			styles: {
-				"@brand": "#ba141a",
+				"@brand": "#BA142D",
+				"@brand-secondary": "#189196"
 			},
 			attributes: {
 				"marketPrefix": "sa",
@@ -118,6 +104,7 @@ let getBrands = function(market){
 		CT: {
 			styles: {
 				"@brand": "#1A98FF",
+				"@brand-secondary": "#FFBC30"
 			},
 			attributes: {
 				"marketPrefix": "in",
@@ -129,10 +116,11 @@ let getBrands = function(market){
 			}
 		},
 
-		/* Connecticut */
+		/* Communities */
 		Texcom: {
 			styles: {
 				"@brand": "#900900",
+				"@brand-secondary": "#189196"
 			},
 			attributes: {
 				"marketPrefix": "texcom/mrt",
@@ -143,11 +131,10 @@ let getBrands = function(market){
 				"subscribeLink": "/subproject"
 			}
 		},
-
-		/* Connecticut */
 		Midcom: {
 			styles: {
 				"@brand": "#900900",
+				"@brand-secondary": "#189196"
 			},
 			attributes: {
 				"marketPrefix": "midcom/mid",
@@ -163,6 +150,7 @@ let getBrands = function(market){
 		TK: {
 			styles: {
 				"@brand": "#900900",
+				"@brand-secondary": "#189196"
 			},
 			attributes: {
 				"marketPrefix": "tk",
@@ -181,4 +169,4 @@ let getBrands = function(market){
 	return combinedStyles
 }
 
-module.exports = { getBrands }
+module.exports = { getBrands2 }

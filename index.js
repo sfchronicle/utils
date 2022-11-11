@@ -9,15 +9,15 @@ let appCheck = function(){
 	if (env === 'app'){
 		appVersion = true
 	}
-	
+
 	// If we can access window, check to see if we're dealing with app version
 	if (typeof window !== "undefined"){
 		// Any link with ?fromRichie=1 will have paywall disabled
 		// Also hdnEmployeeAccess is the new free param
 		// Native in-app webviews will have a custom user agent, so check that too
 		if (
-			window.location.href.indexOf('fromRichie=1') > -1 || 
-			window.location.href.indexOf('hdnEmployeeAccess=true') > -1 || 
+			window.location.href.indexOf('fromRichie=1') > -1 ||
+			window.location.href.indexOf('hdnEmployeeAccess=true') > -1 ||
 			navigator.userAgent.indexOf(' Richie/') > -1) {
 		    appVersion = true
 		}
@@ -29,7 +29,7 @@ let appCheck = function(){
 // Blend the HDN var with whatever is already present on the page
 // Returns a string for injection into the head of the page
 let blendHDN = function(meta){
-	
+
 	if (!meta.PROJECT){
 		// If we don't have a properly formatted meta var coming in, this is a legacy template and needs settings pulled
 		let url_add = meta.url_add || ""
@@ -78,7 +78,7 @@ let blendHDN = function(meta){
 
   // If canonical has a slash at the end, remove it
   if (CANONICAL_URL.slice(-1) === "/"){
-  	CANONICAL_URL = CANONICAL_URL.slice(0, -1) 
+  	CANONICAL_URL = CANONICAL_URL.slice(0, -1)
   }
 
   // Add the url add here unless it's sent in
@@ -90,7 +90,7 @@ let blendHDN = function(meta){
   if (URL_ADD && URL_ADD.slice(-1) !== "/"){
   	URL_ADD += "/"
   }
-	
+
 	// Get dates from env
 	let pubdate = ""
 	if (ISO_PUBDATE){
@@ -143,31 +143,31 @@ let blendHDN = function(meta){
 
 	// HDN.dataLayer object for source information
 	HDN.dataLayer.source.authorName = ''
-	
+
 	HDN.dataLayer.source.authorTitle = '';
 	HDN.dataLayer.source.originalSourceSite = '';
 	HDN.dataLayer.source.publishingSite = '';
 	HDN.dataLayer.source.sourceSite = '';
 	switch(MARKET_KEY){
-  	case "SFC": 
+  	case "SFC":
   		HDN.dataLayer.source.authorTitle = 'San Francisco Chronicle Staff';
   		HDN.dataLayer.source.originalSourceSite = 'SF';
 			HDN.dataLayer.source.publishingSite = 'premiumsfgate';
 			HDN.dataLayer.source.sourceSite = 'sfgate';
 			break;
-		case "Houston": 
+		case "Houston":
   		HDN.dataLayer.source.authorTitle = 'Houston Chronicle Staff';
   		HDN.dataLayer.source.originalSourceSite = 'HC';
 			break;
-		case "SanAntonio": 
+		case "SanAntonio":
   		HDN.dataLayer.source.authorTitle = 'Express News Staff';
   		HDN.dataLayer.source.originalSourceSite = 'EN';
 			break;
-		case "Albany": 
+		case "Albany":
   		HDN.dataLayer.source.authorTitle = 'Times Union Staff';
   		HDN.dataLayer.source.originalSourceSite = 'TU';
 			break;
-		case "CT": 
+		case "CT":
   		HDN.dataLayer.source.authorTitle = 'Connecticut Digital Staff';
   		HDN.dataLayer.source.originalSourceSite = 'CT';
 			break;
@@ -248,6 +248,7 @@ let blendHDN = function(meta){
 
 // Grab neighbor files
 let { getBrands } = require('./brands')
+let { getBrands2 } = require('./brands2')
 let { getSettings } = require('./settings')
 let { getNav } = require('./nav')
 let { getNav2 } = require('./nav2')
@@ -257,4 +258,4 @@ let { getTopper } = require('./topper')
 let { getBlueconic } = require('./blueconic')
 let { pollForAccount } = require('./accountswap')
 
-module.exports = { appCheck, blendHDN, getSettings, getBrands, getNav, getNav2, getSpecialNav, getFooter, getTopper, getBlueconic, pollForAccount }
+module.exports = { appCheck, blendHDN, getSettings, getBrands, getBrands2, getNav, getNav2, getSpecialNav, getFooter, getTopper, getBlueconic, pollForAccount }
