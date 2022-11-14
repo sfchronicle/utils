@@ -123,10 +123,17 @@ let getSheet = async (resolve, reject, auth, spreadsheetId, directory, forceStr)
       // skip blank rows
       if (!row.length) continue;
       var obj = {};
+      var rowSkip = true;
       row.forEach(function (value, i) {
         var key = header[i];
         obj[key] = cast(value, forceStr);
+        if (value && value !== "FALSE"){
+          rowSkip = false;
+        }
       });
+      // If only values in row are garbage or blank-ish, skip
+      if (rowSkip) continue;
+      // Handle actual value
       if (isKeyed) {
         out[obj.key] = isValued ? obj.value : obj;
       } else {
