@@ -36,6 +36,7 @@ let getBrands = function(market){
 				"@serif-book": '"Tiempos Regular", Georgia, serif',
 				"@serif-bold": '"Tiempos Bold", Georgia, serif',
 
+				"@sans": '"National Medium", Helvetica, sans-serif',
 				"@sans-light": '"National Light", Helvetica, sans-serif',
 				"@sans-med": '"National Medium", Helvetica, sans-serif',
 				"@sans-book": '"National Book", Helvetica, sans-serif',
@@ -59,6 +60,7 @@ let getBrands = function(market){
 				"@serif-book": '"Publico Text Roman", Georgia, serif',
 				"@serif-bold": '"Publico Text Bold", Georgia, serif',
 
+				"@sans": '"Marr Sans Regular", Helvetica, sans-serif',
 				"@sans-light": '"Marr Sans Regular", Helvetica, sans-serif',
 				"@sans-med": '"Marr Sans Regular", Helvetica, sans-serif',
 				"@sans-book": '"Marr Sans Regular", Helvetica, sans-serif',
@@ -84,6 +86,7 @@ let getBrands = function(market){
 				"@serif-bold": '"ChronicleTextG2-Bold", Georgia, serif',
 				"@base-font-size": "20px",
 
+				"@sans": '"HelveticaNeue-Roman", Helvetica, sans-serif',
 				"@sans-light": '"HelveticaNeue-Roman", Helvetica, sans-serif',
 				"@sans-med": '"HelveticaNeue-Roman", Helvetica, sans-serif',
 				"@sans-book": '"HelveticaNeue-Roman", Helvetica, sans-serif',
