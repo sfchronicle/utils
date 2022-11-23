@@ -126,7 +126,7 @@ let getNav2 = function (
 
   // If a link object was provided, format the insert
   let navLinkInsert = "";
-  if (navLink) {
+  if (navLink && navLink.url !== "") {
     navLinkInsert = `
       <a
         class="nav2-title"
