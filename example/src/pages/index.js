@@ -12,6 +12,8 @@ import RelatedSection from '../components/sfc/relatedsection'
 import CreditsSection from '../components/sfc/creditssection'
 import Ad from '../components/sfc/ad'
 import Newsletter from '../components/sfc/newsletter'
+import { Topper2 } from '../../../components/topper2'
+
 let rawCredits;
 try {
 	rawCredits = require('../data/credits.sheet.json')
@@ -44,6 +46,7 @@ const IndexPage = ({ data }) => {
   return (
     <Layout meta={siteMetadata}>
       <Topper meta={siteMetadata} />
+      <Topper2/>
       <main>
         <article>
           <p>

@@ -257,5 +257,6 @@ let { getFooter } = require('./footer')
 let { getTopper } = require('./topper')
 let { getBlueconic } = require('./blueconic')
 let { pollForAccount } = require('./accountswap')
+// let Topper2 = require('./components/topper2')
 
 module.exports = { appCheck, blendHDN, getSettings, getBrands, getBrands2, getNav, getNav2, getSpecialNav, getFooter, getTopper, getBlueconic, pollForAccount }
