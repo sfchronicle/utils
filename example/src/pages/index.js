@@ -46,7 +46,7 @@ const IndexPage = ({ data }) => {
   return (
     <Layout meta={siteMetadata}>
       <Topper meta={siteMetadata} />
-      <Topper2/>
+      <Topper2 text={"this is a test topper"}/>
       <main>
         <article>
           <p>
