@@ -320,6 +320,9 @@ let getTopper = function(settings){
            height: 100%;
            position: absolute;
        }
+       .articleHeader--shareTools {
+           justify-content: center;
+       }
        #topper-mediacontainer{
            position: absolute;
            top: 37px;
