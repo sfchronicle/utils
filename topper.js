@@ -166,6 +166,7 @@ let getTopper = function(settings){
     .giftarticle .givegift {
         width: auto;
         display: inline-flex;
+        align-items: center;
         padding: 3px 9px !important;
     }
    `
