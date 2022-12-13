@@ -163,6 +163,11 @@ let getTopper = function(settings){
         width: 100%;
         height: 100%;
     }
+    .giftarticle .givegift {
+        width: auto;
+        display: inline-flex;
+        padding: 3px 9px !important;
+    }
    `
    if(storySettings.Topper_CustomCSS_Inject){
     topperCSS += storySettings.Topper_CustomCSS_Inject;
