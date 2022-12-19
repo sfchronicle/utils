@@ -12,6 +12,8 @@ import RelatedSection from '../components/sfc/relatedsection'
 import CreditsSection from '../components/sfc/creditssection'
 import Ad from '../components/sfc/ad'
 import Newsletter from '../components/sfc/newsletter'
+import Topper2 from '../../../components/topper2.mjs'
+
 let rawCredits;
 try {
 	rawCredits = require('../data/credits.sheet.json')
@@ -19,11 +21,19 @@ try {
     // It's fine
     rawCredits = null;
 }
+
 let related_links;
-try{
+try {
   related_links = require('../data/related_links.sheet.json')
 } catch(err){
   related_links = require('../data/sfc/related_links.json')
+}
+
+let topperSettings;
+try {
+  topperSettings = require('../data/topper2_settings.sheet.json')
+} catch {
+  topperSettings = null;
 }
 
 const IndexPage = ({ data }) => {
@@ -43,7 +53,8 @@ const IndexPage = ({ data }) => {
 
   return (
     <Layout meta={siteMetadata}>
-      <Topper meta={siteMetadata} />
+      {/* <Topper2 settings={topperSettings[0]} /> */}
+      <Topper meta={siteMetadata} topperSettings={topperSettings[0]} />
       <main>
         <article>
           <p>

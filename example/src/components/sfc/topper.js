@@ -3,6 +3,8 @@ import PropTypes from 'prop-types'
 import Byline from './byline'
 import NavTop from './navtop'
 import ScrollDown from './scrolldown'
+import Topper2 from '../../../../components/topper2.mjs'
+
 import {
   pubdateString,
   moddateString,
@@ -10,7 +12,7 @@ import {
 import * as topperStyles from '../../styles/modules/topper.module.less'
 import WCMImage from './wcmimage'
 
-const Topper = ({ meta }) => {
+const Topper = ({ meta, topperSettings }) => {
   const {
     PROJECT: { AUTHORS, ISO_MODDATE, ISO_PUBDATE, DISPLAY_TITLE, DECK },
   } = meta
@@ -23,11 +25,12 @@ const Topper = ({ meta }) => {
           aria-label="Topper headline, deck, byline and dateline"
           className={topperStyles.textContainer}
         >
-          <h1 className={topperStyles.hed}>{DISPLAY_TITLE ? DISPLAY_TITLE : "A brave new template v2"}</h1>
+          <Topper2 settings={topperSettings} />
+          {/* <h1 className={topperStyles.hed}>{DISPLAY_TITLE ? DISPLAY_TITLE : "A brave new template v2"}</h1>
           <h2 className={topperStyles.dek}>
             {DECK ? DECK : "Words can be like X-rays if you use them properly &mdash; they'll go through anything."}
-          </h2>
-          <div className={topperStyles.dateby}>
+          </h2> */}
+          {/* <div className={topperStyles.dateby}>
             <span>By</span>
             {AUTHORS.map((author, index) => {
               // Pass special flag if this is the last item
@@ -66,17 +69,17 @@ const Topper = ({ meta }) => {
                 </time>
               </Fragment>
             )}
-          </div>
+          </div> */}
         </section>
       </header>
-      <figure className={topperStyles.figure}>
+      {/* <figure className={topperStyles.figure}> */}
         {/* You can also use a 100vh/100vw with a normal img tag here, just make sure to set the container that way so we don't get layout shift */}
-        <WCMImage wcm={20374215} alt="TKTKTK" lz={false} />
+        {/* <WCMImage wcm={20374215} alt="TKTKTK" lz={false} /> */}
 
         {/* This prop gives the arrow an id to scroll to */}
-        <ScrollDown scrollTo="article" />
-        <figcaption className={topperStyles.topcap}>A man sitting on a hill with the Golden Gate Bridge in the background <span className={topperStyles.topcred}>(Scott Strazzante / San Francisco Chronicle)</span></figcaption>
-      </figure>
+        {/* <ScrollDown scrollTo="article" /> */}
+        {/* <figcaption className={topperStyles.topcap}>A man sitting on a hill with the Golden Gate Bridge in the background <span className={topperStyles.topcred}>(Scott Strazzante / San Francisco Chronicle)</span></figcaption> */}
+      {/* </figure> */}
     </Fragment>
   )
 }
