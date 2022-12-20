@@ -1,21 +1,50 @@
 @import (less) "values";
 
-.topperContainer {
-    margin: 0 auto;
+.topperContainerStacked {
+    display: block;
+    padding: 0 @step-7;
+    margin: @step-3 0;
+}
+
+.topperContainerFullScreen {
+    display: flex;
 }
 
 .header {
+    font-family: @hed;
     font-size: @step-5;
-    font-family: @alt-hed;
-    margin-bottom: var(--step--2);
+    margin-bottom: @step--2;
 }
 
 .dek {
-    font-size: @step-2;
     font-family: @serif-book;
-    margin-bottom: var(--step--2);
+    font-size: @step-1;
+    margin-bottom: @step--2;
 }
 
 .center {
     text-align: center;
+}
+
+.imageFullScreen {
+    top: 0 !important;
+    width: 100%;
+}
+
+.headerDekAlwaysTop {
+    position: absolute !important;
+    padding: 15px; //TODO
+    top: 50%;  
+    left: 50%; 
+    transform: translate(-50%, -50%);
+}
+
+.whiteTextBlackBg {
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.54);
+}
+
+.blackTextWhiteBg {
+    color: #000;
+    background-color: rgba(255, 255, 255, 0.54);
 }

@@ -12,6 +12,7 @@ import RelatedSection from '../components/sfc/relatedsection'
 import CreditsSection from '../components/sfc/creditssection'
 import Ad from '../components/sfc/ad'
 import Newsletter from '../components/sfc/newsletter'
+import NavTop from '../components/sfc/navtop'
 import Topper2 from '../../../components/topper2.mjs'
 
 let rawCredits;
@@ -55,7 +56,9 @@ const IndexPage = ({ data }) => {
   return (
     <Layout meta={siteMetadata}>
       {/* <Topper2 settings={topperSettings[0]} /> */}
-      <Topper meta={siteMetadata} topperSettings={topperSettings[0]} wcmData={allWcmPhotos} />
+      <NavTop meta={siteMetadata} />
+      <Topper2 settings={topperSettings[0]} wcmData={allWcmPhotos} />
+      {/* <Topper meta={siteMetadata} topperSettings={topperSettings[0]} wcmData={allWcmPhotos} /> */}
       <main>
         <article>
           <p>

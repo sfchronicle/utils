@@ -73,10 +73,10 @@ const WCMImage2 = ({ wcm, alt, cap, cred, lz, className, ratio, wcmData }) => {
   return (
     <figure className={className ? className : ""}>
       <div ref={picRef} style={{paddingBottom: photoRatio, overflow: "hidden", position: "relative"}}>
-        {/* <ConditionalWrapper
+        <ConditionalWrapper
           condition={!lz}
           wrapper={children => <LazyLoad offset={300} resize once>{children}</LazyLoad>}
-        > */}
+        >
           {imageRez > 0 &&
             <img style={{position: "absolute"}}
               className={wcmimageStyles.cImg}
@@ -87,7 +87,7 @@ const WCMImage2 = ({ wcm, alt, cap, cred, lz, className, ratio, wcmData }) => {
               alt={alt}
             />
           }
-        {/* </ConditionalWrapper> */}
+        </ConditionalWrapper>
       </div>
       {cap && cred && (
         <figcaption className={wcmimageStyles.cFigCap}>
