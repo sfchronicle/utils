@@ -57,6 +57,7 @@ const WCMImage2 = ({ wcm, alt, cap, cred, lz, className, ratio, wcmData }) => {
       fullPath = matchedPhoto.photo.full_path;
     } else {
       // Alert that things will go wrong on deploy
+      console.error('testing')
       console.error(`No matching ID for ${wcm} found in gatsby-node.js! This is fine for development, but it will error on deploy!`);
     }
   } else {
@@ -69,17 +70,13 @@ const WCMImage2 = ({ wcm, alt, cap, cred, lz, className, ratio, wcmData }) => {
     throw `WCMImage error: Image for ${wcm} needs an alt tag! Please add a good, descriptive alt tag. Suggestion from Mozilla: When choosing alt strings for your images, imagine what you would say when reading the page to someone over the phone without mentioning that there's an image on the page.`
   }
 
-//   // Conditionally lazyload if we want to and have the capability
-//   const ConditionalWrapper = ({ condition, wrapper, children }) => 
-//   condition ? wrapper(children) : children;
-
   return (
     <figure className={className ? className : ""}>
       <div ref={picRef} style={{paddingBottom: photoRatio, overflow: "hidden", position: "relative"}}>
-        <ConditionalWrapper
+        {/* <ConditionalWrapper
           condition={!lz}
           wrapper={children => <LazyLoad offset={300} resize once>{children}</LazyLoad>}
-        >
+        > */}
           {imageRez > 0 &&
             <img style={{position: "absolute"}}
               className={wcmimageStyles.cImg}
@@ -90,7 +87,7 @@ const WCMImage2 = ({ wcm, alt, cap, cred, lz, className, ratio, wcmData }) => {
               alt={alt}
             />
           }
-        </ConditionalWrapper>
+        {/* </ConditionalWrapper> */}
       </div>
       {cap && cred && (
         <figcaption className={wcmimageStyles.cFigCap}>
