@@ -12,7 +12,7 @@ import {
 import * as topperStyles from '../../styles/modules/topper.module.less'
 import WCMImage from './wcmimage'
 
-const Topper = ({ meta, topperSettings }) => {
+const Topper = ({ meta, topperSettings, wcmData }) => {
   const {
     PROJECT: { AUTHORS, ISO_MODDATE, ISO_PUBDATE, DISPLAY_TITLE, DECK },
   } = meta
@@ -25,7 +25,7 @@ const Topper = ({ meta, topperSettings }) => {
           aria-label="Topper headline, deck, byline and dateline"
           className={topperStyles.textContainer}
         >
-          <Topper2 settings={topperSettings} />
+          <Topper2 settings={topperSettings} wcmData={wcmData} />
           {/* <h1 className={topperStyles.hed}>{DISPLAY_TITLE ? DISPLAY_TITLE : "A brave new template v2"}</h1>
           <h2 className={topperStyles.dek}>
             {DECK ? DECK : "Words can be like X-rays if you use them properly &mdash; they'll go through anything."}

@@ -49,12 +49,13 @@ const IndexPage = ({ data }) => {
   const {
     site: { siteMetadata },
     allRelatedLinksJson: { nodes: relatedLinks },
+    allWcmPhotos
   } = data
 
   return (
     <Layout meta={siteMetadata}>
       {/* <Topper2 settings={topperSettings[0]} /> */}
-      <Topper meta={siteMetadata} topperSettings={topperSettings[0]} />
+      <Topper meta={siteMetadata} topperSettings={topperSettings[0]} wcmData={allWcmPhotos} />
       <main>
         <article>
           <p>
@@ -143,6 +144,15 @@ export const query = graphql`
         wcmid
         title
         url
+      }
+    }
+    allWcmPhotos {
+      nodes {
+        photo {
+          ratio
+          wcmid
+          full_path
+        }
       }
     }
   }

@@ -1,13 +1,13 @@
 import React, {useRef, useEffect, useLayoutEffect, useState} from 'react'
 import LazyLoad from 'react-lazyload'
 import PropTypes from 'prop-types'
+import ConditionalWrapper from './conditionalwrapper.mjs'
 import * as wcmimageStyles from "../css/wcmimage.module.less"
-import { useStaticQuery, graphql } from "gatsby"
 import { debounce } from './helpers/utilfunctions.mjs'
 
 const currentEnv = process.env.GATSBY_DEPLOY_ENV
 
-const WCMImage = ({ wcm, alt, cap, cred, lz, className, ratio }) => {
+const WCMImage2 = ({ wcm, alt, cap, cred, lz, className, ratio, wcmData }) => {
   // When the wrapping div is rendered, we're going to figure out the best size for this image to be
   let picRef = useRef(null)
   let [imageRez, setImageRez] = useState(0)
@@ -38,26 +38,15 @@ const WCMImage = ({ wcm, alt, cap, cred, lz, className, ratio }) => {
     setImageWidth()
   }, [])
 
-  // Use GraphQL to grab the data for the WCM photo we want
-  const data = useStaticQuery(graphql`
-    query PhotoQuery {
-      allWcmPhotos {
-        nodes {
-          photo {
-            ratio
-            wcmid
-            full_path
-          }
-        }
-      }
-    }
-  `)
-
   let photoRatio = "56.25%"; // Default to 16/9
   let fullPath = `https://s.hdnux.com/photos/0/0/0/${wcm}/0/`;
   if (!ratio){
-    let matchedPhoto = data.allWcmPhotos.nodes.find((item) => {
-      return item.photo.wcmid.toString() === wcm.toString()
+    let matchedPhoto = wcmData.nodes.find((item) => {
+        if ("id" in item) {
+            return item.id.toString() === wcm.toString()
+        } else {
+            return item.photo.wcmid.toString() === wcm.toString()
+        }
     })
     if (!matchedPhoto && currentEnv !== "development"){
       throw `WCMImage error: No matching ID for ${wcm} present in the array at the top of gatsby-node.js! If it's already there, you might need to reboot dev.`
@@ -80,9 +69,9 @@ const WCMImage = ({ wcm, alt, cap, cred, lz, className, ratio }) => {
     throw `WCMImage error: Image for ${wcm} needs an alt tag! Please add a good, descriptive alt tag. Suggestion from Mozilla: When choosing alt strings for your images, imagine what you would say when reading the page to someone over the phone without mentioning that there's an image on the page.`
   }
 
-  // Conditionally lazyload if we want to and have the capability
-  const ConditionalWrapper = ({ condition, wrapper, children }) => 
-  condition ? wrapper(children) : children;
+//   // Conditionally lazyload if we want to and have the capability
+//   const ConditionalWrapper = ({ condition, wrapper, children }) => 
+//   condition ? wrapper(children) : children;
 
   return (
     <figure className={className ? className : ""}>
@@ -120,7 +109,7 @@ const WCMImage = ({ wcm, alt, cap, cred, lz, className, ratio }) => {
   )
 }
 
-WCMImage.propTypes = {
+WCMImage2.propTypes = {
   wcm: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   // alt: PropTypes.string.isRequired,
   cap: PropTypes.string,
@@ -128,4 +117,4 @@ WCMImage.propTypes = {
   className: PropTypes.string,
 }
 
-export default WCMImage
+export default WCMImage2
