@@ -1,11 +1,14 @@
 import React, {useRef, useEffect, useLayoutEffect, useState} from 'react'
 import LazyLoad from 'react-lazyload'
 import PropTypes from 'prop-types'
-import ConditionalWrapper from './conditionalwrapper.mjs'
 import * as wcmimageStyles from "../css/wcmimage.module.less"
 import { debounce } from './helpers/utilfunctions.mjs'
 
 const currentEnv = process.env.GATSBY_DEPLOY_ENV
+
+// Conditionally lazyload if we want to and have the capability
+const ConditionalWrapper = ({ condition, wrapper, children }) => 
+condition ? wrapper(children) : children;
 
 const WCMImage2 = ({ wcm, alt, cap, cred, lz, className, ratio, wcmData }) => {
   // When the wrapping div is rendered, we're going to figure out the best size for this image to be
