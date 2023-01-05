@@ -1,0 +1,145 @@
+.hed, .deck{
+  text-align: center;
+  margin: @s16 0;
+  @media @text-width {
+    text-align: left;
+  }
+}
+
+//could the next three classes be moved into byline module?
+.byline-wrapper {
+  max-width: @lg;
+  border-bottom: 1px solid @grey-75;
+  margin: @s16 auto @s24;
+  padding-bottom: @s8;
+  @media (max-width: @md) {
+    border-bottom: none;
+  }
+}
+.byline-name {
+    font-weight: 700;
+}
+
+.byline {
+  text-align: left;
+  display: inline-block;
+  a {
+    text-decoration: none;
+    color: @black;
+    &:hover {
+      color: @brand;
+    }
+  }
+}
+
+//move into share module?
+#sharebutton-wrapper {
+  display: inline-block;
+  text-align: right;
+  float: right;
+  a {
+    color: @black;
+  }
+  @media (max-width: @md) {
+    display: block;
+    float: none;
+    margin: @s4 0;
+  }
+}
+
+// .serif-copy, .sans-copy {
+//   margin: 0 auto @s24;
+// }
+
+// .subhead, .subhead-sans {
+//   margin-top: @s32;
+//   margin-bottom: @s8;
+// }
+
+// .lead-in, .label {
+//   margin-top: @s4;
+//   margin-bottom: @s4;
+// }
+
+.caption {
+  margin: @s4 auto @s24;
+  max-width: @text-width;
+  @media @text-width {
+    padding: 0 @s16;
+  }
+}
+
+.topper-image {
+  .caption {
+    max-width: @lg;
+  }
+}
+
+// Handle basic embed classes
+.inline-image.centered {
+  max-width: @md;
+  margin: @s24 auto;
+  width: 100%;
+  padding: 0 @s16;
+}
+.inline-image {
+  &.left, .right {
+    max-width: @xxl;
+    @media (max-width: @xxl){
+      max-width: @md;
+    }
+    figure {
+      max-width: @sm;
+      width: 100%;
+      @media (max-width: @xxl){
+        max-width: @md;
+        float: none;
+        margin: @s24 auto;
+      }
+    }
+  }
+  &.left {
+    figure {
+      float: left;
+      margin-right: @s16;
+    }
+
+  }
+  &.right {
+    figure {
+      float: right;
+      margin-left: @s16;
+    }
+  }
+  &.wide {
+    max-width: @xxl;
+    margin: @s24 auto;
+  }
+  &.full {
+    max-width: 100%;
+  }
+}
+
+.inline-image.centered, .inline-image.full {
+  .caption {
+    @media @text-width {
+      padding: 0;
+    }
+  }
+}
+
+a {
+  color: @black;
+  text-decoration: underline;
+  text-decoration-color: @brand;
+  text-decoration-skip-ink: auto;
+  outline: 0 !important;
+
+  &:hover {
+    color: @brand;
+  }
+
+  &:visited {
+    color: @grey-75;
+  }
+}
