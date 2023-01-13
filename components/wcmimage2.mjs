@@ -1,4 +1,4 @@
-import React, {useRef, useEffect, useLayoutEffect, useState} from 'react'
+import React, {useRef, useEffect, useState} from 'react'
 import PropTypes from 'prop-types'
 import CaptionCredit from './captioncredit.mjs'
 import * as wcmimageStyles from "../styles/modules/wcmimage2.module.less"
@@ -55,16 +55,14 @@ const WCMImage = ({ wcm, alt, cap, cred, isNotLazyloaded, className, ratio, wcmD
     return null
   }
 
+  // This calculation is not used for the topper impl, but keeping it here just in case
+  // it is needed for the general WCMImage utils migration
   let r = document.querySelector(':root');
   let photoRatio = "56.25%"; // Default to 16/9
   let fullPath = `https://s.hdnux.com/photos/0/0/0/${wcm}/0/`;
   if (!ratio){
     let matchedPhoto = wcmData.nodes.find((item) => {
-        if ("id" in item) {
-            return item.id.toString() === wcm.toString()
-        } else {
-            return item.photo.wcmid.toString() === wcm.toString()
-        }
+        return (item.photo.wcmid).toString() === (wcm).toString()
     })
     if (!matchedPhoto && currentEnv !== "development"){
       throw `WCMImage error: No matching ID for ${wcm} present in the array at the top of gatsby-node.js! If it's already there, you might need to reboot dev.`
@@ -92,11 +90,10 @@ const WCMImage = ({ wcm, alt, cap, cred, isNotLazyloaded, className, ratio, wcmD
 
   // Pull lazyloader HTML from index.js
   const LazyLoaderHTML = lazyloader;
-  const ContainerCss = (isFullScreenTopper) ? "" : wcmimageStyles.cContainer;
 
   return (
       <figure className={className ? className : ""}>
-        <div ref={picRef} className={ContainerCss}>
+        <div ref={picRef}>
           {!isNotLazyloaded && (
             <LazyLoaderHTML>
               <ImageHTML fullPath={fullPath} imageRez={imageRez} alt={alt} isFullScreenTopper={isFullScreenTopper}/>
