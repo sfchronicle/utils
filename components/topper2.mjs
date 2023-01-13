@@ -10,7 +10,8 @@ const Topper2 = ({ settings, wcmData, lazyloader }) => {
 
   const headerDekStyleList = () => {
     switch(Topper_Style) {
-      case "stacked": 
+      case "stacked":
+      case "no-visual":
         return ["mw-lg ", topperStyles.topperContainerStacked];
       case "full-screen": 
         // TODO
@@ -23,6 +24,7 @@ const Topper2 = ({ settings, wcmData, lazyloader }) => {
   const headerStyleList = () => {
     switch(Topper_Style) {
       case "stacked": 
+      case "no-visual":
         return ["hed", topperStyles.hedStacked];
       case "full-screen": 
         // TODO
@@ -34,7 +36,8 @@ const Topper2 = ({ settings, wcmData, lazyloader }) => {
 
   const deckStyleList = () => {
     switch(Topper_Style) {
-      case "stacked": 
+      case "stacked":
+      case "no-visual": 
         return ["deck", topperStyles.deckStacked];
       case "full-screen": 
         // TODO
@@ -70,6 +73,26 @@ const Topper2 = ({ settings, wcmData, lazyloader }) => {
             </div>
             <div className={topperStyles.imageStacked}>
               <ImageHTML/>
+            </div>
+          </div>
+          </>
+        );
+
+      case "no-visual":
+        return (
+          <>
+          <div className={topperStyles.topperContainerStacked}>
+            <div className={headerDekStyleList().join('')}>
+              <Heading
+                level={1}
+                text={Title}
+                className={headerStyleList().join(' ')}
+              />
+              <Heading
+                level={2}
+                text={Deck}
+                className={deckStyleList().join(' ')}
+              />
             </div>
           </div>
           </>

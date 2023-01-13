@@ -9,7 +9,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    @media @mobile {
+    @media @tablet {
         align-items: flex-start;
     }
 }
@@ -21,6 +21,9 @@
 
 .hedStacked {
     margin-top: @s16;
+    @media @tablet {
+      margin: @s8 @s16;
+    }
     @media @mobile {
         margin: @s16 @s8 @s8 @s8;
     } 
@@ -29,7 +32,8 @@
 .deckStacked {
     margin: @s16 0;
     @media @tablet {
-      margin: @s8 @s8;
+      margin: @s8 @s16;
+      text-align: left;
     }
     @media @mobile {
         margin: @s8 @s8 @s16 @s8;
@@ -43,6 +47,7 @@
 
 .imageStacked {
     width: 80%;
+    margin: 0 auto;
 
     @media @mobile {
         width: 100%;
