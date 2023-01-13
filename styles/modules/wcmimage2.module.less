@@ -1,0 +1,25 @@
+@import (less) '../values';
+@import (less) "../variables.less";
+
+.c-img {
+  display: block;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: auto;
+}
+
+.c-img-fullscreen {
+  object-fit: cover;
+  height: calc(100vh - 37px);
+  @media @tablet {
+    height: auto;
+  }
+}
+
+.c-img-hidden-when-desktop {
+  display: none;
+  @media @mobile {
+    display: block;
+  }
+}

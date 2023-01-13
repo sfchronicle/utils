@@ -5,6 +5,7 @@ import Layout from '../components/layout'
 import WCMImage from '../components/sfc/wcmimage'
 import DropCap from '../components/sfc/dropcap'
 import { useCanNativeLazyLoad } from '../components/sfc/component-helpers/customhooks'
+import LazyLoad from 'react-lazyload'
 import Topper from '../components/sfc/topper'
 import RelatedSection from '../components/sfc/relatedsection'
 import CreditsSection from '../components/sfc/creditssection'
@@ -12,6 +13,7 @@ import Ad from '../components/sfc/ad'
 import Newsletter from '../components/sfc/newsletter'
 import NavTop from '../components/sfc/navtop'
 import Byline from '../../../components/byline.mjs'
+import Topper2 from '../../../components/topper2.mjs'
 
 let rawCredits;
 try {
@@ -28,6 +30,20 @@ try {
   related_links = require('../data/sfc/related_links.json')
 }
 
+let topperSettings;
+try {
+  topperSettings = require('../data/topper2_settings.sheet.json')
+} catch {
+  topperSettings = null;
+}
+
+// lazy loader wrapper for WCM Image
+const LazyLoader = ({children}) => {
+  return (
+    <LazyLoad offset={300} resize once>{children}</LazyLoad>
+  )
+}
+
 const IndexPage = ({ data }) => {
   // easy hooks based request library
   // const { data: responseData, error } = useSWR('https://api.kanye.rest', getData, {
@@ -41,12 +57,13 @@ const IndexPage = ({ data }) => {
   const {
     site: { siteMetadata },
     allRelatedLinksJson: { nodes: relatedLinks },
+    allWcmPhotos
   } = data
 
   return (
     <Layout meta={siteMetadata}>
-      {/* <Topper meta={siteMetadata} /> */}
       <NavTop meta={siteMetadata} />
+      <Topper2 settings={topperSettings[0]} wcmData={allWcmPhotos} lazyloader={LazyLoader}/>
       <Byline meta={siteMetadata}/>
       <main>
         <article>
@@ -136,6 +153,15 @@ export const query = graphql`
         wcmid
         title
         url
+      }
+    }
+    allWcmPhotos {
+      nodes {
+        photo {
+          ratio
+          wcmid
+          full_path
+        }
       }
     }
   }
