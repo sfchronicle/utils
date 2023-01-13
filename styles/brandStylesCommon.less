@@ -11,7 +11,10 @@
   max-width: @lg;
   border-bottom: 1px solid @grey-75;
   margin: @s16 auto @s24;
-  padding-bottom: @s8;
+  // padding-bottom: @s8;
+  @media @tablet {
+    margin: @s16 @s24;
+  }
   @media (max-width: @md) {
     border-bottom: none;
   }
