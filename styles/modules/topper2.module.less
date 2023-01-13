@@ -48,6 +48,8 @@
 .imageStacked {
     width: 80%;
     margin: 0 auto;
+    position: relative;
+    overflow: hidden;
 
     @media @mobile {
         width: 100%;
@@ -71,78 +73,91 @@
 }
 
 .hedFullScreen {
-    margin-bottom: @s8;
+  margin-bottom: @s8;
+  @media @mobile {
+    margin: auto @s16 @s8 @s16;
+  }
 }
 
 .deckFullScreen {
-    margin-top: @s8;
+  margin-top: @s8;
+  @media @mobile {
+    margin: @s8 @s16 auto @s16;
+  }
 }
 
 .headerDekTop {
-    top: 0%;
-    margin-top: var(--headerDek-vertical-offset);
-    @media @mobile {
-        margin-top: 0px;
-    }
+  top: 0%;
+  margin-top: var(--headerDek-vertical-offset);
+  @media @mobile {
+      margin-top: 0px;
+  }
 }
 
 .headerDekBottom {
-    bottom: 0%;
-    margin-bottom: var(--headerDek-vertical-offset);
-    @media @mobile {
-        margin-bottom: 0px;
-    }
+  bottom: 0%;
+  margin-bottom: var(--headerDek-vertical-offset);
+  @media @mobile {
+      margin-bottom: 0px;
+  }
 }
 
 .headerDekLeft {
-    left: 0%;
-    margin-left: var(--headerDek-horizontal-offset);
-    @media @mobile {
-        margin-left: 0px;
-    }
+  left: 0%;
+  margin-left: var(--headerDek-horizontal-offset);
+  @media @mobile {
+      margin-left: 0px;
+  }
 }
 
 .headerDekRight {
-    right: 0%;
-    margin-right: var(--headerDek-horizontal-offset);
-    @media @mobile {
-        margin-right: 0px;
-    }
+  right: 0%;
+  margin-right: var(--headerDek-horizontal-offset);
+  @media @mobile {
+      margin-right: 0px;
+  }
 }
 
 .headerDekCenter {
-    left: 50%; 
-    transform: translate(-50%, 0%);
-    margin-left: var(--headerDek-horizontal-offset);
+  left: 50%; 
+  transform: translate(-50%, 0%);
+  margin-left: var(--headerDek-horizontal-offset);
 
-    @media @mobile { 
-        transform: none;
-        top: 0%;
-        left: 0%;
-        margin-left: 0px;
-    }
+  @media @mobile { 
+      transform: none;
+      top: 0%;
+      left: 0%;
+      margin-left: 0px;
+  }
 }
 
 .textAlignLeft {
-    text-align: left;
+  text-align: left;
 }
 
 .textAlignCenter {
-    text-align: center;
+  text-align: center;
+  @media @mobile {
+    text-align: left;
+  }
 }
 
 .whiteTextBlackBg {
-    color: @white;
-    background-color: rgba(0, 0, 0, 0.54);
+  color: @white;
+  background-color: rgba(0, 0, 0, 0.54);
 }
 
 .blackTextWhiteBg {
-    color: @black;
-    background-color: rgba(255, 255, 255, 0.54);
+  color: @black;
+  background-color: rgba(255, 255, 255, 0.54);
 }
 
 .hideWhenMobile {
-    @media @mobile { 
-        display: none;
-    }
+  @media @mobile { 
+      display: none;
+  }
+}
+
+.smallPaddingLeft {
+  padding-left: @s8;
 }

@@ -6,14 +6,13 @@ import { debounce } from './helpers/utilfunctions.mjs'
 
 const currentEnv = process.env.GATSBY_DEPLOY_ENV
 
-const ImageCss = [wcmimageStyles.cImg];
+const ImageHTML = ({fullPath, imageRez, alt, isFullScreenTopper}) => {
+  let imageCss = [wcmimageStyles.cImg];
+  if (isFullScreenTopper) imageCss.push(wcmimageStyles.cImgFullscreen);
 
-const ImageHTML = ({fullPath, imageRez, alt}) => {
-  // TODO: remove style for full screen
   return (
-    <img 
-      style={{position: "absolute"}} 
-      className={ImageCss.join(' ')} 
+    <img  
+      className={imageCss.join(' ')} 
       src={`${fullPath}${imageRez}x0.jpg`} 
       alt={alt}/>
   )
@@ -56,6 +55,7 @@ const WCMImage = ({ wcm, alt, cap, cred, isNotLazyloaded, className, ratio, wcmD
     return null
   }
 
+  let r = document.querySelector(':root');
   let photoRatio = "56.25%"; // Default to 16/9
   let fullPath = `https://s.hdnux.com/photos/0/0/0/${wcm}/0/`;
   if (!ratio){
@@ -72,6 +72,8 @@ const WCMImage = ({ wcm, alt, cap, cred, isNotLazyloaded, className, ratio, wcmD
     if (matchedPhoto){  
       // Set ratio of the actual photo like a legit hacker
       photoRatio = (matchedPhoto.photo.ratio*100)+"%";
+      r.style.setProperty('--img-bottom-padding-ratio', photoRatio); 
+
       fullPath = matchedPhoto.photo.full_path;
     } else {
       // Alert that things will go wrong on deploy
@@ -80,6 +82,7 @@ const WCMImage = ({ wcm, alt, cap, cred, isNotLazyloaded, className, ratio, wcmD
   } else {
     // If an override is being passed in, use that
     photoRatio = ratio
+    r.style.setProperty('--img-bottom-padding-ratio', photoRatio); 
   }
 
   // Get serious about alt tags
@@ -89,19 +92,19 @@ const WCMImage = ({ wcm, alt, cap, cred, isNotLazyloaded, className, ratio, wcmD
 
   // Pull lazyloader HTML from index.js
   const LazyLoaderHTML = lazyloader;
+  const ContainerCss = (isFullScreenTopper) ? "" : wcmimageStyles.cContainer;
 
   return (
       <figure className={className ? className : ""}>
-        {/* TODO: remove style for full screen image  */}
-        <div ref={picRef} style={{paddingBottom: photoRatio, overflow: "hidden", position: "relative"}}>
+        <div ref={picRef} className={ContainerCss}>
           {!isNotLazyloaded && (
             <LazyLoaderHTML>
-              <ImageHTML fullPath={fullPath} imageRez={imageRez} alt={alt}/>
+              <ImageHTML fullPath={fullPath} imageRez={imageRez} alt={alt} isFullScreenTopper={isFullScreenTopper}/>
             </LazyLoaderHTML>
           )}
-          {isNotLazyloaded && <ImageHTML fullPath={fullPath} imageRez={imageRez} alt={alt}/>}
+          {isNotLazyloaded && <ImageHTML fullPath={fullPath} imageRez={imageRez} alt={alt} isFullScreenTopper={isFullScreenTopper}/>}
         </div>
-        <CaptionCredit caption={cap} credit={cred} isFullScreenTopper={isFullScreenTopper}/>
+        <CaptionCredit caption={cap} credit={cred} extraStyles={[wcmimageStyles.cFigHiddenWhenDesktop]}/>
       </figure>
   )
 }
