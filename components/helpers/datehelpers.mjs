@@ -1,5 +1,5 @@
 // Add SFC utils
-import { getSettings } from 'sfc-utils'
+import { getSettings } from '../../settings'
 const settings = getSettings()
 
 // declare date function variables

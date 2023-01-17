@@ -13,6 +13,12 @@ try {
 
 // Get settings off story_settings if it exists, otherwise fall back to projectConfig
 let getSettings = function(){
+	if (!projectConfig) {
+		let settings = {PROJECT : {DATE: "September 20, 2022 9:00 AM", MOD_DATE: "September 21, 2022 9:00 AM"}}
+		return (
+			settings
+		)
+	}
 	let projectSettings = projectConfig.PROJECT
 	let settings = projectConfig
 	// This needs to be set even if the "try" below fails
