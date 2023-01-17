@@ -6,7 +6,7 @@ import * as topperStyles from "../styles/modules/topper2.module.less"
 
 const Topper2 = ({ settings, wcmData, lazyloader }) => {
   const { 
-    Topper_Style, Title, Deck, Image, Image_Alt, Image_Caption, Image_Credits, 
+    Topper_Style, Title, Title_Style, Deck, Image, Image_Alt, Image_Caption, Image_Credits, 
     HeaderDek_Vertical_Position, HeaderDek_Vertical_Offset, HeaderDek_Horizontal_Offset, HeaderDek_Horizontal_Position, Inverted_Colors 
   } = settings
 
@@ -14,7 +14,7 @@ const Topper2 = ({ settings, wcmData, lazyloader }) => {
     switch(Topper_Style) {
       case "stacked":
       case "no-visual":
-        return ["mw-lg ", topperStyles.topperContainerStacked];
+        return ["mw-lg mt-sm ", topperStyles.topperContainerStacked];
       case "full-screen": 
         // apply margin offsets from spreadsheet
         calculatefullScreenOffsets();
@@ -38,15 +38,26 @@ const Topper2 = ({ settings, wcmData, lazyloader }) => {
   }
 
   const headerStyleList = () => {
+    let defaultStyles; 
     switch(Topper_Style) {
       case "stacked": 
       case "no-visual":
-        return ["hed", topperStyles.hedStacked];
+        defaultStyles = [topperStyles.hedStacked];
+        break;
       case "full-screen": 
-        return ["hed", topperStyles.hedFullScreen, fullScreenTextAlignCss()];
+        defaultStyles = [topperStyles.hedFullScreen, fullScreenTextAlignCss()];
+        break;
       case "side-by-side": 
-        return ["hed"];
+        defaultStyles = [];
+        break;
     }
+
+    if (Title_Style !== "") {
+      let extraStyles = Title_Style.split(", ");
+      defaultStyles = defaultStyles.concat(extraStyles);
+    }
+
+    return defaultStyles;
   }
 
   const deckStyleList = () => {
