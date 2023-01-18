@@ -160,7 +160,7 @@ const Layout = ({
           type="image/x-icon"
         />
         <link rel="canonical" href={ CANONICAL_URL } />
-        <link rel="stylesheet" href={`https://sfc-project-files.s3.amazonaws.com/brand-styles/${styleSheetID}.css`} />
+        <link rel="stylesheet" href={`https://files.sfchronicle.com/brand-styles/${styleSheetID}.css`} />
 
         {(isApp || EMBEDDED) ? (
           <meta name="robots" content="noindex, nofollow" />

@@ -37,17 +37,21 @@ return (
                   />
                 )
               })}
-              &nbsp;|&nbsp;
               </>
             }
             {!has_authors && <span>Published </span>}
-              <time
-                className="topper-dateline"
-                dateTime={ISO_PUBDATE}
-                itemProp="datePublished"
-              >
-                {pubdateString}
-              </time>
+              { !moddateString && 
+                <>
+                  &nbsp;|&nbsp;
+                  <time
+                    className="topper-dateline"
+                    dateTime={ISO_PUBDATE}
+                    itemProp="datePublished"
+                  >
+                    {pubdateString}
+                  </time>
+                </>
+              }
               {moddateString && (
                 <Fragment>
                   &nbsp;|&nbsp;
@@ -61,8 +65,10 @@ return (
                 </Fragment>
               )}
             </div>
-            <div id="sharebutton-wrapper">
-              <ShareButtons meta={meta} />
+            <div className="articleHeader--shareTools">
+              <div className="share-list" id="sharebutton-wrapper">
+                <ShareButtons meta={meta} />
+              </div>
             </div>
         </div>
     </>
