@@ -160,19 +160,26 @@ const Topper2 = ({ settings, wcmData, lazyloader }) => {
   const calculatefullScreenOffsets = () => {
     var r = document.querySelector(':root');
 
-    var verticalOffset = Number(HeaderDek_Vertical_Offset.slice(0, -2));
-    var horizontalOffset = Number(HeaderDek_Horizontal_Offset.slice(0, -2));
-
-    // in case of invalid inputs, reset offsets to 0
-    if (isNaN(verticalOffset)) verticalOffset = 0;
-    if (isNaN(horizontalOffset)) verticalOffset = 0;
-
-    // invert direction of offset for bottom and right positions
-    if (HeaderDek_Vertical_Position === "bottom") verticalOffset *= -1;
-    if (HeaderDek_Horizontal_Position === "right") horizontalOffset *= -1;
+    let verticalOffset = convertStringToNumber(HeaderDek_Vertical_Offset, (HeaderDek_Vertical_Position === "bottom"));
+    let horizontalOffset = convertStringToNumber(HeaderDek_Horizontal_Offset, (HeaderDek_Horizontal_Position === "right"));
 
     r.style.setProperty('--headerDek-vertical-offset', verticalOffset + "px" ); 
     r.style.setProperty('--headerDek-horizontal-offset', horizontalOffset + "px"); 
+  }
+
+  const convertStringToNumber = (maybeStr, isFlipped) => {
+    var num = 0;
+    if (typeof(maybeStr) === "string") {
+      // remove all non-number characters and "-" from string
+      num = Number(maybeStr.replace(/(?!^)-|[^0-9-]/g,''))
+    } else {
+      num = maybeStr
+    }
+
+    if (isNaN(num)) num = 0;
+    if (isFlipped) num *= -1;
+
+    return num;
   }
 
   const calculateFullScreenImageRatio = () => {

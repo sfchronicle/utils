@@ -28,8 +28,11 @@ let getSettings = function(){
 	let fullAuthors = []
 	try {
     try {
-    	// Check for classic story_settings sheet
-    	[storySettings] = require("../../src/data/story_settings.sheet.json")
+    	// TODO: can we remove this? 
+			// [storySettings] = require("../../src/data/story_settings.sheet.json")
+			
+			// Check for classic story_settings sheet
+			[storySettings] = require("./example/src/data/story_settings.sheet.json")
 			// If we got story_settings, try structuring the AUTHORS object
 			let authorNames = []
 			let authorLinks = []

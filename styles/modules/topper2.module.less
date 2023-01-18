@@ -107,6 +107,10 @@
 .whiteTextBlackBg {
   color: @white;
   background-color: rgba(0, 0, 0, 0.54);
+  @media @mobile {
+    color: @black;
+    background-color: transparent;
+  }
 }
 
 .blackTextWhiteBg {
