@@ -101,7 +101,7 @@ const WCMImage = ({ wcm, alt, cap, cred, isNotLazyloaded, className, ratio, wcmD
           )}
           {isNotLazyloaded && <ImageHTML fullPath={fullPath} imageRez={imageRez} alt={alt} isFullScreenTopper={isFullScreenTopper}/>}
         </div>
-        <CaptionCredit caption={cap} credit={cred} extraStyles={[wcmimageStyles.cFigHiddenWhenDesktop]}/>
+        <CaptionCredit caption={cap} credit={cred} />
       </figure>
   )
 }

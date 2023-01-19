@@ -14,7 +14,7 @@ const Topper2 = ({ settings, wcmData, lazyloader }) => {
     switch(Topper_Style) {
       case "stacked":
       case "no-visual":
-        return ["mw-lg mt-sm ", topperStyles.topperContainerStacked];
+        return ["mw-lg mt-lg mb-lg mr-auto ml-auto", topperStyles.topperContainerStacked];
       case "full-screen": 
         // apply margin offsets from spreadsheet
         calculatefullScreenOffsets();
@@ -41,8 +41,10 @@ const Topper2 = ({ settings, wcmData, lazyloader }) => {
     let defaultStyles; 
     switch(Topper_Style) {
       case "stacked": 
-      case "no-visual":
         defaultStyles = [topperStyles.hedStacked];
+        break;
+      case "no-visual":
+        defaultStyles = ["left", topperStyles.hedStacked];
         break;
       case "full-screen": 
         defaultStyles = [topperStyles.hedFullScreen, fullScreenTextAlignCss()];
@@ -63,8 +65,10 @@ const Topper2 = ({ settings, wcmData, lazyloader }) => {
   const deckStyleList = () => {
     switch(Topper_Style) {
       case "stacked":
-      case "no-visual": 
         return ["deck", topperStyles.deckStacked];
+        break;
+      case "no-visual": 
+        return ["deck left", topperStyles.deckStacked];
       case "full-screen": 
         return ["deck", topperStyles.deckFullScreen, fullScreenTextAlignCss()];
       case "side-by-side": 
@@ -81,7 +85,7 @@ const Topper2 = ({ settings, wcmData, lazyloader }) => {
     }
   }
 
-  const ImageHTML = () => <WCMImage2 wcm={Image} alt={Image_Alt} isNotLazyloaded={false} wcmData={wcmData} cap={Image_Caption} cred={Image_Credits} lazyloader={lazyloader} isFullScreenTopper={false}/>
+  const ImageHTML = () => <WCMImage2 className={"topper-image"} wcm={Image} alt={Image_Alt} isNotLazyloaded={false} wcmData={wcmData} cap={Image_Caption} cred={Image_Credits} lazyloader={lazyloader} isFullScreenTopper={false}/>
   const FullScreenImageHTML = () => <WCMImage2 wcm={Image} alt={Image_Alt} isNotLazyloaded={false} cap={Image_Caption} cred={Image_Credits} ratio={calculateFullScreenImageRatio()} wcmData={wcmData} lazyloader={lazyloader} isFullScreenTopper={true}/>
   
   const TopperHtml = () => {
@@ -90,7 +94,7 @@ const Topper2 = ({ settings, wcmData, lazyloader }) => {
         return (
           <>
           <div className={topperStyles.topperContainerFullScreen}>
-              <div className={topperStyles.imageFullScreen}>
+              <div className={`topper-image ${topperStyles.imageFullScreen}`}>
                 <FullScreenImageHTML/>
               </div>
               <div className={headerDekStyleList().join(' ')}>
@@ -104,7 +108,7 @@ const Topper2 = ({ settings, wcmData, lazyloader }) => {
                 />
               </div>
           </div>
-          <CaptionCredit caption={Image_Caption} credit={Image_Credits} hasPadding={true} extraStyles={[topperStyles.hideWhenMobile, topperStyles.smallPaddingLeft]}/>
+          {/* <CaptionCredit caption={Image_Caption} credit={Image_Credits} hasPadding={true} extraStyles={[topperStyles.hideWhenMobile, topperStyles.smallPaddingLeft]}/> */}
           </>
         );
 
@@ -124,7 +128,7 @@ const Topper2 = ({ settings, wcmData, lazyloader }) => {
                 className={deckStyleList().join(' ')}
               />
             </div>
-            <div className={topperStyles.imageStacked}>
+            <div className={`mw-xl ml-auto mr-auto ${topperStyles.imageStacked}`}>
               <ImageHTML/>
             </div>
           </div>
