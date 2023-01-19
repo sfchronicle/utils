@@ -14,7 +14,7 @@ const Topper2 = ({ settings, wcmData, lazyloader }) => {
     switch(Topper_Style) {
       case "stacked":
       case "no-visual":
-        return ["mw-lg mt-lg mb-lg mr-auto ml-auto", topperStyles.topperContainerStacked];
+        return ["mw-lg mt-lg mb-lg mr-auto ml-auto"];
       case "full-screen": 
         // apply margin offsets from spreadsheet
         calculatefullScreenOffsets();
@@ -41,10 +41,10 @@ const Topper2 = ({ settings, wcmData, lazyloader }) => {
     let defaultStyles; 
     switch(Topper_Style) {
       case "stacked": 
-        defaultStyles = [topperStyles.hedStacked];
+        defaultStyles = [];
         break;
       case "no-visual":
-        defaultStyles = ["left", topperStyles.hedStacked];
+        defaultStyles = ["left"];
         break;
       case "full-screen": 
         defaultStyles = [topperStyles.hedFullScreen, fullScreenTextAlignCss()];
@@ -65,10 +65,10 @@ const Topper2 = ({ settings, wcmData, lazyloader }) => {
   const deckStyleList = () => {
     switch(Topper_Style) {
       case "stacked":
-        return ["deck", topperStyles.deckStacked];
+        return ["deck"];
         break;
       case "no-visual": 
-        return ["deck left", topperStyles.deckStacked];
+        return ["deck left"];
       case "full-screen": 
         return ["deck", topperStyles.deckFullScreen, fullScreenTextAlignCss()];
       case "side-by-side": 
@@ -115,7 +115,7 @@ const Topper2 = ({ settings, wcmData, lazyloader }) => {
       case "stacked":
         return (
           <>
-          <div className={topperStyles.topperContainerStacked}>
+          <div>
             <div className={headerDekStyleList().join('')}>
               <Heading
                 level={1}
@@ -138,7 +138,7 @@ const Topper2 = ({ settings, wcmData, lazyloader }) => {
       case "no-visual":
         return (
           <>
-          <div className={topperStyles.topperContainerStacked}>
+          <div>
             <div className={headerDekStyleList().join('')}>
               <Heading
                 level={1}
