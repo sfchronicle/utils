@@ -1,10 +1,10 @@
 import React from 'react'
-import * as capcredStyles from "../styles/modules/captioncredit.module.less"
+// import * as capcredStyles from "../styles/modules/captioncredit.module.less"
 
 const CaptionCredit = (props) => {
   let {caption, credit, extraStyles} = props
 
-  let captionCss = [capcredStyles.cFigCap, "topper-image", "caption"];
+  let captionCss = ["topper-image", "caption"]; //capcredStyles.cFigCap, 
   if (extraStyles) captionCss = captionCss.concat(extraStyles);
 
   return (
