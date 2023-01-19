@@ -1,20 +1,20 @@
-@import (less) '../../../styles/variables.less';
+@import (less) "values";
 
 .pageFooter {
-  background-color: @black;
+  background-color: #222;
   overflow: auto;
-  padding: @s32 @s24;
+  padding: 30px 20px;
   position: relative;
 
   &.invert {
-    background-color: @grey-pale;
-    color: @black;
+    background-color: #ececec;
+    color: #000;
   }
 }
 
 .pageFooter--left {
   text-indent: -9999px;
-  margin-bottom: @s16;
+  margin-bottom: 15px;
 }
 
 .pageFooter--left-logo {
@@ -146,63 +146,56 @@
   list-style: none;
 }
 
-.PageFooter,.wrapper,ul {
-    padding-top: @s16 !important;
-}
-
-.PageFooter,.section,ul {
-    padding-top: 0 !important;
-}
-
 .pageFooter--right-links li {
-  margin-bottom: @s8;
+  margin-bottom: 10px;
   padding: 0;
 
   a {
-    color: @white;
+    color: #fff;
     text-decoration: none;
     &:hover {
-      color: @grey-25;
+      color: #ccc;
     }
     &:visited{
-      color: @grey-50;
+      color: @gray;
     }
   }
 }
 
-.invert .pageFooter--right-links li {
+.invert .pageFooter--right-links li { 
   a {
-    color: @black;
+    color: #222;
   }
   a:hover {
     color: @brand;
   }
-  a:visited{
-    color: @grey-50;
+  &:visited{
+    color: @gray;
   }
 }
 
 .pageFooter--right-links .section {
   -webkit-column-count: 2;
   column-count: 2;
-  margin: @s8 0 @s24;
+  margin: 11px 0 18px;
 }
 
 .pageFooter--right-links .footer-title {
+  margin-bottom: 4px;
   text-align: left;
   text-transform: uppercase;
 }
 
 .pageFooter--branding {
-  border-top: 1px solid @grey-50;
+  border-top: 1px solid #999;
   float: left;
-  padding-top: @s16;
+  padding-top: 17px;
   width: 100%;
-  color: @white;
+  color: #fff;
 }
 
 .invert .pageFooter--branding {
-  color: @black;
+  color: #000;
 }
 
 .pageFooter--branding-logo {
@@ -216,7 +209,7 @@
 }
 @media (min-width:48rem) {
   .pageFooter {
-    padding: @s32 @s64;
+    padding: 36px 64px;
   }
 
   .pageFooter--wrapper {
@@ -233,13 +226,13 @@
   }
 
   .pageFooter--right-topLine {
-    border-bottom: 1px solid @grey-50;
-    margin-bottom: @s16;
+    border-bottom: 1px solid #999;
+    margin-bottom: 14px;
     position: static;
     text-align: right;
 
     a {
-      color: @black;
+      color: #222;
     }
   }
 
@@ -255,17 +248,14 @@
 
   .pageFooter--right-links .wrapper > li {
     -webkit-box-flex: 0;
-    padding: 0 @s16;
-    &:first-of-type {
-      padding-left: 0;
-    }
+    padding-bottom: 0;
   }
 
   .pageFooter--right-links .section {
     -webkit-column-count: 1;
     column-count: 1;
     margin-bottom: 0;
-    margin-right: @s4;
+    margin-right: 5px;
   }
 
   .pageFooter--right-links .section > li:last-child {
@@ -281,16 +271,16 @@
 }
 @media (min-width:58rem) {
   .pageFooter {
-    padding: @s32;
+    padding: 36px;
   }
 
   .pageFooter--right {
-    width: @md;
+    width: 600px;
   }
 }
 @media (min-width:88.75rem) {
   .pageFooter {
-    padding: @s32 0;
+    padding: 36px 0;
   }
 
   .pageFooter--branding {
@@ -299,28 +289,28 @@
 }
 
 .pageFooter {
-  font-family: @sans;
+  font-family: @sans-light;
   font-variant-numeric: lining-nums;
-  font-weight: 400;
+  font-weight: 300;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   -webkit-text-stroke: 0.45px rgba(0,0,0,.1);
-  color: @black;
+  color: #000;
   font-size: 12px;
   line-height: 1.17;
 }
 
 .pageFooter .footer-title {
-  font-family: @sans;
+  font-family: @sans-bold;
   font-variant-numeric: lining-nums;
-  font-weight: 700;
+  font-weight: 400;
   -webkit-font-smoothing: antialiased;
   letter-spacing: 1px;
-  color: @white;
+  color: #fff;
 }
 
 .pageFooter.invert .footer-title {
-  color: @black;
+  color: #000;
 }
 
 .pageFooter .footer-title,
@@ -330,7 +320,7 @@
 }
 
 .pageFooter .return {
-  font-family: @sans;
+  font-family: @sans-med;
   font-variant-numeric: lining-nums;
   font-weight: 400;
   -webkit-font-smoothing: antialiased;
@@ -338,7 +328,7 @@
 }
 
 #scrollTop {
-  color: @black;
+  color: #222;
   min-width: 120px;
   cursor: pointer;
   font-size: 12px;
