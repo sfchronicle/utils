@@ -42,7 +42,7 @@ return (
             {!has_authors && <span>Published </span>}
               { !moddateString && 
                 <>
-                  &nbsp;|&nbsp;
+                  { has_authors && <span>&nbsp;|&nbsp;</span> }
                   <time
                     className="topper-dateline"
                     dateTime={ISO_PUBDATE}
