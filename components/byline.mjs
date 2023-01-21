@@ -39,10 +39,12 @@ return (
               })}
               </>
             }
+           
+            { has_authors && <span>&nbsp;|&nbsp;</span> }
+
             {!has_authors && <span>Published </span>}
               { !moddateString && 
                 <>
-                  { has_authors && <span>&nbsp;|&nbsp;</span> }
                   <time
                     className="topper-dateline"
                     dateTime={ISO_PUBDATE}
@@ -54,13 +56,12 @@ return (
               }
               {moddateString && (
                 <Fragment>
-                  &nbsp;|&nbsp;
                   <time
                     className="topper-dateline updated-date"
                     dateTime={ISO_MODDATE}
                     itemProp="dateModified"
                   >
-                    Updated: {moddateString}
+                    Updated {moddateString}
                   </time>
                 </Fragment>
               )}
