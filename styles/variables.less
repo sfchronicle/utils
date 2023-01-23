@@ -27,11 +27,21 @@
 @s18: 1.125rem;
 @s20: 1.25rem;
 
+//aliases for sizing variables that match values.less logic
+@s-xxs: @s4;
+@s-xs: @s8;
+@s-sm: @s16;
+@s-md: @s24;
+@s-lg: @s32;
+@s-xl: @s40;
+@s-xxl: @s48;
+
 //widths
 @sm: 400px;
 @md: 672px;
 @lg: 928px;
 @xl: 1200px;
+
 @w-text-width: 640px;
 @w-tablet: 768px;
 @w-mobile: 480px;
@@ -42,6 +52,7 @@
 @max: ~"(max-width: 1000000px)";
 
 @max-sm: ~"(max-width: 400px)";
+@max-mobile: ~"(max-width: 480px)";
 @max-tablet: ~"(max-width: 768px)";
 @max-text-width: ~"(max-width: 672px)";
 @max-desktop: ~"(max-width: 1200px)";
