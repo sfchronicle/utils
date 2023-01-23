@@ -42,15 +42,15 @@ return (
            
             { has_authors && <span>&nbsp;|&nbsp;</span> }
 
-            {!has_authors && <span>Published </span>}
               { !moddateString && 
                 <>
+                  
                   <time
                     className="topper-dateline"
                     dateTime={ISO_PUBDATE}
                     itemProp="datePublished"
                   >
-                    {pubdateString}
+                   {!has_authors && <span>Published </span>} {pubdateString}
                   </time>
                 </>
               }
