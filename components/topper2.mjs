@@ -14,7 +14,7 @@ const Topper2 = ({ settings, wcmData, lazyloader }) => {
     switch(Topper_Style) {
       case "stacked":
       case "no-visual":
-        return ["mw-lg mt-lg mb-lg mr-auto ml-auto"];
+        return [topperStyles.headerDekStacked, " mw-lg mt-lg mb-md"];
       case "full-screen": 
         // apply margin offsets from spreadsheet
         calculatefullScreenOffsets();

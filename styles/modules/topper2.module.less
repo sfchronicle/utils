@@ -24,17 +24,23 @@
     }
 }
 
+.headerDekStacked {
+  margin-left: auto;
+  margin-right: auto;
+  @media (max-width: 960px) {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
 .headerDekFullScreen {
     position: absolute;
     padding: @s24; 
     width: @md;
     @media @tablet {
         width: @sm;
-    }
-    @media @mobile {
         position: static;
         transform: none;
-        margin: @s16 0;
+        margin: 0;
         padding: 0;
         width: 100%;
     }
@@ -51,7 +57,7 @@
 .headerDekTop {
   top: 0%;
   margin-top: var(--headerDek-vertical-offset);
-  @media @mobile {
+  @media @tablet {
       margin-top: 0px;
   }
 }
@@ -59,7 +65,7 @@
 .headerDekBottom {
   bottom: 0%;
   margin-bottom: var(--headerDek-vertical-offset);
-  @media @mobile {
+  @media @tablet {
       margin-bottom: 0px;
   }
 }
@@ -67,7 +73,7 @@
 .headerDekLeft {
   left: 0%;
   margin-left: var(--headerDek-horizontal-offset);
-  @media @mobile {
+  @media @tablet {
       margin-left: 0px;
   }
 }
@@ -75,7 +81,7 @@
 .headerDekRight {
   right: 0%;
   margin-right: var(--headerDek-horizontal-offset);
-  @media @mobile {
+  @media @tablet {
       margin-right: 0px;
   }
 }
@@ -85,7 +91,7 @@
   transform: translate(-50%, 0%);
   margin-left: var(--headerDek-horizontal-offset);
 
-  @media @mobile { 
+  @media @tablet { 
       transform: none;
       top: 0%;
       left: 0%;
@@ -99,7 +105,7 @@
 
 .textAlignCenter {
   text-align: center;
-  @media @mobile {
+  @media @tablet {
     text-align: left;
   }
 }
@@ -107,7 +113,7 @@
 .whiteTextBlackBg {
   color: @white;
   background-color: rgba(0, 0, 0, 0.54);
-  @media @mobile {
+  @media @tablet {
     color: @black;
     background-color: transparent;
   }
