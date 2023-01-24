@@ -130,6 +130,14 @@
   }
 }
 
+.hideWhenDesktop {
+  display: none;
+  @media @mobile {
+    display: block;
+    padding-left: @s8;
+  }
+}
+
 .smallPaddingLeft {
   padding-left: @s8;
 }

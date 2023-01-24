@@ -66,7 +66,6 @@ const Topper2 = ({ settings, wcmData, lazyloader }) => {
     switch(Topper_Style) {
       case "stacked":
         return ["deck"];
-        break;
       case "no-visual": 
         return ["deck left"];
       case "full-screen": 
@@ -85,8 +84,8 @@ const Topper2 = ({ settings, wcmData, lazyloader }) => {
     }
   }
 
-  const ImageHTML = () => <WCMImage2 className={"topper-image"} wcm={Image} alt={Image_Alt} isNotLazyloaded={false} wcmData={wcmData} cap={Image_Caption} cred={Image_Credits} lazyloader={lazyloader} isFullScreenTopper={false}/>
-  const FullScreenImageHTML = () => <WCMImage2 wcm={Image} alt={Image_Alt} isNotLazyloaded={false} cap={Image_Caption} cred={Image_Credits} ratio={calculateFullScreenImageRatio()} wcmData={wcmData} lazyloader={lazyloader} isFullScreenTopper={true}/>
+  const ImageHTML = () => <WCMImage2 wcm={Image} alt={Image_Alt} isNotLazyloaded={false} wcmData={wcmData} lazyloader={lazyloader} isFullScreenTopper={false}/>
+  const FullScreenImageHTML = () => <WCMImage2 wcm={Image} alt={Image_Alt} isNotLazyloaded={false} ratio={calculateFullScreenImageRatio()} wcmData={wcmData} lazyloader={lazyloader} isFullScreenTopper={true}/>
   
   const TopperHtml = () => {
     switch (Topper_Style) {
@@ -94,9 +93,10 @@ const Topper2 = ({ settings, wcmData, lazyloader }) => {
         return (
           <>
           <div className={topperStyles.topperContainerFullScreen}>
-              <div className={`topper-image ${topperStyles.imageFullScreen}`}>
+              <figure className={`topper-image ${topperStyles.imageFullScreen}` } aria-labelledby="topperCaptionText">
                 <FullScreenImageHTML/>
-              </div>
+                <CaptionCredit caption={Image_Caption} credit={Image_Credits} extraStyles={topperStyles.hideWhenDesktop}/>
+              </figure>
               <div className={headerDekStyleList().join(' ')}>
                 <Heading level={1} text={Title}
                   className={headerStyleList().join(' ')}
@@ -108,7 +108,9 @@ const Topper2 = ({ settings, wcmData, lazyloader }) => {
                 />
               </div>
           </div>
-          {/* <CaptionCredit caption={Image_Caption} credit={Image_Credits} hasPadding={true} extraStyles={[topperStyles.hideWhenMobile, topperStyles.smallPaddingLeft]}/> */}
+          <div className="topperCaptionText">
+            <CaptionCredit caption={Image_Caption} credit={Image_Credits} extraStyles={[topperStyles.hideWhenMobile, topperStyles.smallPaddingLeft]}/>
+          </div>
           </>
         );
 
@@ -128,9 +130,10 @@ const Topper2 = ({ settings, wcmData, lazyloader }) => {
                 className={deckStyleList().join(' ')}
               />
             </div>
-            <div className={`mw-xl ml-auto mr-auto ${topperStyles.imageStacked}`}>
+            <figure className={`mw-xl ml-auto mr-auto ${topperStyles.imageStacked}`}>
               <ImageHTML/>
-            </div>
+              <CaptionCredit caption={Image_Caption} credit={Image_Credits} />
+            </figure>
           </div>
           </>
         );

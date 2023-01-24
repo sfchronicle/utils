@@ -1,6 +1,5 @@
 import React, {useRef, useEffect, useState} from 'react'
 import PropTypes from 'prop-types'
-import CaptionCredit from './captioncredit.mjs'
 import * as wcmimageStyles from "../styles/modules/wcmimage2.module.less"
 import { debounce } from './helpers/utilfunctions.mjs'
 
@@ -18,7 +17,7 @@ const ImageHTML = ({fullPath, imageRez, alt, isFullScreenTopper}) => {
   )
 }
 
-const WCMImage = ({ wcm, alt, cap, cred, isNotLazyloaded, className, ratio, wcmData, lazyloader, isFullScreenTopper }) => {
+const WCMImage = ({ wcm, alt, isNotLazyloaded, ratio, wcmData, lazyloader, isFullScreenTopper }) => {
   // When the wrapping div is rendered, we're going to figure out the best size for this image to be
   let picRef = useRef(null)
   let [imageRez, setImageRez] = useState(0)
@@ -92,27 +91,21 @@ const WCMImage = ({ wcm, alt, cap, cred, isNotLazyloaded, className, ratio, wcmD
   const LazyLoaderHTML = lazyloader;
 
   return (
-      <figure className={className ? className : ""}>
-        <div ref={picRef}>
-          {!isNotLazyloaded && (
-            <LazyLoaderHTML>
-              <ImageHTML fullPath={fullPath} imageRez={imageRez} alt={alt} isFullScreenTopper={isFullScreenTopper}/>
-            </LazyLoaderHTML>
-          )}
-          {isNotLazyloaded && <ImageHTML fullPath={fullPath} imageRez={imageRez} alt={alt} isFullScreenTopper={isFullScreenTopper}/>}
-        </div>
-        <CaptionCredit caption={cap} credit={cred} />
-      </figure>
+    <div ref={picRef}>
+      {!isNotLazyloaded && (
+        <LazyLoaderHTML>
+          <ImageHTML fullPath={fullPath} imageRez={imageRez} alt={alt} isFullScreenTopper={isFullScreenTopper}/>
+        </LazyLoaderHTML>
+      )}
+      {isNotLazyloaded && <ImageHTML fullPath={fullPath} imageRez={imageRez} alt={alt} isFullScreenTopper={isFullScreenTopper}/>}
+    </div>
   )
 }
 
 WCMImage.propTypes = {
   wcm: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   alt: PropTypes.string.isRequired,
-  cap: PropTypes.string,
-  cred: PropTypes.string,
   isLazyloaded: PropTypes.bool,
-  className: PropTypes.string,
   ratio: PropTypes.string,
   lazyloader: PropTypes.element
 }
