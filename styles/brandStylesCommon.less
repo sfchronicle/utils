@@ -58,27 +58,16 @@
 }
 
 // Handle basic embed classes
-.inline-figure.centered {
-  max-width: @md;
-  margin: @s24 auto;
-  width: 100%;
-  padding: 0 @s16;
-}
 .inline-figure {
-  .caption {
-    max-width: @w-text-width;
-    @media @max-text-width {
-      padding: 0 @s16;
-    }
-  }
   &.float-left, &.float-right {
     max-width: @xl;
     margin: 0 auto;
     @media (max-width: @xl){
       max-width: @md;
+      padding: 0 @s16;
     }
     figure {
-      max-width: @sm;
+      max-width: @xs;
       width: 100%;
       @media (max-width: @xl){
         max-width: @md;
@@ -100,25 +89,35 @@
       margin-left: @s16;
     }
   }
-  &.large {
-    max-width: @lg;
-    margin: @s24 auto;
-    padding: 0 @s16;
-  }
-  &.wide {
-    max-width: @xl;
-    margin: @s24 auto;
-  }
   &.full {
     max-width: 100%;
   }
 }
 
-.inline-figure.centered, .inline-figure.full {
-  .caption {
-    @media @max-text-width {
-      padding: 0;
+// TO DO: Add support for side-by-side visuals
+
+.inline-figure.wide, .inline-figure.full, .inline-figure.large {
+  &.graphic-wrapper {
+    @media @max-desktop {
+      padding: 0 @s16;
     }
+  }
+   .caption {
+    max-width: @w-text-width;
+    @media @max-text-width {
+      padding: 0 @s16;
+    }
+  }
+}
+
+.graphic-wrapper {
+  &.inline-figure.wide, &.inline-figure.full, &.inline-figure.large {
+    .caption {
+     max-width: 100%;
+     @media @max-text-width {
+       padding: 0;
+     }
+   }
   }
 }
 
@@ -129,6 +128,7 @@
     }
   }
 }
+
 
 .topper-image {
   .caption {
