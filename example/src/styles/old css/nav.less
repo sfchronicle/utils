@@ -1,0 +1,187 @@
+// sticky navigation bar-------------------------------
+@import (less) "values";
+
+.topper-nav-container {
+  height: 37px;
+  background-color: black;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.headroom--pinned,
+.headroom--unfixed {
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.25), 0 2px 2px rgba(0, 0, 0, 0.2),
+    0 4px 4px rgba(0, 0, 0, 0.15), 0 8px 8px rgba(0, 0, 0, 0.1),
+    0 16px 16px rgba(0, 0, 0, 0.05);
+}
+
+.topper-nav-desk-logo,
+.topper-nav-mobile-logo {
+  max-height: 20px;
+  margin-left: 8px;
+  margin-right: 2px;
+}
+
+.topper-nav-desk-logo {
+  @media (max-width: 490px) {
+    display: none;
+  }
+}
+
+.topper-nav-mobile-logo {
+  display: none;
+
+  @media (max-width: 490px) {
+    display: block;
+  }
+}
+
+.topper-nav-left {
+  display: flex;
+  flex: 75;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.topper-nav-right {
+  display: none;
+  flex: 25;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+// Hide in the app
+.not-app .topper-nav-right {
+  display: flex;
+}
+
+.topper-nav-right .sub-box {
+  margin-right: 10px;
+  color: @brand;
+  border: 1px solid @brand;
+  border-radius: 3px;
+  padding: 3px 8px;
+  font-size: 14px;
+  text-decoration: none;
+  font-family: @sans-light;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+
+  &:hover {
+    background: @brand;
+    color: white;
+
+    & > div:hover {
+      color: white;
+    }
+  }
+}
+
+.topper-nav-social {
+  margin:0 12px;
+  padding-top: 4px;
+
+  #twitter-icon {
+    color: @brand;
+  }
+  a :hover {
+    color: white;
+  }
+}
+
+.topper-nav-container.invert {
+  background-color: #fff;
+
+  a :hover, .topper-nav-title:hover {
+    color: #999;
+  }
+}
+
+.topper-nav-title {
+  color: @brand;
+  font-family: @sans-book;
+  font-size: @step--1;
+  padding-left: 15px;
+  text-transform: uppercase;
+  text-decoration: none;
+  letter-spacing: 0.08em;
+  font-smooth: auto;
+  -webkit-font-smoothing: auto;
+  -moz-osx-font-smoothing: auto;
+
+  &:hover {
+    color: @white;
+  }
+}
+
+#topper-nav-twitter-icon,
+#topper-nav-mail-icon,
+#topper-nav-facebook-icon {
+  color: @brand;
+
+  &:hover {
+    color: @white;
+  }
+}
+
+/* Configure the nav array */
+
+.headroom li, .headroom ul {
+  font-family: @sans-book;
+  text-transform: uppercase;
+  font-size: 14px;
+  letter-spacing: .05em;
+  width: 100%;
+  margin: 0;
+}
+
+.headroom ul#subnav {
+  position: absolute;
+  top: 37px;
+  padding: 0;
+  border-top: 2px solid #ccc;
+  border-right: 2px solid #ccc;
+  width: 300px;
+  display: none;
+
+  @media @tablet {
+    border-right: none;
+    width: 100%;
+  }
+}
+
+.headroom .show-subnav ul#subnav {
+  display: block;
+}
+
+.headroom.headroom--unpinned .show-subnav ul#subnav {
+  display: none;
+}
+
+.headroom li {
+  display: block;
+  background-color: #fff;
+  border-bottom: 2px solid #ccc;
+
+  a {
+    padding: 10px;
+    display: inline-block;
+    width: 100%;
+  }
+
+  .arrow-bullet {
+    font-size: 10px;
+  }
+}
+
+.dropdown-icon {
+  margin-left: 5px;
+  display: inline-block;
+  transition: transform 0.2s;
+}
+
+.show-subnav .dropdown-icon {
+  transform: rotate(180deg);
+}
+

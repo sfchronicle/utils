@@ -44,8 +44,6 @@ h1,
 h2,
 h3,
 h4,
-h5,
-h6,
 p,
 ul[class],
 ol[class],
@@ -84,9 +82,9 @@ img {
 }
 
 /* Natural flow and rhythm in articles by default */
-/* article > * + * {
+article > * + * {
   margin-top: 1em;
-} */
+}
 
 /* Inherit fonts for inputs and buttons */
 input,

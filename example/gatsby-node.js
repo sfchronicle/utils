@@ -4,11 +4,17 @@
  * See: https://www.gatsbyjs.org/docs/node-apis/
  */
 
- var {requestImage} = require("./tasks/node-helpers");
+var {requestImage} = require("./tasks/node-helpers");
+let topperData = require("./src/data/topper2_settings.sheet.json");
 
 // Import all the WCM photos you'd like to use in this project
 // NOTE: Leave this as an empty array if you aren't importing any WCM photos, but you won't be able to use the WCMImage component
 const wcmPhotos = [20374215]
+
+// Add topper image to wcmPhotos list
+let numStr = (topperData[0].Image).toString()
+let isNum = /^\d+$/.test(numStr.trim())
+if (isNum && !wcmPhotos.includes(numStr.trim())) wcmPhotos.push((numStr.trim()));
 
 // Create nodes so GraphQL can access
 exports.sourceNodes = async ({

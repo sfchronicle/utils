@@ -1,0 +1,164 @@
+.hed, .deck{
+  text-align: center;
+  margin: @s8 0;
+  &.left {
+    text-align: left;
+  }
+  @media (max-width: 960px) {
+    text-align: left;
+    padding: 0 @s16;
+  }
+}
+
+//could the next three classes be moved into byline module?
+.byline-wrapper {
+  max-width: @lg;
+  border-bottom: 1px solid @grey-75;
+  margin: @s16 auto @s24;
+  padding-bottom: @s8;
+  @media (max-width: 960px) {
+    margin: @s16 @s16 @s24;
+  }
+  @media (max-width: @md) {
+    border-bottom: none;  }
+}
+.byline-name {
+    font-weight: 700;
+}
+
+.byline {
+  text-align: left;
+  display: inline-block;
+  a, a:visited {
+    text-decoration: none;
+    color: @black;
+    &:hover {
+      color: @brand;
+    }
+  }
+}
+
+//move into share module?
+.articleHeader--shareTools {
+  display: inline-block;
+  text-align: right;
+  float: right;
+  a, a:visited {
+    color: @black;
+  }
+  @media (max-width: @md) {
+    display: block;
+    float: none;
+    margin: @s4 0;
+  }
+}
+
+.caption {
+  margin: @s4 auto @s24;
+}
+
+// Handle basic embed classes
+.inline-figure {
+  &.float-left, &.float-right {
+    max-width: @xl;
+    margin: 0 auto;
+    @media (max-width: @xl){
+      max-width: @md;
+      padding: 0 @s16;
+    }
+    figure {
+      max-width: @xs;
+      width: 100%;
+      @media (max-width: @xl){
+        max-width: @md;
+        float: none;
+        margin: @s24 auto;
+      }
+    }
+  }
+  &.float-left {
+    figure {
+      float: left;
+      margin-right: @s16;
+    }
+
+  }
+  &.float-right {
+    figure {
+      float: right;
+      margin-left: @s16;
+    }
+  }
+  &.full {
+    max-width: 100%;
+  }
+}
+
+// TO DO: Add support for side-by-side visuals
+
+.inline-figure.wide, .inline-figure.full, .inline-figure.large {
+  &.graphic-wrapper {
+    @media @max-desktop {
+      padding: 0 @s16;
+    }
+  }
+   .caption {
+    max-width: @w-text-width;
+    @media @max-text-width {
+      padding: 0 @s16;
+    }
+  }
+}
+
+.graphic-wrapper {
+  &.inline-figure.wide, &.inline-figure.full, &.inline-figure.large {
+    .caption {
+     max-width: 100%;
+     @media @max-text-width {
+       padding: 0;
+     }
+   }
+  }
+}
+
+.inline-figure.wide {
+  caption {
+    @media (max-width: @xl) {
+      padding: 0 @s16;
+    }
+  }
+}
+
+
+.topper-image {
+  .caption {
+    max-width: @lg;
+    margin-bottom: @s8;
+    @media (max-width: 960px) {
+      padding: 0 @s16;
+    }
+  }
+}
+a {
+  color: @black;
+  text-decoration: underline;
+  text-decoration-color: @brand;
+  text-decoration-skip-ink: auto;
+  outline: 0 !important;
+
+  &:hover {
+    color: @brand;
+  }
+
+  &:visited {
+    color: @grey-75;
+  }
+}
+
+.dropcap:first-letter {
+  font-family: @hed;
+  font-size: @s112;
+  float: left;
+  line-height: 0.75;
+  margin: 0.75rem 0.5rem 0 0.25rem;
+}

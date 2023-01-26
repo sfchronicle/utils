@@ -49,18 +49,17 @@ const Layout = ({
   SOCIAL_TITLE = social_title || SOCIAL_TITLE
   TITLE = title || TITLE
 
+  let styleSheetID;
+  if ((MARKET_KEY === "SFC") || (MARKET_KEY === "Houston") || (MARKET_KEY === "Albany")) {
+    styleSheetID = MARKET_KEY
+  }
+  else {
+    styleSheetID = "default"
+  }
+
   // Make sure url_add ends with a slash
   if (url_add && url_add.slice(-1) !== "/"){
     url_add += "/"
-  }
-
-  // Set fonts by MARKET_KEY
-  switch(MARKET_KEY){
-    case "SFC": require('../../../fonts/sfc.less'); break;
-    case "Houston": require('../../../fonts/houston.less'); break;
-    case "Albany": require('../../../fonts/albany.less'); break;
-    // TK many more
-    default: require('../../../fonts/default.less'); break;
   }
 
   // Determine if app ver
@@ -161,6 +160,7 @@ const Layout = ({
           type="image/x-icon"
         />
         <link rel="canonical" href={ CANONICAL_URL } />
+        <link rel="stylesheet" href={`https://files.sfchronicle.com/brand-styles/${styleSheetID}.css`} />
 
         {(isApp || EMBEDDED) ? (
           <meta name="robots" content="noindex, nofollow" />

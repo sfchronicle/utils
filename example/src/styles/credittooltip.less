@@ -1,0 +1,55 @@
+@import (less) '../../../styles/variables.less';
+
+body .__react_component_tooltip {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 20%);
+  padding: 6px @s4;
+  pointer-events: all;
+
+  .flex-contact {
+    display: flex;
+    align-items: center;
+
+    a {
+      &:visited {
+        color: @black;
+      }
+      &:hover {
+        opacity: 0.6;
+        color: @black;
+      }
+    }
+    .svg-wrapper {
+      width: 25px;
+      height: 25px;
+      border-radius: 25px;
+      border: 1px solid @black;
+      margin: 0 2px;
+    }
+    svg {
+      width: 100%;
+      padding: @s4;
+      // margin: 0 3px;
+    }
+  }
+}
+
+.contact-name, .font-awesome a {
+  color: @black;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-decoration-color: @grey-75;
+  cursor: pointer;
+
+  &:hover {
+    color: @grey-50;
+  }
+}
+
+.contact-name[data-tip="{}"] {
+  text-decoration: none;
+  color: @black;
+  &:hover {
+    color: inherit;
+    cursor: inherit;
+  }
+}

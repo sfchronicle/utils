@@ -13,6 +13,12 @@ try {
 
 // Get settings off story_settings if it exists, otherwise fall back to projectConfig
 let getSettings = function(){
+	if (!projectConfig) {
+		let settings = {PROJECT : {DATE: "September 20, 2022 9:00 AM", MOD_DATE: "September 21, 2022 9:00 AM"}}
+		return (
+			settings
+		)
+	}
 	let projectSettings = projectConfig.PROJECT
 	let settings = projectConfig
 	// This needs to be set even if the "try" below fails
@@ -22,8 +28,11 @@ let getSettings = function(){
 	let fullAuthors = []
 	try {
     try {
-    	// Check for classic story_settings sheet
+		
     	[storySettings] = require("../../src/data/story_settings.sheet.json")
+		// Uncomment line below and comment out line above if testing from example folder in utils
+			// [storySettings] = require("./example/src/data/story_settings.sheet.json")
+			
 			// If we got story_settings, try structuring the AUTHORS object
 			let authorNames = []
 			let authorLinks = []

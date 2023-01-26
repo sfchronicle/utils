@@ -1,0 +1,32 @@
+@import (less) '../values';
+@import (less) "../variables.less";
+
+:root { 
+  --img-bottom-padding-ratio: "56.25%";
+}
+
+.c-img {
+  display: block;
+  position: relative;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: auto;
+}
+
+.c-img-fullscreen {
+  position: static;
+  object-fit: cover;
+  height: calc(100vh - 37px);
+  @media @tablet {
+    height: auto;
+  }
+}
+
+.c-fig-hidden-when-desktop {
+  display: none;
+  @media @mobile {
+    display: block;
+    padding-left: @s8;
+  }
+}
