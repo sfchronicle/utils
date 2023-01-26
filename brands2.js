@@ -47,7 +47,7 @@ let getBrands2 = function(market){
 			styles: {
 				"@brand": "#FF7500",
 				"@brand-secondary": "#1874CB",
-				"@hed": '"Marr Sans", Georgia, serif',
+				"@hed": '"Publico Headline", Georgia, serif',
 				"@hed-alt": '"Marr Sans Condensed", Georgia, serif',
 				"@serif": '"Publico", Georgia, serif',
 				"@sans": '"Marr Sans", Helvetica, sans-serif',
