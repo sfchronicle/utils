@@ -17,7 +17,7 @@ const ImageHTML = ({fullPath, imageRez, alt, isFullScreenTopper}) => {
   )
 }
 
-const WCMImage = ({ wcm, alt, ratio, wcmData, lazyloader, isFullScreenTopper }) => {
+const WCMImage = ({ wcm, alt, ratio, wcmData, isFullScreenTopper }) => {
   // When the wrapping div is rendered, we're going to figure out the best size for this image to be
   let picRef = useRef(null)
   let [imageRez, setImageRez] = useState(0)
@@ -95,14 +95,9 @@ const WCMImage = ({ wcm, alt, ratio, wcmData, lazyloader, isFullScreenTopper }) 
     throw `WCMImage error: Image for ${wcm} needs an alt tag! Please add a good, descriptive alt tag. Suggestion from Mozilla: When choosing alt strings for your images, imagine what you would say when reading the page to someone over the phone without mentioning that there's an image on the page.`
   }
 
-  // Pull lazyloader HTML from index.js
-  const LazyLoaderHTML = lazyloader;
-
   return (
     <div ref={picRef}>
-        <LazyLoaderHTML>
           <ImageHTML fullPath={fullPath} imageRez={imageRez} alt={alt} isFullScreenTopper={isFullScreenTopper}/>
-        </LazyLoaderHTML>
     </div>
   )
 }
@@ -110,8 +105,7 @@ const WCMImage = ({ wcm, alt, ratio, wcmData, lazyloader, isFullScreenTopper }) 
 WCMImage.propTypes = {
   wcm: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   alt: PropTypes.string.isRequired,
-  ratio: PropTypes.string,
-  lazyloader: PropTypes.element
+  ratio: PropTypes.string
 }
 
 export default WCMImage

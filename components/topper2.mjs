@@ -4,7 +4,7 @@ import WCMImage2 from "./wcmimage2.mjs"
 import CaptionCredit from "./captioncredit.mjs"
 import * as topperStyles from "../styles/modules/topper2.module.less"
 
-const Topper2 = ({ settings, wcmData, lazyloader }) => {
+const Topper2 = ({ settings, wcmData }) => {
   const { 
     Topper_Style, Title, Title_Style, Deck, Image, Image_Alt, Image_Caption, Image_Credits, 
     HeaderDek_Vertical_Position, HeaderDek_Vertical_Offset, HeaderDek_Horizontal_Offset, HeaderDek_Horizontal_Position, Inverted_Colors 
@@ -87,8 +87,8 @@ const Topper2 = ({ settings, wcmData, lazyloader }) => {
     }
   }
 
-  const ImageHTML = () => <WCMImage2 wcm={Image} alt={Image_Alt} isNotLazyloaded={false} wcmData={wcmData} lazyloader={lazyloader} isFullScreenTopper={false}/>
-  const FullScreenImageHTML = () => <WCMImage2 wcm={Image} alt={Image_Alt} isNotLazyloaded={false} ratio={calculateFullScreenImageRatio()} wcmData={wcmData} lazyloader={lazyloader} isFullScreenTopper={true}/>
+  const ImageHTML = () => <WCMImage2 wcm={Image} alt={Image_Alt} isNotLazyloaded={false} wcmData={wcmData} isFullScreenTopper={false}/>
+  const FullScreenImageHTML = () => <WCMImage2 wcm={Image} alt={Image_Alt} isNotLazyloaded={false} ratio={calculateFullScreenImageRatio()} wcmData={wcmData} isFullScreenTopper={true}/>
   
   const TopperHtml = () => {
     switch (Topper_Style) {
