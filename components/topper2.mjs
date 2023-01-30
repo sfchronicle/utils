@@ -190,6 +190,7 @@ const Topper2 = ({ settings, wcmData, lazyloader }) => {
 
   const calculateFullScreenImageRatio = () => {
       // ratio needs to account for height of nav bar which is 37px
+    if (typeof window === "undefined") return "56.25%"
     const windowRatio = ((window.innerHeight-37) / window.innerWidth)*100;
     let fullScreenRatio = "56.25%"; // defaults to 16/9;
 
