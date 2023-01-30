@@ -17,7 +17,7 @@ const ImageHTML = ({fullPath, imageRez, alt, isFullScreenTopper}) => {
   )
 }
 
-const WCMImage = ({ wcm, alt, isNotLazyloaded, ratio, wcmData, lazyloader, isFullScreenTopper }) => {
+const WCMImage = ({ wcm, alt, ratio, wcmData, lazyloader, isFullScreenTopper }) => {
   // When the wrapping div is rendered, we're going to figure out the best size for this image to be
   let picRef = useRef(null)
   let [imageRez, setImageRez] = useState(0)
@@ -92,12 +92,11 @@ const WCMImage = ({ wcm, alt, isNotLazyloaded, ratio, wcmData, lazyloader, isFul
 
   return (
     <div ref={picRef}>
-      {!isNotLazyloaded && (
+      
         <LazyLoaderHTML>
           <ImageHTML fullPath={fullPath} imageRez={imageRez} alt={alt} isFullScreenTopper={isFullScreenTopper}/>
         </LazyLoaderHTML>
-      )}
-      {isNotLazyloaded && <ImageHTML fullPath={fullPath} imageRez={imageRez} alt={alt} isFullScreenTopper={isFullScreenTopper}/>}
+      
     </div>
   )
 }
@@ -105,7 +104,6 @@ const WCMImage = ({ wcm, alt, isNotLazyloaded, ratio, wcmData, lazyloader, isFul
 WCMImage.propTypes = {
   wcm: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   alt: PropTypes.string.isRequired,
-  isLazyloaded: PropTypes.bool,
   ratio: PropTypes.string,
   lazyloader: PropTypes.element
 }
