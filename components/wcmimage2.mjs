@@ -56,7 +56,11 @@ const WCMImage = ({ wcm, alt, ratio, wcmData, lazyloader, isFullScreenTopper }) 
 
   // This calculation is not used for the topper impl, but keeping it here just in case
   // it is needed for the general WCMImage utils migration
-  let r = document.querySelector(':root');
+  let r = null;
+  if (typeof window != "undefined") {
+    r = document.querySelector(':root');
+  }
+
   let photoRatio = "56.25%"; // Default to 16/9
   let fullPath = `https://s.hdnux.com/photos/0/0/0/${wcm}/0/`;
   if (!ratio){
@@ -69,7 +73,9 @@ const WCMImage = ({ wcm, alt, ratio, wcmData, lazyloader, isFullScreenTopper }) 
     if (matchedPhoto){  
       // Set ratio of the actual photo like a legit hacker
       photoRatio = (matchedPhoto.photo.ratio*100)+"%";
-      r.style.setProperty('--img-bottom-padding-ratio', photoRatio); 
+      if (r) { 
+        r.style.setProperty('--img-bottom-padding-ratio', photoRatio); 
+      }
 
       fullPath = matchedPhoto.photo.full_path;
     } else {
@@ -79,7 +85,9 @@ const WCMImage = ({ wcm, alt, ratio, wcmData, lazyloader, isFullScreenTopper }) 
   } else {
     // If an override is being passed in, use that
     photoRatio = ratio
-    r.style.setProperty('--img-bottom-padding-ratio', photoRatio); 
+    if (r) {
+      r.style.setProperty('--img-bottom-padding-ratio', photoRatio); 
+    }
   }
 
   // Get serious about alt tags
@@ -92,11 +100,9 @@ const WCMImage = ({ wcm, alt, ratio, wcmData, lazyloader, isFullScreenTopper }) 
 
   return (
     <div ref={picRef}>
-      
         <LazyLoaderHTML>
           <ImageHTML fullPath={fullPath} imageRez={imageRez} alt={alt} isFullScreenTopper={isFullScreenTopper}/>
         </LazyLoaderHTML>
-      
     </div>
   )
 }

@@ -17,7 +17,10 @@ const Topper2 = ({ settings, wcmData, lazyloader }) => {
         return [topperStyles.headerDekStacked, " mw-lg mt-lg mb-md"];
       case "full-screen": 
         // apply margin offsets from spreadsheet
-        calculatefullScreenOffsets();
+        if (typeof window != "undefined") {
+          calculatefullScreenOffsets();
+        }
+
         return [
           topperStyles.headerDekFullScreen, fullScreenHorizontalCss(),
           ... (HeaderDek_Vertical_Position === "top") ? [topperStyles.headerDekTop] : [topperStyles.headerDekBottom],
