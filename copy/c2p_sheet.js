@@ -63,7 +63,7 @@ let createSheet = (auth, fallback, configData) => {
 
     const drive = google.drive({ version: "v3", auth });
     const body = { title: "New C2P sheet" };
-    const templateId = "1juVrba9UNHVZV13e23o0gcwOw8YzX_1b7uxTI_jv7_4";
+    const templateId = "1DUvYnFdxtBv1AXcDI9X00s_opUSu4uHJmd5LNemCN9E";
     drive.files.copy(
       {
         fileId: templateId, // Base template
