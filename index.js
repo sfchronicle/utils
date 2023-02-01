@@ -36,6 +36,10 @@ let blendHDN = function(meta){
 		meta = getSettings()
 		meta.URL_ADD = url_add
 	}
+	let sailthru = ""
+	if (meta.SAIL_CUST){
+		sailthru = meta.SAIL_CUST
+	}
 
 	// Set vars with the new object
 	let {
@@ -202,6 +206,7 @@ let blendHDN = function(meta){
 	  siteId: '35',
 	  siteUrl: siteDomain,
 	  timeZone: 'Pacific',
+		sailthruId: sailthru
 	}
 
 	// Create author for analytics here
