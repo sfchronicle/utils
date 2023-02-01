@@ -38,7 +38,8 @@ let getBrands2 = function(market){
 				"siteName": "The San Francisco Chronicle",
 				"twitter": "sfchronicle",
 				"gaAccount": "UA-1616916-26",
-				"subscribeLink": "https://www.sfchronicle.com/subproject"
+				"subscribeLink": "https://www.sfchronicle.com/subproject",
+				"sailCustomer": "fca2a0390286f0e53120a668534d9529"
 			}
 		},
 
@@ -59,7 +60,8 @@ let getBrands2 = function(market){
 				"twitter": "HoustonChron",
 				"invert": true,
 				"gaAccount": "UA-1616916-24",
-				"subscribeLink": "https://www.houstonchronicle.com/subproject"
+				"subscribeLink": "https://www.houstonchronicle.com/subproject",
+				"sailCustomer": "48e30b5083cf6bf47c519651453c9e8a"
 			}
 		},
 
@@ -80,7 +82,8 @@ let getBrands2 = function(market){
 				"twitter": "timesunion",
 				"invert": true,
 				"gaAccount": "UA-1616916-7",
-				"subscribeLink": "https://www.timesunion.com/subproject"
+				"subscribeLink": "https://www.timesunion.com/subproject",
+				"sailCustomer": "5bb9eee089bdc2e27cbd265535ad1f90"
 			}
 		},
 
@@ -96,7 +99,8 @@ let getBrands2 = function(market){
 				"twitter": "ExpressNews",
 				"invert": true,
 				"gaAccount": "UA-1616916-27",
-				"subscribeLink": "https://www.expressnews.com/subproject"
+				"subscribeLink": "https://www.expressnews.com/subproject",
+				"sailCustomer": "aec52c4681ed63b5beab139a2584f0d4"
 			}
 		},
 
@@ -112,7 +116,8 @@ let getBrands2 = function(market){
 				"twitter": "insider_ct",
 				"invert": true,
 				"gaAccount": "UA-1616916-99",
-				"subscribeLink": "https://www.ctinsider.com/subproject"
+				"subscribeLink": "https://www.ctinsider.com/subproject",
+				"sailCustomer": "9b21160afa226c9f84d27b47c3d52364"
 			}
 		},
 
@@ -128,7 +133,8 @@ let getBrands2 = function(market){
 				"twitter": "mwtnews",
 				"invert": true,
 				"gaAccount": "UA-1616916-99",
-				"subscribeLink": "/subproject"
+				"subscribeLink": "/subproject",
+				"sailCustomer": "4a181de0b63a131cf27f8ea9485e5e1c"
 			}
 		},
 		Midcom: {
@@ -142,7 +148,23 @@ let getBrands2 = function(market){
 				"twitter": "MDN",
 				"invert": true,
 				"gaAccount": "UA-1616916-99",
-				"subscribeLink": "/subproject"
+				"subscribeLink": "/subproject",
+				"sailCustomer": "f3dc0abb53995f957783e76eff3ef01e"
+			}
+		},
+		Conroe: {
+			styles: {
+				"@brand": "#900900",
+				"@brand-secondary": "#189196"
+			},
+			attributes: {
+				"marketPrefix": "conroe",
+				"siteName": "Conroe Courier",
+				"twitter": "ConroeCourier",
+				"invert": true,
+				"gaAccount": "UA-1616916-99",
+				"subscribeLink": "https://www.yourconroenews.com/subproject",
+				"sailCustomer": "4a181de0b63a131cf27f8ea9485e5e1c"
 			}
 		},
 
