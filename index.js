@@ -145,6 +145,9 @@ let blendHDN = function(meta){
 	HDN.dataLayer.content.keyNlpOther = []
 	HDN.dataLayer.content.keyNlpUnknown = []
 
+	// Signal to Blueconic that we are ready for gift button
+	HDN.dataLayer.content.giftEnabled = meta.GIFT_ENABLED;
+
 	// HDN.dataLayer object for source information
 	HDN.dataLayer.source.authorName = ''
 
