@@ -1,6 +1,6 @@
 import React from "react"
 import Heading from "./heading.mjs"
-import WCMImage2 from "./wcmimage2.mjs"
+import TopperImage from "./topperimage.mjs"
 import CaptionCredit from "./captioncredit.mjs"
 import * as topperStyles from "../styles/modules/topper2.module.less"
 
@@ -16,8 +16,9 @@ const Topper2 = ({ settings, wcmData }) => {
       case "no-visual":
         return [topperStyles.headerDekStacked, " mw-lg mt-lg mb-md"];
       case "full-screen": 
-        // apply margin offsets from spreadsheet
+        // Check if css ":root" is accessible
         if (typeof window != "undefined") {
+          // Apply margin offsets from spreadsheet
           calculatefullScreenOffsets();
         }
 
@@ -87,8 +88,8 @@ const Topper2 = ({ settings, wcmData }) => {
     }
   }
 
-  const ImageHTML = () => <WCMImage2 wcm={Image} alt={Image_Alt} isNotLazyloaded={false} wcmData={wcmData} isFullScreenTopper={false}/>
-  const FullScreenImageHTML = () => <WCMImage2 wcm={Image} alt={Image_Alt} isNotLazyloaded={false} ratio={calculateFullScreenImageRatio()} wcmData={wcmData} isFullScreenTopper={true}/>
+  const ImageHTML = () => <TopperImage wcm={Image} alt={Image_Alt} wcmData={wcmData} isFullScreenTopper={false}/>
+  const FullScreenImageHTML = () => <TopperImage wcm={Image} alt={Image_Alt} ratio={calculateFullScreenImageRatio()} wcmData={wcmData} isFullScreenTopper={true}/>
   
   const TopperHtml = () => {
     switch (Topper_Style) {

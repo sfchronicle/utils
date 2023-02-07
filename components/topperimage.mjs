@@ -1,6 +1,6 @@
 import React, {useRef, useEffect, useState} from 'react'
 import PropTypes from 'prop-types'
-import * as wcmimageStyles from "../styles/modules/wcmimage2.module.less"
+import * as wcmimageStyles from "../styles/modules/topperimage.module.less"
 import { debounce } from './helpers/utilfunctions.mjs'
 
 const currentEnv = process.env.GATSBY_DEPLOY_ENV
@@ -17,7 +17,7 @@ const ImageHTML = ({fullPath, imageRez, alt, isFullScreenTopper}) => {
   )
 }
 
-const WCMImage = ({ wcm, alt, ratio, wcmData, isFullScreenTopper }) => {
+const TopperImage = ({ wcm, alt, ratio, wcmData, isFullScreenTopper }) => {
   // When the wrapping div is rendered, we're going to figure out the best size for this image to be
   let picRef = useRef(null)
   let [imageRez, setImageRez] = useState(0)
@@ -54,13 +54,12 @@ const WCMImage = ({ wcm, alt, ratio, wcmData, isFullScreenTopper }) => {
     return null
   }
 
+  // During server-side rendering, access to ":root" is unavailable. This is okay; we just need
+  // to make sure that the site does not crash during SSR
+  let r = (typeof window != "undefined") ? document.querySelector(':root') : null;
+
   // This calculation is not used for the topper impl, but keeping it here just in case
   // it is needed for the general WCMImage utils migration
-  let r = null;
-  if (typeof window != "undefined") {
-    r = document.querySelector(':root');
-  }
-
   let photoRatio = "56.25%"; // Default to 16/9
   let fullPath = `https://s.hdnux.com/photos/0/0/0/${wcm}/0/`;
   if (!ratio){
@@ -73,6 +72,8 @@ const WCMImage = ({ wcm, alt, ratio, wcmData, isFullScreenTopper }) => {
     if (matchedPhoto){  
       // Set ratio of the actual photo like a legit hacker
       photoRatio = (matchedPhoto.photo.ratio*100)+"%";
+      
+      // If css :root is available, set the photo ratio
       if (r) { 
         r.style.setProperty('--img-bottom-padding-ratio', photoRatio); 
       }
@@ -85,6 +86,8 @@ const WCMImage = ({ wcm, alt, ratio, wcmData, isFullScreenTopper }) => {
   } else {
     // If an override is being passed in, use that
     photoRatio = ratio
+
+    // If css :root is available, set the photo ratio
     if (r) {
       r.style.setProperty('--img-bottom-padding-ratio', photoRatio); 
     }
@@ -97,15 +100,17 @@ const WCMImage = ({ wcm, alt, ratio, wcmData, isFullScreenTopper }) => {
 
   return (
     <div ref={picRef}>
-          <ImageHTML fullPath={fullPath} imageRez={imageRez} alt={alt} isFullScreenTopper={isFullScreenTopper}/>
+      <ImageHTML fullPath={fullPath} imageRez={imageRez} alt={alt} isFullScreenTopper={isFullScreenTopper}/>
     </div>
   )
 }
 
-WCMImage.propTypes = {
+TopperImage.propTypes = {
   wcm: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   alt: PropTypes.string.isRequired,
-  ratio: PropTypes.string
+  ratio: PropTypes.string,
+  wcmData: PropTypes.object,
+  isFullScreenTopper: PropTypes.bool
 }
 
-export default WCMImage
+export default TopperImage
