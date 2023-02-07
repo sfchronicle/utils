@@ -127,15 +127,17 @@ let createSheet = (auth, fallback, configData) => {
             );
             resolveAll();
           } else {
+            // Transfer ownership to the user
             const permission = {
               type: "user",
-              role: "writer",
-              emailAddress: gmail,
+              role: "owner",
+              emailAddress: gmail
             };
             drive.permissions.create(
               {
                 resource: permission,
                 fileId: resp.data.id, // Modify the created file
+                transferOwnership: true
               },
               (permErr, permResp) => {
                 //console.log("permResp", permResp, permErr)
