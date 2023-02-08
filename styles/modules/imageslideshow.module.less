@@ -1,49 +1,44 @@
 .slideshow {
   margin: 0 auto;
-  overflow: hidden;
+  // overflow: hidden;
   white-space: nowrap;
   width: 100%;
-  
+  z-index: 100;
 }
 
 .container {
   position: relative;
-}
-
-.grid {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  z-index: 99;
-}
-
-.fadein {
-  opacity: 0;
-  // position: absolute;
   width: 100%;
   height: 100%;
   z-index: 100;
-  animation: fadein 5s linear;
-  animation-iteration-count: 1;
+
 }
 
-.fadein2 {
+.curr-image {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+}
+
+/* enter animation */
+.fade-enter {
   opacity: 0;
-  animation: fadein 4s ease forwards;
+  z-index: 1;
 }
-
-.fadeout {
+.fade-enter.fade-enter-active {
   opacity: 1;
-  animation: fadeout 2s linear forwards;
+  transition: opacity 2000ms linear;
 }
 
-@keyframes fadein {
-  0% { opacity: 0; }
-  30% { opacity: 1; }
-  100% { opacity: 1; }
+/* exit animation */
+.fade-exit {
+  opacity: 1;
 }
-  
-@keyframes fadeout {
-  0% { opacity: 1; }
-  100% { opacity: 0; }
+.fade-exit.fade-exit-active {
+  opacity: 0;
+  transition: opacity 3000ms linear;
+}
+.fade-exit-done {
+  opacity: 0;
 }
