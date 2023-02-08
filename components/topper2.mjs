@@ -2,6 +2,7 @@ import React from "react"
 import Heading from "./heading.mjs"
 import TopperImage from "./topperimage.mjs"
 import CaptionCredit from "./captioncredit.mjs"
+import ImageSlideshow from "./imageslideshow.mjs"
 import * as topperStyles from "../styles/modules/topper2.module.less"
 
 const Topper2 = ({ settings, wcmData }) => {
@@ -135,7 +136,8 @@ const Topper2 = ({ settings, wcmData }) => {
               />
             </div>
             <figure className={`mw-xl ml-auto mr-auto ${topperStyles.imageStacked}`}>
-              <ImageHTML/>
+              <ImageSlideshow wcmData={wcmData} imageList={[20374215, 21958221, 21142640]}/>
+              {/* <ImageHTML/> */}
               <CaptionCredit caption={Image_Caption} credit={Image_Credits} />
             </figure>
           </div>
@@ -164,6 +166,7 @@ const Topper2 = ({ settings, wcmData }) => {
     }
   } 
 
+  /** TODO **/
   const calculatefullScreenOffsets = () => {
     var r = document.querySelector(':root');
 
@@ -174,6 +177,7 @@ const Topper2 = ({ settings, wcmData }) => {
     r.style.setProperty('--headerDek-horizontal-offset', horizontalOffset + "px"); 
   }
 
+  /** TODO **/
   const convertStringToNumber = (maybeStr, isFlipped) => {
     var num = 0;
     if (typeof(maybeStr) === "string") {
@@ -189,6 +193,7 @@ const Topper2 = ({ settings, wcmData }) => {
     return num;
   }
 
+  /** TODO **/
   const calculateFullScreenImageRatio = () => {
       // ratio needs to account for height of nav bar which is 37px
     if (typeof window === "undefined") return "56.25%"

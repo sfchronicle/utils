@@ -1,0 +1,49 @@
+.slideshow {
+  margin: 0 auto;
+  overflow: hidden;
+  white-space: nowrap;
+  width: 100%;
+  
+}
+
+.container {
+  position: relative;
+}
+
+.grid {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 99;
+}
+
+.fadein {
+  opacity: 0;
+  // position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+  animation: fadein 5s linear;
+  animation-iteration-count: 1;
+}
+
+.fadein2 {
+  opacity: 0;
+  animation: fadein 4s ease forwards;
+}
+
+.fadeout {
+  opacity: 1;
+  animation: fadeout 2s linear forwards;
+}
+
+@keyframes fadein {
+  0% { opacity: 0; }
+  30% { opacity: 1; }
+  100% { opacity: 1; }
+}
+  
+@keyframes fadeout {
+  0% { opacity: 1; }
+  100% { opacity: 0; }
+}
