@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef }  from "react"
 import TopperImage from "./topperimage.mjs"
 import * as styles from "../styles/modules/imageslideshow.module.less"
-
+import ReactCSSTransitionGroup from 'react-transition-group'
 
 const CurrentImage = ({ wcmId, wcmData, classList }) => {
   return (
@@ -16,7 +16,7 @@ const ImageSlideshow = ({ wcmData, imageList }) => {
   const [prevIndex, setPrevIndex] = useState(imageList.length-1);
 
   const timeoutRef = useRef(null);
-  const [animClass, setAnimClass] = useState(styles.test);
+  const [animClass, setAnimClass] = useState(styles.fadein);
 
   function resetTimeout() {
     if (timeoutRef.current) {
