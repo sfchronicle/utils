@@ -38,7 +38,6 @@ let googleAuth = (configData) => {
 };
 
 let createSheet = (auth, fallback, configData) => {
-  console.log(configData, "config data from create sheet");
   return new Promise((resolveAll, rejectAll) => {
     let gmail;
     if (!fallback) {
@@ -62,16 +61,21 @@ let createSheet = (auth, fallback, configData) => {
     }
 
     const drive = google.drive({ version: "v3", auth });
-    const body = { title: "New C2P sheet" };
     const templateId = "1DUvYnFdxtBv1AXcDI9X00s_opUSu4uHJmd5LNemCN9E";
+    const body = { title: "New C2P sheet", name: configData.PROJECT.SLUG };
+    if (configData.PROJECT.MARKET_KEY === "SFC"){
+      // If this is SFC, make sure it's created in the shared folder
+      body.parents = ['1_jnRs3xOYDxm27y7TZB9gkudzTRmcd7x'];
+    }
+    const createOptions = {
+      fileId: templateId, // Base template
+      resource: body,
+      supportsAllDrives: true,
+      //'copyCollaborators': true // This doesn't work unfortunately
+    };
     drive.files.copy(
-      {
-        fileId: templateId, // Base template
-        resource: body,
-        //'copyCollaborators': true // This doesn't work unfortunately
-      },
+      createOptions,
       (err, resp) => {
-        console.log("SHEET RESP", resp);
         // Make edits to the sheet to match the repo details
         let resources = {
           auth: auth,
@@ -127,20 +131,17 @@ let createSheet = (auth, fallback, configData) => {
             );
             resolveAll();
           } else {
-            // Transfer ownership to the user
             const permission = {
               type: "user",
-              role: "owner",
-              emailAddress: gmail
+              role: "writer",
+              emailAddress: gmail,
             };
             drive.permissions.create(
               {
                 resource: permission,
                 fileId: resp.data.id, // Modify the created file
-                transferOwnership: true
               },
               (permErr, permResp) => {
-                //console.log("permResp", permResp, permErr)
                 if (permErr) {
                   console.log("An error prevented the sharing of this sheet!");
                   rejectAll();
