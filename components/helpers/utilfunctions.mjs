@@ -1,5 +1,5 @@
 import {getBlueconic} from "../../blueconic"
-import {appCheck} from "../../index"
+import {appCheck, blendHDN} from "../../index"
 
 /** TODO */
 function debounce(fn, ms) {
@@ -51,4 +51,25 @@ function appendLayoutScripts(isEmbedded) {
   }, 5000)
 }
 
-export { debounce, appendLayoutScripts }
+function formatHDN(isEmbedded, url_add, meta) {
+  const isApp = appCheck();
+
+   // Combine our settings with what Hearst puts on page
+   let stringHDN = ''
+   if (!isEmbedded) {
+     // Put url_add into a new meta object to pass in
+     const metaHDN = Object.assign({}, meta)
+     metaHDN.URL_ADD = url_add
+     // Make sure this is free on app
+     if (isApp) {
+       metaHDN.PAYWALL_SETTING = "free"
+     }
+     // Allow gift button to appear next to sharebuttons
+     metaHDN.GIFT_ENABLED = true
+     let blended = blendHDN(metaHDN)
+     stringHDN = blended.stringHDN
+   }
+   return stringHDN;
+}
+
+export { debounce, appendLayoutScripts, formatHDN }
