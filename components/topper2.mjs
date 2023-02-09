@@ -6,17 +6,17 @@ import ImageSlideshow from "./imageslideshow.mjs"
 import * as topperStyles from "../styles/modules/topper2.module.less"
 
 const Topper2 = ({ settings, wcmData }) => {
-  const { 
-    Topper_Style, Title, Title_Style, Deck, Image, Image_Alt, Image_Caption, Image_Credits, 
-    HeaderDek_Vertical_Position, HeaderDek_Vertical_Offset, HeaderDek_Horizontal_Offset, HeaderDek_Horizontal_Position, Inverted_Colors 
+  const {
+    Topper_Style, Title, Title_Style, Deck, Image, Image_Alt, Image_Caption, Image_Credits,
+    HeaderDek_Vertical_Position, HeaderDek_Vertical_Offset, HeaderDek_Horizontal_Offset, HeaderDek_Horizontal_Position, Inverted_Colors
   } = settings
 
   const headerDekStyleList = () => {
-    switch(Topper_Style) {
+    switch (Topper_Style) {
       case "stacked":
       case "no-visual":
         return [topperStyles.headerDekStacked, " mw-lg mt-lg mb-md"];
-      case "full-screen": 
+      case "full-screen":
         // Check if css ":root" is accessible
         if (typeof window != "undefined") {
           // Apply margin offsets from spreadsheet
@@ -28,13 +28,13 @@ const Topper2 = ({ settings, wcmData }) => {
           ... (HeaderDek_Vertical_Position === "top") ? [topperStyles.headerDekTop] : [topperStyles.headerDekBottom],
           ... (Inverted_Colors === "black-text-white-bg") ? [topperStyles.blackTextWhiteBg] : [topperStyles.whiteTextBlackBg]
         ];
-      case "side-by-side": 
+      case "side-by-side":
         return [];
     }
   }
 
-   /** get horizontal positioning css for full screen header-deck container **/
-   const fullScreenHorizontalCss = () => {
+  /** get horizontal positioning css for full screen header-deck container **/
+  const fullScreenHorizontalCss = () => {
     switch (HeaderDek_Horizontal_Position) {
       case "left": return topperStyles.headerDekLeft;
       case "right": return topperStyles.headerDekRight;
@@ -43,18 +43,18 @@ const Topper2 = ({ settings, wcmData }) => {
   }
 
   const headerStyleList = () => {
-    let defaultStyles; 
-    switch(Topper_Style) {
-      case "stacked": 
+    let defaultStyles;
+    switch (Topper_Style) {
+      case "stacked":
         defaultStyles = [];
         break;
       case "no-visual":
         defaultStyles = ["left"];
         break;
-      case "full-screen": 
+      case "full-screen":
         defaultStyles = [topperStyles.hedFullScreen, fullScreenTextAlignCss()];
         break;
-      case "side-by-side": 
+      case "side-by-side":
         defaultStyles = [];
         break;
     }
@@ -68,14 +68,14 @@ const Topper2 = ({ settings, wcmData }) => {
   }
 
   const deckStyleList = () => {
-    switch(Topper_Style) {
+    switch (Topper_Style) {
       case "stacked":
         return ["deck"];
-      case "no-visual": 
+      case "no-visual":
         return ["deck left"];
-      case "full-screen": 
+      case "full-screen":
         return ["deck", topperStyles.deckFullScreen, fullScreenTextAlignCss()];
-      case "side-by-side": 
+      case "side-by-side":
         return ["deck"];
     }
   }
@@ -89,18 +89,24 @@ const Topper2 = ({ settings, wcmData }) => {
     }
   }
 
-  const ImageHTML = () => <TopperImage wcm={Image} alt={Image_Alt} wcmData={wcmData} isFullScreenTopper={false}/>
-  const FullScreenImageHTML = () => <TopperImage wcm={Image} alt={Image_Alt} ratio={calculateFullScreenImageRatio()} wcmData={wcmData} isFullScreenTopper={true}/>
-  
+  /** TODO */
+  const getWcmIdList = (listStr) => {
+    return listStr.split(",").map((d) => parseInt(d));
+  }
+
+  const ImageHTML = () => <TopperImage wcm={Image} alt={Image_Alt} wcmData={wcmData} isFullScreenTopper={false} />
+  const FullScreenImageHTML = () => <TopperImage wcm={Image} alt={Image_Alt} ratio={calculateFullScreenImageRatio()} wcmData={wcmData} isFullScreenTopper={true} />
+
+  const wcmIdList = getWcmIdList(Image);
   const TopperHtml = () => {
     switch (Topper_Style) {
-      case "full-screen": 
+      case "full-screen":
         return (
           <>
-          <div className={topperStyles.topperContainerFullScreen}>
-              <figure className={`topper-image ${topperStyles.imageFullScreen}` } aria-labelledby="topperCaptionText">
-                <FullScreenImageHTML/>
-                <CaptionCredit caption={Image_Caption} credit={Image_Credits} extraStyles={topperStyles.hideWhenDesktop}/>
+            <div className={topperStyles.topperContainerFullScreen}>
+              <figure className={`topper-image ${topperStyles.imageFullScreen}`} aria-labelledby="topperCaptionText">
+                <FullScreenImageHTML />
+                <CaptionCredit caption={Image_Caption} credit={Image_Credits} extraStyles={topperStyles.hideWhenDesktop} />
               </figure>
               <div className={headerDekStyleList().join(' ')}>
                 <Heading level={1} text={Title}
@@ -112,59 +118,59 @@ const Topper2 = ({ settings, wcmData }) => {
                   className={deckStyleList().join(' ')}
                 />
               </div>
-          </div>
-          <div className="topperCaptionText">
-            <CaptionCredit caption={Image_Caption} credit={Image_Credits} extraStyles={[topperStyles.hideWhenMobile, topperStyles.smallPaddingLeft]}/>
-          </div>
+            </div>
+            <div className="topperCaptionText">
+              <CaptionCredit caption={Image_Caption} credit={Image_Credits} extraStyles={[topperStyles.hideWhenMobile, topperStyles.smallPaddingLeft]} />
+            </div>
           </>
         );
 
       case "stacked":
         return (
           <>
-          <div>
-            <div className={headerDekStyleList().join('')}>
-              <Heading
-                level={1}
-                text={Title}
-                className={headerStyleList().join(' ')}
-              />
-              <Heading
-                level={2}
-                text={Deck}
-                className={deckStyleList().join(' ')}
-              />
+            <div>
+              <div className={headerDekStyleList().join('')}>
+                <Heading
+                  level={1}
+                  text={Title}
+                  className={headerStyleList().join(' ')}
+                />
+                <Heading
+                  level={2}
+                  text={Deck}
+                  className={deckStyleList().join(' ')}
+                />
+              </div>
+              <figure className={`mw-xl ml-auto mr-auto ${topperStyles.imageStacked}`}>
+                {(wcmIdList.length > 1) && <ImageSlideshow wcmData={wcmData} imageList={wcmIdList} />}
+                {(wcmIdList.length == 1) && <ImageHTML />}
+                <CaptionCredit caption={Image_Caption} credit={Image_Credits} />
+              </figure>
             </div>
-            <figure className={`mw-xl ml-auto mr-auto ${topperStyles.imageStacked}`}>
-              <ImageSlideshow wcmData={wcmData} imageList={[20374215, 21958221, 21142640]}/>
-              {/* <ImageHTML/> */}
-              <CaptionCredit caption={Image_Caption} credit={Image_Credits} />
-            </figure>
-          </div>
           </>
         );
 
       case "no-visual":
         return (
           <>
-          <div>
-            <div className={headerDekStyleList().join('')}>
-              <Heading
-                level={1}
-                text={Title}
-                className={headerStyleList().join(' ')}
-              />
-              <Heading
-                level={2}
-                text={Deck}
-                className={deckStyleList().join(' ')}
-              />
+            <div>
+              <div className={headerDekStyleList().join('')}>
+                <Heading
+                  level={1}
+                  text={Title}
+                  className={headerStyleList().join(' ')}
+                />
+                <Heading
+                  level={2}
+                  text={Deck}
+                  className={deckStyleList().join(' ')}
+                />
+              </div>
             </div>
-          </div>
           </>
         );
     }
-  } 
+  }
 
   /** TODO **/
   const calculatefullScreenOffsets = () => {
@@ -173,16 +179,16 @@ const Topper2 = ({ settings, wcmData }) => {
     let verticalOffset = convertStringToNumber(HeaderDek_Vertical_Offset, (HeaderDek_Vertical_Position === "bottom"));
     let horizontalOffset = convertStringToNumber(HeaderDek_Horizontal_Offset, (HeaderDek_Horizontal_Position === "right"));
 
-    r.style.setProperty('--headerDek-vertical-offset', verticalOffset + "px" ); 
-    r.style.setProperty('--headerDek-horizontal-offset', horizontalOffset + "px"); 
+    r.style.setProperty('--headerDek-vertical-offset', verticalOffset + "px");
+    r.style.setProperty('--headerDek-horizontal-offset', horizontalOffset + "px");
   }
 
   /** TODO **/
   const convertStringToNumber = (maybeStr, isFlipped) => {
     var num = 0;
-    if (typeof(maybeStr) === "string") {
+    if (typeof (maybeStr) === "string") {
       // remove all non-number characters and "-" from string
-      num = Number(maybeStr.replace(/(?!^)-|[^0-9-]/g,''))
+      num = Number(maybeStr.replace(/(?!^)-|[^0-9-]/g, ''))
     } else {
       num = maybeStr
     }
@@ -195,18 +201,18 @@ const Topper2 = ({ settings, wcmData }) => {
 
   /** TODO **/
   const calculateFullScreenImageRatio = () => {
-      // ratio needs to account for height of nav bar which is 37px
+    // ratio needs to account for height of nav bar which is 37px
     if (typeof window === "undefined") return "56.25%"
-    const windowRatio = ((window.innerHeight-37) / window.innerWidth)*100;
+    const windowRatio = ((window.innerHeight - 37) / window.innerWidth) * 100;
     let fullScreenRatio = "56.25%"; // defaults to 16/9;
 
     if (windowRatio < 56.25) fullScreenRatio = (windowRatio + "%")
     return fullScreenRatio
   }
 
-  return (     
-      <TopperHtml/>
-    )
-  }
+  return (
+    <TopperHtml />
+  )
+}
 
 export default Topper2
