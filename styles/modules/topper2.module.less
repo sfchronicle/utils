@@ -1,49 +1,54 @@
 @import (less) "../variables.less";
 
-:root { 
-    --headerDek-vertical-offset: 0px;
-    --headerDek-horizontal-offset: 0px;
+:root {
+  --headerDek-vertical-offset: 0px;
+  --headerDek-horizontal-offset: 0px;
 }
 
 .topperContainerFullScreen {
-    max-width: 100%;
-    position: relative;
+  max-width: 100%;
+  position: relative;
 }
 
 .imageFullScreen {
-    top: 0 !important;
-    width: 100%;
+  top: 0 !important;
+  width: 100%;
 }
 
 .imageStacked {
-    position: relative;
-    // overflow: hidden;
+  position: relative;
+  max-width: @xl;
 
-    @media @mobile {
-        width: 100%;
-    }
+  @media @mobile {
+    width: 100%;
+  }
 }
 
 .headerDekStacked {
   margin-left: auto;
   margin-right: auto;
+
   @media (max-width: 960px) {
     margin-left: 0;
     margin-right: 0;
   }
 }
+
 .headerDekFullScreen {
-    position: absolute;
+  position: absolute;
+  padding: @s24;
     padding: @s24; 
-    width: @md;
-    @media @tablet {
-        width: @sm;
-        position: static;
-        transform: none;
-        margin: 0;
-        padding: 0;
-        width: 100%;
-    }
+  padding: @s24;
+  width: @md;
+
+  @media @tablet {
+    width: @sm;
+    position: static;
+    transform: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+  }
 }
 
 .hedFullScreen {
@@ -51,51 +56,55 @@
 }
 
 .deckFullScreen {
-  margin-bottom: 0px; 
+  margin-bottom: 0px;
 }
 
 .headerDekTop {
   top: 0%;
   margin-top: var(--headerDek-vertical-offset);
+
   @media @tablet {
-      margin-top: 0px;
+    margin-top: 0px;
   }
 }
 
 .headerDekBottom {
   bottom: 0%;
   margin-bottom: var(--headerDek-vertical-offset);
+
   @media @tablet {
-      margin-bottom: 0px;
+    margin-bottom: 0px;
   }
 }
 
 .headerDekLeft {
   left: 0%;
   margin-left: var(--headerDek-horizontal-offset);
+
   @media @tablet {
-      margin-left: 0px;
+    margin-left: 0px;
   }
 }
 
 .headerDekRight {
   right: 0%;
   margin-right: var(--headerDek-horizontal-offset);
+
   @media @tablet {
-      margin-right: 0px;
+    margin-right: 0px;
   }
 }
 
 .headerDekCenter {
-  left: 50%; 
+  left: 50%;
   transform: translate(-50%, 0%);
   margin-left: var(--headerDek-horizontal-offset);
 
-  @media @tablet { 
-      transform: none;
-      top: 0%;
-      left: 0%;
-      margin-left: 0px;
+  @media @tablet {
+    transform: none;
+    top: 0%;
+    left: 0%;
+    margin-left: 0px;
   }
 }
 
@@ -105,6 +114,7 @@
 
 .textAlignCenter {
   text-align: center;
+
   @media @tablet {
     text-align: left;
   }
@@ -113,6 +123,7 @@
 .whiteTextBlackBg {
   color: @white;
   background-color: rgba(0, 0, 0, 0.54);
+
   @media @tablet {
     color: @black;
     background-color: transparent;
@@ -125,13 +136,14 @@
 }
 
 .hideWhenMobile {
-  @media @mobile { 
-      display: none;
+  @media @mobile {
+    display: none;
   }
 }
 
 .hideWhenDesktop {
   display: none;
+
   @media @mobile {
     display: block;
     padding-left: @s8;

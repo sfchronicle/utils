@@ -5,8 +5,9 @@ import { debounce } from './helpers/utilfunctions.mjs'
 
 const currentEnv = process.env.GATSBY_DEPLOY_ENV
 
-const ImageHTML = ({fullPath, imageRez, alt, isFullScreenTopper}) => {
+const ImageHTML = ({fullPath, imageRez, alt, isFullScreenTopper, overrideCss}) => {
   let imageCss = [wcmimageStyles.cImg];
+  if (overrideCss) imageCss = overrideCss;
   if (isFullScreenTopper) imageCss.push(wcmimageStyles.cImgFullscreen);
 
   return (
@@ -17,7 +18,7 @@ const ImageHTML = ({fullPath, imageRez, alt, isFullScreenTopper}) => {
   )
 }
 
-const TopperImage = ({ wcm, alt, ratio, wcmData, isFullScreenTopper }) => {
+const TopperImage = ({ wcm, alt, ratio, wcmData, isFullScreenTopper, overrideCss }) => {
   // When the wrapping div is rendered, we're going to figure out the best size for this image to be
   let picRef = useRef(null)
   let [imageRez, setImageRez] = useState(0)
@@ -100,7 +101,7 @@ const TopperImage = ({ wcm, alt, ratio, wcmData, isFullScreenTopper }) => {
 
   return (
     <div ref={picRef}>
-      <ImageHTML fullPath={fullPath} imageRez={imageRez} alt={alt} isFullScreenTopper={isFullScreenTopper}/>
+      <ImageHTML fullPath={fullPath} imageRez={imageRez} alt={alt} isFullScreenTopper={isFullScreenTopper} overrideCss={overrideCss}/>
     </div>
   )
 }
