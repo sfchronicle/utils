@@ -4,15 +4,25 @@ import * as styles from "../styles/modules/imageslideshow.module.less"
 import * as imageStyles from "../styles/modules/topperimage.module.less"
 import { TransitionGroup, CSSTransition } from "react-transition-group"
 
-const CurrentImage = ({ wcmId, wcmData, classList }) => {
+const CurrentImage = ({ wcmId, wcmData, wrapperClass, topperStyle, ratio }) => {
+  // TODO turn into function
+  let imageCss = "";
+  switch (topperStyle) {
+    case "stacked": 
+      imageCss = imageStyles.cForceAspectRatio;
+      break;
+    default:
+      imageCss = "";
+      break;
+  }
   return (
-    <div className={classList}>
-      <TopperImage wcm={wcmId} alt={"test alt"} wcmData={wcmData} isFullScreenTopper={false} overrideCss={[imageStyles.cForceAspectRatio]}/>
+    <div className={wrapperClass}>
+      <TopperImage wcm={wcmId} alt={"test alt"} wcmData={wcmData} isFullScreenTopper={false} overrideCssList={[imageCss]}/>
     </div>
   )
 }
 
-const ImageSlideshow = ({ wcmData, imageList }) => {
+const ImageSlideshow = ({ wcmData, imageList, ratio, topperStyle }) => {
   const [index, setIndex] = useState(0);
   const timeoutRef = useRef(null);
 
@@ -28,7 +38,7 @@ const ImageSlideshow = ({ wcmData, imageList }) => {
       // Set image index
       setIndex((prevIndex) => (prevIndex === imageList.length - 1) ? 0 : prevIndex + 1);
     },
-      5000 // delay
+      40000 // delay
     );
 
     return () => {
@@ -36,12 +46,25 @@ const ImageSlideshow = ({ wcmData, imageList }) => {
     };
   }, [index]);
 
+  // TODO turn into function
+  let containerClass = "";
+  switch (topperStyle) {
+    case "stacked": 
+      containerClass = styles.containerStacked;
+      break;
+    case "full-screen": 
+      containerClass = styles.containerFullscreen;
+      break;
+    default: 
+      break;
+  }
+
   return (
-    <div className={styles.container}>
+    <div className={containerClass}>
       <TransitionGroup>
         <CSSTransition
           key={index}
-          timeout={4000}
+          timeout={40000}
           classNames={{
             enter: styles.fadeEnter,
             enterActive: styles.fadeEnterActive,
@@ -50,7 +73,7 @@ const ImageSlideshow = ({ wcmData, imageList }) => {
             exitDone: styles.fadeExitDone
           }}
         >
-          <CurrentImage wcmId={imageList[index]} wcmData={wcmData} classList={styles.currImage} />
+          <CurrentImage wcmId={imageList[index]} wcmData={wcmData} wrapperClass={styles.currImage} topperStyle={topperStyle} ratio={ratio}/>
         </CSSTransition>
       </TransitionGroup>
     </div>

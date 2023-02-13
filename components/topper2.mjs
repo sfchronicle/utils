@@ -4,6 +4,7 @@ import TopperImage from "./topperimage.mjs"
 import CaptionCredit from "./captioncredit.mjs"
 import ImageSlideshow from "./imageslideshow.mjs"
 import * as topperStyles from "../styles/modules/topper2.module.less"
+import * as sliderStyles from "../styles/modules/imageslideshow.module.less"
 
 const Topper2 = ({ settings, wcmData }) => {
   const {
@@ -24,7 +25,8 @@ const Topper2 = ({ settings, wcmData }) => {
         }
 
         return [
-          topperStyles.headerDekFullScreen, fullScreenHorizontalCss(),
+          topperStyles.headerDekFullScreen, 
+          fullScreenHorizontalCss(),
           ... (HeaderDek_Vertical_Position === "top") ? [topperStyles.headerDekTop] : [topperStyles.headerDekBottom],
           ... (Inverted_Colors === "black-text-white-bg") ? [topperStyles.blackTextWhiteBg] : [topperStyles.whiteTextBlackBg]
         ];
@@ -105,7 +107,8 @@ const Topper2 = ({ settings, wcmData }) => {
           <>
             <div className={topperStyles.topperContainerFullScreen}>
               <figure className={`topper-image ${topperStyles.imageFullScreen}`} aria-labelledby="topperCaptionText">
-                <FullScreenImageHTML />
+                {/* <FullScreenImageHTML /> */}
+                <ImageSlideshow wcmData={wcmData} imageList={wcmIdList} ratio={calculateFullScreenImageRatio()} topperStyle={Topper_Style}/>
                 <CaptionCredit caption={Image_Caption} credit={Image_Credits} extraStyles={topperStyles.hideWhenDesktop} />
               </figure>
               <div className={headerDekStyleList().join(' ')}>
@@ -142,7 +145,7 @@ const Topper2 = ({ settings, wcmData }) => {
                 />
               </div>
               <figure className={`mw-xl ml-auto mr-auto ${topperStyles.imageStacked}`}>
-                {(wcmIdList.length > 1) && <ImageSlideshow wcmData={wcmData} imageList={wcmIdList} />}
+                {(wcmIdList.length > 1) && <ImageSlideshow wcmData={wcmData} imageList={wcmIdList} topperStyle={Topper_Style}/>}
                 {(wcmIdList.length == 1) && <ImageHTML />}
                 <CaptionCredit caption={Image_Caption} credit={Image_Credits} />
               </figure>
@@ -201,8 +204,9 @@ const Topper2 = ({ settings, wcmData }) => {
 
   /** TODO **/
   const calculateFullScreenImageRatio = () => {
-    // ratio needs to account for height of nav bar which is 37px
     if (typeof window === "undefined") return "56.25%"
+
+    // ratio needs to account for height of nav bar which is 37px
     const windowRatio = ((window.innerHeight - 37) / window.innerWidth) * 100;
     let fullScreenRatio = "56.25%"; // defaults to 16/9;
 

@@ -1,11 +1,20 @@
 @import (less) '../values';
 
-.container {
+.container-stacked {
   margin: 0 auto;
   white-space: nowrap;
   padding-bottom: calc(@xl*9/16);
   @media @tablet {
     padding-bottom: calc(100vw * (9/16));
+  }
+}
+
+.container-fullscreen {
+  padding-bottom: calc(100vh - 37px);
+  width: 100%;
+
+  @media @tablet {
+    padding-bottom: calc(100vh);
   }
 }
 

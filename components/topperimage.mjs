@@ -5,9 +5,9 @@ import { debounce } from './helpers/utilfunctions.mjs'
 
 const currentEnv = process.env.GATSBY_DEPLOY_ENV
 
-const ImageHTML = ({fullPath, imageRez, alt, isFullScreenTopper, overrideCss}) => {
+const ImageHTML = ({fullPath, imageRez, alt, isFullScreenTopper, overrideCssList}) => {
   let imageCss = [wcmimageStyles.cImg];
-  if (overrideCss) imageCss = overrideCss;
+  if (overrideCssList) imageCss = overrideCssList
   if (isFullScreenTopper) imageCss.push(wcmimageStyles.cImgFullscreen);
 
   return (
@@ -18,7 +18,7 @@ const ImageHTML = ({fullPath, imageRez, alt, isFullScreenTopper, overrideCss}) =
   )
 }
 
-const TopperImage = ({ wcm, alt, ratio, wcmData, isFullScreenTopper, overrideCss }) => {
+const TopperImage = ({ wcm, alt, ratio, wcmData, isFullScreenTopper, overrideCssList }) => {
   // When the wrapping div is rendered, we're going to figure out the best size for this image to be
   let picRef = useRef(null)
   let [imageRez, setImageRez] = useState(0)
@@ -101,7 +101,7 @@ const TopperImage = ({ wcm, alt, ratio, wcmData, isFullScreenTopper, overrideCss
 
   return (
     <div ref={picRef}>
-      <ImageHTML fullPath={fullPath} imageRez={imageRez} alt={alt} isFullScreenTopper={isFullScreenTopper} overrideCss={overrideCss}/>
+      <ImageHTML fullPath={fullPath} imageRez={imageRez} alt={alt} isFullScreenTopper={isFullScreenTopper} overrideCssList={overrideCssList}/>
     </div>
   )
 }
