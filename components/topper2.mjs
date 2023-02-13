@@ -4,7 +4,6 @@ import TopperImage from "./topperimage.mjs"
 import CaptionCredit from "./captioncredit.mjs"
 import ImageSlideshow from "./imageslideshow.mjs"
 import * as topperStyles from "../styles/modules/topper2.module.less"
-import * as sliderStyles from "../styles/modules/imageslideshow.module.less"
 import * as imageStyles from "../styles/modules/topperimage.module.less"
 
 const Topper2 = ({ settings, wcmData }) => {
@@ -26,9 +25,12 @@ const Topper2 = ({ settings, wcmData }) => {
         }
 
         return [
-          topperStyles.headerDekFullScreen, 
+          topperStyles.headerDekFullScreen,
+          // Add styling for header-deck container position
           fullScreenHorizontalCss(),
+          // Add styling for text position inside header-deck
           ... (HeaderDek_Vertical_Position === "top") ? [topperStyles.headerDekTop] : [topperStyles.headerDekBottom],
+          // Add styling for header-deck container background
           ... (Inverted_Colors === "black-text-white-bg") ? [topperStyles.blackTextWhiteBg] : [topperStyles.whiteTextBlackBg]
         ];
       case "side-by-side":
@@ -62,6 +64,7 @@ const Topper2 = ({ settings, wcmData }) => {
         break;
     }
 
+    // Apply extra custom styling if it exists in the spreadsheet
     if (Title_Style !== "") {
       let extraStyles = Title_Style.split(", ");
       defaultStyles = defaultStyles.concat(extraStyles);
@@ -92,18 +95,19 @@ const Topper2 = ({ settings, wcmData }) => {
     }
   }
 
-  /** TODO */
+  /** Converts wcm string from spreadsheet into a list of WCM ids */
   const getWcmIdList = (listStr) => {
     return listStr.split(",").map((d) => parseInt(d));
   }
 
-  /** TODO */
+  /** Checks if WCM list represents an image slideshow */
   const isSlideshow = (wcmIdList) => {
     return (wcmIdList.length > 1);
   }
 
   const ImageHTML = () => <TopperImage wcm={Image} alt={Image_Alt} wcmData={wcmData} />
-  const FullScreenImageHTML = () => <TopperImage wcm={Image} alt={Image_Alt} ratio={calculateFullScreenImageRatio()} wcmData={wcmData} overrideCssList={[imageStyles.cImgFullscreen]} />
+  const FullScreenImageHTML = () => <TopperImage wcm={Image} alt={Image_Alt} wcmData={wcmData} overrideCssList={[imageStyles.cImgFullscreen]} />
+  const ImageSlideshowHTML = () => <ImageSlideshow wcmData={wcmData} imageList={wcmIdList} topperStyle={Topper_Style} />
 
   const wcmIdList = getWcmIdList(Image);
   const TopperHtml = () => {
@@ -115,7 +119,8 @@ const Topper2 = ({ settings, wcmData }) => {
             <div className={containerCss}>
               <figure className={`topper-image ${topperStyles.imageFullScreen}`} aria-labelledby="topperCaptionText">
                 {!isSlideshow(wcmIdList) && <FullScreenImageHTML />}
-                {isSlideshow(wcmIdList) && <ImageSlideshow wcmData={wcmData} imageList={wcmIdList} topperStyle={Topper_Style}/>}
+                {isSlideshow(wcmIdList) && <ImageSlideshowHTML />}
+
                 <CaptionCredit caption={Image_Caption} credit={Image_Credits} extraStyles={topperStyles.hideWhenDesktop} />
               </figure>
               <div className={headerDekStyleList().join(' ')}>
@@ -152,8 +157,9 @@ const Topper2 = ({ settings, wcmData }) => {
                 />
               </div>
               <figure className={`mw-xl ml-auto mr-auto ${topperStyles.imageStacked}`}>
-                {isSlideshow(wcmIdList) && <ImageSlideshow wcmData={wcmData} imageList={wcmIdList} topperStyle={Topper_Style}/>}
+                {isSlideshow(wcmIdList) && <ImageSlideshowHTML />}
                 {!isSlideshow(wcmIdList) && <ImageHTML />}
+
                 <CaptionCredit caption={Image_Caption} credit={Image_Credits} />
               </figure>
             </div>
@@ -182,7 +188,7 @@ const Topper2 = ({ settings, wcmData }) => {
     }
   }
 
-  /** TODO **/
+  /** Calculate offsets for header-deck container based on the spreadsheet, for full-screen toppers only **/
   const calculatefullScreenOffsets = () => {
     var r = document.querySelector(':root');
 
@@ -193,7 +199,7 @@ const Topper2 = ({ settings, wcmData }) => {
     r.style.setProperty('--headerDek-horizontal-offset', horizontalOffset + "px");
   }
 
-  /** TODO **/
+  /** Convert offset values from the spreadsheet into Number type **/
   const convertStringToNumber = (maybeStr, isFlipped) => {
     var num = 0;
     if (typeof (maybeStr) === "string") {
@@ -207,18 +213,6 @@ const Topper2 = ({ settings, wcmData }) => {
     if (isFlipped) num *= -1;
 
     return num;
-  }
-
-  /** TODO **/
-  const calculateFullScreenImageRatio = () => {
-    if (typeof window === "undefined") return "56.25%"
-
-    // ratio needs to account for height of nav bar which is 37px
-    const windowRatio = ((window.innerHeight - 37) / window.innerWidth) * 100;
-    let fullScreenRatio = "56.25%"; // defaults to 16/9;
-
-    if (windowRatio < 56.25) fullScreenRatio = (windowRatio + "%")
-    return fullScreenRatio
   }
 
   return (

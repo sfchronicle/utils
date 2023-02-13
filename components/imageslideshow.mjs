@@ -4,36 +4,6 @@ import * as styles from "../styles/modules/imageslideshow.module.less"
 import * as imageStyles from "../styles/modules/topperimage.module.less"
 import { TransitionGroup, CSSTransition } from "react-transition-group"
 
-const CurrentImage = ({ wcmId, wcmData, topperStyle }) => {
-  let wrapperClass = "";
-  switch (topperStyle) {
-    case "stacked": 
-      wrapperClass = styles.imageWrapperStacked;
-      break;
-    default:
-      wrapperClass = styles.imageWrapperFullscreen;
-      break;
-  }
-  
-  let imageCss = [""];
-  switch (topperStyle) {
-    case "stacked": 
-      imageCss = [imageStyles.cForceAspectRatio];
-      break;
-    case "full-screen":
-      imageCss = [imageStyles.cImgSlideshowFullscreen];
-      break;
-    default:
-      break;
-  }
-
-  return (
-    <div className={wrapperClass}>
-      <TopperImage wcm={wcmId} alt={"test alt"} wcmData={wcmData} isFullScreenTopper={false} overrideCssList={imageCss}/>
-    </div>
-  )
-}
-
 const ImageSlideshow = ({ wcmData, imageList, topperStyle }) => {
   const [index, setIndex] = useState(0);
   const timeoutRef = useRef(null);
@@ -47,10 +17,10 @@ const ImageSlideshow = ({ wcmData, imageList, topperStyle }) => {
   useEffect(() => {
     resetTimeout();
     timeoutRef.current = setTimeout(() => {
-      // Set image index
+      // Set current image index
       setIndex((prevIndex) => (prevIndex === imageList.length - 1) ? 0 : prevIndex + 1);
     },
-      4000 // delay
+      4000 // Delay for switching images
     );
 
     return () => {
@@ -58,25 +28,53 @@ const ImageSlideshow = ({ wcmData, imageList, topperStyle }) => {
     };
   }, [index]);
 
-  // TODO turn into function
-  let containerClass = "";
-  switch (topperStyle) {
-    case "stacked": 
-      containerClass = styles.containerStacked;
-      break;
-    case "full-screen": 
-      containerClass = styles.containerStacked;
-      break;
-    default: 
-      break;
+  const getContainerClass = () => {
+    switch (topperStyle) {
+      case "stacked":
+        return styles.containerStacked;
+      case "full-screen":
+        return styles.containerStacked;
+      default:
+        return "";
+    }
   }
 
+  const getWrapperClass = () => {
+    switch (topperStyle) {
+      case "stacked":
+        return styles.imageWrapperStacked;
+      case "full-screen":
+        return styles.imageWrapperFullscreen;
+      default:
+        return "";
+    }
+  }
+
+  const getImageClassList = () => {
+    switch (topperStyle) {
+      case "stacked":
+        return [imageStyles.cForceAspectRatio];
+      case "full-screen":
+        return [imageStyles.cImgSlideshowFullscreen];
+      default:
+        return [""];
+    }
+  }
+
+  /**
+   * Overall CSS architecture:
+   * <Container>
+   *   <Wrapper>
+   *    <Image/>
+   *  </Wrapper> 
+   * </Container> 
+   */
   return (
-    <div className={containerClass}>
+    <div className={getContainerClass()}>
       <TransitionGroup>
         <CSSTransition
           key={index}
-          timeout={40000}
+          timeout={4000}
           classNames={{
             enter: styles.fadeEnter,
             enterActive: styles.fadeEnterActive,
@@ -85,7 +83,10 @@ const ImageSlideshow = ({ wcmData, imageList, topperStyle }) => {
             exitDone: styles.fadeExitDone
           }}
         >
-          <CurrentImage wcmId={imageList[index]} wcmData={wcmData} topperStyle={topperStyle}/>
+          <div className={getWrapperClass()}>
+            {/* TODO: fix alt and captions */}
+            <TopperImage wcm={imageList[index]} alt={"test alt"} wcmData={wcmData} overrideCssList={getImageClassList()} />
+          </div>
         </CSSTransition>
       </TransitionGroup>
     </div>
