@@ -17,6 +17,19 @@
   }
 }
 
+.c-img-slideshow-fullscreen {
+  display: static;
+  width: 100%;
+  object-fit: cover;
+  height: calc(100vh - 37px);
+  margin: 0 auto;
+
+  @media @tablet {
+    width: @xl;
+    height: calc(100vw*9/16);
+  }
+}
+
 .c-img {
   display: block;
   position: relative;
@@ -29,6 +42,7 @@
 .c-img-fullscreen {
   position: static;
   object-fit: cover;
+  width: 100%;
   height: calc(100vh - 37px);
 
   @media @tablet {
@@ -39,7 +53,7 @@
 .c-fig-hidden-when-desktop {
   display: none;
 
-  @media @mobile {
+  @media @tablet {
     display: block;
     padding-left: @s8;
   }

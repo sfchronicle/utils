@@ -5,6 +5,7 @@ import CaptionCredit from "./captioncredit.mjs"
 import ImageSlideshow from "./imageslideshow.mjs"
 import * as topperStyles from "../styles/modules/topper2.module.less"
 import * as sliderStyles from "../styles/modules/imageslideshow.module.less"
+import * as imageStyles from "../styles/modules/topperimage.module.less"
 
 const Topper2 = ({ settings, wcmData }) => {
   const {
@@ -96,19 +97,25 @@ const Topper2 = ({ settings, wcmData }) => {
     return listStr.split(",").map((d) => parseInt(d));
   }
 
-  const ImageHTML = () => <TopperImage wcm={Image} alt={Image_Alt} wcmData={wcmData} isFullScreenTopper={false} />
-  const FullScreenImageHTML = () => <TopperImage wcm={Image} alt={Image_Alt} ratio={calculateFullScreenImageRatio()} wcmData={wcmData} isFullScreenTopper={true} />
+  /** TODO */
+  const isSlideshow = (wcmIdList) => {
+    return (wcmIdList.length > 1);
+  }
+
+  const ImageHTML = () => <TopperImage wcm={Image} alt={Image_Alt} wcmData={wcmData} />
+  const FullScreenImageHTML = () => <TopperImage wcm={Image} alt={Image_Alt} ratio={calculateFullScreenImageRatio()} wcmData={wcmData} overrideCssList={[imageStyles.cImgFullscreen]} />
 
   const wcmIdList = getWcmIdList(Image);
   const TopperHtml = () => {
     switch (Topper_Style) {
       case "full-screen":
+        let containerCss = isSlideshow(wcmIdList) ? topperStyles.topperContainerSlideshowFullScreen : topperStyles.topperContainerFullScreen;
         return (
           <>
-            <div className={topperStyles.topperContainerFullScreen}>
+            <div className={containerCss}>
               <figure className={`topper-image ${topperStyles.imageFullScreen}`} aria-labelledby="topperCaptionText">
-                {/* <FullScreenImageHTML /> */}
-                <ImageSlideshow wcmData={wcmData} imageList={wcmIdList} ratio={calculateFullScreenImageRatio()} topperStyle={Topper_Style}/>
+                {!isSlideshow(wcmIdList) && <FullScreenImageHTML />}
+                {isSlideshow(wcmIdList) && <ImageSlideshow wcmData={wcmData} imageList={wcmIdList} topperStyle={Topper_Style}/>}
                 <CaptionCredit caption={Image_Caption} credit={Image_Credits} extraStyles={topperStyles.hideWhenDesktop} />
               </figure>
               <div className={headerDekStyleList().join(' ')}>
@@ -123,7 +130,7 @@ const Topper2 = ({ settings, wcmData }) => {
               </div>
             </div>
             <div className="topperCaptionText">
-              <CaptionCredit caption={Image_Caption} credit={Image_Credits} extraStyles={[topperStyles.hideWhenMobile, topperStyles.smallPaddingLeft]} />
+              <CaptionCredit caption={Image_Caption} credit={Image_Credits} extraStyles={[topperStyles.hideWhenTablet, topperStyles.smallPaddingLeft]} />
             </div>
           </>
         );
@@ -145,8 +152,8 @@ const Topper2 = ({ settings, wcmData }) => {
                 />
               </div>
               <figure className={`mw-xl ml-auto mr-auto ${topperStyles.imageStacked}`}>
-                {(wcmIdList.length > 1) && <ImageSlideshow wcmData={wcmData} imageList={wcmIdList} topperStyle={Topper_Style}/>}
-                {(wcmIdList.length == 1) && <ImageHTML />}
+                {isSlideshow(wcmIdList) && <ImageSlideshow wcmData={wcmData} imageList={wcmIdList} topperStyle={Topper_Style}/>}
+                {!isSlideshow(wcmIdList) && <ImageHTML />}
                 <CaptionCredit caption={Image_Caption} credit={Image_Credits} />
               </figure>
             </div>

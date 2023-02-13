@@ -14,20 +14,31 @@
   width: 100%;
 
   @media @tablet {
-    padding-bottom: calc(100vh);
+    margin: 0 auto;
+    white-space: nowrap;
+    padding-bottom: calc(100vw * (9/16));
   }
 }
 
-.curr-image {
+.image-wrapper-stacked {
   position: absolute;
   width: 100%;
-  z-index: 100;
+}
+
+.image-wrapper-fullscreen {
+  position: absolute;
+  width: 100%;
+
+  @media @mobile {
+    margin: 0;
+    padding: 0;
+    height: auto;
+  }
 }
 
 /* enter animation */
 .fade-enter {
   opacity: 0;
-  z-index: 1;
 }
 
 .fade-enter.fade-enter-active {

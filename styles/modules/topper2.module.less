@@ -10,9 +10,21 @@
   position: relative;
 }
 
+.topperContainerSlideshowFullScreen {
+  max-width: 100%;
+  position: relative;
+  height: calc(100vh - 37px);
+  @media @tablet {
+    height: auto;
+  }
+}
+
 .imageFullScreen {
   top: 0 !important;
   width: 100%;
+  @media @mobile {
+    height: 100%;
+  }
 }
 
 .imageStacked {
@@ -36,8 +48,6 @@
 
 .headerDekFullScreen {
   position: absolute;
-  padding: @s24;
-    padding: @s24; 
   padding: @s24;
   width: @md;
 
@@ -135,8 +145,8 @@
   background-color: rgba(255, 255, 255, 0.54);
 }
 
-.hideWhenMobile {
-  @media @mobile {
+.hideWhenTablet {
+  @media @tablet {
     display: none;
   }
 }
@@ -144,7 +154,7 @@
 .hideWhenDesktop {
   display: none;
 
-  @media @mobile {
+  @media @tablet {
     display: block;
     padding-left: @s8;
   }
