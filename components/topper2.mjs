@@ -98,7 +98,7 @@ const Topper2 = ({ settings, wcmData }) => {
 
   /** Converts wcm string from spreadsheet into a list of WCM ids */
   const getWcmIdList = (listStr) => {
-    return listStr.split(",").map((d) => parseInt(d));
+    return listStr.split(";").map((d) => parseInt(d));
   }
 
   /** Checks if WCM list represents an image slideshow */
