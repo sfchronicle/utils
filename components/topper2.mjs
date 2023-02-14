@@ -2,7 +2,8 @@ import React from "react"
 import Heading from "./heading.mjs"
 import TopperImage from "./topperimage.mjs"
 import CaptionCredit from "./captioncredit.mjs"
-import ImageSlideshow from "./imageslideshow.mjs"
+import CaptionCreditSlideshow from "./slideshow/captioncreditslideshow.mjs"
+import ImageSlideshow from "./slideshow/imageslideshow.mjs"
 import * as topperStyles from "../styles/modules/topper2.module.less"
 import * as imageStyles from "../styles/modules/topperimage.module.less"
 
@@ -95,9 +96,40 @@ const Topper2 = ({ settings, wcmData }) => {
     }
   }
 
+  /** Converts wcm string from spreadsheet into a list of WCM ids */
+  const getWcmIdList = (listStr) => {
+    return listStr.split(",").map((d) => parseInt(d));
+  }
+
+  /** Checks if WCM list represents an image slideshow */
+  const isSlideshow = (wcmIdList) => {
+    return (wcmIdList.length > 1);
+  }
+
+  /** Converts string from spreadsheet into a list and pads the list if the length is incorrect */
+  const convertStringToList = (str, size) => {
+    var list = str.split(";");
+    if (list.length === size) return list;
+
+    for (var i = (list.length - 1); i < (size - 1); i++) {
+      list.push("");
+    }
+
+    console.error(`The topper slideshow does not have the correct amount of metadata!`);
+    return list;
+  }
+
   const ImageHTML = () => <TopperImage wcm={Image} alt={Image_Alt} wcmData={wcmData} />
   const FullScreenImageHTML = () => <TopperImage wcm={Image} alt={Image_Alt} wcmData={wcmData} overrideCssList={[imageStyles.cImgFullscreen]} />
-  const ImageSlideshowHTML = () => <ImageSlideshow wcmData={wcmData} altList={getAltList(Image_Alt, wcmIdList.length)} imageList={wcmIdList} topperStyle={Topper_Style} />
+  const ImageSlideshowHTML = () =>
+    <ImageSlideshow
+      wcmData={wcmData}
+      imageList={wcmIdList}
+      altList={convertStringToList(Image_Alt, wcmIdList.length)}
+      captionList={convertStringToList(Image_Caption, wcmIdList.length)}
+      creditList={convertStringToList(Image_Credits, wcmIdList.length)}
+      topperStyle={Topper_Style}
+    />
 
   const wcmIdList = getWcmIdList(Image);
   const TopperHtml = () => {
@@ -108,10 +140,18 @@ const Topper2 = ({ settings, wcmData }) => {
           <>
             <div className={containerCss}>
               <figure className={`topper-image ${topperStyles.imageFullScreen}`} aria-labelledby="topperCaptionText">
-                {!isSlideshow(wcmIdList) && <FullScreenImageHTML />}
                 {isSlideshow(wcmIdList) && <ImageSlideshowHTML />}
+                {!isSlideshow(wcmIdList) && <FullScreenImageHTML />}
 
-                <CaptionCredit caption={Image_Caption} credit={Image_Credits} extraStyles={topperStyles.hideWhenDesktop} />
+                {/* This caption-credit only shows when the screen size is tablet or mobile */}
+                {isSlideshow(wcmIdList) &&
+                  <CaptionCreditSlideshow
+                    captionList={convertStringToList(Image_Caption, wcmIdList.length)}
+                    creditList={convertStringToList(Image_Credits, wcmIdList.length)}
+                    extraStyles={topperStyles.hideWhenDesktop}
+                  />
+                }
+                {!isSlideshow(wcmIdList) && <CaptionCredit caption={Image_Caption} credit={Image_Credits} extraStyles={topperStyles.hideWhenDesktop} />}
               </figure>
               <div className={headerDekStyleList().join(' ')}>
                 <Heading level={1} text={Title}
@@ -125,7 +165,15 @@ const Topper2 = ({ settings, wcmData }) => {
               </div>
             </div>
             <div className="topperCaptionText">
-              <CaptionCredit caption={Image_Caption} credit={Image_Credits} extraStyles={[topperStyles.hideWhenTablet, topperStyles.smallPaddingLeft]} />
+              {/* This caption-credit only shows when the screen size is desktop */}
+              {isSlideshow(wcmIdList) &&
+                <CaptionCreditSlideshow
+                  captionList={convertStringToList(Image_Caption, wcmIdList.length)}
+                  creditList={convertStringToList(Image_Credits, wcmIdList.length)}
+                  extraStyles={[topperStyles.hideWhenTablet, topperStyles.smallPaddingLeft]}
+                />
+              }
+              {!isSlideshow(wcmIdList) && <CaptionCredit caption={Image_Caption} credit={Image_Credits} extraStyles={[topperStyles.hideWhenTablet, topperStyles.smallPaddingLeft]} />}
             </div>
           </>
         );
@@ -149,8 +197,13 @@ const Topper2 = ({ settings, wcmData }) => {
               <figure className={`mw-xl ml-auto mr-auto ${topperStyles.imageStacked}`}>
                 {isSlideshow(wcmIdList) && <ImageSlideshowHTML />}
                 {!isSlideshow(wcmIdList) && <ImageHTML />}
-
-                <CaptionCredit caption={Image_Caption} credit={Image_Credits} />
+                {isSlideshow(wcmIdList) &&
+                  <CaptionCreditSlideshow
+                    captionList={convertStringToList(Image_Caption, wcmIdList.length)}
+                    creditList={convertStringToList(Image_Credits, wcmIdList.length)}
+                  />
+                }
+                {!isSlideshow(wcmIdList) && <CaptionCredit caption={Image_Caption} credit={Image_Credits} />}
               </figure>
             </div>
           </>
@@ -203,29 +256,6 @@ const Topper2 = ({ settings, wcmData }) => {
     if (isFlipped) num *= -1;
 
     return num;
-  }
-
-  /** Converts wcm string from spreadsheet into a list of WCM ids */
-  const getWcmIdList = (listStr) => {
-    return listStr.split(",").map((d) => parseInt(d));
-  }
-
-  /** Checks if WCM list represents an image slideshow */
-  const isSlideshow = (wcmIdList) => {
-    return (wcmIdList.length > 1);
-  }
-
-  /** Converts alt string from spreadsheet into a list and pads the list if the length is incorrect */
-  const getAltList = (altStr, size) => {
-    var list = altStr.split(";");
-    if (list.length === size) return list; 
-
-    for (var i = (list.length-1); i < (size-1); i++) {
-      list.push("This is the topper image for the article");
-    }
-
-    console.error(`The topper image is missing an alt tag`);
-    return list;
   }
 
   return (

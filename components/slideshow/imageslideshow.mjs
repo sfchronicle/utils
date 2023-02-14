@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react"
-import TopperImage from "./topperimage.mjs"
-import * as styles from "../styles/modules/imageslideshow.module.less"
-import * as imageStyles from "../styles/modules/topperimage.module.less"
+import TopperImage from "../topperimage.mjs"
+import * as styles from "../../styles/modules/imageslideshow.module.less"
+import * as imageStyles from "../../styles/modules/topperimage.module.less"
 import { TransitionGroup, CSSTransition } from "react-transition-group"
 
 const ImageSlideshow = ({ wcmData, imageList, altList, topperStyle }) => {
