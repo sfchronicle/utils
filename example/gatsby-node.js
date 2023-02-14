@@ -11,10 +11,22 @@ let topperData = require("./src/data/topper2_settings.sheet.json");
 // NOTE: Leave this as an empty array if you aren't importing any WCM photos, but you won't be able to use the WCMImage component
 const wcmPhotos = [20374215]
 
-// Add topper image to wcmPhotos list
+const addValidWcmId = (numStr, wcmPhotos) => {
+  let isNum = /^\d+$/.test(numStr.trim())
+  if (isNum && !wcmPhotos.includes(numStr.trim())) wcmPhotos.push((numStr.trim()));
+}
+
+// Add topper image(s) to wcmPhotos list
 let numStr = (topperData[0].Image).toString()
-let isNum = /^\d+$/.test(numStr.trim())
-if (isNum && !wcmPhotos.includes(numStr.trim())) wcmPhotos.push((numStr.trim()));
+if (numStr.includes(",")) {
+  let numList = numStr.split(",");
+  for (var num of numList) {
+    addValidWcmId(num, wcmPhotos);
+  }
+} else { 
+  addValidWcmId(numStr, wcmPhotos);
+}
+
 
 // Create nodes so GraphQL can access
 exports.sourceNodes = async ({

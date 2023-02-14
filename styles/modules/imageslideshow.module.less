@@ -1,0 +1,62 @@
+@import (less) '../values';
+
+.container-stacked {
+  margin: 0 auto;
+  white-space: nowrap;
+  padding-bottom: calc(@xl*9/16);
+
+  @media @tablet {
+    padding-bottom: calc(100vw * (9/16));
+  }
+}
+
+.container-fullscreen {
+  padding-bottom: calc(100vh - 37px);
+  width: 100%;
+
+  @media @tablet {
+    margin: 0 auto;
+    white-space: nowrap;
+    padding-bottom: calc(100vw * (9/16));
+  }
+}
+
+.image-wrapper-stacked {
+  position: absolute;
+  width: 100%;
+}
+
+.image-wrapper-fullscreen {
+  position: absolute;
+  width: 100%;
+
+  @media @mobile {
+    margin: 0;
+    padding: 0;
+    height: auto;
+  }
+}
+
+/* enter animation */
+.fade-enter {
+  opacity: 0;
+}
+
+.fade-enter.fade-enter-active {
+  opacity: 1;
+  transition: opacity 1500ms linear;
+}
+
+/* exit animation */
+.fade-exit {
+  opacity: 1;
+}
+
+.fade-exit.fade-exit-active {
+  opacity: 0;
+  transition: opacity 2000ms linear;
+}
+
+.fade-exit-done {
+  opacity: 0;
+}
