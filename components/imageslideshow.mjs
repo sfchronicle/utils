@@ -4,7 +4,7 @@ import * as styles from "../styles/modules/imageslideshow.module.less"
 import * as imageStyles from "../styles/modules/topperimage.module.less"
 import { TransitionGroup, CSSTransition } from "react-transition-group"
 
-const ImageSlideshow = ({ wcmData, imageList, topperStyle }) => {
+const ImageSlideshow = ({ wcmData, imageList, altList, topperStyle }) => {
   const [index, setIndex] = useState(0);
   const timeoutRef = useRef(null);
 
@@ -84,8 +84,7 @@ const ImageSlideshow = ({ wcmData, imageList, topperStyle }) => {
           }}
         >
           <div className={getWrapperClass()}>
-            {/* TODO: fix alt and captions */}
-            <TopperImage wcm={imageList[index]} alt={"test alt"} wcmData={wcmData} overrideCssList={getImageClassList()} />
+            <TopperImage wcm={imageList[index]} alt={altList[index]} wcmData={wcmData} overrideCssList={getImageClassList()} />
           </div>
         </CSSTransition>
       </TransitionGroup>

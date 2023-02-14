@@ -95,19 +95,9 @@ const Topper2 = ({ settings, wcmData }) => {
     }
   }
 
-  /** Converts wcm string from spreadsheet into a list of WCM ids */
-  const getWcmIdList = (listStr) => {
-    return listStr.split(",").map((d) => parseInt(d));
-  }
-
-  /** Checks if WCM list represents an image slideshow */
-  const isSlideshow = (wcmIdList) => {
-    return (wcmIdList.length > 1);
-  }
-
   const ImageHTML = () => <TopperImage wcm={Image} alt={Image_Alt} wcmData={wcmData} />
   const FullScreenImageHTML = () => <TopperImage wcm={Image} alt={Image_Alt} wcmData={wcmData} overrideCssList={[imageStyles.cImgFullscreen]} />
-  const ImageSlideshowHTML = () => <ImageSlideshow wcmData={wcmData} imageList={wcmIdList} topperStyle={Topper_Style} />
+  const ImageSlideshowHTML = () => <ImageSlideshow wcmData={wcmData} altList={getAltList(Image_Alt, wcmIdList.length)} imageList={wcmIdList} topperStyle={Topper_Style} />
 
   const wcmIdList = getWcmIdList(Image);
   const TopperHtml = () => {
@@ -213,6 +203,29 @@ const Topper2 = ({ settings, wcmData }) => {
     if (isFlipped) num *= -1;
 
     return num;
+  }
+
+  /** Converts wcm string from spreadsheet into a list of WCM ids */
+  const getWcmIdList = (listStr) => {
+    return listStr.split(",").map((d) => parseInt(d));
+  }
+
+  /** Checks if WCM list represents an image slideshow */
+  const isSlideshow = (wcmIdList) => {
+    return (wcmIdList.length > 1);
+  }
+
+  /** Converts alt string from spreadsheet into a list and pads the list if the length is incorrect */
+  const getAltList = (altStr, size) => {
+    var list = altStr.split(";");
+    if (list.length === size) return list; 
+
+    for (var i = (list.length-1); i < (size-1); i++) {
+      list.push("This is the topper image for the article");
+    }
+
+    console.error(`The topper image is missing an alt tag`);
+    return list;
   }
 
   return (
