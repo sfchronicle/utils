@@ -18,8 +18,8 @@ const addValidWcmId = (numStr, wcmPhotos) => {
 
 // Add topper image(s) to wcmPhotos list
 let numStr = (topperData[0].Image).toString()
-if (numStr.includes(",")) {
-  let numList = numStr.split(",");
+if (numStr.includes(";")) {
+  let numList = numStr.split(";");
   for (var num of numList) {
     addValidWcmId(num, wcmPhotos);
   }
