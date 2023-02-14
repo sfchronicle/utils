@@ -39,7 +39,9 @@ let getBrands2 = function(market){
 				"twitter": "sfchronicle",
 				"gaAccount": "UA-1616916-26",
 				"subscribeLink": "https://www.sfchronicle.com/subproject",
-				"sailCustomer": "fca2a0390286f0e53120a668534d9529"
+				"sailCustomer": "fca2a0390286f0e53120a668534d9529",
+				"sailSiteName": "san-francisco-chronicle",
+				"siteId": 35,
 			}
 		},
 
@@ -61,7 +63,9 @@ let getBrands2 = function(market){
 				"invert": true,
 				"gaAccount": "UA-1616916-24",
 				"subscribeLink": "https://www.houstonchronicle.com/subproject",
-				"sailCustomer": "48e30b5083cf6bf47c519651453c9e8a"
+				"sailCustomer": "48e30b5083cf6bf47c519651453c9e8a",
+				"sailSiteName": "houston-chronicle",
+				"siteId": 33
 			}
 		},
 
@@ -83,7 +87,9 @@ let getBrands2 = function(market){
 				"invert": true,
 				"gaAccount": "UA-1616916-7",
 				"subscribeLink": "https://www.timesunion.com/subproject",
-				"sailCustomer": "5bb9eee089bdc2e27cbd265535ad1f90"
+				"sailCustomer": "5bb9eee089bdc2e27cbd265535ad1f90",
+				"sailSiteName": "times-union",
+				"siteId": 3
 			}
 		},
 
@@ -100,7 +106,9 @@ let getBrands2 = function(market){
 				"invert": true,
 				"gaAccount": "UA-1616916-27",
 				"subscribeLink": "https://www.expressnews.com/subproject",
-				"sailCustomer": "aec52c4681ed63b5beab139a2584f0d4"
+				"sailCustomer": "aec52c4681ed63b5beab139a2584f0d4",
+				"sailSiteName": "san-antonio-express-news",
+				"siteId": 36
 			}
 		},
 
@@ -117,7 +125,9 @@ let getBrands2 = function(market){
 				"invert": true,
 				"gaAccount": "UA-1616916-99",
 				"subscribeLink": "https://www.ctinsider.com/subproject",
-				"sailCustomer": "9b21160afa226c9f84d27b47c3d52364"
+				"sailCustomer": "9b21160afa226c9f84d27b47c3d52364",
+				"sailSiteName": "ct-insider",
+				"siteId": 61
 			}
 		},
 
@@ -134,7 +144,9 @@ let getBrands2 = function(market){
 				"invert": true,
 				"gaAccount": "UA-1616916-99",
 				"subscribeLink": "/subproject",
-				"sailCustomer": "4a181de0b63a131cf27f8ea9485e5e1c"
+				"sailCustomer": "4a181de0b63a131cf27f8ea9485e5e1c",
+				"sailSiteName": "midland-reporter-telegram",
+				"siteId": 57
 			}
 		},
 		Midcom: {
@@ -149,7 +161,9 @@ let getBrands2 = function(market){
 				"invert": true,
 				"gaAccount": "UA-1616916-99",
 				"subscribeLink": "/subproject",
-				"sailCustomer": "f3dc0abb53995f957783e76eff3ef01e"
+				"sailCustomer": "4a181de0b63a131cf27f8ea9485e5e1c",
+				"sailSiteName": "midland-daily-news",
+				"siteId": 61
 			}
 		},
 		Conroe: {
@@ -164,7 +178,9 @@ let getBrands2 = function(market){
 				"invert": true,
 				"gaAccount": "UA-1616916-99",
 				"subscribeLink": "https://www.yourconroenews.com/subproject",
-				"sailCustomer": "4a181de0b63a131cf27f8ea9485e5e1c"
+				"sailCustomer": "4a181de0b63a131cf27f8ea9485e5e1c",
+				"sailSiteName": "the-courier-of-montgomery-county",
+				"siteId": 68
 			}
 		},
 
