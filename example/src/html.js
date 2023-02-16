@@ -1,5 +1,6 @@
 import React from "react"
 import PropTypes from "prop-types"
+import LayoutScript from "../../components/layout/layoutscript.mjs"
 
 export default function HTML(props) {
   return (
@@ -11,8 +12,7 @@ export default function HTML(props) {
           name="viewport"
           content="width=device-width, initial-scale=1, shrink-to-fit=no"
         />
-        <script src="https://projects.sfchronicle.com/shared/js/jquery.min.js"></script>
-        <script src="https://treg.hearstnp.com/treg.js"></script>
+        <LayoutScript/>
         {props.headComponents}
       </head>
       <body {...props.bodyAttributes} is="responsive-body">
