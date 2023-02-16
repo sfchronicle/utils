@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { Helmet } from 'react-helmet'
-import { appCheck, getBrands2 } from "../index"
+import { appCheck, getBrands2 } from "../../index"
 
 const LayoutHelmet = ({ meta, url_add }) => {
   let {

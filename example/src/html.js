@@ -1,6 +1,6 @@
 import React from "react"
 import PropTypes from "prop-types"
-import LayoutScript from "../../components/layoutscript.mjs"
+import LayoutScript from "../../components/layout/layoutscript.mjs"
 
 export default function HTML(props) {
   return (

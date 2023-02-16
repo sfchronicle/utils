@@ -5,8 +5,6 @@ import Layout from '../components/layout'
 import WCMImage from '../components/sfc/wcmimage'
 import DropCap from '../components/sfc/dropcap'
 import { useCanNativeLazyLoad } from '../components/sfc/component-helpers/customhooks'
-import LazyLoad from 'react-lazyload'
-import Topper from '../components/sfc/topper'
 import RelatedSection from '../components/sfc/relatedsection'
 import CreditsSection from '../components/sfc/creditssection'
 import Ad from '../components/sfc/ad'
@@ -37,13 +35,6 @@ try {
   topperSettings = null;
 }
 
-// lazy loader wrapper for WCM Image
-const LazyLoader = ({children}) => {
-  return (
-    <LazyLoad offset={300} resize once>{children}</LazyLoad>
-  )
-}
-
 const IndexPage = ({ data }) => {
   // easy hooks based request library
   // const { data: responseData, error } = useSWR('https://api.kanye.rest', getData, {
@@ -63,7 +54,7 @@ const IndexPage = ({ data }) => {
   return (
     <Layout meta={siteMetadata}>
       <NavTop meta={siteMetadata} />
-      <Topper2 settings={topperSettings[0]} wcmData={allWcmPhotos} lazyloader={LazyLoader}/>
+      <Topper2 settings={topperSettings[0]} wcmData={allWcmPhotos}/>
       <Byline meta={siteMetadata}/>
       <main>
         <article>

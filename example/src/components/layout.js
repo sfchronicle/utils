@@ -3,7 +3,7 @@
 import React, { Fragment, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { Helmet } from 'react-helmet'
-import LayoutHelmet from '../../../components/layouthelmet.mjs'
+import LayoutHelmet from '../../../components/layout/layouthelmet.mjs'
 import Footer from './sfc/footer'
 // Add SFC utils
 import { appCheck } from '../../../index'
@@ -72,7 +72,7 @@ const Layout = ({
         ]}
       />
 
-      <LayoutHelmet meta={meta} url_add={url_add}/>
+      <LayoutHelmet meta={meta} url_add={url_add} />
 
       {/* Full project included here: */}
       {children}

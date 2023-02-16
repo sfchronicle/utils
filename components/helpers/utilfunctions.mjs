@@ -1,7 +1,7 @@
 import { getBlueconic } from "../../blueconic"
 import { appCheck, blendHDN } from "../../index"
 
-/** TODO */
+/** Used for resizing the WCM Image */
 function debounce(fn, ms) {
   let timer
   return _ => {
