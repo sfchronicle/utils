@@ -20,6 +20,10 @@
   }
 }
 
+.topperContainerSideBySide {
+  display: flex;
+}
+
 .imageFullScreen {
   top: 0 !important;
   width: 100%;
@@ -36,6 +40,13 @@
   @media @mobile {
     width: 100%;
   }
+}
+
+.imageSideBySide {
+  max-width: 50%;
+  float: left;
+  padding: @s16;
+
 }
 
 .headerDekStacked {
@@ -61,6 +72,14 @@
     padding: 0;
     width: 100%;
   }
+}
+
+.headerDekSideBySide {
+  max-width: 50%;
+  float: right;
+  text-align: left;
+  padding: @s16;
+  margin: auto;
 }
 
 .hedFullScreen {

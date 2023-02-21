@@ -17,7 +17,7 @@ const ImageHTML = ({ fullPath, imageRez, alt, overrideCssList }) => {
   )
 }
 
-const TopperImage = ({ wcm, alt, ratio, wcmData, overrideCssList }) => {
+const TopperImage = ({ wcm, alt, ratio, wcmData, containerCssList = [], overrideCssList = [] }) => {
   // When the wrapping div is rendered, we're going to figure out the best size for this image to be
   let picRef = useRef(null)
   let [imageRez, setImageRez] = useState(0)
@@ -99,7 +99,7 @@ const TopperImage = ({ wcm, alt, ratio, wcmData, overrideCssList }) => {
   }
 
   return (
-    <div ref={picRef}>
+    <div className={containerCssList.join(' ')} ref={picRef}>
       <ImageHTML fullPath={fullPath} imageRez={imageRez} alt={alt} overrideCssList={overrideCssList} />
     </div>
   )
@@ -110,6 +110,7 @@ TopperImage.propTypes = {
   alt: PropTypes.string.isRequired,
   ratio: PropTypes.string, // This prop is currently not being used, might be ok to delete? 
   wcmData: PropTypes.object,
+  containerCssList: PropTypes.array,
   overrideCssList: PropTypes.array
 }
 

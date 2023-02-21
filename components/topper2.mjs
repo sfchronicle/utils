@@ -35,6 +35,9 @@ const Topper2 = ({ settings, wcmData }) => {
           ... (Inverted_Colors === "black-text-white-bg") ? [topperStyles.blackTextWhiteBg] : [topperStyles.whiteTextBlackBg]
         ];
       case "side-by-side":
+        return [topperStyles.headerDekSideBySide];
+      default:
+        console.error(`${Topper_Style} is not a valid topper style!`)
         return [];
     }
   }
@@ -49,7 +52,7 @@ const Topper2 = ({ settings, wcmData }) => {
   }
 
   const headerStyleList = () => {
-    let defaultStyles;
+    let defaultStyles = [];
     switch (Topper_Style) {
       case "stacked":
         defaultStyles = [];
@@ -61,7 +64,7 @@ const Topper2 = ({ settings, wcmData }) => {
         defaultStyles = [topperStyles.hedFullScreen, fullScreenTextAlignCss()];
         break;
       case "side-by-side":
-        defaultStyles = [];
+        defaultStyles = ["left"];
         break;
     }
 
@@ -83,7 +86,9 @@ const Topper2 = ({ settings, wcmData }) => {
       case "full-screen":
         return ["deck", topperStyles.deckFullScreen, fullScreenTextAlignCss()];
       case "side-by-side":
-        return ["deck"];
+        return ["deck left"];
+      default:
+        return [""]
     }
   }
 
@@ -119,8 +124,10 @@ const Topper2 = ({ settings, wcmData }) => {
     return list;
   }
 
+  // HTML for the topper image
   const ImageHTML = () => <TopperImage wcm={Image} alt={Image_Alt} wcmData={wcmData} />
   const FullScreenImageHTML = () => <TopperImage wcm={Image} alt={Image_Alt} wcmData={wcmData} overrideCssList={[imageStyles.cImgFullscreen]} />
+  const SideBySideImageHTML = () => <TopperImage wcm={Image} alt={Image_Alt} wcmData={wcmData} containerCssList={[imageStyles.cContainerSideBySide]} overrideCssList={[imageStyles.cImgSideBySide]} />
   const ImageSlideshowHTML = () =>
     <ImageSlideshow
       wcmData={wcmData}
@@ -202,7 +209,7 @@ const Topper2 = ({ settings, wcmData }) => {
                     extraStyles={[topperStyles.smallPaddingLeftWhenTablet]}
                   />
                 }
-                {!isSlideshow(wcmIdList) && <CaptionCredit caption={Image_Caption} credit={Image_Credits} extraStyles={[topperStyles.smallPaddingLeftWhenTablet]}/>}
+                {!isSlideshow(wcmIdList) && <CaptionCredit caption={Image_Caption} credit={Image_Credits} extraStyles={[topperStyles.smallPaddingLeftWhenTablet]} />}
               </figure>
             </div>
           </>
@@ -227,6 +234,28 @@ const Topper2 = ({ settings, wcmData }) => {
             </div>
           </>
         );
+
+      case "side-by-side":
+        return (
+          <div className={topperStyles.topperContainerSideBySide}>
+            <figure className={`topper-image ${topperStyles.imageSideBySide}`}>
+              <SideBySideImageHTML />
+              <CaptionCredit caption={Image_Caption} credit={Image_Credits} extraStyles={[topperStyles.smallPaddingLeftWhenTablet]} />
+            </figure>
+            <div className={headerDekStyleList().join('')}>
+              <Heading
+                level={1}
+                text={Title}
+                className={headerStyleList().join(' ')}
+              />
+              <Heading
+                level={2}
+                text={Deck}
+                className={deckStyleList().join(' ')}
+              />
+            </div>
+          </div>
+        )
     }
   }
 
