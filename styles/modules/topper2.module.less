@@ -60,7 +60,12 @@
 
 .imageSideBySideSlideshow {
   width: 50%;
-  height: calc(50vw*2/3)
+  height: calc(50vw*2/3);
+
+  @media @tablet {
+    width: 100%;
+    height: calc(100vw*2/3);
+  }
 }
 
 .headerDekStacked {
@@ -211,12 +216,12 @@
   }
 }
 
-.topPaddingSlideshowSideBySide {
+.slideshowCaptionSideBySide {
   padding-top: calc(50vw*2/3 - @s16);
   padding-left: @s16;
 
   @media (max-width: 960px) {
-    padding-top: calc(50vw*2/3 - @s16);
+    padding-top: calc(100vw*2/3 - @s16);
     padding-left: @s16;
   }
 }

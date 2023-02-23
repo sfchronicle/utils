@@ -25,6 +25,13 @@
   padding-bottom: calc(50vw*2/3);
   width: 50%;
   height: 100%;
+
+  @media @tablet {
+    margin: 0 auto;
+    width: auto;
+    white-space: nowrap;
+    padding-bottom: calc(100vw * (2/3));
+  }
 }
 
 .image-wrapper-stacked {
@@ -47,6 +54,11 @@
   position: absolute;
   width: calc(50vw);
   height: calc(50vw*2/3);
+
+  @media @tablet {
+    width: 100%;
+    height: calc(100vw*2/3);
+  }
 }
 
 /* enter animation */

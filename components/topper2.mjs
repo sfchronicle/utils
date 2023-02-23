@@ -258,7 +258,8 @@ const Topper2 = ({ settings, wcmData }) => {
                 <CaptionCreditSlideshow
                   captionList={convertStringToList(Image_Caption, wcmIdList.length)}
                   creditList={convertStringToList(Image_Credits, wcmIdList.length)}
-                  extraStyles={[topperStyles.topPaddingSlideshowSideBySide]}
+                  extraStyles={[topperStyles.slideshowCaptionSideBySide]}
+                  isBrandStylesRemoved={true}
                 />
               }
               {!isSlideshow(wcmIdList) && <CaptionCredit caption={Image_Caption} credit={Image_Credits} extraStyles={[topperStyles.smallPaddingLeftWhenTablet]} />}

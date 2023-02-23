@@ -1,8 +1,10 @@
 import React, { useEffect, useState, useRef } from "react"
 
-const CaptionCreditSlideshow = ({ captionList, creditList, extraStyles }) => {
+const CaptionCreditSlideshow = ({ captionList, creditList, extraStyles, isBrandStylesRemoved = false }) => {
   let captionCss = ["topper-image", "caption"];
-  if (extraStyles) captionCss = extraStyles.concat(captionCss);
+  if (extraStyles) {
+    captionCss = (isBrandStylesRemoved) ? extraStyles : extraStyles.concat(captionCss);
+  }
 
   const [index, setIndex] = useState(0);
   const timeoutRef = useRef(null);
