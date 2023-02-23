@@ -23,6 +23,10 @@
 .topperContainerSideBySide {
   display: flex;
   align-items: center;
+
+  @media @tablet {
+    flex-direction: column;
+  }
 }
 
 .imageFullScreen {
@@ -47,6 +51,11 @@
   width: 50%;
   float: left;
   padding: @s16;
+
+  @media @tablet {
+    width: auto;
+    float: none;
+  }
 }
 
 .imageSideBySideSlideshow {
@@ -85,6 +94,12 @@
   text-align: left;
   padding: @s16;
   margin: auto;
+
+  @media @tablet {
+    width: auto;
+    max-width: 100%;
+    float: none;
+  }
 }
 
 .hedFullScreen {
