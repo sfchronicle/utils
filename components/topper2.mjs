@@ -236,11 +236,20 @@ const Topper2 = ({ settings, wcmData }) => {
         );
 
       case "side-by-side":
+        let figureCss = isSlideshow(wcmIdList) ? `topper-image ${topperStyles.imageSideBySideSlideshow}` : `topper-image ${topperStyles.imageSideBySide}`;
         return (
           <div className={topperStyles.topperContainerSideBySide}>
-            <figure className={`topper-image ${topperStyles.imageSideBySide}`}>
-              <SideBySideImageHTML />
-              <CaptionCredit caption={Image_Caption} credit={Image_Credits} extraStyles={[topperStyles.smallPaddingLeftWhenTablet]} />
+            <figure className={figureCss}>
+              {isSlideshow(wcmIdList) && <ImageSlideshowHTML />}
+              {!isSlideshow(wcmIdList) && <SideBySideImageHTML />}
+              {isSlideshow(wcmIdList) &&
+                  <CaptionCreditSlideshow
+                    captionList={convertStringToList(Image_Caption, wcmIdList.length)}
+                    creditList={convertStringToList(Image_Credits, wcmIdList.length)}
+                    extraStyles={[topperStyles.topPaddingSlideshowSideBySide]}
+                  />
+                }
+              {!isSlideshow(wcmIdList) && <CaptionCredit caption={Image_Caption} credit={Image_Credits} extraStyles={[topperStyles.smallPaddingLeftWhenTablet]} />}
             </figure>
             <div className={headerDekStyleList().join('')}>
               <Heading

@@ -31,7 +31,6 @@ const ImageSlideshow = ({ wcmData, imageList, altList, topperStyle }) => {
   const getContainerClass = () => {
     switch (topperStyle) {
       case "stacked":
-        return styles.containerStacked;
       case "full-screen":
         return styles.containerStacked;
       default:
@@ -45,6 +44,8 @@ const ImageSlideshow = ({ wcmData, imageList, altList, topperStyle }) => {
         return styles.imageWrapperStacked;
       case "full-screen":
         return styles.imageWrapperFullscreen;
+      case "side-by-side":
+        return styles.imageWrapperSideBySide;
       default:
         return "";
     }
@@ -56,6 +57,8 @@ const ImageSlideshow = ({ wcmData, imageList, altList, topperStyle }) => {
         return [imageStyles.cForceAspectRatio];
       case "full-screen":
         return [imageStyles.cImgSlideshowFullscreen];
+      case "side-by-side":
+        return [imageStyles.cImgSlideshowSideBySide];
       default:
         return [""];
     }

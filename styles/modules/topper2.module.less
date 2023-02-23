@@ -22,6 +22,7 @@
 
 .topperContainerSideBySide {
   display: flex;
+  align-items: center;
 }
 
 .imageFullScreen {
@@ -43,10 +44,14 @@
 }
 
 .imageSideBySide {
-  max-width: 50%;
+  width: 50%;
   float: left;
   padding: @s16;
+}
 
+.imageSideBySideSlideshow {
+  width: 50%;
+  height: calc(50vw*2/3)
 }
 
 .headerDekStacked {
@@ -188,5 +193,15 @@
 .smallPaddingLeftWhenTablet {
   @media @tablet {
     padding-left: @s8;
+  }
+}
+
+.topPaddingSlideshowSideBySide {
+  padding-top: calc(50vw*2/3 - @s16);
+  padding-left: @s16;
+
+  @media (max-width: 960px) {
+    padding-top: calc(50vw*2/3 - @s16);
+    padding-left: @s16;
   }
 }
