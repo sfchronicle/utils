@@ -13,7 +13,9 @@ const ImageHTML = ({ fullPath, imageRez, alt, overrideCssList }) => {
     <img
       className={imageCss.join(' ')}
       src={`${fullPath}${imageRez}x0.jpg`}
-      alt={alt} />
+      alt={alt} 
+      style={{position: "absolute" }}  
+    />
   )
 }
 
@@ -54,10 +56,6 @@ const TopperImage = ({ wcm, alt, ratio, wcmData, overrideCssList }) => {
     return null
   }
 
-  // During server-side rendering, access to ":root" is unavailable. This is okay; we just need
-  // to make sure that the site does not crash during SSR
-  let r = (typeof window != "undefined") ? document.querySelector(':root') : null;
-
   // This calculation is not used for the topper impl, but keeping it here just in case
   // it is needed for the general WCMImage utils migration
   let photoRatio = "56.25%"; // Default to 16/9
@@ -72,12 +70,6 @@ const TopperImage = ({ wcm, alt, ratio, wcmData, overrideCssList }) => {
     if (matchedPhoto) {
       // Set ratio of the actual photo like a legit hacker
       photoRatio = (matchedPhoto.photo.ratio * 100) + "%";
-
-      // If css :root is available, set the photo ratio
-      if (r) {
-        r.style.setProperty('--img-bottom-padding-ratio', photoRatio);
-      }
-
       fullPath = matchedPhoto.photo.full_path;
     } else {
       // Alert that things will go wrong on deploy
@@ -86,11 +78,6 @@ const TopperImage = ({ wcm, alt, ratio, wcmData, overrideCssList }) => {
   } else {
     // If an override is being passed in, use that
     photoRatio = ratio
-
-    // If css :root is available, set the photo ratio
-    if (r) {
-      r.style.setProperty('--img-bottom-padding-ratio', photoRatio);
-    }
   }
 
   // Get serious about alt tags
@@ -99,8 +86,10 @@ const TopperImage = ({ wcm, alt, ratio, wcmData, overrideCssList }) => {
   }
 
   return (
-    <div ref={picRef}>
-      <ImageHTML fullPath={fullPath} imageRez={imageRez} alt={alt} overrideCssList={overrideCssList} />
+    <div ref={picRef} style={{paddingBottom: photoRatio}}>
+      {imageRez &&
+        <ImageHTML fullPath={fullPath} imageRez={imageRez} alt={alt} overrideCssList={overrideCssList} />
+      }
     </div>
   )
 }
