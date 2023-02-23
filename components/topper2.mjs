@@ -262,7 +262,7 @@ const Topper2 = ({ settings, wcmData }) => {
                   isBrandStylesRemoved={true}
                 />
               }
-              {!isSlideshow(wcmIdList) && <CaptionCredit caption={Image_Caption} credit={Image_Credits} extraStyles={[topperStyles.smallPaddingLeftWhenTablet]} />}
+              {!isSlideshow(wcmIdList) && <CaptionCredit caption={Image_Caption} credit={Image_Credits} extraStyles={[topperStyles.captionSideBySide]} isBrandStylesRemoved={true} />}
             </figure>
           </div>
         )

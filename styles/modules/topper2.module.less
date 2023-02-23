@@ -55,6 +55,7 @@
   @media @tablet {
     width: auto;
     float: none;
+    padding-bottom: 0;
   }
 }
 
@@ -220,8 +221,11 @@
   padding-top: calc(50vw*2/3 - @s16);
   padding-left: @s16;
 
-  @media (max-width: 960px) {
+  @media @tablet {
     padding-top: calc(100vw*2/3 - @s16);
-    padding-left: @s16;
   }
+}
+
+.captionSideBySide {
+  max-width: @lg;
 }
