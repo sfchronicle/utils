@@ -61,6 +61,7 @@ const TopperImage = ({ wcm, alt, ratio, wcmData, containerCssList = [], override
   // This calculation is not used for the topper impl, but keeping it here just in case
   // it is needed for the general WCMImage utils migration
   let photoRatio = "56.25%"; // Default to 16/9
+  let photoViewport = "56.25vw";
   let fullPath = `https://s.hdnux.com/photos/0/0/0/${wcm}/0/`;
   if (!ratio) {
     let matchedPhoto = wcmData.nodes.find((item) => {
@@ -72,10 +73,12 @@ const TopperImage = ({ wcm, alt, ratio, wcmData, containerCssList = [], override
     if (matchedPhoto) {
       // Set ratio of the actual photo like a legit hacker
       photoRatio = (matchedPhoto.photo.ratio * 100) + "%";
+      photoViewport = (matchedPhoto.photo.ratio * 50) + "vw";
 
       // If css :root is available, set the photo ratio
       if (r) {
         r.style.setProperty('--img-bottom-padding-ratio', photoRatio);
+        r.style.setProperty('--img-height-viewport', photoViewport);
       }
 
       fullPath = matchedPhoto.photo.full_path;
@@ -90,6 +93,7 @@ const TopperImage = ({ wcm, alt, ratio, wcmData, containerCssList = [], override
     // If css :root is available, set the photo ratio
     if (r) {
       r.style.setProperty('--img-bottom-padding-ratio', photoRatio);
+      r.style.setProperty('--img-height-viewport', photoViewport);
     }
   }
 

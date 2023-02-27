@@ -3,6 +3,7 @@
 
 :root {
   --img-bottom-padding-ratio: "56.25%";
+  --img-height-viewport: "56.25vw";
 }
 
 .c-force-aspect-ratio {
@@ -66,8 +67,13 @@
 }
 
 .c-img-side-by-side {
-  height: 100%;
   object-fit: cover;
+  width: 50vw;
+  height: var(--img-height-viewport);
+  @media @tablet {
+    width: 100vw;
+    height: calc(100vw*2/3);
+  }
 }
 
 .c-fig-hidden-when-desktop {
