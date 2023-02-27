@@ -10,7 +10,8 @@ import * as imageStyles from "../styles/modules/topperimage.module.less"
 const Topper2 = ({ settings, wcmData }) => {
   const {
     Topper_Style, Title, Title_Style, Deck, Image, Image_Alt, Image_Caption, Image_Credits,
-    HeaderDek_Vertical_Position, HeaderDek_Vertical_Offset, HeaderDek_Horizontal_Offset, HeaderDek_Horizontal_Position, Inverted_Colors
+    HeaderDek_Vertical_Position, HeaderDek_Vertical_Offset, HeaderDek_Horizontal_Offset, 
+    HeaderDek_Horizontal_Position, Inverted_Colors, Invert_Layout
   } = settings
 
   const headerDekStyleList = () => {
@@ -237,8 +238,10 @@ const Topper2 = ({ settings, wcmData }) => {
 
       case "side-by-side":
         let figureCss = isSlideshow(wcmIdList) ? `topper-image ${topperStyles.imageSideBySideSlideshow}` : `topper-image ${topperStyles.imageSideBySide}`;
+        let sideBySideContainerCss = (Invert_Layout == "headerdek-left-image-right") ? `${topperStyles.topperContainerSideBySide}` : `${topperStyles.topperContainerSideBySide} ${topperStyles.reverseFlexbox}`
+
         return (
-          <div className={topperStyles.topperContainerSideBySide}>
+          <div className={sideBySideContainerCss}>
             <div className={headerDekStyleList().join('')}>
               <Heading
                 level={1}

@@ -229,3 +229,10 @@
 .captionSideBySide {
   max-width: @lg;
 }
+
+.reverseFlexbox {
+  flex-direction: row-reverse;
+  @media @tablet {
+    flex-direction: column;
+  }
+}
