@@ -11,7 +11,7 @@ const Topper2 = ({ settings, wcmData }) => {
   const {
     Topper_Style, Title, Title_Style, Deck, Image, Image_Alt, Image_Caption, Image_Credits,
     HeaderDek_Vertical_Position, HeaderDek_Vertical_Offset, HeaderDek_Horizontal_Offset, 
-    HeaderDek_Horizontal_Position, Inverted_Colors, Invert_Layout
+    HeaderDek_Horizontal_Position, Inverted_Colors, Invert_Layout, Background_Color
   } = settings
 
   const headerDekStyleList = () => {
@@ -238,8 +238,8 @@ const Topper2 = ({ settings, wcmData }) => {
 
       case "side-by-side":
         let figureCss = isSlideshow(wcmIdList) ? `topper-image ${topperStyles.imageSideBySideSlideshow}` : `topper-image ${topperStyles.imageSideBySide}`;
-        let sideBySideContainerCss = (Invert_Layout == "headerdek-left-image-right") ? `${topperStyles.topperContainerSideBySide}` : `${topperStyles.topperContainerSideBySide} ${topperStyles.reverseFlexbox}`
-
+        let sideBySideContainerCss = (Invert_Layout === "headerdek-right-image-left") ? `${topperStyles.topperContainerSideBySide} ${topperStyles.reverseFlexbox}` : `${topperStyles.topperContainerSideBySide}`
+        setBackgroundColor();
         return (
           <div className={sideBySideContainerCss}>
             <div className={headerDekStyleList().join('')}>
@@ -297,6 +297,14 @@ const Topper2 = ({ settings, wcmData }) => {
     if (isFlipped) num *= -1;
 
     return num;
+  }
+
+  const setBackgroundColor = () => {
+    let r = document.querySelector(':root');
+
+    if (Background_Color) {
+      r.style.setProperty('--container-background-color', Background_Color)
+    }
   }
 
   return (

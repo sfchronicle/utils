@@ -3,6 +3,7 @@
 :root {
   --headerDek-vertical-offset: 0px;
   --headerDek-horizontal-offset: 0px;
+  --container-background-color: none;
 }
 
 .topperContainerFullScreen {
@@ -23,6 +24,7 @@
 .topperContainerSideBySide {
   display: flex;
   align-items: center;
+  background: var(--container-background-color);
 
   @media @tablet {
     flex-direction: column;
@@ -61,11 +63,11 @@
 
 .imageSideBySideSlideshow {
   width: 50%;
-  height: calc(50vw*2/3);
+  height: calc(50vw*2/3 + 10px);
 
   @media @tablet {
     width: 100%;
-    height: calc(100vw*2/3);
+    height: calc(100vw*2/3 + 10px);
   }
 }
 
