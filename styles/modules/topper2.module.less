@@ -4,6 +4,7 @@
   --headerDek-vertical-offset: 0px;
   --headerDek-horizontal-offset: 0px;
   --container-background-color: none;
+  --side-by-side-text-color: black;
 }
 
 .topperContainerFullScreen {
@@ -26,7 +27,7 @@
   align-items: center;
   background: var(--container-background-color);
 
-  @media @tablet {
+  @media (max-width: @lg) {
     flex-direction: column;
   }
 }
@@ -54,7 +55,7 @@
   float: left;
   padding: @s16;
 
-  @media @tablet {
+  @media (max-width: @lg) {
     width: auto;
     float: none;
     padding-bottom: 0;
@@ -65,7 +66,7 @@
   width: 50%;
   height: calc(50vw*2/3 + 10px);
 
-  @media @tablet {
+  @media (max-width: @lg) {
     width: 100%;
     height: calc(100vw*2/3 + 10px);
   }
@@ -101,12 +102,14 @@
   float: right;
   text-align: left;
   padding: @s16;
-  margin: auto;
+  // margin: @s24 auto;
+  color:var(--side-by-side-text-color);
 
-  @media @tablet {
+  @media (max-width: @lg) {
     width: auto;
     max-width: 100%;
     float: none;
+    padding: 0;
   }
 }
 
@@ -223,7 +226,7 @@
   padding-top: calc(50vw*2/3 - @s16);
   padding-left: @s16;
 
-  @media @tablet {
+  @media (max-width: @lg) {
     padding-top: calc(100vw*2/3 - @s16);
   }
 }
@@ -234,7 +237,11 @@
 
 .reverseFlexbox {
   flex-direction: row-reverse;
-  @media @tablet {
+  @media (max-width: @lg) {
     flex-direction: column;
   }
+}
+
+.captionTextColor {
+  color: var(--side-by-side-text-color);
 }

@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from "react"
 
-const CaptionCreditSlideshow = ({ captionList, creditList, extraStyles, isBrandStylesRemoved = false }) => {
+const CaptionCreditSlideshow = ({ captionList, creditList, extraStyles, creditStyles = [], isBrandStylesRemoved = false }) => {
   let captionCss = ["topper-image", "caption"];
   if (extraStyles) {
     captionCss = (isBrandStylesRemoved) ? extraStyles : extraStyles.concat(captionCss);
@@ -31,16 +31,17 @@ const CaptionCreditSlideshow = ({ captionList, creditList, extraStyles, isBrandS
 
   const hasCaption = (captionList.length > 0)
   const hasCredit = (creditList.length > 0)
+  let creditCss = `credit ${creditStyles.join(" ")}`
   return (
     <>
       {hasCaption && hasCredit && (
         <figcaption className={captionCss.join(' ')}>
-          {captionList[index]} <span className="credit">{creditList[index]}</span>
+          {captionList[index]} <span className={creditCss}>{creditList[index]}</span>
         </figcaption>
       )}
       {!hasCaption && hasCredit && (
         <figcaption className={captionCss.join(' ')}>
-          <span className="credit">{creditList[index]}</span>
+          <span className={creditCss}>{creditList[index]}</span>
         </figcaption>
       )}
       {hasCaption && !hasCredit && (

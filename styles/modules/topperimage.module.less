@@ -37,7 +37,7 @@
   height: calc(50vw * 2/3);
   padding: @s16;
 
-  @media @tablet {
+  @media (max-width: @lg) {
     height: calc(100vw*2/3);
   }
 }
@@ -70,7 +70,7 @@
   object-fit: cover;
   width: 50vw;
   height: var(--img-height-viewport);
-  @media @tablet {
+  @media (max-width: @lg) {
     width: 100vw;
     height: calc(100vw*2/3);
   }

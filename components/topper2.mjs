@@ -11,7 +11,8 @@ const Topper2 = ({ settings, wcmData }) => {
   const {
     Topper_Style, Title, Title_Style, Deck, Image, Image_Alt, Image_Caption, Image_Credits,
     HeaderDek_Vertical_Position, HeaderDek_Vertical_Offset, HeaderDek_Horizontal_Offset, 
-    HeaderDek_Horizontal_Position, Inverted_Colors, Invert_Layout, Background_Color
+    HeaderDek_Horizontal_Position, Inverted_Colors, Inverted_Layout, Inverted_Text_Color, 
+    Topper_Background_Color
   } = settings
 
   const headerDekStyleList = () => {
@@ -237,9 +238,9 @@ const Topper2 = ({ settings, wcmData }) => {
         );
 
       case "side-by-side":
-        let figureCss = isSlideshow(wcmIdList) ? `topper-image ${topperStyles.imageSideBySideSlideshow}` : `topper-image ${topperStyles.imageSideBySide}`;
-        let sideBySideContainerCss = (Invert_Layout === "headerdek-right-image-left") ? `${topperStyles.topperContainerSideBySide} ${topperStyles.reverseFlexbox}` : `${topperStyles.topperContainerSideBySide}`
-        setBackgroundColor();
+        let figureCss = isSlideshow(wcmIdList) ? `${topperStyles.imageSideBySideSlideshow}` : `${topperStyles.imageSideBySide}`;
+        let sideBySideContainerCss = (Inverted_Layout === "headerdek-right-image-left") ? `${topperStyles.topperContainerSideBySide} ${topperStyles.reverseFlexbox}` : `${topperStyles.topperContainerSideBySide}`
+        setBackgroundAndTextColor();
         return (
           <div className={sideBySideContainerCss}>
             <div className={headerDekStyleList().join('')}>
@@ -261,11 +262,12 @@ const Topper2 = ({ settings, wcmData }) => {
                 <CaptionCreditSlideshow
                   captionList={convertStringToList(Image_Caption, wcmIdList.length)}
                   creditList={convertStringToList(Image_Credits, wcmIdList.length)}
-                  extraStyles={[topperStyles.slideshowCaptionSideBySide]}
-                  isBrandStylesRemoved={true}
+                  extraStyles={[topperStyles.slideshowCaptionSideBySide, topperStyles.captionTextColor]}
+                  creditStyles={[topperStyles.captionTextColor]}
+                  // isBrandStylesRemoved={true}
                 />
               }
-              {!isSlideshow(wcmIdList) && <CaptionCredit caption={Image_Caption} credit={Image_Credits} extraStyles={[topperStyles.captionSideBySide]} isBrandStylesRemoved={true} />}
+              {!isSlideshow(wcmIdList) && <CaptionCredit caption={Image_Caption} credit={Image_Credits} extraStyles={[topperStyles.captionSideBySide]} creditStyles={[topperStyles.captionTextColor]} />}
             </figure>
           </div>
         )
@@ -299,11 +301,15 @@ const Topper2 = ({ settings, wcmData }) => {
     return num;
   }
 
-  const setBackgroundColor = () => {
+  const setBackgroundAndTextColor = () => {
     let r = document.querySelector(':root');
 
-    if (Background_Color) {
-      r.style.setProperty('--container-background-color', Background_Color)
+    if (Topper_Background_Color) {
+      r.style.setProperty('--container-background-color', Topper_Background_Color)
+    }
+
+    if (Inverted_Text_Color) {
+      r.style.setProperty('--side-by-side-text-color', Inverted_Text_Color)
     }
   }
 
