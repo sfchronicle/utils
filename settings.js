@@ -14,7 +14,7 @@ try {
 // Get settings off story_settings if it exists, otherwise fall back to projectConfig
 let getSettings = function(){
 	if (!projectConfig) {
-		let settings = {PROJECT : {DATE: "September 20, 2022 9:00 AM", MOD_DATE: "September 21, 2022 9:00 AM"}}
+		let settings = {PROJECT : {DATE: "January 1, 1900 9:00 AM", MOD_DATE: "January 1, 1901 9:00 AM"}} // Making this demo date SUPER wrong so we can catch it
 		return (
 			settings
 		)

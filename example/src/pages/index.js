@@ -12,6 +12,7 @@ import Newsletter from '../components/sfc/newsletter'
 import NavTop from '../components/sfc/navtop'
 import Byline from '../../../components/byline.mjs'
 import Topper2 from '../../../components/topper2.mjs'
+import OgPubDate from '../../../components/ogpubdate.mjs'
 
 let rawCredits;
 try {
@@ -101,6 +102,7 @@ const IndexPage = ({ data }) => {
       </main>
 
       <RelatedSection links={related_links} />
+      <OgPubDate />
       {rawCredits && <CreditsSection creditsData={rawCredits}/>}
     </Layout>
   )
