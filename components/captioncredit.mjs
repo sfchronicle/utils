@@ -1,9 +1,9 @@
 import React from 'react'
 
-const CaptionCredit = ({ caption, credit, extraStyles, creditStyles = [], isBrandStylesRemoved = false }) => {
+const CaptionCredit = ({ caption, credit, extraStyles, creditStyles = [] }) => {
   let captionCss = ["topper-image", "caption"];
   if (extraStyles) {
-    captionCss = (isBrandStylesRemoved) ? extraStyles : captionCss.concat(extraStyles);
+    captionCss = captionCss.concat(extraStyles);
   }
 
   let creditCss = `credit ${creditStyles.join(" ")}`

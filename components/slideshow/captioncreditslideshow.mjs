@@ -1,9 +1,9 @@
 import React, { useEffect, useState, useRef } from "react"
 
-const CaptionCreditSlideshow = ({ captionList, creditList, extraStyles, creditStyles = [], isBrandStylesRemoved = false }) => {
+const CaptionCreditSlideshow = ({ captionList, creditList, extraStyles, creditStyles = [] }) => {
   let captionCss = ["topper-image", "caption"];
   if (extraStyles) {
-    captionCss = (isBrandStylesRemoved) ? extraStyles : extraStyles.concat(captionCss);
+    captionCss = extraStyles.concat(captionCss);
   }
 
   const [index, setIndex] = useState(0);

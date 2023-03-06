@@ -110,8 +110,14 @@ const Topper2 = ({ settings, wcmData }) => {
     }
   }
 
+  /** Add styling for text color on topper slideshow captions. Note that the credits 
+   * are grey when the caption is black and white when the captions are white. */
+  const sideBySideCapCredColorCss = () => {
+    return (Inverted_Text_Color === "black") ? topperStyles.captionTextColor : topperStyles.captionTextColorImportant;
+  }
+
   /** Add styling for left padding on topper slideshow captions */
-  const sideBySideCaptionCreditCss = () => {
+  const sideBySideCapCredPaddingCss = () => {
     return (Inverted_Layout === "headerdek-right-image-left") ? topperStyles.captionLargePaddingLeft : topperStyles.captionLargePaddingRight
   }
 
@@ -252,9 +258,8 @@ const Topper2 = ({ settings, wcmData }) => {
 
       case "side-by-side":
         let figureCss = isSlideshow(wcmIdList) ? `${topperStyles.imageSideBySideSlideshow}` : `${topperStyles.imageSideBySide}`;
-        let sideBySideContainerCss = (Inverted_Layout === "headerdek-right-image-left") ? `${topperStyles.topperContainerSideBySide} ${topperStyles.reverseFlexbox}` : `${topperStyles.topperContainerSideBySide}`
-        let captionCreditContainerCss =
-          setBackgroundAndTextColor();
+        let sideBySideContainerCss = (Inverted_Layout === "headerdek-right-image-left") ? `${topperStyles.topperContainerSideBySide} ${topperStyles.reverseFlexbox}` : `${topperStyles.topperContainerSideBySide}`;
+        setBackgroundAndTextColor();
         return (
           <div className={sideBySideContainerCss}>
             <div className={headerDekStyleList().join(' ')}>
@@ -276,11 +281,11 @@ const Topper2 = ({ settings, wcmData }) => {
                 <CaptionCreditSlideshow
                   captionList={convertStringToList(Image_Caption, wcmIdList.length)}
                   creditList={convertStringToList(Image_Credits, wcmIdList.length)}
-                  extraStyles={[topperStyles.slideshowCaptionSideBySide, topperStyles.captionTextColor, sideBySideCaptionCreditCss()]}
-                  creditStyles={[topperStyles.captionTextColor]}
+                  extraStyles={[topperStyles.slideshowCaptionSideBySide, sideBySideCapCredColorCss(), sideBySideCapCredPaddingCss()]}
+                  creditStyles={[sideBySideCapCredColorCss()]}
                 />
               }
-              {!isSlideshow(wcmIdList) && <CaptionCredit caption={Image_Caption} credit={Image_Credits} extraStyles={[topperStyles.captionSideBySide]} creditStyles={[topperStyles.captionTextColor]} />}
+              {!isSlideshow(wcmIdList) && <CaptionCredit caption={Image_Caption} credit={Image_Credits} extraStyles={[topperStyles.captionSideBySide, sideBySideCapCredColorCss()]} creditStyles={[sideBySideCapCredColorCss()]} />}
             </figure>
           </div>
         )
