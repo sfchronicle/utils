@@ -70,6 +70,7 @@
   object-fit: cover;
   width: 50vw;
   height: var(--img-height-viewport);
+
   @media (max-width: @lg) {
     width: 100vw;
     height: calc(100vw*2/3);
@@ -82,5 +83,21 @@
   @media @tablet {
     display: block;
     padding-left: @s8;
+  }
+}
+
+.c-large-padding-left {
+  padding: @s16 @s8 @s16 @s32;
+
+  @media (max-width: @lg) {
+    padding: @s16;
+  }
+}
+
+.c-large-padding-right {
+  padding: @s16 @s32 @s16 @s8;
+
+  @media (max-width: @lg) {
+    padding: @s16;
   }
 }

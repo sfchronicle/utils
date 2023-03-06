@@ -4,7 +4,7 @@ import * as styles from "../../styles/modules/imageslideshow.module.less"
 import * as imageStyles from "../../styles/modules/topperimage.module.less"
 import { TransitionGroup, CSSTransition } from "react-transition-group"
 
-const ImageSlideshow = ({ wcmData, imageList, altList, topperStyle }) => {
+const ImageSlideshow = ({ wcmData, imageList, altList, topperStyle, isLayoutInverted = false }) => {
   const [index, setIndex] = useState(0);
   const timeoutRef = useRef(null);
 
@@ -58,7 +58,10 @@ const ImageSlideshow = ({ wcmData, imageList, altList, topperStyle }) => {
       case "full-screen":
         return [imageStyles.cImgSlideshowFullscreen];
       case "side-by-side":
-        return [imageStyles.cImgSlideshowSideBySide];
+        return [imageStyles.cImgSlideshowSideBySide].concat(
+          // Add styling for left padding on topper image
+          (isLayoutInverted) ? [imageStyles.cLargePaddingLeft] : [imageStyles.cLargePaddingRight]
+        );
       default:
         return [""];
     }

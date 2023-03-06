@@ -10,8 +10,8 @@ import * as imageStyles from "../styles/modules/topperimage.module.less"
 const Topper2 = ({ settings, wcmData }) => {
   const {
     Topper_Style, Title, Title_Style, Deck, Image, Image_Alt, Image_Caption, Image_Credits,
-    HeaderDek_Vertical_Position, HeaderDek_Vertical_Offset, HeaderDek_Horizontal_Offset, 
-    HeaderDek_Horizontal_Position, Inverted_Colors, Inverted_Layout, Inverted_Text_Color, 
+    HeaderDek_Vertical_Position, HeaderDek_Vertical_Offset, HeaderDek_Horizontal_Offset,
+    HeaderDek_Horizontal_Position, Inverted_Colors, Inverted_Layout, Inverted_Text_Color,
     Topper_Background_Color
   } = settings
 
@@ -37,7 +37,12 @@ const Topper2 = ({ settings, wcmData }) => {
           ... (Inverted_Colors === "black-text-white-bg") ? [topperStyles.blackTextWhiteBg] : [topperStyles.whiteTextBlackBg]
         ];
       case "side-by-side":
-        return [topperStyles.headerDekSideBySide];
+        // case "side-by-side-portrait":
+        return [
+          topperStyles.headerDekSideBySide,
+          // Add styling for left padding on header-deck
+          ... (Inverted_Layout === "headerdek-right-image-left") ? [topperStyles.largePaddingRight] : [topperStyles.largePaddingLeft]
+        ];
       default:
         console.error(`${Topper_Style} is not a valid topper style!`)
         return [];
@@ -66,6 +71,7 @@ const Topper2 = ({ settings, wcmData }) => {
         defaultStyles = [topperStyles.hedFullScreen, fullScreenTextAlignCss()];
         break;
       case "side-by-side":
+      case "side-by-side-portrait":
         defaultStyles = ["left"];
         break;
     }
@@ -88,19 +94,25 @@ const Topper2 = ({ settings, wcmData }) => {
       case "full-screen":
         return ["deck", topperStyles.deckFullScreen, fullScreenTextAlignCss()];
       case "side-by-side":
+      case "side-by-side-portrait":
         return ["deck left"];
       default:
         return [""]
     }
   }
 
-  /** get text alignment based on header-deck position **/
+  /** Get text alignment based on header-deck position **/
   const fullScreenTextAlignCss = () => {
     switch (HeaderDek_Horizontal_Position) {
       case "left": return topperStyles.textAlignLeft;
       case "right": return topperStyles.textAlignLeft;
       case "center": return topperStyles.textAlignCenter;
     }
+  }
+
+  /** Add styling for left padding on topper slideshow captions */
+  const sideBySideCaptionCreditCss = () => {
+    return (Inverted_Layout === "headerdek-right-image-left") ? topperStyles.captionLargePaddingLeft : topperStyles.captionLargePaddingRight
   }
 
   /** Converts wcm string from spreadsheet into a list of WCM ids */
@@ -136,6 +148,7 @@ const Topper2 = ({ settings, wcmData }) => {
       imageList={wcmIdList}
       altList={convertStringToList(Image_Alt, wcmIdList.length)}
       topperStyle={Topper_Style}
+      isLayoutInverted={(Inverted_Layout === "headerdek-right-image-left")}
     />
 
   const wcmIdList = getWcmIdList(Image);
@@ -240,10 +253,11 @@ const Topper2 = ({ settings, wcmData }) => {
       case "side-by-side":
         let figureCss = isSlideshow(wcmIdList) ? `${topperStyles.imageSideBySideSlideshow}` : `${topperStyles.imageSideBySide}`;
         let sideBySideContainerCss = (Inverted_Layout === "headerdek-right-image-left") ? `${topperStyles.topperContainerSideBySide} ${topperStyles.reverseFlexbox}` : `${topperStyles.topperContainerSideBySide}`
-        setBackgroundAndTextColor();
+        let captionCreditContainerCss =
+          setBackgroundAndTextColor();
         return (
           <div className={sideBySideContainerCss}>
-            <div className={headerDekStyleList().join('')}>
+            <div className={headerDekStyleList().join(' ')}>
               <Heading
                 level={1}
                 text={Title}
@@ -262,9 +276,8 @@ const Topper2 = ({ settings, wcmData }) => {
                 <CaptionCreditSlideshow
                   captionList={convertStringToList(Image_Caption, wcmIdList.length)}
                   creditList={convertStringToList(Image_Credits, wcmIdList.length)}
-                  extraStyles={[topperStyles.slideshowCaptionSideBySide, topperStyles.captionTextColor]}
+                  extraStyles={[topperStyles.slideshowCaptionSideBySide, topperStyles.captionTextColor, sideBySideCaptionCreditCss()]}
                   creditStyles={[topperStyles.captionTextColor]}
-                  // isBrandStylesRemoved={true}
                 />
               }
               {!isSlideshow(wcmIdList) && <CaptionCredit caption={Image_Caption} credit={Image_Credits} extraStyles={[topperStyles.captionSideBySide]} creditStyles={[topperStyles.captionTextColor]} />}
