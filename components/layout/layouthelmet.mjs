@@ -67,6 +67,8 @@ const LayoutHelmet = ({ meta, url_add }) => {
       />
       <link rel="canonical" href={`${CANONICAL_URL}/${url_add}`} />
       <link rel="stylesheet" href={`https://files.sfchronicle.com/brand-styles/${styleSheetID}.css`} />
+      <link rel="stylesheet" href={`https://files.sfchronicle.com/brand-styles/reset.css`} />
+
 
       {(isApp || EMBEDDED) ? (
         <meta name="robots" content="noindex, nofollow" />
