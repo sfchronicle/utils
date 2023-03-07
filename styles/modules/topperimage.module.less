@@ -77,6 +77,26 @@
   }
 }
 
+.c-container-side-by-side-portrait {
+  float: left;
+  height: 100%;
+}
+
+.c-img-side-by-side-portrait {
+  object-fit: cover;
+  width: calc(90vh * 2/3);
+  height: 100%;
+  min-width: 400px;
+  min-height: 600px;
+
+  @media (max-width: @lg) {
+    width: 100vw;
+    height: auto;
+    min-height: unset;
+    min-width: unset;
+  }
+}
+
 .c-fig-hidden-when-desktop {
   display: none;
 

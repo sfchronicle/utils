@@ -37,7 +37,12 @@ const Topper2 = ({ settings, wcmData }) => {
           ... (Inverted_Colors === "black-text-white-bg") ? [topperStyles.blackTextWhiteBg] : [topperStyles.whiteTextBlackBg]
         ];
       case "side-by-side":
-        // case "side-by-side-portrait":
+        return [
+          topperStyles.headerDekSideBySide,
+          // Add styling for left padding on header-deck
+          ... (Inverted_Layout === "headerdek-right-image-left") ? [topperStyles.largePaddingRight] : [topperStyles.largePaddingLeft]
+        ];
+      case "side-by-side-portrait":
         return [
           topperStyles.headerDekSideBySide,
           // Add styling for left padding on header-deck
@@ -148,6 +153,7 @@ const Topper2 = ({ settings, wcmData }) => {
   const ImageHTML = () => <TopperImage wcm={Image} alt={Image_Alt} wcmData={wcmData} />
   const FullScreenImageHTML = () => <TopperImage wcm={Image} alt={Image_Alt} wcmData={wcmData} overrideCssList={[imageStyles.cImgFullscreen]} />
   const SideBySideImageHTML = () => <TopperImage wcm={Image} alt={Image_Alt} wcmData={wcmData} containerCssList={[imageStyles.cContainerSideBySide]} overrideCssList={[imageStyles.cImgSideBySide]} />
+  const SideBySidePortraitImageHTML = () => <TopperImage wcm={Image} alt={Image_Alt} wcmData={wcmData} containerCssList={[imageStyles.cContainerSideBySidePortrait]} overrideCssList={[imageStyles.cImgSideBySidePortrait]} />
   const ImageSlideshowHTML = () =>
     <ImageSlideshow
       wcmData={wcmData}
@@ -288,7 +294,41 @@ const Topper2 = ({ settings, wcmData }) => {
               {!isSlideshow(wcmIdList) && <CaptionCredit caption={Image_Caption} credit={Image_Credits} extraStyles={[topperStyles.captionSideBySide, sideBySideCapCredColorCss()]} creditStyles={[sideBySideCapCredColorCss()]} />}
             </figure>
           </div>
-        )
+        );
+
+      case "side-by-side-portrait":
+        let portraitFigureCss = isSlideshow(wcmIdList) ? `${topperStyles.imageSideBySideSlideshow}` : `${topperStyles.imageSideBySidePortrait}`;
+        let sideBySidePortraitContainerCss = (Inverted_Layout === "headerdek-right-image-left") ? `${topperStyles.topperContainerSideBySidePortrait} ${topperStyles.reverseFlexbox}` : `${topperStyles.topperContainerSideBySidePortrait}`;
+        setBackgroundAndTextColor();
+        return (
+          <div className={sideBySidePortraitContainerCss}>
+            <div className={headerDekStyleList().join(' ')}>
+              <Heading
+                level={1}
+                text={Title}
+                className={headerStyleList().join(' ')}
+              />
+              <Heading
+                level={2}
+                text={Deck}
+                className={deckStyleList().join(' ')}
+              />
+            </div>
+            <figure className={portraitFigureCss}>
+              {isSlideshow(wcmIdList) && <ImageSlideshowHTML />}
+              {!isSlideshow(wcmIdList) && <SideBySidePortraitImageHTML />}
+              {isSlideshow(wcmIdList) &&
+                <CaptionCreditSlideshow
+                  captionList={convertStringToList(Image_Caption, wcmIdList.length)}
+                  creditList={convertStringToList(Image_Credits, wcmIdList.length)}
+                  extraStyles={[topperStyles.slideshowCaptionSideBySide, sideBySideCapCredColorCss(), sideBySideCapCredPaddingCss()]}
+                  creditStyles={[sideBySideCapCredColorCss()]}
+                />
+              }
+              {!isSlideshow(wcmIdList) && <CaptionCredit caption={Image_Caption} credit={Image_Credits} extraStyles={[topperStyles.captionSideBySidePortrait, sideBySideCapCredColorCss()]} creditStyles={[sideBySideCapCredColorCss()]} />}
+            </figure>
+          </div>
+        );
     }
   }
 

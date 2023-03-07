@@ -102,7 +102,6 @@ const TopperImage = ({ wcm, alt, ratio, wcmData, containerCssList = [], override
     throw `WCMImage error: Image for ${wcm} needs an alt tag! Please add a good, descriptive alt tag. Suggestion from Mozilla: When choosing alt strings for your images, imagine what you would say when reading the page to someone over the phone without mentioning that there's an image on the page.`
   }
 
-  console.log(containerCssList.join(' '))
   return (
     <div className={containerCssList.join(' ')} ref={picRef}>
       <ImageHTML fullPath={fullPath} imageRez={imageRez} alt={alt} overrideCssList={overrideCssList} />

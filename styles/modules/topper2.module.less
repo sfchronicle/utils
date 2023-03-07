@@ -32,6 +32,19 @@
   }
 }
 
+.topperContainerSideBySidePortrait {
+  display: flex;
+  align-items: center;
+  max-width: @xl;
+  background: var(--container-background-color);
+  margin: auto;
+  min-height: 600px;
+
+  @media (max-width: @lg) {
+    flex-direction: column;
+  }
+}
+
 .imageFullScreen {
   top: 0 !important;
   width: 100%;
@@ -69,6 +82,22 @@
   @media (max-width: @lg) {
     width: 100%;
     height: calc(100vw*2/3 + 10px);
+  }
+}
+
+.imageSideBySidePortrait {
+  width: 50%;
+  height: 90vh;
+  min-height: calc(600px + 32px);
+  float: left;
+  padding: @s16;
+
+  @media (max-width: @lg) {
+    width: auto;
+    float: none;
+    height: auto;
+    padding-bottom: 0;
+    min-height: unset;
   }
 }
 
@@ -229,6 +258,11 @@
 }
 
 .captionSideBySide {
+  max-width: @lg;
+}
+
+.captionSideBySidePortrait {
+  float: left;
   max-width: @lg;
 }
 
