@@ -46,6 +46,8 @@ const ImageSlideshow = ({ wcmData, imageList, altList, topperStyle, isLayoutInve
         return styles.imageWrapperFullscreen;
       case "side-by-side":
         return styles.imageWrapperSideBySide;
+      case "side-by-side-portrait":
+        return styles.imageWrapperSideBySidePortrait;
       default:
         return "";
     }
@@ -62,6 +64,8 @@ const ImageSlideshow = ({ wcmData, imageList, altList, topperStyle, isLayoutInve
           // Add styling for left padding on topper image
           (isLayoutInverted) ? [imageStyles.cLargePaddingLeft] : [imageStyles.cLargePaddingRight]
         );
+      case "side-by-side-portrait":
+        return [imageStyles.cImgSlideshowSideBySidePortrait];
       default:
         return [""];
     }

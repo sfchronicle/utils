@@ -126,6 +126,11 @@ const Topper2 = ({ settings, wcmData }) => {
     return (Inverted_Layout === "headerdek-right-image-left") ? topperStyles.captionLargePaddingLeft : topperStyles.captionLargePaddingRight
   }
 
+  /** Add styling for left padding on topper slideshow captions */
+  const sideBySidePortraitCapCredPaddingCss = () => {
+    return (Inverted_Layout === "headerdek-right-image-left") ? topperStyles.captionSmallPaddingLeft : topperStyles.captionLargePaddingRight
+  }
+
   /** Converts wcm string from spreadsheet into a list of WCM ids */
   const getWcmIdList = (listStr) => {
     return listStr.split(";").map((d) => parseInt(d));
@@ -297,7 +302,7 @@ const Topper2 = ({ settings, wcmData }) => {
         );
 
       case "side-by-side-portrait":
-        let portraitFigureCss = isSlideshow(wcmIdList) ? `${topperStyles.imageSideBySideSlideshow}` : `${topperStyles.imageSideBySidePortrait}`;
+        let portraitFigureCss = isSlideshow(wcmIdList) ? `${topperStyles.imageSideBySidePortraitSlideshow}` : `${topperStyles.imageSideBySidePortrait}`;
         let sideBySidePortraitContainerCss = (Inverted_Layout === "headerdek-right-image-left") ? `${topperStyles.topperContainerSideBySidePortrait} ${topperStyles.reverseFlexbox}` : `${topperStyles.topperContainerSideBySidePortrait}`;
         setBackgroundAndTextColor();
         return (
@@ -321,7 +326,7 @@ const Topper2 = ({ settings, wcmData }) => {
                 <CaptionCreditSlideshow
                   captionList={convertStringToList(Image_Caption, wcmIdList.length)}
                   creditList={convertStringToList(Image_Credits, wcmIdList.length)}
-                  extraStyles={[topperStyles.slideshowCaptionSideBySide, sideBySideCapCredColorCss(), sideBySideCapCredPaddingCss()]}
+                  extraStyles={[topperStyles.slideshowCaptionSideBySidePortrait, sideBySideCapCredColorCss(), sideBySidePortraitCapCredPaddingCss()]}
                   creditStyles={[sideBySideCapCredColorCss()]}
                 />
               }

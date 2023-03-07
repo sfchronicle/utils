@@ -42,6 +42,28 @@
   }
 }
 
+.c-img-slideshow-side-by-side-portrait {
+  object-fit: cover;
+  width: 100%;
+  height: calc(90vh);
+  min-width: 400px;
+  min-height: 600px;
+  padding: @s16;
+
+  @media (max-width: @lg) {
+    height: calc(90vh - 37px);
+    width: calc(90vh*2/3);
+    min-height: unset;
+    min-width: unset;
+  }
+
+  @media @mobile {
+    width: 90vw;
+    height: calc(90vw*3/2);
+    padding: 0;
+  }
+}
+
 .c-img {
   display: block;
   position: relative;

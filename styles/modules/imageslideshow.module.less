@@ -61,6 +61,23 @@
   }
 }
 
+.image-wrapper-side-by-side-portrait {
+  position: absolute;
+  width: calc(90vh*2/3);
+  height: calc(90vh);
+  min-height: calc(600px + 32px);
+
+  @media (max-width: @lg) {
+    height: calc(90vh);
+    min-height: unset;
+  }
+
+  @media @mobile {
+    width: 90vw;
+    height: calc(90vw*3/2);
+  }
+}
+
 /* enter animation */
 .fade-enter {
   opacity: 0;

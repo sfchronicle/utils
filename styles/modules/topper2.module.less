@@ -38,10 +38,12 @@
   max-width: @xl;
   background: var(--container-background-color);
   margin: auto;
+  margin-bottom: @s32;
   min-height: 600px;
 
   @media (max-width: @lg) {
     flex-direction: column;
+    margin-bottom: 0;
   }
 }
 
@@ -98,6 +100,28 @@
     height: auto;
     padding-bottom: 0;
     min-height: unset;
+  }
+}
+
+.imageSideBySidePortraitSlideshow {
+  width: 50%;
+  height: 90vh;
+  min-height: calc(600px + 32px);
+  float: left;
+  padding: @s16;
+
+  @media (max-width: @lg) {
+    width: calc(90vh*2/3);
+    float: none;
+    height: calc(90vh);
+    padding-bottom: 0;
+    min-height: unset;
+  }
+
+  @media @mobile {
+    width: 90vw;
+    height: calc(90vw*3/2 + @s16);
+    padding: 0;
   }
 }
 
@@ -257,13 +281,33 @@
   }
 }
 
+.slideshowCaptionSideBySidePortrait {
+  padding-top: clamp(584px, 88vh, 90vh);
+
+  @media (max-width: @lg) {
+    padding-top: calc(90vh - 37px - @s16);
+  }
+
+  @media @mobile {
+    padding-top: calc(90vw*3/2);
+  }
+}
+
 .captionSideBySide {
   max-width: @lg;
 }
 
 .captionSideBySidePortrait {
   float: left;
-  max-width: @lg;
+  width: calc(90vh * 2/3);
+  max-width: calc(50vw * 2/3 - 32px);
+  min-width: 400px;
+
+  @media (max-width: @lg) {
+    width: auto;
+    max-width: none;
+    min-width: 0px;
+  }
 }
 
 .reverseFlexbox {
@@ -303,6 +347,18 @@
 
   @media (max-width: @lg) {
     padding-left: @s16;
+  }
+}
+
+.captionSmallPaddingLeft {
+  padding-left: @s16;
+
+  @media (max-width: @lg) {
+    padding-left: @s16;
+  }
+
+  @media @mobile {
+    padding-left: 0;
   }
 }
 
