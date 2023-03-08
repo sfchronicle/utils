@@ -1,29 +1,29 @@
 import React from 'react'
-// import * as capcredStyles from "../styles/modules/captioncredit.module.less"
 
-const CaptionCredit = (props) => {
-  let {caption, credit, extraStyles} = props
+const CaptionCredit = ({ caption, credit, extraStyles, creditStyles = [] }) => {
+  let captionCss = ["topper-image", "caption"];
+  if (extraStyles) {
+    captionCss = captionCss.concat(extraStyles);
+  }
 
-  let captionCss = ["topper-image", "caption"]; //capcredStyles.cFigCap, 
-  if (extraStyles) captionCss = captionCss.concat(extraStyles);
-
+  let creditCss = `credit ${creditStyles.join(" ")}`
   return (
     <>
-    {caption && credit && (
-      <figcaption className={captionCss.join(' ')}>
-        {caption} <span className="credit">{credit}</span>
-      </figcaption>
-    )}
-    {!caption && credit && (
-      <figcaption className={captionCss.join(' ')}>
-        <span className="credit">{credit}</span>
-      </figcaption>
-    )}
-    {caption && !credit && (
-      <figcaption className={captionCss.join(' ')}>
-        {caption}
-      </figcaption>
-    )}
+      {caption && credit && (
+        <figcaption className={captionCss.join(' ')}>
+          {caption} <span className={creditCss}>{credit}</span>
+        </figcaption>
+      )}
+      {!caption && credit && (
+        <figcaption className={captionCss.join(' ')}>
+          <span className={creditCss}>{credit}</span>
+        </figcaption>
+      )}
+      {caption && !credit && (
+        <figcaption className={captionCss.join(' ')}>
+          {caption}
+        </figcaption>
+      )}
     </>
   )
 }

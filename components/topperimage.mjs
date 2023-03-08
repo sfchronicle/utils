@@ -17,7 +17,7 @@ const ImageHTML = ({ fullPath, imageRez, alt, overrideCssList }) => {
   )
 }
 
-const TopperImage = ({ wcm, alt, ratio, wcmData, overrideCssList }) => {
+const TopperImage = ({ wcm, alt, ratio, wcmData, containerCssList = [], overrideCssList = [] }) => {
   // When the wrapping div is rendered, we're going to figure out the best size for this image to be
   let picRef = useRef(null)
   let [imageRez, setImageRez] = useState(0)
@@ -61,6 +61,7 @@ const TopperImage = ({ wcm, alt, ratio, wcmData, overrideCssList }) => {
   // This calculation is not used for the topper impl, but keeping it here just in case
   // it is needed for the general WCMImage utils migration
   let photoRatio = "56.25%"; // Default to 16/9
+  let photoViewport = "56.25vw";
   let fullPath = `https://s.hdnux.com/photos/0/0/0/${wcm}/0/`;
   if (!ratio) {
     let matchedPhoto = wcmData.nodes.find((item) => {
@@ -72,10 +73,12 @@ const TopperImage = ({ wcm, alt, ratio, wcmData, overrideCssList }) => {
     if (matchedPhoto) {
       // Set ratio of the actual photo like a legit hacker
       photoRatio = (matchedPhoto.photo.ratio * 100) + "%";
+      photoViewport = (matchedPhoto.photo.ratio * 50) + "vw";
 
       // If css :root is available, set the photo ratio
       if (r) {
         r.style.setProperty('--img-bottom-padding-ratio', photoRatio);
+        r.style.setProperty('--img-height-viewport', photoViewport);
       }
 
       fullPath = matchedPhoto.photo.full_path;
@@ -90,6 +93,7 @@ const TopperImage = ({ wcm, alt, ratio, wcmData, overrideCssList }) => {
     // If css :root is available, set the photo ratio
     if (r) {
       r.style.setProperty('--img-bottom-padding-ratio', photoRatio);
+      r.style.setProperty('--img-height-viewport', photoViewport);
     }
   }
 
@@ -99,7 +103,7 @@ const TopperImage = ({ wcm, alt, ratio, wcmData, overrideCssList }) => {
   }
 
   return (
-    <div ref={picRef}>
+    <div className={containerCssList.join(' ')} ref={picRef}>
       <ImageHTML fullPath={fullPath} imageRez={imageRez} alt={alt} overrideCssList={overrideCssList} />
     </div>
   )
@@ -110,6 +114,7 @@ TopperImage.propTypes = {
   alt: PropTypes.string.isRequired,
   ratio: PropTypes.string, // This prop is currently not being used, might be ok to delete? 
   wcmData: PropTypes.object,
+  containerCssList: PropTypes.array,
   overrideCssList: PropTypes.array
 }
 

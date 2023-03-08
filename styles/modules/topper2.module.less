@@ -3,6 +3,8 @@
 :root {
   --headerDek-vertical-offset: 0px;
   --headerDek-horizontal-offset: 0px;
+  --container-background-color: none;
+  --side-by-side-text-color: black;
 }
 
 .topperContainerFullScreen {
@@ -17,6 +19,40 @@
 
   @media @tablet {
     height: auto;
+  }
+}
+
+.topperContainerSideBySide {
+  display: flex;
+  align-items: center;
+  background: var(--container-background-color);
+
+  @media (max-width: @lg) {
+    flex-direction: column;
+  }
+}
+
+.topperContainerSideBySidePortrait {
+  display: flex;
+  align-items: center;
+  max-width: @xl;
+  margin: auto;
+  margin-bottom: @s32;
+  min-height: 600px;
+
+  @media (max-width: @lg) {
+    flex-direction: column;
+    margin-bottom: 0;
+  }
+}
+
+.fullWidthContainer {
+  background: var(--container-background-color);
+  width: 100%;
+  padding-bottom: @s16;
+
+  @media (max-width: @lg) {
+    padding-bottom: 0px;
   }
 }
 
@@ -35,6 +71,66 @@
 
   @media @mobile {
     width: 100%;
+  }
+}
+
+.imageSideBySide {
+  width: 50%;
+  float: left;
+  padding: @s16;
+
+  @media (max-width: @lg) {
+    width: auto;
+    float: none;
+    padding-bottom: 0;
+  }
+}
+
+.imageSideBySideSlideshow {
+  width: 50%;
+  height: calc(50vw*2/3 + 10px);
+
+  @media (max-width: @lg) {
+    width: 100%;
+    height: calc(100vw*2/3 + 10px);
+  }
+}
+
+.imageSideBySidePortrait {
+  width: 50%;
+  height: 90vh;
+  min-height: calc(600px + 32px);
+  float: left;
+  padding: @s16;
+
+  @media (max-width: @lg) {
+    width: auto;
+    float: none;
+    height: auto;
+    padding-bottom: 0;
+    min-height: unset;
+  }
+}
+
+.imageSideBySidePortraitSlideshow {
+  width: 50%;
+  height: 90vh;
+  min-height: calc(600px + 32px);
+  float: left;
+  padding: @s16;
+
+  @media (max-width: @lg) {
+    width: calc(90vh*2/3);
+    float: none;
+    height: calc(90vh);
+    padding-bottom: 0;
+    min-height: unset;
+  }
+
+  @media @mobile {
+    width: 90vw;
+    height: calc(90vw*3/2 + @s16);
+    padding: 0;
   }
 }
 
@@ -60,6 +156,20 @@
     margin: 0;
     padding: 0;
     width: 100%;
+  }
+}
+
+.headerDekSideBySide {
+  max-width: 50%;
+  float: right;
+  text-align: left;
+  color: var(--side-by-side-text-color);
+
+  @media (max-width: @lg) {
+    width: auto;
+    max-width: 100%;
+    float: none;
+    padding: 0;
   }
 }
 
@@ -169,5 +279,134 @@
 .smallPaddingLeftWhenTablet {
   @media @tablet {
     padding-left: @s8;
+  }
+}
+
+.slideshowCaptionSideBySide {
+  padding-top: calc(50vw*2/3 - @s16);
+
+  @media (max-width: @lg) {
+    padding-top: calc(100vw*2/3 - @s16);
+  }
+}
+
+.slideshowCaptionSideBySidePortrait {
+  padding-top: clamp(584px, 88vh, 90vh);
+
+  @media (max-width: @lg) {
+    padding-top: calc(90vh - 37px - @s16);
+  }
+
+  @media @mobile {
+    padding-top: calc(90vw*3/2);
+  }
+}
+
+.captionSideBySide {
+  max-width: @lg;
+}
+
+.captionSideBySidePortrait {
+  width: clamp(0px, calc(50vw - 32px), calc(90vh * 2/3));
+  max-width: calc(50vw * 2/3 - 32px);
+  min-width: 400px;
+
+  @media (max-width: @lg) {
+    width: auto;
+    max-width: none;
+    min-width: 0px;
+  }
+}
+
+.reverseFlexbox {
+  flex-direction: row-reverse;
+
+  @media (max-width: @lg) {
+    flex-direction: column;
+  }
+}
+
+.captionTextColor {
+  color: var(--side-by-side-text-color);
+}
+
+.captionTextColorImportant {
+  color: var(--side-by-side-text-color) !important;
+}
+
+.largePaddingLeft {
+  padding: @s16 @s8 @s16 @s32;
+
+  @media (max-width: @lg) {
+    padding: 0;
+  }
+}
+
+.largePaddingRight {
+  padding: @s16 @s32 @s16 @s8;
+
+  @media (max-width: @lg) {
+    padding: 0;
+  }
+}
+
+.captionLargePaddingLeft {
+  padding-left: @s32;
+
+  @media (max-width: @lg) {
+    padding-left: @s16;
+  }
+}
+
+.captionSmallPaddingLeft {
+  padding-left: @s16;
+
+  @media (max-width: @lg) {
+    padding-left: @s16;
+  }
+
+  @media @mobile {
+    padding-left: 0;
+  }
+}
+
+.captionLargePaddingRight {
+  padding-left: @s8;
+
+  @media (max-width: @lg) {
+    padding-left: @s16;
+  }
+}
+
+.captionXLargePaddingRight {
+  padding-left: @s16;
+
+  @media (max-width: @lg) {
+    padding-left: @s16;
+  }
+}
+
+.captionSideBySidePortraitPadding {
+  padding-left: clamp(0px, calc(50vw - (90vh * 2/3) - @s16), calc(600px - 90vh *2/3 + @s16));
+
+  @media (max-width: @lg) {
+    padding-left: @s16;
+  }
+}
+
+.floatLeftWhenDesktop {
+  float: left;
+
+  @media (max-width: @lg) {
+    float: none;
+  }
+}
+
+.floatRightWhenDesktop {
+  float: right;
+  max-width: none;
+
+  @media (max-width: @lg) {
+    float: none;
   }
 }

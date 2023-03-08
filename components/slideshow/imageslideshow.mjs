@@ -4,7 +4,7 @@ import * as styles from "../../styles/modules/imageslideshow.module.less"
 import * as imageStyles from "../../styles/modules/topperimage.module.less"
 import { TransitionGroup, CSSTransition } from "react-transition-group"
 
-const ImageSlideshow = ({ wcmData, imageList, altList, topperStyle }) => {
+const ImageSlideshow = ({ wcmData, imageList, altList, topperStyle, isLayoutInverted = false }) => {
   const [index, setIndex] = useState(0);
   const timeoutRef = useRef(null);
 
@@ -31,7 +31,6 @@ const ImageSlideshow = ({ wcmData, imageList, altList, topperStyle }) => {
   const getContainerClass = () => {
     switch (topperStyle) {
       case "stacked":
-        return styles.containerStacked;
       case "full-screen":
         return styles.containerStacked;
       default:
@@ -45,6 +44,10 @@ const ImageSlideshow = ({ wcmData, imageList, altList, topperStyle }) => {
         return styles.imageWrapperStacked;
       case "full-screen":
         return styles.imageWrapperFullscreen;
+      case "side-by-side":
+        return styles.imageWrapperSideBySide;
+      case "side-by-side-portrait":
+        return styles.imageWrapperSideBySidePortrait;
       default:
         return "";
     }
@@ -56,6 +59,18 @@ const ImageSlideshow = ({ wcmData, imageList, altList, topperStyle }) => {
         return [imageStyles.cForceAspectRatio];
       case "full-screen":
         return [imageStyles.cImgSlideshowFullscreen];
+      case "side-by-side":
+        return [imageStyles.cImgSlideshowSideBySide].concat(
+          // Add styling for left padding on topper image
+          (isLayoutInverted) ? [imageStyles.cLargePaddingLeft] : [imageStyles.cLargePaddingRight]
+        );
+      case "side-by-side-portrait":
+        return [imageStyles.cImgSlideshowSideBySidePortrait].concat(
+          [
+            // Add styling for left padding on image caption
+            (isLayoutInverted) ? [] : [styles.sideBySidePortraitMarginLeft]
+          ]
+        );
       default:
         return [""];
     }

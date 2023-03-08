@@ -3,6 +3,7 @@
 
 :root {
   --img-bottom-padding-ratio: "56.25%";
+  --img-height-viewport: "56.25vw";
 }
 
 .c-force-aspect-ratio {
@@ -30,6 +31,39 @@
   }
 }
 
+.c-img-slideshow-side-by-side {
+  object-fit: cover;
+  width: 100%;
+  height: calc(50vw * 2/3);
+  padding: @s16;
+
+  @media (max-width: @lg) {
+    height: calc(100vw*2/3);
+  }
+}
+
+.c-img-slideshow-side-by-side-portrait {
+  object-fit: cover;
+  width: 100%;
+  height: calc(90vh);
+  min-width: 400px;
+  min-height: 600px;
+  padding: @s16;
+
+  @media (max-width: @lg) {
+    height: calc(90vh - 37px);
+    width: calc(90vh*2/3);
+    min-height: unset;
+    min-width: unset;
+  }
+
+  @media @mobile {
+    width: 90vw;
+    height: calc(90vw*3/2);
+    padding: 0;
+  }
+}
+
 .c-img {
   display: block;
   position: relative;
@@ -50,11 +84,62 @@
   }
 }
 
+.c-container-side-by-side {
+  height: 100%;
+}
+
+.c-img-side-by-side {
+  object-fit: cover;
+  width: 50vw;
+  height: var(--img-height-viewport);
+
+  @media (max-width: @lg) {
+    width: 100vw;
+    height: calc(100vw*2/3);
+  }
+}
+
+.c-container-side-by-side-portrait {
+  float: left;
+  height: 100%;
+}
+
+.c-img-side-by-side-portrait {
+  object-fit: cover;
+  width: calc(90vh * 2/3);
+  height: 100%;
+  min-width: 400px;
+  min-height: 600px;
+
+  @media (max-width: @lg) {
+    width: 100vw;
+    height: auto;
+    min-height: unset;
+    min-width: unset;
+  }
+}
+
 .c-fig-hidden-when-desktop {
   display: none;
 
   @media @tablet {
     display: block;
     padding-left: @s8;
+  }
+}
+
+.c-large-padding-left {
+  padding: @s16 @s8 @s16 @s32;
+
+  @media (max-width: @lg) {
+    padding: @s16;
+  }
+}
+
+.c-large-padding-right {
+  padding: @s16 @s32 @s16 @s8;
+
+  @media (max-width: @lg) {
+    padding: @s16;
   }
 }
