@@ -128,7 +128,12 @@ const Topper2 = ({ settings, wcmData }) => {
 
   /** Add styling for left padding on topper slideshow captions */
   const sideBySidePortraitCapCredPaddingCss = () => {
-    return (Inverted_Layout === "headerdek-right-image-left") ? topperStyles.captionSmallPaddingLeft : topperStyles.captionLargePaddingRight
+    return (Inverted_Layout === "headerdek-right-image-left") ? topperStyles.captionSmallPaddingLeft : topperStyles.captionSideBySidePortraitPadding;
+  }
+
+  /** Add styling for float position for side-by-side-portrait image */
+  const sideBySidePortraitFloatCss = () => {
+    return (Inverted_Layout === "headerdek-right-image-left") ? topperStyles.floatLeftWhenDesktop : topperStyles.floatRightWhenDesktop;
   }
 
   /** Converts wcm string from spreadsheet into a list of WCM ids */
@@ -191,7 +196,7 @@ const Topper2 = ({ settings, wcmData }) => {
             wcm={Image}
             alt={Image_Alt}
             wcmData={wcmData}
-            containerCssList={[imageStyles.cContainerSideBySidePortrait]}
+            containerCssList={[imageStyles.cContainerSideBySidePortrait, sideBySidePortraitFloatCss()]}
             overrideCssList={[imageStyles.cImgSideBySidePortrait]}
           />
         )
@@ -362,7 +367,7 @@ const Topper2 = ({ settings, wcmData }) => {
                   creditStyles={[sideBySideCapCredColorCss()]}
                 />
               }
-              {!isSlideshow(wcmIdList) && <CaptionCredit caption={Image_Caption} credit={Image_Credits} extraStyles={[topperStyles.captionSideBySidePortrait, sideBySideCapCredColorCss()]} creditStyles={[sideBySideCapCredColorCss()]} />}
+              {!isSlideshow(wcmIdList) && <CaptionCredit caption={Image_Caption} credit={Image_Credits} extraStyles={[topperStyles.captionSideBySidePortrait, sideBySideCapCredColorCss(), sideBySidePortraitFloatCss()]} creditStyles={[sideBySideCapCredColorCss()]} />}
             </figure>
           </div>
         );

@@ -65,7 +65,12 @@ const ImageSlideshow = ({ wcmData, imageList, altList, topperStyle, isLayoutInve
           (isLayoutInverted) ? [imageStyles.cLargePaddingLeft] : [imageStyles.cLargePaddingRight]
         );
       case "side-by-side-portrait":
-        return [imageStyles.cImgSlideshowSideBySidePortrait];
+        return [imageStyles.cImgSlideshowSideBySidePortrait].concat(
+          [
+            // Add styling for left padding on image caption
+            (isLayoutInverted) ? [] : [styles.sideBySidePortraitMarginLeft]
+          ]
+        );
       default:
         return [""];
     }

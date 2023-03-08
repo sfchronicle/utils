@@ -298,8 +298,7 @@
 }
 
 .captionSideBySidePortrait {
-  float: left;
-  width: calc(90vh * 2/3);
+  width: clamp(0px, calc(50vw - 32px), calc(90vh * 2/3));
   max-width: calc(50vw * 2/3 - 32px);
   min-width: 400px;
 
@@ -367,5 +366,38 @@
 
   @media (max-width: @lg) {
     padding-left: @s16;
+  }
+}
+
+.captionXLargePaddingRight {
+  padding-left: @s16;
+
+  @media (max-width: @lg) {
+    padding-left: @s16;
+  }
+}
+
+.captionSideBySidePortraitPadding {
+  padding-left: clamp(0px, calc(50vw - (90vh * 2/3) - @s16), calc(600px - 90vh *2/3 + @s16));
+
+  @media (max-width: @lg) {
+    padding-left: @s16;
+  }
+}
+
+.floatLeftWhenDesktop {
+  float: left;
+
+  @media (max-width: @lg) {
+    float: none;
+  }
+}
+
+.floatRightWhenDesktop {
+  float: right;
+  max-width: none;
+
+  @media (max-width: @lg) {
+    float: none;
   }
 }
