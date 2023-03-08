@@ -378,13 +378,15 @@ const Topper2 = ({ settings, wcmData }) => {
 
   /** Calculate offsets for header-deck container based on the spreadsheet, for full-screen toppers only **/
   const calculatefullScreenOffsets = () => {
-    var r = document.querySelector(':root');
+    let r = (typeof window != "undefined") ? document.querySelector(':root') : null;
 
     let verticalOffset = convertStringToNumber(HeaderDek_Vertical_Offset, (HeaderDek_Vertical_Position === "bottom"));
     let horizontalOffset = convertStringToNumber(HeaderDek_Horizontal_Offset, (HeaderDek_Horizontal_Position === "right"));
 
-    r.style.setProperty('--headerDek-vertical-offset', verticalOffset + "px");
-    r.style.setProperty('--headerDek-horizontal-offset', horizontalOffset + "px");
+    if (r) {
+      r.style.setProperty('--headerDek-vertical-offset', verticalOffset + "px");
+      r.style.setProperty('--headerDek-horizontal-offset', horizontalOffset + "px");
+    }
   }
 
   /** Convert offset values from the spreadsheet into Number type **/
@@ -405,13 +407,13 @@ const Topper2 = ({ settings, wcmData }) => {
 
   /** Sets the background and text color in topper for side-by-side and side-by-side-portrait topper styles **/
   const setBackgroundAndTextColor = () => {
-    let r = document.querySelector(':root');
+    let r = (typeof window != "undefined") ? document.querySelector(':root') : null;
 
-    if (Topper_Background_Color) {
+    if (r && Topper_Background_Color) {
       r.style.setProperty('--container-background-color', Topper_Background_Color)
     }
 
-    if (Inverted_Text_Color) {
+    if (r && Inverted_Text_Color) {
       r.style.setProperty('--side-by-side-text-color', Inverted_Text_Color)
     }
   }
