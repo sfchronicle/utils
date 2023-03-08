@@ -154,19 +154,52 @@ const Topper2 = ({ settings, wcmData }) => {
     return list;
   }
 
-  // HTML for the topper image
-  const ImageHTML = () => <TopperImage wcm={Image} alt={Image_Alt} wcmData={wcmData} />
-  const FullScreenImageHTML = () => <TopperImage wcm={Image} alt={Image_Alt} wcmData={wcmData} overrideCssList={[imageStyles.cImgFullscreen]} />
-  const SideBySideImageHTML = () => <TopperImage wcm={Image} alt={Image_Alt} wcmData={wcmData} containerCssList={[imageStyles.cContainerSideBySide]} overrideCssList={[imageStyles.cImgSideBySide]} />
-  const SideBySidePortraitImageHTML = () => <TopperImage wcm={Image} alt={Image_Alt} wcmData={wcmData} containerCssList={[imageStyles.cContainerSideBySidePortrait]} overrideCssList={[imageStyles.cImgSideBySidePortrait]} />
-  const ImageSlideshowHTML = () =>
-    <ImageSlideshow
-      wcmData={wcmData}
-      imageList={wcmIdList}
-      altList={convertStringToList(Image_Alt, wcmIdList.length)}
-      topperStyle={Topper_Style}
-      isLayoutInverted={(Inverted_Layout === "headerdek-right-image-left")}
-    />
+  /* Returns the corresponding image HTML for each topper style and slideshow status */
+  const getImageHTML = (isSlideshow) => {
+    if (isSlideshow) return (
+      <ImageSlideshow
+        wcmData={wcmData}
+        imageList={wcmIdList}
+        altList={convertStringToList(Image_Alt, wcmIdList.length)}
+        topperStyle={Topper_Style}
+        isLayoutInverted={(Inverted_Layout === "headerdek-right-image-left")}
+      />
+    )
+
+    switch (Topper_Style) {
+      case "stacked":
+        return (<TopperImage wcm={Image} alt={Image_Alt} wcmData={wcmData} />)
+      case "full-screen":
+        return (<TopperImage
+          wcm={Image}
+          alt={Image_Alt}
+          wcmData={wcmData}
+          overrideCssList={[imageStyles.cImgFullscreen]}
+        />)
+      case "side-by-side":
+        return (
+          <TopperImage
+            wcm={Image}
+            alt={Image_Alt}
+            wcmData={wcmData}
+            containerCssList={[imageStyles.cContainerSideBySide]}
+            overrideCssList={[imageStyles.cImgSideBySide]}
+          />)
+      case "side-by-side-portrait":
+        return (
+          <TopperImage
+            wcm={Image}
+            alt={Image_Alt}
+            wcmData={wcmData}
+            containerCssList={[imageStyles.cContainerSideBySidePortrait]}
+            overrideCssList={[imageStyles.cImgSideBySidePortrait]}
+          />
+        )
+      case "no-visual":
+      default:
+        return null
+    }
+  }
 
   const wcmIdList = getWcmIdList(Image);
   const TopperHtml = () => {
@@ -177,15 +210,14 @@ const Topper2 = ({ settings, wcmData }) => {
           <>
             <div className={containerCss}>
               <figure className={`topper-image ${topperStyles.imageFullScreen}`} aria-labelledby="topperCaptionText">
-                {isSlideshow(wcmIdList) && <ImageSlideshowHTML />}
-                {!isSlideshow(wcmIdList) && <FullScreenImageHTML />}
+                {getImageHTML(isSlideshow(wcmIdList))}
 
                 {/* This caption-credit only shows when the screen size is tablet or mobile */}
                 {isSlideshow(wcmIdList) &&
                   <CaptionCreditSlideshow
                     captionList={convertStringToList(Image_Caption, wcmIdList.length)}
                     creditList={convertStringToList(Image_Credits, wcmIdList.length)}
-                    extraStyles={topperStyles.hideWhenDesktop}
+                    extraStyles={[topperStyles.hideWhenDesktop]}
                   />
                 }
                 {!isSlideshow(wcmIdList) && <CaptionCredit caption={Image_Caption} credit={Image_Credits} extraStyles={topperStyles.hideWhenDesktop} />}
@@ -232,8 +264,8 @@ const Topper2 = ({ settings, wcmData }) => {
                 />
               </div>
               <figure className={`mw-xl ml-auto mr-auto ${topperStyles.imageStacked}`}>
-                {isSlideshow(wcmIdList) && <ImageSlideshowHTML />}
-                {!isSlideshow(wcmIdList) && <ImageHTML />}
+                {getImageHTML(isSlideshow(wcmIdList))}
+
                 {isSlideshow(wcmIdList) &&
                   <CaptionCreditSlideshow
                     captionList={convertStringToList(Image_Caption, wcmIdList.length)}
@@ -286,8 +318,8 @@ const Topper2 = ({ settings, wcmData }) => {
               />
             </div>
             <figure className={figureCss}>
-              {isSlideshow(wcmIdList) && <ImageSlideshowHTML />}
-              {!isSlideshow(wcmIdList) && <SideBySideImageHTML />}
+              {getImageHTML(isSlideshow(wcmIdList))}
+
               {isSlideshow(wcmIdList) &&
                 <CaptionCreditSlideshow
                   captionList={convertStringToList(Image_Caption, wcmIdList.length)}
@@ -320,8 +352,8 @@ const Topper2 = ({ settings, wcmData }) => {
               />
             </div>
             <figure className={portraitFigureCss}>
-              {isSlideshow(wcmIdList) && <ImageSlideshowHTML />}
-              {!isSlideshow(wcmIdList) && <SideBySidePortraitImageHTML />}
+              {getImageHTML(isSlideshow(wcmIdList))}
+
               {isSlideshow(wcmIdList) &&
                 <CaptionCreditSlideshow
                   captionList={convertStringToList(Image_Caption, wcmIdList.length)}
@@ -364,6 +396,7 @@ const Topper2 = ({ settings, wcmData }) => {
     return num;
   }
 
+  /** Sets the background and text color in topper for side-by-side and side-by-side-portrait topper styles **/
   const setBackgroundAndTextColor = () => {
     let r = document.querySelector(':root');
 
