@@ -36,7 +36,6 @@
   display: flex;
   align-items: center;
   max-width: @xl;
-  background: var(--container-background-color);
   margin: auto;
   margin-bottom: @s32;
   min-height: 600px;
@@ -44,6 +43,16 @@
   @media (max-width: @lg) {
     flex-direction: column;
     margin-bottom: 0;
+  }
+}
+
+.fullWidthContainer {
+  background: var(--container-background-color);
+  width: 100%;
+  padding-bottom: @s16;
+
+  @media (max-width: @lg) {
+    padding-bottom: 0px;
   }
 }
 

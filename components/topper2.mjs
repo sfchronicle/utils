@@ -343,32 +343,34 @@ const Topper2 = ({ settings, wcmData }) => {
         let sideBySidePortraitContainerCss = (Inverted_Layout === "headerdek-right-image-left") ? `${topperStyles.topperContainerSideBySidePortrait} ${topperStyles.reverseFlexbox}` : `${topperStyles.topperContainerSideBySidePortrait}`;
         setBackgroundAndTextColor();
         return (
-          <div className={sideBySidePortraitContainerCss}>
-            <div className={headerDekStyleList().join(' ')}>
-              <Heading
-                level={1}
-                text={Title}
-                className={headerStyleList().join(' ')}
-              />
-              <Heading
-                level={2}
-                text={Deck}
-                className={deckStyleList().join(' ')}
-              />
-            </div>
-            <figure className={portraitFigureCss}>
-              {getImageHTML(isSlideshow(wcmIdList))}
-
-              {isSlideshow(wcmIdList) &&
-                <CaptionCreditSlideshow
-                  captionList={convertStringToList(Image_Caption, wcmIdList.length)}
-                  creditList={convertStringToList(Image_Credits, wcmIdList.length)}
-                  extraStyles={[topperStyles.slideshowCaptionSideBySidePortrait, sideBySideCapCredColorCss(), sideBySidePortraitCapCredPaddingCss()]}
-                  creditStyles={[sideBySideCapCredColorCss()]}
+          <div className={topperStyles.fullWidthContainer}>
+            <div className={sideBySidePortraitContainerCss}>
+              <div className={headerDekStyleList().join(' ')}>
+                <Heading
+                  level={1}
+                  text={Title}
+                  className={headerStyleList().join(' ')}
                 />
-              }
-              {!isSlideshow(wcmIdList) && <CaptionCredit caption={Image_Caption} credit={Image_Credits} extraStyles={[topperStyles.captionSideBySidePortrait, sideBySideCapCredColorCss(), sideBySidePortraitFloatCss()]} creditStyles={[sideBySideCapCredColorCss()]} />}
-            </figure>
+                <Heading
+                  level={2}
+                  text={Deck}
+                  className={deckStyleList().join(' ')}
+                />
+              </div>
+              <figure className={portraitFigureCss}>
+                {getImageHTML(isSlideshow(wcmIdList))}
+
+                {isSlideshow(wcmIdList) &&
+                  <CaptionCreditSlideshow
+                    captionList={convertStringToList(Image_Caption, wcmIdList.length)}
+                    creditList={convertStringToList(Image_Credits, wcmIdList.length)}
+                    extraStyles={[topperStyles.slideshowCaptionSideBySidePortrait, sideBySideCapCredColorCss(), sideBySidePortraitCapCredPaddingCss()]}
+                    creditStyles={[sideBySideCapCredColorCss()]}
+                  />
+                }
+                {!isSlideshow(wcmIdList) && <CaptionCredit caption={Image_Caption} credit={Image_Credits} extraStyles={[topperStyles.captionSideBySidePortrait, sideBySideCapCredColorCss(), sideBySidePortraitFloatCss()]} creditStyles={[sideBySideCapCredColorCss()]} />}
+              </figure>
+            </div>
           </div>
         );
     }
