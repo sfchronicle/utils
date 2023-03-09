@@ -82,7 +82,7 @@ const Topper2 = ({ settings, wcmData }) => {
     }
 
     // Apply extra custom styling if it exists in the spreadsheet
-    if (Title_Style !== "") {
+    if (Title_Style && Title_Style !== "") {
       let extraStyles = Title_Style.split(", ");
       defaultStyles = defaultStyles.concat(extraStyles);
     }
@@ -138,6 +138,8 @@ const Topper2 = ({ settings, wcmData }) => {
 
   /** Converts wcm string from spreadsheet into a list of WCM ids */
   const getWcmIdList = (listStr) => {
+    if (!listStr) return [];
+
     return listStr.split(";").map((d) => parseInt(d));
   }
 
@@ -175,12 +177,14 @@ const Topper2 = ({ settings, wcmData }) => {
       case "stacked":
         return (<TopperImage wcm={Image} alt={Image_Alt} wcmData={wcmData} />)
       case "full-screen":
-        return (<TopperImage
-          wcm={Image}
-          alt={Image_Alt}
-          wcmData={wcmData}
-          overrideCssList={[imageStyles.cImgFullscreen]}
-        />)
+        return (
+          <TopperImage
+            wcm={Image}
+            alt={Image_Alt}
+            wcmData={wcmData}
+            overrideCssList={[imageStyles.cImgFullscreen]}
+          />
+        )
       case "side-by-side":
         return (
           <TopperImage
