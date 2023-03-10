@@ -1,6 +1,7 @@
 import React from 'react'
 import Credits from './credits'
 import CreditLine from './creditline'
+import OgPubDate from '../../../../components/ogpubdate.mjs'
 import * as creditssectionStyles from '../../styles/modules/creditssection.module.less'
 let rawCredits;
 try {
@@ -27,6 +28,7 @@ const CreditsSection = () => {
 }
   return (
     <section aria-label="Credits" className={creditssectionStyles.section}>
+      <OgPubDate/>
       <h4 className={creditssectionStyles.hed}>Credits</h4>
       {Object.keys(creditObj).map((key) => (
         <Credits type={key} key={key}>

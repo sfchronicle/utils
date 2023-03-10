@@ -5,12 +5,12 @@ import {
   moddateString
 } from './helpers/datehelpers.mjs'
 
-const OgPubDate = ({ settings }) => {
+const OgPubDate = () => {
   return (
     <>
       {moddateString && 
-        <p><i>Originally published on {pubdateString}</i></p>
-      }
+        <p className="mt-md og-pub-date">Originally published on {pubdateString}</p>
+      }    
     </>
   )
 }
