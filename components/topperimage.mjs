@@ -5,9 +5,9 @@ import { debounce } from './helpers/utilfunctions.mjs'
 
 const currentEnv = process.env.GATSBY_DEPLOY_ENV
 
-const ImageHTML = ({ fullPath, imageRez, alt, overrideCssList }) => {
+const ImageHTML = ({ fullPath, imageRez, alt, imageCssList }) => {
   let imageCss = [wcmimageStyles.cImg];
-  if (overrideCssList) imageCss = overrideCssList
+  if (imageCssList) imageCss = imageCssList
 
   return (
     <img
@@ -17,7 +17,7 @@ const ImageHTML = ({ fullPath, imageRez, alt, overrideCssList }) => {
   )
 }
 
-const TopperImage = ({ wcm, alt, ratio, wcmData, containerCssList = [], overrideCssList = [] }) => {
+const TopperImage = ({ wcm, alt, ratio, wcmData, containerCssList = [], imageCssList = [] }) => {
   // When the wrapping div is rendered, we're going to figure out the best size for this image to be
   let picRef = useRef(null)
   let [imageRez, setImageRez] = useState(0)
@@ -104,7 +104,7 @@ const TopperImage = ({ wcm, alt, ratio, wcmData, containerCssList = [], override
 
   return (
     <div className={containerCssList.join(' ')} ref={picRef}>
-      <ImageHTML fullPath={fullPath} imageRez={imageRez} alt={alt} overrideCssList={overrideCssList} />
+      <ImageHTML fullPath={fullPath} imageRez={imageRez} alt={alt} imageCssList={imageCssList} />
     </div>
   )
 }
@@ -115,7 +115,7 @@ TopperImage.propTypes = {
   ratio: PropTypes.string, // This prop is currently not being used, might be ok to delete? 
   wcmData: PropTypes.object,
   containerCssList: PropTypes.array,
-  overrideCssList: PropTypes.array
+  imageCssList: PropTypes.array
 }
 
 export default TopperImage

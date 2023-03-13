@@ -175,14 +175,22 @@ const Topper2 = ({ settings, wcmData }) => {
 
     switch (Topper_Style) {
       case "stacked":
-        return (<TopperImage wcm={Image} alt={Image_Alt} wcmData={wcmData} />)
+        return (
+          <TopperImage
+            wcm={Image}
+            alt={Image_Alt}
+            wcmData={wcmData}
+            containerCssList={[imageStyles.cContainerStacked]}
+            imageCssList={[imageStyles.cImgStacked]}
+          />
+        )
       case "full-screen":
         return (
           <TopperImage
             wcm={Image}
             alt={Image_Alt}
             wcmData={wcmData}
-            overrideCssList={[imageStyles.cImgFullscreen]}
+            imageCssList={[imageStyles.cImgFullscreen]}
           />
         )
       case "side-by-side":
@@ -192,7 +200,7 @@ const Topper2 = ({ settings, wcmData }) => {
             alt={Image_Alt}
             wcmData={wcmData}
             containerCssList={[imageStyles.cContainerSideBySide]}
-            overrideCssList={[imageStyles.cImgSideBySide]}
+            imageCssList={[imageStyles.cImgSideBySide]}
           />)
       case "side-by-side-portrait":
         return (
@@ -201,7 +209,7 @@ const Topper2 = ({ settings, wcmData }) => {
             alt={Image_Alt}
             wcmData={wcmData}
             containerCssList={[imageStyles.cContainerSideBySidePortrait, sideBySidePortraitFloatCss()]}
-            overrideCssList={[imageStyles.cImgSideBySidePortrait]}
+            imageCssList={[imageStyles.cImgSideBySidePortrait]}
           />
         )
       case "no-visual":
