@@ -9,7 +9,7 @@ import * as imageStyles from "../styles/modules/topperimage.module.less"
 
 const Topper2 = ({ settings, wcmData }) => {
   const {
-    Topper_Style, Title, Title_Style, Deck, Image, Image_Alt, Image_Caption, Image_Credits,
+    Topper_Style, Title, Title_Style, Deck, Image, Image_Alt, Video_Mp4, Image_Caption, Image_Credits,
     HeaderDek_Vertical_Position, HeaderDek_Vertical_Offset, HeaderDek_Horizontal_Offset,
     HeaderDek_Horizontal_Position, Inverted_Colors, Inverted_Layout, Inverted_Text_Color,
     Topper_Background_Color
@@ -161,8 +161,40 @@ const Topper2 = ({ settings, wcmData }) => {
     return list;
   }
 
+  /** Returns the HTML to support video */
+  const getVideoHtml = () => {
+    let videoCss = "";
+
+    switch (Topper_Style) {
+      case "stacked":
+        videoCss = topperStyles.videoStacked;
+        break;
+      case "full-screen":
+        videoCss = topperStyles.videoFullscreen;
+        break;
+      case "side-by-side":
+        videoCss = topperStyles.videoStacked;
+        break;
+      case "side-by-side-portrait":
+        videoCss = `${topperStyles.videoSideBySidePortrait} ${sideBySidePortraitFloatCss()}`;
+        break;
+      case "no-visual":
+      default:
+        break;
+    }
+
+    return (
+      <video className={videoCss} muted loop autoPlay playsInline poster={Video_Mp4.trim().replace('.mp4', '.jpg')}           >
+        <source src={Video_Mp4.trim().replace('.mp4', '.m3u8')} type="application/vnd.apple.mpegurl" />
+        <source src={Video_Mp4.trim()} type="video/mp4" />
+      </video>
+    )
+  }
+
   /* Returns the corresponding image HTML for each topper style and slideshow status */
-  const getImageHTML = (isSlideshow) => {
+  const getMediaHTML = (isSlideshow) => {
+    if (Video_Mp4) return getVideoHtml();
+
     if (isSlideshow) return (
       <ImageSlideshow
         wcmData={wcmData}
@@ -175,14 +207,22 @@ const Topper2 = ({ settings, wcmData }) => {
 
     switch (Topper_Style) {
       case "stacked":
-        return (<TopperImage wcm={Image} alt={Image_Alt} wcmData={wcmData} />)
+        return (
+          <TopperImage
+            wcm={Image}
+            alt={Image_Alt}
+            wcmData={wcmData}
+            containerCssList={[imageStyles.cContainerStacked]}
+            imageCssList={[imageStyles.cImgStacked]}
+          />
+        )
       case "full-screen":
         return (
           <TopperImage
             wcm={Image}
             alt={Image_Alt}
             wcmData={wcmData}
-            overrideCssList={[imageStyles.cImgFullscreen]}
+            imageCssList={[imageStyles.cImgFullscreen]}
           />
         )
       case "side-by-side":
@@ -192,7 +232,7 @@ const Topper2 = ({ settings, wcmData }) => {
             alt={Image_Alt}
             wcmData={wcmData}
             containerCssList={[imageStyles.cContainerSideBySide]}
-            overrideCssList={[imageStyles.cImgSideBySide]}
+            imageCssList={[imageStyles.cImgSideBySide]}
           />)
       case "side-by-side-portrait":
         return (
@@ -201,7 +241,7 @@ const Topper2 = ({ settings, wcmData }) => {
             alt={Image_Alt}
             wcmData={wcmData}
             containerCssList={[imageStyles.cContainerSideBySidePortrait, sideBySidePortraitFloatCss()]}
-            overrideCssList={[imageStyles.cImgSideBySidePortrait]}
+            imageCssList={[imageStyles.cImgSideBySidePortrait]}
           />
         )
       case "no-visual":
@@ -219,7 +259,7 @@ const Topper2 = ({ settings, wcmData }) => {
           <>
             <div className={containerCss}>
               <figure className={`topper-image ${topperStyles.imageFullScreen}`} aria-labelledby="topperCaptionText">
-                {getImageHTML(isSlideshow(wcmIdList))}
+                {getMediaHTML(isSlideshow(wcmIdList))}
 
                 {/* This caption-credit only shows when the screen size is tablet or mobile */}
                 {isSlideshow(wcmIdList) &&
@@ -273,7 +313,7 @@ const Topper2 = ({ settings, wcmData }) => {
                 />
               </div>
               <figure className={`mw-xl ml-auto mr-auto ${topperStyles.imageStacked}`}>
-                {getImageHTML(isSlideshow(wcmIdList))}
+                {getMediaHTML(isSlideshow(wcmIdList))}
 
                 {isSlideshow(wcmIdList) &&
                   <CaptionCreditSlideshow
@@ -327,7 +367,7 @@ const Topper2 = ({ settings, wcmData }) => {
               />
             </div>
             <figure className={figureCss}>
-              {getImageHTML(isSlideshow(wcmIdList))}
+              {getMediaHTML(isSlideshow(wcmIdList))}
 
               {isSlideshow(wcmIdList) &&
                 <CaptionCreditSlideshow
@@ -362,7 +402,7 @@ const Topper2 = ({ settings, wcmData }) => {
                 />
               </div>
               <figure className={portraitFigureCss}>
-                {getImageHTML(isSlideshow(wcmIdList))}
+                {getMediaHTML(isSlideshow(wcmIdList))}
 
                 {isSlideshow(wcmIdList) &&
                   <CaptionCreditSlideshow
