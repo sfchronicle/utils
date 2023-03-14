@@ -163,8 +163,25 @@ const Topper2 = ({ settings, wcmData }) => {
 
   /** Returns the HTML to support video */
   const getVideoHtml = () => {
+    let videoCss = "";
+
+    switch (Topper_Style) {
+      case "stacked":
+        videoCss = topperStyles.videoStacked;
+        break;
+      case "full-screen":
+        videoCss = topperStyles.videoFullscreen;
+        break;
+      case "side-by-side":
+        break;
+      case "no-visual":
+      case "side-by-side-portrait":
+      default:
+        break;
+    }
+
     return (
-      <video className={topperStyles.video} muted loop autoPlay playsInline poster={Video_Mp4.trim().replace('.mp4', '.jpg')}           >
+      <video className={videoCss} muted loop autoPlay playsInline poster={Video_Mp4.trim().replace('.mp4', '.jpg')}           >
         <source src={Video_Mp4.trim().replace('.mp4', '.m3u8')} type="application/vnd.apple.mpegurl" />
         <source src={Video_Mp4.trim()} type="video/mp4" />
       </video>

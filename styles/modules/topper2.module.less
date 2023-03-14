@@ -411,7 +411,17 @@
   }
 }
 
-.video {
+.videoStacked {
   width: 100%;
   object-fit: cover;
+}
+
+.videoFullscreen {
+  width: 100%;
+  height: calc(100vh - 37px);
+  object-fit: cover;
+
+  @media @tablet {
+    height: 100%;
+  }
 }
