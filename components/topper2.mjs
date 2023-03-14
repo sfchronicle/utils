@@ -173,6 +173,7 @@ const Topper2 = ({ settings, wcmData }) => {
         videoCss = topperStyles.videoFullscreen;
         break;
       case "side-by-side":
+        videoCss = topperStyles.videoStacked;
         break;
       case "no-visual":
       case "side-by-side-portrait":
