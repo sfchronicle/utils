@@ -433,4 +433,12 @@
   max-width: calc(50vw - @s32);
   min-width: 400px;
   min-height: 600px;
+
+  @media (max-width: @lg) {
+    width: 90vw;
+    height: auto;
+    max-width: unset;
+    min-height: unset;
+    min-width: unset;
+  }
 }
