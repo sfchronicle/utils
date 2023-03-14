@@ -175,8 +175,10 @@ const Topper2 = ({ settings, wcmData }) => {
       case "side-by-side":
         videoCss = topperStyles.videoStacked;
         break;
-      case "no-visual":
       case "side-by-side-portrait":
+        videoCss = `${topperStyles.videoSideBySidePortrait} ${sideBySidePortraitFloatCss()}`;
+        break;
+      case "no-visual":
       default:
         break;
     }
