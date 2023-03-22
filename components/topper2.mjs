@@ -140,7 +140,7 @@ const Topper2 = ({ settings, wcmData }) => {
   const getWcmIdList = (listStr) => {
     if (!listStr) return [];
 
-    return listStr.split(";").map((d) => parseInt(d));
+    return listStr.toString().split(";").map((d) => parseInt(d));
   }
 
   /** Checks if WCM list represents an image slideshow */
