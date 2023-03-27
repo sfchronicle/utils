@@ -3,7 +3,7 @@ import React from 'react'
 import { Helmet } from 'react-helmet'
 import { appCheck, getBrands2 } from "../../index"
 
-const LayoutHelmet = ({ meta, url_add }) => {
+const LayoutHelmet = ({ meta, url_add, noindex = false }) => {
   let {
     EMBEDDED,
     MAIN_DOMAIN,
@@ -68,7 +68,7 @@ const LayoutHelmet = ({ meta, url_add }) => {
       <link rel="canonical" href={`${CANONICAL_URL}/${url_add}`} />
       <link rel="stylesheet" href={`https://files.sfchronicle.com/brand-styles/${styleSheetID}.css`} />
 
-      {(isApp || EMBEDDED) ? (
+      {(isApp || EMBEDDED || noindex) ? (
         <meta name="robots" content="noindex, nofollow" />
       ) : (
         <meta name="robots" content="max-image-preview:large" />
