@@ -99,7 +99,7 @@ const ImageSlideshow = ({ wcmData, imageList, altList, topperStyle, isLayoutInve
           }}
         >
           <div className={getWrapperClass()}>
-            <TopperImage wcm={imageList[index]} alt={altList[index]} wcmData={wcmData} overrideCssList={getImageClassList()} />
+            <TopperImage wcm={imageList[index]} alt={altList[index]} wcmData={wcmData} imageCssList={getImageClassList()} />
           </div>
         </CSSTransition>
       </TransitionGroup>
