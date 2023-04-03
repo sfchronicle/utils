@@ -42,11 +42,16 @@ function appendLayoutScripts(isEmbedded, isAdRemoved) {
   setTimeout(() => {
     if (!isEmbedded && !isApp) {
       let blueconicURL = getBlueconic(window.location.origin)
-      let script = document.createElement('script');
-      script.type = 'text/javascript';
-      script.defer = true;
-      script.src = blueconicURL;
-      document.body.appendChild(script);
+      let script = document.createElement('script')
+      script.type = 'text/javascript'
+      script.defer = true
+      script.src = blueconicURL
+      document.body.appendChild(script)
+
+      // Init sailthru
+      if (window && window.Sailthru){
+        window.Sailthru.init({ customerId: thisBrand.attributes.sailCustomer })
+      }
     }
   }, 5000)
 }
