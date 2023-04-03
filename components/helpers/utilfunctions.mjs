@@ -60,6 +60,8 @@ function formatHDN(isEmbedded, url_add, meta) {
     // Put url_add into a new meta object to pass in
     const metaHDN = Object.assign({}, meta)
     metaHDN.URL_ADD = url_add
+    // Add sailthru var
+    metaHDN.SAIL_CUST = thisBrand.attributes.sailCustomer
     // Make sure this is free on app
     if (isApp) {
       metaHDN.PAYWALL_SETTING = "free"
