@@ -14,7 +14,7 @@ function debounce(fn, ms) {
   }
 }
 
-function appendLayoutScripts(isEmbedded, isAdRemoved) {
+function appendLayoutScripts(isEmbedded, isAdRemoved, marketKey) {
   const isApp = appCheck();
 
   // React Helmet is actually terrible and runs these scripts twice, so we are including them async ourselves
@@ -50,15 +50,16 @@ function appendLayoutScripts(isEmbedded, isAdRemoved) {
       document.body.appendChild(script)
 
       // Init sailthru
-      // if (window && window.Sailthru){
-      //   window.Sailthru.init({ customerId: thisBrand.attributes.sailCustomer })
-      // }
+      if (window && window.Sailthru && marketKey){
+        window.Sailthru.init({ customerId: getBrands2(marketKey).attributes.sailCustomer })
+      }
     }
   }, 5000)
 }
 
 function formatHDN(isEmbedded, url_add, meta) {
   const isApp = appCheck();
+  const thisBrand = getBrands2(meta.PROJECT.MARKET_KEY);
 
   // Combine our settings with what Hearst puts on page
   let stringHDN = ''
@@ -67,7 +68,7 @@ function formatHDN(isEmbedded, url_add, meta) {
     const metaHDN = Object.assign({}, meta)
     metaHDN.URL_ADD = url_add
     // Add sailthru var
-    // metaHDN.SAIL_CUST = thisBrand.attributes.sailCustomer
+    metaHDN.SAIL_CUST = thisBrand.attributes.sailCustomer;
     // Make sure this is free on app
     if (isApp) {
       metaHDN.PAYWALL_SETTING = "free"
