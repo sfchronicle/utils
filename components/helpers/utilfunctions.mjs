@@ -1,4 +1,5 @@
 import { getBlueconic } from "../../blueconic"
+import { getBrands2 } from "../../brands2"
 import { appCheck, blendHDN } from "../../index"
 
 /** Used for resizing the WCM Image */
@@ -49,9 +50,9 @@ function appendLayoutScripts(isEmbedded, isAdRemoved) {
       document.body.appendChild(script)
 
       // Init sailthru
-      if (window && window.Sailthru){
-        window.Sailthru.init({ customerId: thisBrand.attributes.sailCustomer })
-      }
+      // if (window && window.Sailthru){
+      //   window.Sailthru.init({ customerId: thisBrand.attributes.sailCustomer })
+      // }
     }
   }, 5000)
 }
@@ -66,7 +67,7 @@ function formatHDN(isEmbedded, url_add, meta) {
     const metaHDN = Object.assign({}, meta)
     metaHDN.URL_ADD = url_add
     // Add sailthru var
-    metaHDN.SAIL_CUST = thisBrand.attributes.sailCustomer
+    // metaHDN.SAIL_CUST = thisBrand.attributes.sailCustomer
     // Make sure this is free on app
     if (isApp) {
       metaHDN.PAYWALL_SETTING = "free"
