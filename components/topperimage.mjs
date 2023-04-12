@@ -61,6 +61,7 @@ const TopperImage = ({ wcm, alt, ratio, wcmData, containerCssList = [], imageCss
   // This calculation is not used for the topper impl, but keeping it here just in case
   // it is needed for the general WCMImage utils migration
   let photoRatio = "56.25%"; // Default to 16/9
+  let photoFraction = 0.5625;
   let photoViewport = "56.25vw";
   let fullPath = `https://s.hdnux.com/photos/0/0/0/${wcm}/0/`;
   if (!ratio) {
@@ -74,11 +75,13 @@ const TopperImage = ({ wcm, alt, ratio, wcmData, containerCssList = [], imageCss
       // Set ratio of the actual photo like a legit hacker
       photoRatio = (matchedPhoto.photo.ratio * 100) + "%";
       photoViewport = (matchedPhoto.photo.ratio * 50) + "vw";
+      photoFraction = (parseFloat(matchedPhoto.photo.ratio));
 
       // If css :root is available, set the photo ratio
       if (r) {
         r.style.setProperty('--img-bottom-padding-ratio', photoRatio);
         r.style.setProperty('--img-height-viewport', photoViewport);
+        r.style.setProperty('--img-bottom-padding-fraction', photoFraction);
       }
 
       fullPath = matchedPhoto.photo.full_path;
@@ -94,6 +97,7 @@ const TopperImage = ({ wcm, alt, ratio, wcmData, containerCssList = [], imageCss
     if (r) {
       r.style.setProperty('--img-bottom-padding-ratio', photoRatio);
       r.style.setProperty('--img-height-viewport', photoViewport);
+      r.style.setProperty('--img-bottom-padding-fraction', photoFraction);
     }
   }
 
@@ -112,7 +116,7 @@ const TopperImage = ({ wcm, alt, ratio, wcmData, containerCssList = [], imageCss
 TopperImage.propTypes = {
   wcm: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   alt: PropTypes.string.isRequired,
-  ratio: PropTypes.string, // This prop is currently not being used, might be ok to delete? 
+  ratio: PropTypes.string, 
   wcmData: PropTypes.object,
   containerCssList: PropTypes.array,
   imageCssList: PropTypes.array
