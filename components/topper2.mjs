@@ -8,7 +8,7 @@ import * as topperStyles from "../styles/modules/topper2.module.less"
 import * as imageStyles from "../styles/modules/topperimage.module.less"
 
 const Topper2 = ({ settings, wcmData, mods }) => {
-  const {
+  let {
     Topper_Style, Title, Title_Style, Deck, Image, Image_Alt, Video_Mp4, Image_Caption, Image_Credits,
     HeaderDek_Vertical_Position, HeaderDek_Vertical_Offset, HeaderDek_Horizontal_Offset,
     HeaderDek_Horizontal_Position, Inverted_Colors, Inverted_Layout, Inverted_Text_Color,
