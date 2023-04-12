@@ -20,6 +20,8 @@ const Topper2 = ({ settings, wcmData }) => {
       case "stacked":
       case "no-visual":
         return [topperStyles.headerDekStacked, " mw-lg mt-lg mb-md"];
+      case "small-visual":
+        return [topperStyles.headerDekStacked, " mw-lg mt-sm mb-md"];
       case "full-screen":
         // Check if css ":root" is accessible
         if (typeof window != "undefined") {
@@ -67,6 +69,7 @@ const Topper2 = ({ settings, wcmData }) => {
     let defaultStyles = [];
     switch (Topper_Style) {
       case "stacked":
+      case "small-visual":
         defaultStyles = [];
         break;
       case "no-visual":
@@ -93,6 +96,7 @@ const Topper2 = ({ settings, wcmData }) => {
   const deckStyleList = () => {
     switch (Topper_Style) {
       case "stacked":
+      case "small-visual":
         return ["deck"];
       case "no-visual":
         return ["deck left"];
@@ -167,13 +171,12 @@ const Topper2 = ({ settings, wcmData }) => {
 
     switch (Topper_Style) {
       case "stacked":
+      case "side-by-side":
+      case "small-visual":
         videoCss = topperStyles.videoStacked;
         break;
       case "full-screen":
         videoCss = topperStyles.videoFullscreen;
-        break;
-      case "side-by-side":
-        videoCss = topperStyles.videoStacked;
         break;
       case "side-by-side-portrait":
         videoCss = `${topperStyles.videoSideBySidePortrait} ${sideBySidePortraitFloatCss()}`;
@@ -223,6 +226,16 @@ const Topper2 = ({ settings, wcmData }) => {
             alt={Image_Alt}
             wcmData={wcmData}
             imageCssList={[imageStyles.cImgFullscreen]}
+          />
+        )
+      case "small-visual":
+        return (
+          <TopperImage
+            wcm={Image}
+            alt={Image_Alt}
+            wcmData={wcmData}
+            containerCssList={[imageStyles.cContainerSmallVisual]}
+            imageCssList={[imageStyles.cImgSmallVisual]}
           />
         )
       case "side-by-side":
@@ -324,6 +337,29 @@ const Topper2 = ({ settings, wcmData }) => {
                 }
                 {!isSlideshow(wcmIdList) && <CaptionCredit caption={Image_Caption} credit={Image_Credits} extraStyles={[topperStyles.smallPaddingLeftWhenTablet]} />}
               </figure>
+            </div>
+          </>
+        );
+
+      case "small-visual":
+        return (
+          <>
+            <div>
+              <figure className={`mw-xl ml-auto mr-auto ${topperStyles.imageSmallVisual}`}>
+                {getMediaHTML(isSlideshow(wcmIdList))}
+              </figure>
+              <div className={headerDekStyleList().join('')}>
+                <Heading
+                  level={1}
+                  text={Title}
+                  className={headerStyleList().join(' ')}
+                />
+                <Heading
+                  level={2}
+                  text={Deck}
+                  className={deckStyleList().join(' ')}
+                />
+              </div>
             </div>
           </>
         );

@@ -33,6 +33,8 @@ const ImageSlideshow = ({ wcmData, imageList, altList, topperStyle, isLayoutInve
       case "stacked":
       case "full-screen":
         return styles.containerStacked;
+      case "small-visual":
+        return styles.containerSmallVisual;
       default:
         return "";
     }
@@ -48,6 +50,8 @@ const ImageSlideshow = ({ wcmData, imageList, altList, topperStyle, isLayoutInve
         return styles.imageWrapperSideBySide;
       case "side-by-side-portrait":
         return styles.imageWrapperSideBySidePortrait;
+      case "small-visual":
+        return styles.imageWrapperSmallVisual;
       default:
         return "";
     }
