@@ -152,7 +152,7 @@ const Topper2 = ({ settings, wcmData, mods }) => {
     if (!listStr) return [];
     // For backwards compat, handle both ; and , as delimiters
     let charSearch = ","
-    if (listStr.indexOf(";") !== -1){
+    if (listStr.toString().indexOf(";") !== -1){
       charSearch = ";"
     } 
     return listStr.toString().split(charSearch).map((d) => parseInt(d));
