@@ -239,6 +239,62 @@ let getFooter = function(meta, forceColor){
 		    }
 		  ]
 		},
+		"Conroe": {
+		  "About": [
+				{
+		      "text": "Terms of Use",
+		      "link": "https://www.yourconroenews.com/tos/"
+		    },
+				{
+		      "text": "Privacy Notice",
+		      "link": "https://www.yourconroenews.com/privacy/"
+		    },
+				{
+		      "text": "Your California Privacy Rights",
+		      "link": "https://www.yourconroenews.com/privacy/#additionalinformationforcaliforniaresidents"
+		    },
+				{
+		      "text": "Interest Based Ads",
+		      "link": "https://www.yourconroenews.com/privacy/#interestbasedads"
+		    },
+				{
+		      "text": "Careers",
+		      "link": "https://eevd.fa.us6.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1"
+		    },
+		    {
+		      "text": "Our Company",
+		      "link": "https://www.hearst.com/newspapers/houston-chronicle"
+		    },
+		    {
+		      "text": "Subscribe",
+		      "link": "https://www.yourconroenews.com/subproject"
+		    },
+		    {
+		      "text": "e-Edition",
+		      "link": "https://www.yourconroenews.com/e-edition"
+		    }
+		  ],
+		  "Contact": [
+		    {
+		      "text": "Advertising",
+		      "link": "https://marketing.chron.com/"
+		    },
+		    {
+		      "text": "Contact",
+		      "link": "https://www.yourconroenews.com/contact/"
+		    }
+		  ],
+			"Connect": [
+		    {
+		      "text": "Facebook",
+		      "link": "https://www.facebook.com/TheCourierofMontgomeryCounty/"
+		    },
+		    {
+		      "text": "Twitter",
+		      "link": "https://twitter.com/conroecourier"
+		    }
+		  ]
+		},
 		"Albany": {
 		  "About": [
 		    {

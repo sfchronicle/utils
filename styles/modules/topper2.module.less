@@ -74,6 +74,21 @@
   }
 }
 
+.imageSmallVisual {
+  position: relative;
+  max-width: var(--small-visual-max-width);
+  height: auto;
+  width: 100%;
+  margin: @s24 auto 0 auto;
+
+  @media @mobile {
+    margin-left: @s16;
+    margin-right: @s16;
+    width: auto;
+    height: auto;
+  }
+}
+
 .imageSideBySide {
   width: 50%;
   float: left;

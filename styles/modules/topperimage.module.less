@@ -4,6 +4,8 @@
 :root {
   --img-bottom-padding-ratio: "56.25%";
   --img-height-viewport: "56.25vw";
+  --img-bottom-padding-fraction: 0.5625;
+  --small-visual-max-width: 150px;
 }
 
 .c-force-aspect-ratio {
@@ -68,6 +70,19 @@
   padding-bottom: var(--img-bottom-padding-ratio);
 }
 
+.c-container-small-visual {
+  height: calc(var(--img-bottom-padding-fraction)*var(--small-visual-max-width));
+  max-width: var(--small-visual-max-width);
+  width: calc(100vw - 32px);
+  margin: 0 @s16;
+
+  @media @mobile {
+    max-height: calc(var(--img-bottom-padding-fraction)*var(--small-visual-max-width));
+    height: calc(var(--img-bottom-padding-fraction)*(100vw - 32px));
+    margin: auto;
+  }
+}
+
 .c-img {
   display: block;
   position: relative;
@@ -95,6 +110,13 @@
   @media @tablet {
     height: auto;
   }
+}
+
+.c-img-small-visual {
+  display: block;
+  position: absolute;
+  width: calc(100vw - 32px);
+  padding: 0;
 }
 
 .c-container-side-by-side {

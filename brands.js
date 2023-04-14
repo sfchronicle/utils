@@ -161,7 +161,23 @@ let getBrands = function(market){
 				"subscribeLink": "/subproject"
 			}
 		},
-
+		Conroe: {
+			styles: {
+				"@brand": "#900900",
+				"@brand-secondary": "#189196"
+			},
+			attributes: {
+				"marketPrefix": "conroe",
+				"siteName": "Conroe Courier",
+				"twitter": "ConroeCourier",
+				"invert": true,
+				"gaAccount": "UA-1616916-99",
+				"subscribeLink": "https://www.yourconroenews.com/subproject",
+				"sailCustomer": "4a181de0b63a131cf27f8ea9485e5e1c",
+				"sailSiteName": "the-courier-of-montgomery-county",
+				"siteId": 68
+			}
+		},
 		/* Misc */
 		TK: {
 			styles: {

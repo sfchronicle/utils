@@ -56,13 +56,19 @@ const LayoutHelmet = ({ meta, url_add, noindex = false }) => {
     }
   }
 
+  // Handle special favicon logic
+  let favHref = "/favicon.ico"
+  if (MARKET_KEY === "TK"){
+    favHref = "https://files.sfchronicle.com/devhub-logos/DHlogos-sm.png"
+  }
+
   return (
     <Helmet>
       <title>{TITLE}</title>
       <meta name="description" content={DESCRIPTION} />
       <link
         rel="shortcut icon"
-        href="/favicon.ico"
+        href={favHref}
         type="image/x-icon"
       />
       <link rel="canonical" href={`${CANONICAL_URL}/${url_add}`} />

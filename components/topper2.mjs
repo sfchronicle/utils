@@ -7,19 +7,32 @@ import ImageSlideshow from "./slideshow/imageslideshow.mjs"
 import * as topperStyles from "../styles/modules/topper2.module.less"
 import * as imageStyles from "../styles/modules/topperimage.module.less"
 
-const Topper2 = ({ settings, wcmData }) => {
-  const {
+const Topper2 = ({ settings, wcmData, mods }) => {
+  let {
     Topper_Style, Title, Title_Style, Deck, Image, Image_Alt, Video_Mp4, Image_Caption, Image_Credits,
     HeaderDek_Vertical_Position, HeaderDek_Vertical_Offset, HeaderDek_Horizontal_Offset,
     HeaderDek_Horizontal_Position, Inverted_Colors, Inverted_Layout, Inverted_Text_Color,
-    Topper_Background_Color
+    Topper_Background_Color, Small_Visual_Max_Width
   } = settings
+
+  // During server-side rendering, access to ":root" is unavailable. This is okay; we just need
+  // to make sure that the site does not crash during SSR
+  let r = (typeof window != "undefined") ? document.querySelector(':root') : null;
+
+  // Handle mods here, in case the project modifies the title
+  if (mods) {
+    if (mods.Title) {
+      Title = mods.Title
+    }
+  }
 
   const headerDekStyleList = () => {
     switch (Topper_Style) {
       case "stacked":
       case "no-visual":
         return [topperStyles.headerDekStacked, " mw-lg mt-lg mb-md"];
+      case "small-visual":
+        return [topperStyles.headerDekStacked, " mw-lg mt-sm mb-md"];
       case "full-screen":
         // Check if css ":root" is accessible
         if (typeof window != "undefined") {
@@ -67,6 +80,7 @@ const Topper2 = ({ settings, wcmData }) => {
     let defaultStyles = [];
     switch (Topper_Style) {
       case "stacked":
+      case "small-visual":
         defaultStyles = [];
         break;
       case "no-visual":
@@ -93,6 +107,7 @@ const Topper2 = ({ settings, wcmData }) => {
   const deckStyleList = () => {
     switch (Topper_Style) {
       case "stacked":
+      case "small-visual":
         return ["deck"];
       case "no-visual":
         return ["deck left"];
@@ -139,8 +154,12 @@ const Topper2 = ({ settings, wcmData }) => {
   /** Converts wcm string from spreadsheet into a list of WCM ids */
   const getWcmIdList = (listStr) => {
     if (!listStr) return [];
-
-    return listStr.toString().split(";").map((d) => parseInt(d));
+    // For backwards compat, handle both ; and , as delimiters
+    let charSearch = ","
+    if (listStr.toString().indexOf(";") !== -1){
+      charSearch = ";"
+    }
+    return listStr.toString().split(charSearch).map((d) => parseInt(d));
   }
 
   /** Checks if WCM list represents an image slideshow */
@@ -167,13 +186,12 @@ const Topper2 = ({ settings, wcmData }) => {
 
     switch (Topper_Style) {
       case "stacked":
+      case "side-by-side":
+      case "small-visual":
         videoCss = topperStyles.videoStacked;
         break;
       case "full-screen":
         videoCss = topperStyles.videoFullscreen;
-        break;
-      case "side-by-side":
-        videoCss = topperStyles.videoStacked;
         break;
       case "side-by-side-portrait":
         videoCss = `${topperStyles.videoSideBySidePortrait} ${sideBySidePortraitFloatCss()}`;
@@ -223,6 +241,21 @@ const Topper2 = ({ settings, wcmData }) => {
             alt={Image_Alt}
             wcmData={wcmData}
             imageCssList={[imageStyles.cImgFullscreen]}
+          />
+        )
+      case "small-visual":
+        // If there is a "Small_Visual_Max_Width" column, set the custom max width
+        if (Small_Visual_Max_Width && r) {
+          r.style.setProperty('--small-visual-max-width', Small_Visual_Max_Width)
+        }
+
+        return (
+          <TopperImage
+            wcm={Image}
+            alt={Image_Alt}
+            wcmData={wcmData}
+            containerCssList={[imageStyles.cContainerSmallVisual]}
+            imageCssList={[imageStyles.cImgSmallVisual]}
           />
         )
       case "side-by-side":
@@ -328,6 +361,29 @@ const Topper2 = ({ settings, wcmData }) => {
           </>
         );
 
+      case "small-visual":
+        return (
+          <>
+            <div>
+              <figure className={`mw-xl ml-auto mr-auto ${topperStyles.imageSmallVisual}`}>
+                {getMediaHTML(isSlideshow(wcmIdList))}
+              </figure>
+              <div className={headerDekStyleList().join('')}>
+                <Heading
+                  level={1}
+                  text={Title}
+                  className={headerStyleList().join(' ')}
+                />
+                <Heading
+                  level={2}
+                  text={Deck}
+                  className={deckStyleList().join(' ')}
+                />
+              </div>
+            </div>
+          </>
+        );
+
       case "no-visual":
         return (
           <>
@@ -422,8 +478,6 @@ const Topper2 = ({ settings, wcmData }) => {
 
   /** Calculate offsets for header-deck container based on the spreadsheet, for full-screen toppers only **/
   const calculatefullScreenOffsets = () => {
-    let r = (typeof window != "undefined") ? document.querySelector(':root') : null;
-
     let verticalOffset = convertStringToNumber(HeaderDek_Vertical_Offset, (HeaderDek_Vertical_Position === "bottom"));
     let horizontalOffset = convertStringToNumber(HeaderDek_Horizontal_Offset, (HeaderDek_Horizontal_Position === "right"));
 
@@ -451,8 +505,6 @@ const Topper2 = ({ settings, wcmData }) => {
 
   /** Sets the background and text color in topper for side-by-side and side-by-side-portrait topper styles **/
   const setBackgroundAndTextColor = () => {
-    let r = (typeof window != "undefined") ? document.querySelector(':root') : null;
-
     if (r && Topper_Background_Color) {
       r.style.setProperty('--container-background-color', Topper_Background_Color)
     }
