@@ -12,12 +12,16 @@ const Topper2 = ({ settings, wcmData, mods }) => {
     Topper_Style, Title, Title_Style, Deck, Image, Image_Alt, Video_Mp4, Image_Caption, Image_Credits,
     HeaderDek_Vertical_Position, HeaderDek_Vertical_Offset, HeaderDek_Horizontal_Offset,
     HeaderDek_Horizontal_Position, Inverted_Colors, Inverted_Layout, Inverted_Text_Color,
-    Topper_Background_Color
+    Topper_Background_Color, Small_Visual_Max_Width
   } = settings
 
+  // During server-side rendering, access to ":root" is unavailable. This is okay; we just need
+  // to make sure that the site does not crash during SSR
+  let r = (typeof window != "undefined") ? document.querySelector(':root') : null;
+
   // Handle mods here, in case the project modifies the title
-  if (mods){
-    if (mods.Title){
+  if (mods) {
+    if (mods.Title) {
       Title = mods.Title
     }
   }
@@ -154,7 +158,7 @@ const Topper2 = ({ settings, wcmData, mods }) => {
     let charSearch = ","
     if (listStr.toString().indexOf(";") !== -1){
       charSearch = ";"
-    } 
+    }
     return listStr.toString().split(charSearch).map((d) => parseInt(d));
   }
 
@@ -240,6 +244,11 @@ const Topper2 = ({ settings, wcmData, mods }) => {
           />
         )
       case "small-visual":
+        // If there is a "Small_Visual_Max_Width" column, set the custom max width
+        if (Small_Visual_Max_Width) {
+          r.style.setProperty('--small-visual-max-width', Small_Visual_Max_Width)
+        }
+
         return (
           <TopperImage
             wcm={Image}
@@ -469,8 +478,6 @@ const Topper2 = ({ settings, wcmData, mods }) => {
 
   /** Calculate offsets for header-deck container based on the spreadsheet, for full-screen toppers only **/
   const calculatefullScreenOffsets = () => {
-    let r = (typeof window != "undefined") ? document.querySelector(':root') : null;
-
     let verticalOffset = convertStringToNumber(HeaderDek_Vertical_Offset, (HeaderDek_Vertical_Position === "bottom"));
     let horizontalOffset = convertStringToNumber(HeaderDek_Horizontal_Offset, (HeaderDek_Horizontal_Position === "right"));
 
@@ -498,8 +505,6 @@ const Topper2 = ({ settings, wcmData, mods }) => {
 
   /** Sets the background and text color in topper for side-by-side and side-by-side-portrait topper styles **/
   const setBackgroundAndTextColor = () => {
-    let r = (typeof window != "undefined") ? document.querySelector(':root') : null;
-
     if (r && Topper_Background_Color) {
       r.style.setProperty('--container-background-color', Topper_Background_Color)
     }
