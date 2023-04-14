@@ -12,7 +12,7 @@ const Topper2 = ({ settings, wcmData, mods }) => {
     Topper_Style, Title, Title_Style, Deck, Image, Image_Alt, Video_Mp4, Image_Caption, Image_Credits,
     HeaderDek_Vertical_Position, HeaderDek_Vertical_Offset, HeaderDek_Horizontal_Offset,
     HeaderDek_Horizontal_Position, Inverted_Colors, Inverted_Layout, Inverted_Text_Color,
-    Topper_Background_Color, Small_Visual_Max_Width
+    Topper_Background_Color, Small_Visual_Max_Width, Small_Visual_Topper_Url
   } = settings
 
   // During server-side rendering, access to ":root" is unavailable. This is okay; we just need
@@ -156,7 +156,7 @@ const Topper2 = ({ settings, wcmData, mods }) => {
     if (!listStr) return [];
     // For backwards compat, handle both ; and , as delimiters
     let charSearch = ","
-    if (listStr.toString().indexOf(";") !== -1){
+    if (listStr.toString().indexOf(";") !== -1) {
       charSearch = ";"
     }
     return listStr.toString().split(charSearch).map((d) => parseInt(d));
@@ -244,9 +244,18 @@ const Topper2 = ({ settings, wcmData, mods }) => {
           />
         )
       case "small-visual":
-        // If there is a "Small_Visual_Max_Width" column, set the custom max width
+        // If there is a "Small_Visual_Max_Width" column, override the max width of the topper image
         if (Small_Visual_Max_Width && r) {
           r.style.setProperty('--small-visual-max-width', Small_Visual_Max_Width)
+        }
+
+        // If there is a custom topper image or gif url, override the WCM image
+        if (Small_Visual_Topper_Url) {
+          return <img
+            className={imageStyles.cImgSmallVisualUrl}
+            src={Small_Visual_Topper_Url}
+            alt={Image_Alt}
+          />
         }
 
         return (
