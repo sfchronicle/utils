@@ -245,7 +245,7 @@ const Topper2 = ({ settings, wcmData, mods }) => {
         )
       case "small-visual":
         // If there is a "Small_Visual_Max_Width" column, override the max width of the topper image
-        if (Small_Visual_Max_Width && r) {
+        if (r && Small_Visual_Max_Width && Small_Visual_Max_Width !== "") {
           r.style.setProperty('--small-visual-max-width', Small_Visual_Max_Width)
         }
 
