@@ -42,10 +42,12 @@ const Topper2 = ({ settings, wcmData, mods }) => {
 
         return [
           topperStyles.headerDekFullScreen,
-          // Add styling for header-deck container position
+          // Add styling for header-deck container horizontal position
           fullScreenHorizontalCss(),
-          // Add styling for text position inside header-deck
-          ... (HeaderDek_Vertical_Position === "top") ? [topperStyles.headerDekTop] : [topperStyles.headerDekBottom],
+          // Add styling for header-deck container vertical position
+          fullScreenVerticalCss(),
+          // Add style override for center-center position (if applicable)
+          fullScreenCenterCenterCss(),
           // Add styling for header-deck container background
           ... (Inverted_Colors === "black-text-white-bg") ? [topperStyles.blackTextWhiteBg] : [topperStyles.whiteTextBlackBg]
         ];
@@ -72,8 +74,24 @@ const Topper2 = ({ settings, wcmData, mods }) => {
     switch (HeaderDek_Horizontal_Position) {
       case "left": return topperStyles.headerDekLeft;
       case "right": return topperStyles.headerDekRight;
-      case "center": return topperStyles.headerDekCenter;
+      case "center": return topperStyles.headerDekCenterHorizontal;
     }
+  }
+
+  /** get horizontal positioning css for full screen header-deck container **/
+  const fullScreenVerticalCss = () => {
+    switch (HeaderDek_Vertical_Position) {
+      case "top": return topperStyles.headerDekTop;
+      case "center": return topperStyles.headerDekCenterVertical;
+      case "bottom": return topperStyles.headerDekBottom;
+    }
+  }
+
+  const fullScreenCenterCenterCss = () => {
+    return (
+      HeaderDek_Horizontal_Position === "center" &&
+      HeaderDek_Vertical_Position === "center"
+    ) ? topperStyles.headerDekCenterCenter : "";
   }
 
   const headerStyleList = () => {

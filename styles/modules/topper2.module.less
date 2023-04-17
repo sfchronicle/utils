@@ -232,15 +232,44 @@
   }
 }
 
-.headerDekCenter {
+.headerDekCenterHorizontal {
   left: 50%;
-  transform: translate(-50%, 0%);
+  transform: translateX(-50%);
   margin-left: var(--headerDek-horizontal-offset);
 
   @media @tablet {
     transform: none;
     top: 0%;
     left: 0%;
+    margin-left: 0px;
+  }
+}
+
+.headerDekCenterVertical {
+  top: 50%;
+  transform: translateY(-50%);
+  margin-top: var(--headerDek-vertical-offset);
+
+  @media @tablet {
+    transform: none;
+    top: 0%;
+    left: 0%;
+    margin-top: 0px;
+  }
+}
+
+.headerDekCenterCenter {
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  margin-left: var(--headerDek-horizontal-offset);
+  margin-top: var(--headerDek-vertical-offset);
+
+  @media @tablet {
+    transform: none;
+    top: 0%;
+    left: 0%;
+    margin-top: 0px;
     margin-left: 0px;
   }
 }
