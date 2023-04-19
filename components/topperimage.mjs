@@ -63,7 +63,7 @@ const TopperImage = ({ wcm, alt, ratio, wcmData, containerCssList = [], imageCss
   let photoRatio = "56.25%"; // Default to 16/9
   let photoFraction = 0.5625;
   let photoViewport = "56.25vw";
-  let fullPath = `https://s.hdnux.com/photos/0/0/0/${wcm}/0/`;
+  let fullPath = `https://s.hdnux.com/photos/0/0/0/${wcm}/1/`;
   if (!ratio) {
     let matchedPhoto = wcmData.nodes.find((item) => {
       return (item.photo.wcmid).toString() === (wcm).toString()
@@ -108,7 +108,9 @@ const TopperImage = ({ wcm, alt, ratio, wcmData, containerCssList = [], imageCss
 
   return (
     <div className={containerCssList.join(' ')} ref={picRef}>
-      <ImageHTML fullPath={fullPath} imageRez={imageRez} alt={alt} imageCssList={imageCssList} />
+      {imageRez > 0 &&
+        <ImageHTML fullPath={fullPath} imageRez={imageRez} alt={alt} imageCssList={imageCssList} />
+      }
     </div>
   )
 }
