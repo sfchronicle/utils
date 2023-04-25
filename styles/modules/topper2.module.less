@@ -301,6 +301,18 @@
   background-color: rgba(255, 255, 255, 0.54);
 }
 
+.blackTextNoBg {
+  color: @black;
+}
+
+.whiteTextNoBg {
+  color: @white;
+
+  @media @tablet {
+    color: @black;
+  }
+}
+
 .hideWhenTablet {
   @media @tablet {
     display: none;

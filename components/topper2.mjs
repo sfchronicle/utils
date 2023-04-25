@@ -48,8 +48,8 @@ const Topper2 = ({ settings, wcmData, mods }) => {
           fullScreenVerticalCss(),
           // Add style override for center-center position (if applicable)
           fullScreenCenterCenterCss(),
-          // Add styling for header-deck container background
-          ... (Inverted_Colors === "black-text-white-bg") ? [topperStyles.blackTextWhiteBg] : [topperStyles.whiteTextBlackBg]
+          // Add styling for header-deck container text and background color
+          fullScreenHedDekContainerCss()
         ];
       case "side-by-side":
         return [
@@ -87,11 +87,22 @@ const Topper2 = ({ settings, wcmData, mods }) => {
     }
   }
 
+  /** get additional positioning css for full screen center-center header-deck container **/
   const fullScreenCenterCenterCss = () => {
     return (
       HeaderDek_Horizontal_Position === "center" &&
       HeaderDek_Vertical_Position === "center"
     ) ? topperStyles.headerDekCenterCenter : "";
+  }
+
+  /** get css for full screen header-deck container text and background color **/
+  const fullScreenHedDekContainerCss = () => {
+    switch (Inverted_Colors) {
+      case "black-text-white-bg": return topperStyles.blackTextWhiteBg;
+      case "white-text-black-bg": return topperStyles.whiteTextBlackBg;
+      case "black-text-no-bg": return topperStyles.blackTextNoBg;
+      case "white-text-no-bg": return topperStyles.whiteTextNoBg;
+    }
   }
 
   const headerStyleList = () => {
