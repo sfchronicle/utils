@@ -116,7 +116,7 @@ const Topper2 = ({ settings, wcmData, mods }) => {
         defaultStyles = ["left"];
         break;
       case "full-screen":
-        defaultStyles = [topperStyles.hedFullScreen, fullScreenTextAlignCss()];
+        defaultStyles = [topperStyles.hedFullScreen, fullScreenTextAlignCss(), textDecorationCss()];
         break;
       case "side-by-side":
       case "side-by-side-portrait":
@@ -141,7 +141,7 @@ const Topper2 = ({ settings, wcmData, mods }) => {
       case "no-visual":
         return ["deck left"];
       case "full-screen":
-        return ["deck", topperStyles.deckFullScreen, fullScreenTextAlignCss()];
+        return ["deck", topperStyles.deckFullScreen, fullScreenTextAlignCss(), textDecorationCss()];
       case "side-by-side":
       case "side-by-side-portrait":
         return ["deck left"];
@@ -159,6 +159,10 @@ const Topper2 = ({ settings, wcmData, mods }) => {
     }
   }
 
+  /** Add styling for drop shadow on white text for full-screen toppers */
+  const textDecorationCss = () => {
+    return (Inverted_Colors === "white-text-no-bg") ? topperStyles.dropshadow : "";
+  }
   /** Add styling for text color on topper slideshow captions. Note that the credits 
    * are grey when the caption is black and white when the captions are white. */
   const sideBySideCapCredColorCss = () => {
