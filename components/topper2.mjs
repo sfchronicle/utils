@@ -203,7 +203,7 @@ const Topper2 = ({ settings, wcmData, mods }) => {
   /** Converts string from spreadsheet into a list and pads the list if the length is incorrect */
   const convertStringToList = (str, size) => {
     // If the string is empty (ie caption/credit is not filled out), return early 
-    if (!str.includes(";")) return [];
+    if (!str) return [];
 
     var list = str.split(";");
     if (list.length === size) return list;
