@@ -618,7 +618,47 @@ let getFooter = function(meta, forceColor){
 	});
 	let blockHTML = ``
 	if(meta.PROJECT.MARKET_KEY === 'SFC'){
-		blockHTML += `<div class="large-footer-link">
+		blockHTML += `
+		<style>
+		.pageFooter--right-links .large-footer-link{
+			margin: 7px 0 23px 0;
+			clear: both;
+			float: none;
+			text-align: left;
+		}
+		.pageFooter--right-links .large-footer-link a{
+			color: #fff;
+			font-size: 14px;
+			font-family: "National Medium", system-ui;
+			white-space: nowrap;
+			border: 1px solid;
+			padding: 8px 10px;
+		}
+		.pageFooter--right-links .large-footer-link a:hover{
+			color: #C7C7C7;
+		}
+		.pageFooter--right-links .large-footer-link a:visited{
+			color: #909090;
+		}
+		@media (min-width: 768px){
+			.pageFooter--right-links .large-footer-link{
+			margin: 7px 0 7px;}
+		}
+		@media (max-width: 640px) {
+			.hed {font-size: calc(3rem - 2px);}
+			.deck {font-size: calc(1.25rem + 1px); text-align: left;}
+			.subhead {font-size: 2rem;}
+			.hed-lg {font-size: calc(3rem - 2px);}
+			.hed-sm {font-size: calc(2.5rem - 2px);}
+			.subhead-sm {font-size: calc(1.5rem - 2px);}
+			.subhead-sans {font-size: calc(1.25rem + 1px);}
+			.serif-copy {font-size: 1rem;}
+			.sans-copy {font-size: calc(1rem + 1px);}
+			.lead-in {font-size: calc(1rem + 1px);}
+			.dropcap:first-letter {font-size: 6rem;}
+		}
+		</style>
+		<div class="large-footer-link">
 		<a href="https://www.sfchronicle.com/mydata/" target="_blank" role="listitem">Your Privacy Choices (Opt Out of Sale/Targeted Ads)</a>
 		</div>
 		`
