@@ -84,18 +84,18 @@ let getFooter = function(meta, forceColor){
 		"SFC": {
 			"About": [
 				{text:"Our Company",link:"http://www.hearst.com/newspapers/san-francisco-chronicle"},
-				{text:"Privacy Notice / Notice at Collection",link:"https://www.sfchronicle.com/privacy_policy"},
-				{text:"Your California Privacy Rights",link:"https://www.sfchronicle.com/privacy_policy/#caprivacyrights"},
-				{text:"Interest Based Ads",link:"https://www.sfchronicle.com/privacy_policy/#interestbasedads"},
 				{text:"Terms of Use",link:"https://www.sfchronicle.com/terms_of_use/"},
-				{text:"Careers",link:"https://eevd.fa.us6.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_15/pages/29004"},
+				{text:"Privacy Notice",link:"https://www.sfchronicle.com/privacy_policy"},
+				{text:"CA Notice at Collection",link:"https://www.sfchronicle.com/privacy_policy/#caprivacyrights"},
+				{text:"Your CA Privacy Rights (Shine the Light)",link:"https://www.sfchronicle.com/privacy_policy/#shinethelight"},
+				{text:"DAA Industry Opt Out",link:"https://www.sfchronicle.com/privacy_policy/#daaoptout"},
+				{text:"Careers",link:"https://eevd.fa.us6.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_11007"},
 				{text:"Advertising",link:"https://marketing.sfgate.com/advertise-with-us-today"}
 			],
 			"Newsroom": [
 				{text:"Ethics Policy",link:"https://www.sfchronicle.com/file/759/0/7590-7528-Hearst_Newspaper_Group_Standards_and_Ethics_Policy.pdf"},
-				{text:"How We Cover Politics",link:"https://www.sfchronicle.com/local-politics/article/Election-2020-inside-the-newsroom-How-15519702.php"},
 				{text:"Endorsement Process",link:"https://www.sfchronicle.com/opinion/article/How-The-Chronicle-s-endorsement-process-works-14499467.php"},
-				{text:"News Tips",link:"https://www.sfchronicle.com/newstips/"},
+				{text:"News Tips",link:"https://newstips.sfchronicle.com/"},
 				{text:"Newsroom News", link:"https://www.sfchronicle.com/about/newsroomnews/"}
 			],
 			"Contact": [
@@ -103,9 +103,9 @@ let getFooter = function(meta, forceColor){
 				{text:"FAQ",link:"https://www.sfchronicle.com/faq"},
 				{text:"Newsroom Contacts",link:"https://www.sfchronicle.com/newsroom_contacts"}
 			],
-			"CCPA": [
-				{text:"Do Not Sell My Personal Information",link:"https://www.sfchronicle.com/mydata/"}
-			],
+			// "CCPA": [
+			// 	{text:"Do Not Sell My Personal Information",link:"https://www.sfchronicle.com/mydata/"}
+			// ],
 			"Services": [
 				{text:"Subscriber Services",link:"https://subscription.sfchronicle.com/"},
 				{text:"e-Edition",link:"https://www.sfchronicle.com/e-edition"},
@@ -114,8 +114,9 @@ let getFooter = function(meta, forceColor){
 				{text:"App",link:"https://www.sfchronicle.com/mobile-apps/"},
 				{text:"Archives",link:"https://www.sfchronicle.com/archive/search/subscriber/"},
 				{text:"Membership",link:"https://www.sfchronicle.com/membership"},
-				{text:"Store",link:"https://sfchronicle.myshopify.com/?_ga=2.86091355.2125278198.1634578934-724761130.1630448969"},
-				{text:"Subscription Offers",link:"https://subscription.sfchronicle.com/checkout/430/866/?siteID=SFC&origin=footer"},
+				{text:"Place an Obituary",link:"https://ezads.sfchron.com/sf-adportal/obits/"},
+				{text:"Store",link:"https://sfchronicle.myshopify.com/?_ga=2.258575178.196771473.1682963726-25953531.1665430234"},
+				{text:"Subscription Offers",link:"https://subscription.sfchronicle.com/checkout/1223/2586?siteID=SFC&origin=footer"},
 				{text:"sfgate.com",link:"https://www.sfgate.com/"}
 			]
 		},
@@ -613,8 +614,15 @@ let getFooter = function(meta, forceColor){
 
 	  // Close the new section 
 	  linkHTML += '</ul></li>'
-	});
 
+	});
+	let blockHTML = ``
+	if(meta.PROJECT.MARKET_KEY === 'SFC'){
+		blockHTML += `<div class="large-footer-link">
+		<a href="https://www.sfchronicle.com/mydata/" target="_blank" role="listitem">Your Privacy Choices (Opt Out of Sale/Targeted Ads)</a>
+		</div>
+		`
+	  }
 	let footerHTML = `<footer class="pageFooter ${invertClass}">
     <div class="lock">
       <div class="pageFooter--wrapper">
@@ -647,6 +655,7 @@ let getFooter = function(meta, forceColor){
               <ul class="wrapper">
                 ${linkHTML}
               </ul>
+			  ${blockHTML}
             </div>
           </div>
         </div>

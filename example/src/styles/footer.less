@@ -210,6 +210,29 @@
   width: 114px;
 }
 
+.pageFooter--right-links .large-footer-link{
+  margin: 7px 0 23px 0;
+  clear: both;
+  float: none;
+  text-align: left;
+  a{
+    color: @white;
+    font-size: 14px;
+    font-family: "National Medium", system-ui;
+    white-space: nowrap;
+    border: 1px solid;
+    padding: 8px 10px;
+    &:hover{
+      color: @grey-25;
+    }
+    &:visited{
+      color: @grey-50;
+    }
+  }
+  @media(min-width: 768px){margin: 7px 0 7px;}
+
+}
+
 .pageFooter--branding-copyright {
   display: inline-block;
   width: 100%;
