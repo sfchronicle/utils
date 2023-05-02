@@ -101,7 +101,7 @@ let getBrands2 = function(market){
 			},
 			attributes: {
 				"marketPrefix": "sa",
-				"siteName": "Express News",
+				"siteName": "Express-News",
 				"twitter": "ExpressNews",
 				"invert": true,
 				"gaAccount": "UA-1616916-27",
