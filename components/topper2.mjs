@@ -55,7 +55,7 @@ const Topper2 = ({ settings, wcmData, mods }) => {
         return [
           topperStyles.headerDekSideBySide,
           // Add styling for left padding on header-deck
-          ... (Inverted_Layout === "headerdek-right-image-left") ? [topperStyles.largePaddingRight] : [topperStyles.largePaddingLeft]
+          ... (Inverted_Layout === "headerdek-right-image-left") ? [topperStyles.xlargePaddingRight] : [topperStyles.largePaddingLeft]
         ];
       case "side-by-side-portrait":
         return [
