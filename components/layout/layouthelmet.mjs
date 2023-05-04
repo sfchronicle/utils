@@ -3,7 +3,7 @@ import React from 'react'
 import { Helmet } from 'react-helmet'
 import { appCheck, getBrands2 } from "../../index"
 
-const LayoutHelmet = ({ meta, url_add, noindex = false }) => {
+const LayoutHelmet = ({ meta, url_add, noindex=false, schemaOverride={} }) => {
   let {
     EMBEDDED,
     MAIN_DOMAIN,
@@ -62,6 +62,35 @@ const LayoutHelmet = ({ meta, url_add, noindex = false }) => {
     favHref = "https://files.sfchronicle.com/devhub-logos/DHlogos-sm.png"
   }
 
+  // Set the default schema that will be used as a fallback
+  let schemaContent = `{
+    "@context": "http://schema.org",
+    "@type": "${schemaOverride.type || "NewsArticle"}",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "${MAIN_DOMAIN}/${SUBFOLDER}${OPT_SLASH}${SLUG}/${url_add}"
+    },
+    "headline": "${TITLE}",
+    "image": {
+      "@type": "ImageObject",
+      "url": "${IMAGE}"
+    },
+    "datePublished": "${ISO_PUBDATE}",
+    "dateModified": "${ISO_MODDATE}",
+    "author": ${JSON.stringify(authorObj)},
+    "publisher": {
+      "@type": "Organization",
+      "name": "${thisBrand.attributes.siteName}",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "/apple-touch-icon.png",
+        "width": "180",
+        "height": "180"
+      }
+    },
+    "description": "${DESCRIPTION}"
+  }`
+
   return (
     <Helmet>
       <title>{TITLE}</title>
@@ -97,33 +126,8 @@ const LayoutHelmet = ({ meta, url_add, noindex = false }) => {
       <meta property="og:image" content={IMAGE} />
       <meta property="og:description" content={DESCRIPTION} />
 
-      <script data-schema="NewsArticle" type="application/ld+json">{`{
-          "@context": "http://schema.org",
-          "@type": "NewsArticle",
-          "mainEntityOfPage": {
-            "@type": "WebPage",
-            "@id": "${MAIN_DOMAIN}/${SUBFOLDER}${OPT_SLASH}${SLUG}/${url_add}"
-          },
-          "headline": "${TITLE}",
-          "image": {
-            "@type": "ImageObject",
-            "url": "${IMAGE}"
-          },
-          "datePublished": "${ISO_PUBDATE}",
-          "dateModified": "${ISO_MODDATE}",
-          "author": ${JSON.stringify(authorObj)},
-          "publisher": {
-            "@type": "Organization",
-            "name": "${thisBrand.attributes.siteName}",
-            "logo": {
-              "@type": "ImageObject",
-              "url": "/apple-touch-icon.png",
-              "width": "180",
-              "height": "180"
-            }
-          },
-          "description": "${DESCRIPTION}"
-        }`}</script>
+      <script data-schema={schemaOverride.type || "NewsArticle"} type="application/ld+json">{schemaOverride.content || schemaContent}</script>
+      
     </Helmet>
   )
 }
