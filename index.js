@@ -1,4 +1,4 @@
-import { appCheck } from './appcheck.js'
+const { appCheck } = require('./appcheck.js')
 
 // Blend the HDN var with whatever is already present on the page
 // Returns a string for injection into the head of the page
