@@ -7,7 +7,7 @@ import {
   moddateString,
 } from './helpers/datehelpers.mjs'
 
-const Byline = ({ meta, update_note }) => {
+const Byline = ({ meta, updateNote }) => {
   const {
     PROJECT: { AUTHORS, ISO_MODDATE, ISO_PUBDATE },
   } = meta
@@ -66,10 +66,10 @@ const Byline = ({ meta, update_note }) => {
             </>
           )}
           {/* Add a note if this is a live-updating project */}
-          {update_note && (
+          {updateNote && (
             <>
               <span>{" "}|{" "}</span>
-              <span className="topper-update-note">{update_note}</span> 
+              <span className="topper-update-note">{updateNote}</span> 
             </>
           )}
         </div>
