@@ -277,6 +277,7 @@ const Topper2 = ({ settings, wcmData, mods }) => {
             wcm={Image}
             alt={Image_Alt}
             wcmData={wcmData}
+            containerCssList={[imageStyles.cContainerFullscreen]}
             imageCssList={[imageStyles.cImgFullscreen]}
           />
         )
