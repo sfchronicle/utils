@@ -9,7 +9,12 @@
 
 .topperContainerFullScreen {
   max-width: 100%;
+  height: calc(100vh - 37px);
   position: relative;
+
+  @media @tablet {
+    height: auto;
+  }
 }
 
 .topperContainerSlideshowFullScreen {
@@ -57,11 +62,14 @@
 }
 
 .imageFullScreen {
-  top: 0 !important;
+  position: absolute;
   width: 100%;
 
-  @media @mobile {
+  @media @tablet {
+    margin: 0;
+    padding: 0;
     height: 100%;
+    position: static;
   }
 }
 
