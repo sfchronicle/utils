@@ -322,7 +322,11 @@
 }
 
 .dropshadow {
-  text-shadow: 1px 1px 10px rgba(0, 0, 0, .4)
+  text-shadow: 1px 1px 10px rgba(0, 0, 0, .4);
+
+  @media @tablet {
+    text-shadow: none;
+  }
 }
 
 .hideWhenTablet {
