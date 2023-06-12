@@ -70,6 +70,12 @@
   padding-bottom: var(--img-bottom-padding-ratio);
 }
 
+.c-container-fullscreen {
+  @media @tablet {
+    padding-bottom: var(--img-bottom-padding-ratio);
+  }
+}
+
 .c-container-small-visual {
   height: calc(var(--img-bottom-padding-fraction)*var(--small-visual-max-width));
   max-width: var(--small-visual-max-width);
@@ -108,6 +114,11 @@
   height: calc(100vh - 37px);
 
   @media @tablet {
+    display: block;
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    width: 100%;
     height: auto;
   }
 }
@@ -134,7 +145,6 @@
 }
 
 .c-img-side-by-side {
-  object-fit: cover;
   width: 50vw;
   height: var(--img-height-viewport);
 

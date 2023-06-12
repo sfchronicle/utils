@@ -9,7 +9,12 @@
 
 .topperContainerFullScreen {
   max-width: 100%;
+  height: calc(100vh - 37px);
   position: relative;
+
+  @media @tablet {
+    height: auto;
+  }
 }
 
 .topperContainerSlideshowFullScreen {
@@ -25,6 +30,7 @@
 .topperContainerSideBySide {
   display: flex;
   align-items: center;
+  justify-content: center;
   background: var(--container-background-color);
 
   @media (max-width: @lg) {
@@ -57,11 +63,14 @@
 }
 
 .imageFullScreen {
-  top: 0 !important;
+  position: absolute;
   width: 100%;
 
-  @media @mobile {
+  @media @tablet {
+    margin: 0;
+    padding: 0;
     height: 100%;
+    position: static;
   }
 }
 
@@ -314,7 +323,11 @@
 }
 
 .dropshadow {
-  text-shadow: 1px 1px 10px rgba(0, 0, 0, .4)
+  text-shadow: 1px 1px 10px rgba(0, 0, 0, .4);
+
+  @media @tablet {
+    text-shadow: none;
+  }
 }
 
 .hideWhenTablet {

@@ -19,24 +19,24 @@ var archieml = require("archieml");
 var htmlparser = require("htmlparser2");
 var Entities = require("html-entities").AllHtmlEntities;
 
-let googleAuth = (config, directory = null, filenames = null) => {
+let googleAuth = (config, directory = null, filenames = null, useID = null) => {
   var auth = null;
   authObj
     .authenticate({ fallback: false })
     .then((resp) => {
       auth = resp;
-      grabDocs(auth, config, directory, filenames).catch(() => {
+      grabDocs(auth, config, directory, filenames, useID).catch(() => {
         // If the first attempt failed, then make another req using the fallback
         authObj.authenticate({ fallback: true }).then((resp) => {
           auth = resp;
-          grabDocs(auth, config, directory, filenames);
+          grabDocs(auth, config, directory, filenames, useID);
         });
       });
     })
     .catch(() => {
       // Failure if we fall back but there's no token
       auth = authObj.task();
-      grabDocs(auth, config, directory, filenames);
+      grabDocs(auth, config, directory, filenames, useID);
     });
 };
 
@@ -51,7 +51,7 @@ var camelCase = function (str) {
  * https://console.developers.google.com/apis/api/drive.googleapis.com/quotas?project=<project>
  * where <project> is the project you authenticated with using `grunt google-auth`
  */
-let grabDocs = (auth, config, directory = null, filenames = null) => {
+let grabDocs = (auth, config, directory = null, filenames = null, useID = null) => {
   return new Promise((resolve, reject) => {
     var drive = google.drive({
       auth,
@@ -75,9 +75,11 @@ let grabDocs = (auth, config, directory = null, filenames = null) => {
         }
 
         var filename = meta.data.name.replace(/\s+/g, "_");
-
-        //find the appropriate filename if filenames arr is included in params
-        if (filenames) {
+        if (useID) {
+          // If we want to use the ID as the filename, do it
+          filename = fileId;
+        } else if (filenames) {
+          //find the appropriate filename if filenames arr is included in params
           let match = filenames.find((f) => f.id === fileId);
           filename = match.name;
         }

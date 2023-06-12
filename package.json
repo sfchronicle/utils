@@ -1,6 +1,6 @@
 {
   "name": "sfc-utils",
-  "version": "1.4.28",
+  "version": "1.4.37",
   "author": "ewagstaff <evanjwagstaff@gmail.com>",
   "dependencies": {
     "archieml": "^0.4.2",
@@ -10,6 +10,7 @@
     "htmlparser2": "4.1.0",
     "opn": "^6.0.0",
     "prop-types": "^15.8.1",
+    "react-helmet": "^6.1.0",
     "react-transition-group": "^4.4.5",
     "write": "^2.0.0"
   }

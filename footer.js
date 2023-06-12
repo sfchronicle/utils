@@ -94,6 +94,7 @@ let getFooter = function(meta, forceColor){
 			],
 			"Newsroom": [
 				{text:"Ethics Policy",link:"https://www.sfchronicle.com/file/759/0/7590-7528-Hearst_Newspaper_Group_Standards_and_Ethics_Policy.pdf"},
+				{text:"Our Use of AI",link:"/ai_use/"},
 				{text:"Endorsement Process",link:"https://www.sfchronicle.com/opinion/article/How-The-Chronicle-s-endorsement-process-works-14499467.php"},
 				{text:"News Tips",link:"https://newstips.sfchronicle.com/"},
 				{text:"Newsroom News", link:"https://www.sfchronicle.com/about/newsroomnews/"}
@@ -176,6 +177,7 @@ let getFooter = function(meta, forceColor){
 		      "text": "Frequently Asked Questions",
 		      "link": "https://www.houstonchronicle.com/faq"
 		    },
+			{"text":"Our Use of AI","link":"/ai_use/"},
 		    {
 		      "text": "Newsroom Contacts",
 		      "link": "https://www.houstonchronicle.com/newsroom_contacts"
@@ -230,6 +232,7 @@ let getFooter = function(meta, forceColor){
 		      "text": "Customer Service",
 		      "link": "https://www.expressnews.com/customer_service"
 		    },
+			{"text":"Our Use of AI","link":"/ai_use/"},
 		    {
 		      "text": "Frequently Asked Questions",
 		      "link": "https://www.expressnews.com/subscriberfaqs/"
@@ -283,7 +286,8 @@ let getFooter = function(meta, forceColor){
 		    {
 		      "text": "Contact",
 		      "link": "https://www.yourconroenews.com/contact/"
-		    }
+		    },
+			{"text":"Our Use of AI","link":"/ai_use/"}
 		  ],
 			"Connect": [
 		    {
@@ -364,6 +368,7 @@ let getFooter = function(meta, forceColor){
 		      "text": "Online Store",
 		      "link": "https://timesunionplus-store.myshopify.com/"
 		    },
+			{"text":"Our Use of AI","link":"/ai_use/"},
 		    {
 		      "text": "Puzzles Palace",
 		      "link": "https://www.timesunion.com/puzzles/"
@@ -448,6 +453,7 @@ let getFooter = function(meta, forceColor){
 		      "text": "Today's e-Edition",
 		      "link": "https://subscription.hearstmediact.com/eEdition?siteID="+eedition
 		    },
+			{"text":"Our Use of AI","link":"/ai_use/"},
 		    {
 		      "text": "Contact Us",
 		      "link": "/contact/"
@@ -496,6 +502,7 @@ let getFooter = function(meta, forceColor){
 		      "text": "Newsroom Contacts",
 		      "link": "/contact/"
 		    },
+			{"text":"Our Use of AI","link":"/ai_use/"},
 		    {
 		      "text": "Advertise",
 		      "link": "https://hearstmediamidwest.com/"
@@ -520,6 +527,7 @@ let getFooter = function(meta, forceColor){
 		      "text": "Terms of Use",
 		      "link": "/tos/"
 		    },
+			{"text":"Our Use of AI","link":"/ai_use/"},
 		    {
 		      "text": "Careers",
 		      "link": "http://www.hearst.com/careers"
@@ -536,6 +544,83 @@ let getFooter = function(meta, forceColor){
 		    }
 		  ]
 		},
+		"Seattle": {
+			"About": [
+			  {
+				"text": "Privacy Notice",
+				"link": "/privacy/"
+			  },
+			  {
+				"text": "Your California Privacy Rights",
+				"link": "/privacy/#additionalinformationforcaliforniaresidents"
+			  },
+			  {
+				"text": "Interest Based Ads",
+				"link": "/privacy/#interestbasedads"
+			  },
+			  {
+				"text": "Terms of Use",
+				"link": "/terms/"
+			  },
+			  {
+				"text": "Our Company",
+				"link": "/facts/"
+			  },
+			  {
+				"text": "Careers",
+				"link": "/pijobs/"
+			  },
+			  {
+				"text": "Advertising",
+				"link": "https://www.hearstseattlepi.com/"
+			  },
+			  {
+				"text": "Standards and Practices",
+				"link": "https://www.sfchronicle.com/file/759/0/7590-7528-Hearst_Newspaper_Group_Standards_and_Ethics_Policy.pdf"
+			  },
+			  {
+				"text": "Anonymous Sources Policy",
+				"link": "https://documentcloud.adobe.com/link/track?uri=urn%3Aaaid%3Ascds%3AUS%3Acaa61dc6-4e58-4e37-a089-89df2181b945"
+			  },
+			  {
+				"text": "Correction Policy",
+				"link": "https://documentcloud.adobe.com/link/track?uri=urn%3Aaaid%3Ascds%3AUS%3A857e94d2-250e-4bfc-9bd2-50095a3d3e29"
+			  }
+			],
+			"Contact": [
+				  {
+				"text": "Newsroom Contacts",
+				"link": "/pistaff/"
+			  },
+			  {"text":"Our Use of AI","link":"/ai_use/"},
+			  {
+				"text": "Ethics Policy",
+				"link": "/standards/"
+			  }
+			],
+			"Connect": [
+				{
+			  "text": "Archive",
+			  "link": "https://seattlepi.newsbank.com/"
+			},
+			{
+			  "text": "Newsletters",
+			  "link": "https://www.seattlepi.com/newsletters/"
+			},
+			{
+				"text": "Facebook",
+				"link": "https://www.facebook.com/seattlepionline"
+			  },
+			  {
+				"text": "Twitter",
+				"link": "https://twitter.com/seattlepi"
+			  },
+			  {
+				"text": "Instagram",
+				"link": "https://www.instagram.com/seattlepi/"
+			  }
+		  ]
+		  },
 		"TK": {
 		  "About": [
 		    {
@@ -596,7 +681,8 @@ let getFooter = function(meta, forceColor){
 		    {
 		      "text": "FAQ",
 		      "link": "https://www.ctinsider.com/faq/"
-		    }
+		    },
+			{"text":"Our Use of AI","link":"/ai_use/"}
 		  ]
 		}
 	}
