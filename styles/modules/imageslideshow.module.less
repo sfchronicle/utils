@@ -96,6 +96,10 @@
 /* enter animation */
 .fade-enter {
   opacity: 0;
+
+  @media (prefers-reduced-motion: reduce) {
+    opacity: 1;
+  }
 }
 
 .fade-enter.fade-enter-active {
@@ -111,6 +115,10 @@
 .fade-exit.fade-exit-active {
   opacity: 0;
   transition: opacity 2000ms linear;
+
+  @media (prefers-reduced-motion: reduce) {
+    opacity: 1;
+  }
 }
 
 .fade-exit-done {
