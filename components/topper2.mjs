@@ -346,6 +346,7 @@ const Topper2 = ({ settings, wcmData, mods }) => {
                   <CaptionCreditSlideshow
                     captionList={convertStringToList(Image_Caption, wcmIdList.length)}
                     creditList={convertStringToList(Image_Credits, wcmIdList.length)}
+                    listSize={wcmIdList.length}
                     extraStyles={[topperStyles.hideWhenDesktop]}
                   />
                 }
@@ -368,6 +369,7 @@ const Topper2 = ({ settings, wcmData, mods }) => {
                 <CaptionCreditSlideshow
                   captionList={convertStringToList(Image_Caption, wcmIdList.length)}
                   creditList={convertStringToList(Image_Credits, wcmIdList.length)}
+                  listSize={wcmIdList.length}
                   extraStyles={[topperStyles.hideWhenTablet, topperStyles.smallPaddingLeft]}
                 />
               }
@@ -399,6 +401,7 @@ const Topper2 = ({ settings, wcmData, mods }) => {
                   <CaptionCreditSlideshow
                     captionList={convertStringToList(Image_Caption, wcmIdList.length)}
                     creditList={convertStringToList(Image_Credits, wcmIdList.length)}
+                    listSize={wcmIdList.length}
                     extraStyles={[topperStyles.smallPaddingLeftWhenTablet]}
                   />
                 }
@@ -476,6 +479,7 @@ const Topper2 = ({ settings, wcmData, mods }) => {
                 <CaptionCreditSlideshow
                   captionList={convertStringToList(Image_Caption, wcmIdList.length)}
                   creditList={convertStringToList(Image_Credits, wcmIdList.length)}
+                  listSize={wcmIdList.length}
                   extraStyles={[topperStyles.slideshowCaptionSideBySide, sideBySideCapCredColorCss(), sideBySideCapCredPaddingCss()]}
                   creditStyles={[sideBySideCapCredColorCss()]}
                 />
@@ -511,6 +515,7 @@ const Topper2 = ({ settings, wcmData, mods }) => {
                   <CaptionCreditSlideshow
                     captionList={convertStringToList(Image_Caption, wcmIdList.length)}
                     creditList={convertStringToList(Image_Credits, wcmIdList.length)}
+                    listSize={wcmIdList.length}
                     extraStyles={[topperStyles.slideshowCaptionSideBySidePortrait, sideBySideCapCredColorCss(), sideBySidePortraitCapCredPaddingCss()]}
                     creditStyles={[sideBySideCapCredColorCss()]}
                   />

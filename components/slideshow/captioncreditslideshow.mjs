@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from "react"
 
-const CaptionCreditSlideshow = ({ captionList, creditList, extraStyles, creditStyles = [] }) => {
+const CaptionCreditSlideshow = ({ captionList, creditList, listSize, extraStyles, creditStyles = [] }) => {
   let captionCss = ["topper-image", "caption"];
   if (extraStyles) {
     captionCss = extraStyles.concat(captionCss);
@@ -19,7 +19,7 @@ const CaptionCreditSlideshow = ({ captionList, creditList, extraStyles, creditSt
     resetTimeout();
     timeoutRef.current = setTimeout(() => {
       // Set current image index
-      setIndex((prevIndex) => (prevIndex === captionList.length - 1) ? 0 : prevIndex + 1);
+      setIndex((prevIndex) => (prevIndex === listSize - 1) ? 0 : prevIndex + 1);
     },
       4000 // Delay for switching images
     );

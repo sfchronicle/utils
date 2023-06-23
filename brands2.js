@@ -27,11 +27,11 @@ let getBrands2 = function(market){
 			styles: {
 				"@brand": "#26A0A5",
 				"@brand-secondary": "#FFBC30",
-				"@hed": '"Tiempos Headline", Georgia, serif',
-				"@hed-alt": '"Tiempos Headline", Georgia, serif',
-				"@serif": '"Tiempos", Georgia, serif',
-				"@sans": '"National", Helvetica, sans-serif',
-				"@sans-alt": '"National", Helvetica, sans-serif'
+				"@hed": '"Tiempos Headline", "Baskerville", Georgia, serif',
+				"@hed-alt": '"Tiempos Headline", "Baskerville", Georgia, serif',
+				"@serif": '"Tiempos", "Baskerville", Georgia, serif',
+				"@sans": '"National", Arial, Helvetica, sans-serif',
+				"@sans-alt": '"National", Arial, Helvetica, sans-serif'
 			},
 			attributes: {
 				"marketPrefix": "sf",
@@ -50,11 +50,11 @@ let getBrands2 = function(market){
 			styles: {
 				"@brand": "#FF7500",
 				"@brand-secondary": "#1874CB",
-				"@hed": '"Publico Headline", Georgia, serif',
-				"@hed-alt": '"Marr Sans Condensed", Georgia, serif',
-				"@serif": '"Publico", Georgia, serif',
-				"@sans": '"Marr Sans", Helvetica, sans-serif',
-				"@sans-alt": '"Marr Sans Condensed", Helvetica, sans-serif'
+				"@hed": '"Publico Headline", Georgia, "Baskerville", serif',
+				"@hed-alt": '"Marr Sans Condensed", Georgia, "Baskerville", serif',
+				"@serif": '"Publico", Georgia, "Baskerville", serif',
+				"@sans": '"Marr Sans", Arial, Helvetica, sans-serif',
+				"@sans-alt": '"Marr Sans Condensed", Impact, Helvetica, sans-serif'
 			},
 			attributes: {
 				"marketPrefix": "hc",
@@ -78,7 +78,7 @@ let getBrands2 = function(market){
 				"@hed-alt": '"ChronicleDispCond", Georgia, serif',
 				"@serif": '"ChronicleText", Georgia, serif',
 				"@sans": '"HelveticaNeue", Helvetica, sans-serif',
-				"@sans-alt": '"HelveticaNeueCond", Helvetica, sans-serif'
+				"@sans-alt": '"HelveticaNeueCond", Impact, Helvetica, sans-serif'
 			},
 			attributes: {
 				"marketPrefix": "tu",
