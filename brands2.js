@@ -183,7 +183,23 @@ let getBrands2 = function(market){
 				"siteId": 68
 			}
 		},
-
+		Seattle: {
+			styles: {
+				"@brand": "#900900",
+				"@brand-secondary": "#189196"
+			},
+			attributes: {
+				"marketPrefix": "seattle",
+				"siteName": "Seattle PI",
+				"twitter": "seattlepi",
+				"invert": true,
+				"gaAccount": "UA-1616916-99",
+				"subscribeLink": "https://www.seattlepi.com/",
+				"sailCustomer": "da30899589786517b0c0cead37a48b06",
+				"sailSiteName": "seattle-post-intelligencer",
+				"siteId": 20
+			}
+		},
 		/* Misc */
 		TK: {
 			styles: {

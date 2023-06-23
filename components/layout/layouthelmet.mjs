@@ -19,7 +19,8 @@ const LayoutHelmet = ({ meta, url_add, noindex=false, schemaOverride={} }) => {
       SUBFOLDER,
       TITLE,
       MARKET_KEY,
-      CANONICAL_URL
+      CANONICAL_URL,
+      SECTION
     },
   } = meta
 
@@ -62,6 +63,12 @@ const LayoutHelmet = ({ meta, url_add, noindex=false, schemaOverride={} }) => {
     favHref = "https://files.sfchronicle.com/devhub-logos/DHlogos-sm.png"
   }
 
+  // Set section with fallback
+  let articleSection = "Local"
+  if (SECTION) {
+    articleSection = SECTION
+  }
+
   // Set the default schema that will be used as a fallback
   let schemaContent = `{
     "@context": "http://schema.org",
@@ -88,6 +95,7 @@ const LayoutHelmet = ({ meta, url_add, noindex=false, schemaOverride={} }) => {
         "height": "180"
       }
     },
+    "articleSection": "${articleSection}",
     "description": "${DESCRIPTION}"
   }`
 
