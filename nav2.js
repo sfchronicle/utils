@@ -170,7 +170,7 @@ let getNav2 = function (
       </div>
     </a>
     </div>
-    <div class="nav2-right">
+    <div class="nav2-right ${subscribeLink ? "" : "hide-sub"}">
       ${rightBlock}
     </div>
     ${subnav}

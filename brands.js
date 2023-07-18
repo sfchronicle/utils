@@ -189,7 +189,7 @@ let getBrands = function(market){
 				"twitter": "seattlepi",
 				"invert": true,
 				"gaAccount": "UA-1616916-99",
-				"subscribeLink": "https://www.seattlepi.com/",
+				"subscribeLink": "",
 				"sailCustomer": "da30899589786517b0c0cead37a48b06",
 				"sailSiteName": "seattle-post-intelligencer",
 				"siteId": 20
