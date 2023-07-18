@@ -185,7 +185,7 @@ let getBrands2 = function(market){
 		},
 		Seattle: {
 			styles: {
-				"@brand": "#900900",
+				"@brand": "#3F8395",
 				"@brand-secondary": "#189196"
 			},
 			attributes: {
