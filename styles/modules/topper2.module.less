@@ -90,7 +90,7 @@
   width: 100%;
   margin: @s24 auto 0 auto;
 
-  @media @mobile {
+  @media (max-width: 960px) {
     margin-left: @s16;
     margin-right: @s16;
     width: auto;
@@ -291,6 +291,14 @@
   text-align: center;
 
   @media @tablet {
+    text-align: left;
+  }
+}
+
+.textAlignCenterKicker {
+  text-align: center;
+
+  @media (max-width: 960px) {
     text-align: left;
   }
 }
@@ -522,4 +530,19 @@
     min-height: unset;
     min-width: unset;
   }
+}
+
+.kicker {
+  margin: 0;
+  margin-bottom: calc(-1*1rem);
+  padding: 0;
+
+  @media (max-width: 960px) {
+    padding: 0 @s16;
+    margin-top: @s8;
+  }
+}
+
+.kickerSmallVisual {
+  margin-top: 0.5rem;
 }

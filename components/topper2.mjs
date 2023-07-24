@@ -9,7 +9,7 @@ import * as imageStyles from "../styles/modules/topperimage.module.less"
 
 const Topper2 = ({ settings, wcmData, mods }) => {
   let {
-    Topper_Style, Title, Title_Style, Deck, Image, Image_Alt, Video_Mp4, Image_Caption, Image_Credits,
+    Topper_Style, Title, Title_Style, Deck, Image, Image_Alt, Kicker, Video_Mp4, Image_Caption, Image_Credits,
     HeaderDek_Vertical_Position, HeaderDek_Vertical_Offset, HeaderDek_Horizontal_Offset,
     HeaderDek_Horizontal_Position, Inverted_Colors, Inverted_Layout, Inverted_Text_Color,
     Topper_Background_Color, Small_Visual_Max_Width, Small_Visual_Topper_Url
@@ -145,6 +145,22 @@ const Topper2 = ({ settings, wcmData, mods }) => {
       case "side-by-side":
       case "side-by-side-portrait":
         return ["deck left"];
+      default:
+        return [""]
+    }
+  }
+
+  const kickerStyleList = () => {
+    switch (Topper_Style) {
+      case "small-visual":
+        return [topperStyles.kicker, topperStyles.textAlignCenterKicker, topperStyles.kickerSmallVisual]
+      case "stacked":
+        return [topperStyles.kicker, topperStyles.textAlignCenterKicker];
+      case "no-visual":
+      case "side-by-side":
+      case "side-by-side-portrait":
+        return ["left", topperStyles.kicker, topperStyles.textAlignLeft];
+      case "full-screen":
       default:
         return [""]
     }
@@ -383,6 +399,7 @@ const Topper2 = ({ settings, wcmData, mods }) => {
           <>
             <div>
               <div className={headerDekStyleList().join('')}>
+                {Kicker && <Heading level={4} text={Kicker} className={kickerStyleList().join(' ')} />}
                 <Heading
                   level={1}
                   text={Title}
@@ -418,6 +435,7 @@ const Topper2 = ({ settings, wcmData, mods }) => {
               <figure className={`mw-xl ml-auto mr-auto ${topperStyles.imageSmallVisual}`}>
                 {getMediaHTML(isSlideshow(wcmIdList))}
               </figure>
+              {Kicker && <Heading level={4} text={Kicker} className={kickerStyleList().join(' ')} />}
               <div className={headerDekStyleList().join('')}>
                 <Heading
                   level={1}
@@ -439,6 +457,7 @@ const Topper2 = ({ settings, wcmData, mods }) => {
           <>
             <div>
               <div className={headerDekStyleList().join('')}>
+                {Kicker && <Heading level={4} text={Kicker} className={kickerStyleList().join(' ')} />}
                 <Heading
                   level={1}
                   text={Title}
@@ -461,6 +480,7 @@ const Topper2 = ({ settings, wcmData, mods }) => {
         return (
           <div className={sideBySideContainerCss}>
             <div className={headerDekStyleList().join(' ')}>
+              {Kicker && <Heading level={4} text={Kicker} className={kickerStyleList().join(' ')} />}
               <Heading
                 level={1}
                 text={Title}
@@ -497,6 +517,8 @@ const Topper2 = ({ settings, wcmData, mods }) => {
           <div className={topperStyles.fullWidthContainer}>
             <div className={sideBySidePortraitContainerCss}>
               <div className={headerDekStyleList().join(' ')}>
+                {Kicker && <Heading level={4} text={Kicker} className={kickerStyleList().join(' ')} />}
+
                 <Heading
                   level={1}
                   text={Title}
