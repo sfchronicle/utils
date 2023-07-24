@@ -127,7 +127,7 @@ let grabDocs = (auth, config, directory = null, filenames = null, useID = null) 
                     href = url.parse(aTag.attribs.href, true).query.q;
                   }
 
-                  var str = '<a href="' + href + '">';
+                  var str = '<a target="_blank" href="' + href + '">';
                   str += tagHandlers._base(aTag);
                   str += "</a>";
                   return str;

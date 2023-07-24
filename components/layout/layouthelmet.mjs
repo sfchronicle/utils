@@ -19,7 +19,8 @@ const LayoutHelmet = ({ meta, url_add, noindex=false, schemaOverride={} }) => {
       SUBFOLDER,
       TITLE,
       MARKET_KEY,
-      CANONICAL_URL
+      CANONICAL_URL,
+      SECTION
     },
   } = meta
 
@@ -60,6 +61,14 @@ const LayoutHelmet = ({ meta, url_add, noindex=false, schemaOverride={} }) => {
   let favHref = "/favicon.ico"
   if (MARKET_KEY === "TK"){
     favHref = "https://files.sfchronicle.com/devhub-logos/DHlogos-sm.png"
+  } else if (MARKET_KEY === "Seattle"){
+    favHref = "https://www.seattlepi.com/sites/seattlepi/apple-touch-icon-196x196.png"
+  }
+
+  // Set section with fallback
+  let articleSection = "Local"
+  if (SECTION) {
+    articleSection = SECTION
   }
 
   // Set the default schema that will be used as a fallback
@@ -88,6 +97,7 @@ const LayoutHelmet = ({ meta, url_add, noindex=false, schemaOverride={} }) => {
         "height": "180"
       }
     },
+    "articleSection": "${articleSection}",
     "description": "${DESCRIPTION}"
   }`
 
