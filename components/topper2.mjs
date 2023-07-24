@@ -159,7 +159,7 @@ const Topper2 = ({ settings, wcmData, mods }) => {
       case "no-visual":
       case "side-by-side":
       case "side-by-side-portrait":
-        return ["left", topperStyles.kicker, topperStyles.textAlignLeft];
+        return [topperStyles.kicker, topperStyles.textAlignLeft];
       case "full-screen":
       default:
         return [""]
