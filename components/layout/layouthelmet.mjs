@@ -20,6 +20,7 @@ const LayoutHelmet = ({ meta, url_add, noindex=false, schemaOverride={} }) => {
       TITLE,
       MARKET_KEY,
       CANONICAL_URL,
+      ANALYTICS_CREDIT,
       SECTION
     },
   } = meta
@@ -40,14 +41,28 @@ const LayoutHelmet = ({ meta, url_add, noindex=false, schemaOverride={} }) => {
   let authorObj = []
   let newAuthor = {}
   try {
-    AUTHORS.forEach(author => {
-      newAuthor = {
-        '@type': 'Person',
-        name: author.AUTHOR_NAME,
-        url: author.AUTHOR_PAGE,
-      }
-      authorObj.push(newAuthor)
-    })
+    if (!ANALYTICS_CREDIT){
+      // If we have authors (not analytics credit), use those
+      AUTHORS.forEach(author => {
+        newAuthor = {
+          '@type': 'Person',
+          name: author.AUTHOR_NAME,
+          url: author.AUTHOR_PAGE,
+        }
+        authorObj.push(newAuthor)
+      })
+    } else {
+      // If we have analytics credit, use that
+      const creditList = ANALYTICS_CREDIT.split(",")
+      creditList.forEach(credit => {
+        newAuthor = {
+          '@type': 'Person',
+          name: credit,
+          url: MAIN_DOMAIN // Not ideal to not have the actual author page, but we don't have it
+        }
+        authorObj.push(newAuthor)
+      })
+    }
   } catch (err) {
     // If it errored, just set to neutral default
     authorObj = {
