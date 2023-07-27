@@ -399,7 +399,7 @@ const Topper2 = ({ settings, wcmData, mods }) => {
           <>
             <div>
               <div className={headerDekStyleList().join('')}>
-                {Kicker && <Heading level={4} text={Kicker} className={kickerStyleList().join(' ')} />}
+                {Kicker && <Heading level={6} text={Kicker} className={kickerStyleList().join(' ')} />}
                 <Heading
                   level={1}
                   text={Title}
@@ -435,7 +435,7 @@ const Topper2 = ({ settings, wcmData, mods }) => {
               <figure className={`mw-xl ml-auto mr-auto ${topperStyles.imageSmallVisual}`}>
                 {getMediaHTML(isSlideshow(wcmIdList))}
               </figure>
-              {Kicker && <Heading level={4} text={Kicker} className={kickerStyleList().join(' ')} />}
+              {Kicker && <Heading level={6} text={Kicker} className={kickerStyleList().join(' ')} />}
               <div className={headerDekStyleList().join('')}>
                 <Heading
                   level={1}
@@ -457,7 +457,7 @@ const Topper2 = ({ settings, wcmData, mods }) => {
           <>
             <div>
               <div className={headerDekStyleList().join('')}>
-                {Kicker && <Heading level={4} text={Kicker} className={kickerStyleList().join(' ')} />}
+                {Kicker && <Heading level={6} text={Kicker} className={kickerStyleList().join(' ')} />}
                 <Heading
                   level={1}
                   text={Title}
@@ -480,7 +480,7 @@ const Topper2 = ({ settings, wcmData, mods }) => {
         return (
           <div className={sideBySideContainerCss}>
             <div className={headerDekStyleList().join(' ')}>
-              {Kicker && <Heading level={4} text={Kicker} className={kickerStyleList().join(' ')} />}
+              {Kicker && <Heading level={6} text={Kicker} className={kickerStyleList().join(' ')} />}
               <Heading
                 level={1}
                 text={Title}
@@ -517,7 +517,7 @@ const Topper2 = ({ settings, wcmData, mods }) => {
           <div className={topperStyles.fullWidthContainer}>
             <div className={sideBySidePortraitContainerCss}>
               <div className={headerDekStyleList().join(' ')}>
-                {Kicker && <Heading level={4} text={Kicker} className={kickerStyleList().join(' ')} />}
+                {Kicker && <Heading level={6} text={Kicker} className={kickerStyleList().join(' ')} />}
 
                 <Heading
                   level={1}
