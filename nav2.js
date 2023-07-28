@@ -118,6 +118,11 @@ let getNav2 = function (
     invertClass = "invert";
     color = "black";
   }
+  // Allow option to force white text on black nav
+  if (forceColor === "black") {
+    invertClass = "";
+    color = "white";
+  }
 
   let subfolder = "";
   if (meta.PROJECT.SUBFOLDER) {
