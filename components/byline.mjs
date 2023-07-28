@@ -42,34 +42,42 @@ const Byline = ({ meta, updateNote, updatePrefix }) => {
 
           {has_authors && <span>{" "}|{" "}</span>}
 
-          {!moddateString &&
+          {!ReplacementTime &&
             <>
-
-              <time
-                className="topper-dateline"
-                dateTime={ISO_PUBDATE}
-                itemProp="datePublished"
-              >
-                {!has_authors && <span>Published </span>} {pubdateString}
-              </time>
+              {!moddateString &&
+                <>
+                  <time
+                    className="topper-dateline"
+                    dateTime={ISO_PUBDATE}
+                    itemProp="datePublished"
+                  >
+                    {!has_authors && <span>Published </span>} {pubdateString}
+                  </time>
+                </>
+              }
+              {moddateString && (
+                <>
+                  <time
+                    className="topper-dateline updated-date"
+                    dateTime={ISO_MODDATE}
+                    itemProp="dateModified"
+                  >
+                    {updatePrefix ? (
+                      <>{updatePrefix}{' '}</>
+                    ) : (
+                      <>Updated{' '}</>
+                    )}
+                    {moddateString}
+                  </time>
+                </>
+              )}
             </>
           }
-          {moddateString && (
-            <>
-              <time
-                className="topper-dateline updated-date"
-                dateTime={ISO_MODDATE}
-                itemProp="dateModified"
-              >
-                {updatePrefix ? (
-                  <>{updatePrefix}{' '}</>
-                ) : (
-                  <>Updated{' '}</>
-                )}
-                {moddateString}
-              </time>
-            </>
-          )}
+
+          {ReplacementTime &&
+            <ReplacementTime />
+          }
+          
           {/* Add a note if this is a live-updating project */}
           {updateNote && (
             <>
