@@ -7,7 +7,7 @@ import {
   moddateString,
 } from './helpers/datehelpers.mjs'
 
-const Byline = ({ meta, updateNote, updatePrefix }) => {
+const Byline = ({ meta, updateNote, updatePrefix, ReplacementTime }) => {
   const {
     PROJECT: { AUTHORS, ISO_MODDATE, ISO_PUBDATE },
   } = meta
