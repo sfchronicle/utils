@@ -348,6 +348,10 @@ const Topper2 = ({ settings, wcmData, mods }) => {
 
   const wcmIdList = getWcmIdList(Image);
   const TopperHtml = () => {
+    // Remove <a> tags from Title and Deck, links in h1/h2 are bad for SEO
+    Title = removeLinksFromText(Title)
+    Deck = removeLinksFromText(Deck)
+
     switch (Topper_Style) {
       case "full-screen":
         let containerCss = isSlideshow(wcmIdList) ? topperStyles.topperContainerSlideshowFullScreen : topperStyles.topperContainerFullScreen;
@@ -586,6 +590,28 @@ const Topper2 = ({ settings, wcmData, mods }) => {
     if (r && Inverted_Text_Color) {
       r.style.setProperty('--side-by-side-text-color', Inverted_Text_Color)
     }
+  }
+
+  /** Removes html links from string */
+  const removeLinksFromText = (str) => {
+    // Matches to text with <a> tags
+    let reStr = "(<a | <a)(.*)(?=>)(.*)(<\/a>)";
+    let reEndStr = "(<\/a>)"
+
+    let re = RegExp(reStr, 'g');
+    let reEnd = RegExp(reEndStr, 'g')
+
+    let linkText = re.exec(str)
+    // If text does not contain links, return early 
+    if (linkText === null) return str
+
+    let linkedText = linkText[0].split(reEnd)[0].split(">")[1].trim()
+
+    let textArr = str.split(re)
+    let preLink = (textArr.length > 2 || re.lastIndex === str.length) ? textArr[0].trim() : "";
+    let postLink = (textArr.length > 2 || re.lastIndex !== str.length) ? String(textArr.slice(-1)).trim() : "";
+
+    return `${preLink} ${linkedText} ${postLink}`
   }
 
   return (
