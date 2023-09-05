@@ -23,6 +23,8 @@ const Geocoder = ({
   filterRegion, // You need to test results, but could also pass in a neighbourhood, district, city, county, state or administrative area
   market,       // Will filter by the market's state if no filterRegion provided
   resultFunc,
+  buttonTrackingId,
+  placeholder
 }) => {
   // Show a loader when we're requesting
   const [loading, setLoading] = useState(false)
@@ -179,7 +181,7 @@ const Geocoder = ({
       <input
         ref={geocoderInputRef}
         className={geocoderStyles.input}
-        placeholder="Enter an address"
+        placeholder={placeholder ? placeholder : "Enter an address"}
         name="address"
         onChange={handleChange}
         value={inputValue}
@@ -207,7 +209,8 @@ const Geocoder = ({
                 }}
               >
                 <button
-                  className={geocoderStyles.button}
+                  id={buttonTrackingId ? buttonTrackingId : ""}
+                  className={buttonTrackingId ? geocoderStyles.button + " devhub-ga-tracking" : geocoderStyles.button}
                   onFocus={(e) => {
                     // Set index
                     setActiveKeyboardIndex(i)
