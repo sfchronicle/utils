@@ -28,6 +28,22 @@ const ImageSlideshow = ({ wcmData, imageList, altList, topperStyle, isLayoutInve
     };
   }, [index]);
 
+  useEffect(() => {
+    // Find the max height ratio within an wcm image list, this is only used for the small visual slideshow
+    if (wcmData.nodes) {
+      let ratioList = wcmData.nodes.map((d) => d.photo.ratio)
+      console.log(ratioList)
+      let minRatio = Math.max(...ratioList)
+
+      // During server-side rendering, access to ":root" is unavailable. This is okay; we just need
+      // to make sure that the site does not crash during SSR
+      let r = (typeof window != "undefined") ? document.querySelector(':root') : null;
+      if (r) {
+        r.style.setProperty('--small-visual-height-ratio', minRatio);
+      }
+    }
+  }, [])
+
   const getContainerClass = () => {
     switch (topperStyle) {
       case "stacked":

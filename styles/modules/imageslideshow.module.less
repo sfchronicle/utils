@@ -1,5 +1,9 @@
 @import (less) '../values';
 
+:root {
+  --small-visual-height-ratio: 2/3;
+}
+
 .container-stacked {
   margin: 0 auto;
   white-space: nowrap;
@@ -36,7 +40,7 @@
 
 .container-small-visual {
   width: 150px;
-  height: calc(150px*2/3);
+  height: calc(150px*var(--small-visual-height-ratio))
 }
 
 .image-wrapper-stacked {
@@ -69,7 +73,10 @@
 .image-wrapper-small-visual {
   position: absolute;
   width: 150px;
-  height: calc(150px*2/3)
+  right: 0;
+  left: 0;
+  bottom: 0;
+  margin: auto;
 }
 
 .image-wrapper-side-by-side-portrait {
