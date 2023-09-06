@@ -1,9 +1,12 @@
-.hed, .deck{
+.hed,
+.deck {
   text-align: center;
   margin: @s16 0;
+
   &.left {
     text-align: left;
   }
+
   @media (max-width: 960px) {
     text-align: left;
     padding: 0 @s16;
@@ -14,28 +17,41 @@ h1 {
   font-size: 4rem;
   font-family: @hed;
 }
+
 //could the next three classes be moved into byline module?
 .byline-wrapper {
   max-width: @lg;
   border-bottom: 1px solid @grey-75;
   margin: @s16 auto @s24;
   padding-bottom: @s8;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
+
   @media (max-width: 960px) {
     margin: @s16 @s16 @s24;
   }
+
   @media (max-width: @md) {
-    border-bottom: none;  }
+    border-bottom: none;
+    display: block;
+  }
 }
+
 .byline-name {
-    font-weight: 700;
+  font-weight: 700;
 }
 
 .byline {
   text-align: left;
   display: inline-block;
-  a, a:visited {
+
+  a,
+  a:visited {
     text-decoration: none;
     color: @black;
+
     &:hover {
       color: @brand;
     }
@@ -48,23 +64,29 @@ h1 {
 
 // Handle basic embed classes
 .inline-figure {
-  &.float-left, &.float-right {
+
+  &.float-left,
+  &.float-right {
     max-width: @xl;
     margin: 0 auto;
-    @media (max-width: @xl){
+
+    @media (max-width: @xl) {
       max-width: @md;
       padding: 0 @s16;
     }
+
     figure {
       max-width: @xs;
       width: 100%;
-      @media (max-width: @xl){
+
+      @media (max-width: @xl) {
         max-width: @md;
         float: none;
         margin: @s24 auto;
       }
     }
   }
+
   &.float-left {
     figure {
       float: left;
@@ -72,25 +94,31 @@ h1 {
     }
 
   }
+
   &.float-right {
     figure {
       float: right;
       margin-left: @s16;
     }
   }
+
   &.full {
     max-width: 100%;
   }
 }
 
-.inline-figure.wide, .inline-figure.full, .inline-figure.large {
+.inline-figure.wide,
+.inline-figure.full,
+.inline-figure.large {
   &.graphic-wrapper {
     @media @max-desktop {
       padding: 0 @s16;
     }
   }
-   .caption {
+
+  .caption {
     max-width: @w-text-width;
+
     @media @max-text-width {
       padding: 0 @s16;
     }
@@ -100,8 +128,8 @@ h1 {
 //side-by-side photos
 .side-by-side-wrapper {
   @media (max-width: 1200px) {
-      padding-left: @s16;
-      padding-right: @s16;
+    padding-left: @s16;
+    padding-right: @s16;
   }
 }
 
@@ -110,92 +138,109 @@ h1 {
   width: 100%;
   display: inline-block;
   vertical-align: top;
-  @media (max-width: 1200px){
-      width: calc(50% - 4px);
-      // max-width: 640px;
+
+  @media (max-width: 1200px) {
+    width: calc(50% - 4px);
+    // max-width: 640px;
   }
+
   @media @tablet {
-      width: 100%;
-      max-width: 640px;
+    width: 100%;
+    max-width: 640px;
   }
 }
+
 .side-by-side-left {
   margin-right: @s4;
+
   @media @tablet {
-      margin-bottom: @s8;
+    margin-bottom: @s8;
   }
 }
+
 .side-by-side-right {
   margin-left: @s4;
 }
 
-.side-by-side-left, .side-by-side-right{
+.side-by-side-left,
+.side-by-side-right {
   @media @tablet {
-      margin-right: auto;
-      margin-left: auto;
-      display: block;
+    margin-right: auto;
+    margin-left: auto;
+    display: block;
   }
 }
+
 .side-by-side-caption-wrapper {
   margin-bottom: @s24;
   margin-top: @s4;
   line-height: 1.3;
+
   .caption {
-      margin-bottom: 0;
-      margin-top: 0;
-      display: inline;
-      padding: 0 !important;
+    margin-bottom: 0;
+    margin-top: 0;
+    display: inline;
+    padding: 0 !important;
   }
+
   @media @max-text-width {
-      padding: 0;
+    padding: 0;
   }
 }
+
 .side-by-side-caption-left {
-  &::before{
-      content: "LEFT: ";
+  &::before {
+    content: "LEFT: ";
+    font-family: @sans;
+    font-size: @s14;
+    font-weight: 700;
+    color: @grey-75;
+  }
+
+  @media @tablet {
+    &::before {
+      content: "TOP: ";
       font-family: @sans;
       font-size: @s14;
       font-weight: 700;
       color: @grey-75;
-  }
-  @media @tablet{
-      &::before{
-          content: "TOP: ";
-          font-family: @sans;
-          font-size: @s14;
-          font-weight: 700;
-          color: @grey-75;
-      }
+    }
   }
 }
+
 .side-by-side-caption-right {
-  &::before{
-      content: " RIGHT: ";
+  &::before {
+    content: " RIGHT: ";
+    font-family: @sans;
+    font-size: @s14;
+    font-weight: 700;
+    color: @grey-50;
+  }
+
+  @media @tablet {
+    &::before {
+      content: " BOTTOM: ";
       font-family: @sans;
       font-size: @s14;
       font-weight: 700;
       color: @grey-50;
-  }
-  @media @tablet{
-      &::before{
-          content: " BOTTOM: ";
-          font-family: @sans;
-          font-size: @s14;
-          font-weight: 700;
-          color: @grey-50;
-      }
+    }
   }
 }
 
 //custom graphic
 .graphic-wrapper {
-  &.inline-figure.wide, &.inline-figure.full, &.inline-figure.large {
+
+  &.inline-figure.wide,
+  &.inline-figure.full,
+  &.inline-figure.large {
     .caption {
-     max-width: 100%;
-     @media @max-text-width {
-       padding: 0;
-     }
-   }
+      max-width: 100%;
+
+      @media @max-text-width {
+        padding: 0;
+      }
+    }
   }
 }
 
@@ -212,6 +257,7 @@ h1 {
   .caption {
     max-width: @lg;
     margin-bottom: @s8;
+
     @media (max-width: 960px) {
       padding: 0 @s16;
     }
@@ -242,6 +288,7 @@ a {
   a {
     text-decoration-color: @grey-75;
   }
+
   svg {
     height: 0.75rem;
     margin-left: @s4;
@@ -253,6 +300,7 @@ ul {
   padding-left: 2.2rem;
   &:extend(.text-width);
 }
+
 body ul {
   margin-bottom: @s24;
 }
