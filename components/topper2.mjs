@@ -6,13 +6,14 @@ import CaptionCreditSlideshow from "./slideshow/captioncreditslideshow.mjs"
 import ImageSlideshow from "./slideshow/imageslideshow.mjs"
 import * as topperStyles from "../styles/modules/topper2.module.less"
 import * as imageStyles from "../styles/modules/topperimage.module.less"
+import Datawrapper from "./datawrapper.mjs"
 
 const Topper2 = ({ settings, wcmData, mods }) => {
   let {
-    Topper_Style, Title, Title_Style, Deck, Image, Image_Alt, Kicker, Video_Mp4, Image_Caption, Image_Credits,
-    HeaderDek_Vertical_Position, HeaderDek_Vertical_Offset, HeaderDek_Horizontal_Offset,
-    HeaderDek_Horizontal_Position, Inverted_Colors, Inverted_Layout, Inverted_Text_Color,
-    Topper_Background_Color, Small_Visual_Max_Width, Small_Visual_Topper_Url
+    Topper_Style, Title, Title_Style, Deck, Image, Image_Alt, Kicker, Video_Mp4, Datawrapper_Id,
+    Image_Caption, Image_Credits, HeaderDek_Vertical_Position, HeaderDek_Vertical_Offset,
+    HeaderDek_Horizontal_Offset, HeaderDek_Horizontal_Position, Inverted_Colors, Inverted_Layout,
+    Inverted_Text_Color, Topper_Background_Color, Small_Visual_Max_Width, Small_Visual_Topper_Url
   } = settings
 
   // During server-side rendering, access to ":root" is unavailable. This is okay; we just need
@@ -216,6 +217,11 @@ const Topper2 = ({ settings, wcmData, mods }) => {
     return (wcmIdList.length > 1);
   }
 
+  /** Checks if the media type is a datawrapper chart */
+  const isDatawrapper = () => {
+    return Datawrapper_Id && Datawrapper_Id !== 0;
+  }
+
   /** Converts string from spreadsheet into a list and pads the list if the length is incorrect */
   const convertStringToList = (str, size) => {
     // If the string is empty (ie caption/credit is not filled out), return early 
@@ -262,8 +268,18 @@ const Topper2 = ({ settings, wcmData, mods }) => {
     )
   }
 
+  const getDatawrapperHtml = () => {
+    let datawrapperCss = ""
+
+    return (
+      <Datawrapper altText={Image_Alt} id={Datawrapper_Id} />
+    )
+  }
+
   /* Returns the corresponding image HTML for each topper style and slideshow status */
   const getMediaHTML = (isSlideshow) => {
+    if (isDatawrapper()) return getDatawrapperHtml();
+
     if (Video_Mp4) return getVideoHtml();
 
     if (isSlideshow) return (
@@ -426,17 +442,18 @@ const Topper2 = ({ settings, wcmData, mods }) => {
                     extraStyles={[topperStyles.smallPaddingLeftWhenTablet]}
                   />
                 }
-                {!isSlideshow(wcmIdList) && <CaptionCredit caption={Image_Caption} credit={Image_Credits} extraStyles={[topperStyles.smallPaddingLeftWhenTablet]} />}
+                {!isSlideshow(wcmIdList) && (!isDatawrapper()) && <CaptionCredit caption={Image_Caption} credit={Image_Credits} extraStyles={[topperStyles.smallPaddingLeftWhenTablet]} />}
               </figure>
             </div>
           </>
         );
 
       case "small-visual":
+        let smallVisualCss = (isDatawrapper()) ? `${topperStyles.imageSmallVisualDatawrapper}` : `${topperStyles.imageSmallVisual}`;
         return (
           <>
             <div>
-              <figure className={`mw-xl ml-auto mr-auto ${topperStyles.imageSmallVisual}`}>
+              <figure className={`mw-xl ml-auto mr-auto ${smallVisualCss}`}>
                 {getMediaHTML(isSlideshow(wcmIdList))}
               </figure>
               {Kicker && <Heading level={6} text={Kicker} className={kickerStyleList().join(' ')} />}
@@ -478,7 +495,15 @@ const Topper2 = ({ settings, wcmData, mods }) => {
         );
 
       case "side-by-side":
-        let figureCss = isSlideshow(wcmIdList) ? `${topperStyles.imageSideBySideSlideshow}` : `${topperStyles.imageSideBySide}`;
+        let figureCss = "";
+        if (isSlideshow(wcmIdList)) {
+          figureCss = `${topperStyles.imageSideBySideSlideshow}`
+        } else if (isDatawrapper()) {
+          figureCss = `${topperStyles.imageSideBySideDatawrapper}`
+        } else {
+          figureCss = `${topperStyles.imageSideBySide}`
+        }
+
         let sideBySideContainerCss = (Inverted_Layout === "headerdek-right-image-left") ? `${topperStyles.topperContainerSideBySide} ${topperStyles.reverseFlexbox}` : `${topperStyles.topperContainerSideBySide}`;
         setBackgroundAndTextColor();
         return (
@@ -508,13 +533,20 @@ const Topper2 = ({ settings, wcmData, mods }) => {
                   creditStyles={[sideBySideCapCredColorCss()]}
                 />
               }
-              {!isSlideshow(wcmIdList) && <CaptionCredit caption={Image_Caption} credit={Image_Credits} extraStyles={[topperStyles.captionSideBySide, sideBySideCapCredColorCss()]} creditStyles={[sideBySideCapCredColorCss()]} />}
+              {!isSlideshow(wcmIdList) && (!isDatawrapper()) && <CaptionCredit caption={Image_Caption} credit={Image_Credits} extraStyles={[topperStyles.captionSideBySide, sideBySideCapCredColorCss()]} creditStyles={[sideBySideCapCredColorCss()]} />}
             </figure>
           </div>
         );
 
       case "side-by-side-portrait":
-        let portraitFigureCss = isSlideshow(wcmIdList) ? `${topperStyles.imageSideBySidePortraitSlideshow}` : `${topperStyles.imageSideBySidePortrait}`;
+        let portraitFigureCss = "";
+        if (isSlideshow(wcmIdList)) {
+          portraitFigureCss = `${topperStyles.imageSideBySidePortraitSlideshow}`
+        } else if (isDatawrapper()) {
+          portraitFigureCss = `${topperStyles.imageSideBySidePortraitDatawrapper}`
+        } else {
+          portraitFigureCss = `${topperStyles.imageSideBySidePortrait}`
+        }
         let sideBySidePortraitContainerCss = (Inverted_Layout === "headerdek-right-image-left") ? `${topperStyles.topperContainerSideBySidePortrait} ${topperStyles.reverseFlexbox}` : `${topperStyles.topperContainerSideBySidePortrait}`;
         setBackgroundAndTextColor();
         return (
@@ -546,7 +578,7 @@ const Topper2 = ({ settings, wcmData, mods }) => {
                     creditStyles={[sideBySideCapCredColorCss()]}
                   />
                 }
-                {!isSlideshow(wcmIdList) && <CaptionCredit caption={Image_Caption} credit={Image_Credits} extraStyles={[topperStyles.captionSideBySidePortrait, sideBySideCapCredColorCss(), sideBySidePortraitFloatCss()]} creditStyles={[sideBySideCapCredColorCss()]} />}
+                {!isSlideshow(wcmIdList) && (!isDatawrapper()) && <CaptionCredit caption={Image_Caption} credit={Image_Credits} extraStyles={[topperStyles.captionSideBySidePortrait, sideBySideCapCredColorCss(), sideBySidePortraitFloatCss()]} creditStyles={[sideBySideCapCredColorCss()]} />}
               </figure>
             </div>
           </div>

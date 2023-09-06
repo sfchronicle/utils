@@ -98,6 +98,20 @@
   }
 }
 
+.imageSmallVisualDatawrapper {
+  position: relative;
+  height: auto;
+  width: 100%;
+  margin: @s24 auto 0 auto;
+
+  @media (max-width: 960px) {
+    margin-left: @s16;
+    margin-right: @s16;
+    width: auto;
+    height: auto;
+  }
+}
+
 .imageSideBySide {
   width: 50%;
   float: left;
@@ -105,6 +119,18 @@
 
   @media (max-width: @lg) {
     width: auto;
+    float: none;
+    padding-bottom: 0;
+  }
+}
+
+.imageSideBySideDatawrapper {
+  width: 50%;
+  float: left;
+  padding: @s16;
+
+  @media (max-width: @lg) {
+    width: 100%;
     float: none;
     padding-bottom: 0;
   }
@@ -129,6 +155,22 @@
 
   @media (max-width: @lg) {
     width: auto;
+    float: none;
+    height: auto;
+    padding-bottom: 0;
+    min-height: unset;
+  }
+}
+
+.imageSideBySidePortraitDatawrapper {
+  width: 50%;
+  height: 90vh;
+  min-height: calc(600px + 32px);
+  float: left;
+  padding: @s16;
+
+  @media (max-width: @lg) {
+    width: 100%;
     float: none;
     height: auto;
     padding-bottom: 0;

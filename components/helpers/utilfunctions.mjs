@@ -50,7 +50,7 @@ function appendLayoutScripts(isEmbedded, isAdRemoved, marketKey) {
       document.body.appendChild(script)
 
       // Init sailthru
-      if (window && window.Sailthru && marketKey){
+      if (window && window.Sailthru && marketKey) {
         window.Sailthru.init({ customerId: getBrands2(marketKey).attributes.sailCustomer })
       }
     }
@@ -81,4 +81,25 @@ function formatHDN(isEmbedded, url_add, meta) {
   return stringHDN;
 }
 
-export { debounce, appendLayoutScripts, formatHDN }
+function getFigureWidth(maxWidth) {
+  switch (maxWidth) {
+    case "text-width":
+      return "text-width";
+    case "large":
+      return "large mw-lg mt-md mb-md ml-auto mr-auto";
+    case "wide":
+      return "wide mw-xl mt-md mb-md ml-auto mr-auto";
+    case "full":
+      return "full mw-100 mt-md mb-md ml-auto mr-auto";
+    case "embed":
+      return "mw-xl ml-auto mr-auto";
+    case "float-right":
+      return "float-right";
+    case "float-left":
+      return "float-left";
+    default:
+      return "text-width";
+  }
+}
+
+export { debounce, appendLayoutScripts, formatHDN, getFigureWidth }
