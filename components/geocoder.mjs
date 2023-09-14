@@ -49,6 +49,7 @@ const Geocoder = ({
         break;
       case "CT":
         filterRegion = "Connecticut";
+        break;
       default:
         filterRegion = "United States";
     }
