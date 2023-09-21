@@ -13,9 +13,17 @@ const Byline = ({ meta, updateNote, updatePrefix, ReplacementTime }) => {
   } = meta
   const has_authors = AUTHORS[0].AUTHOR_NAME !== ""
 
+  // check the width of the byline wrapper. if it's less than @md or 672px, 
+  // change the display type to "block" to avoid large white spaces with
+  // the gift button
+  let bylineContainer = document.getElementById("byline-wrapper")
+  if (bylineContainer && bylineContainer.offsetWidth < 672) {
+    bylineContainer.style.display = "block"
+  }
+
   return (
     <>
-      <div className="byline-wrapper">
+      <div className="byline-wrapper" id="byline-wrapper">
         <div className="byline">
           {has_authors &&
             <>
@@ -77,12 +85,12 @@ const Byline = ({ meta, updateNote, updatePrefix, ReplacementTime }) => {
           {ReplacementTime &&
             <ReplacementTime />
           }
-          
+
           {/* Add a note if this is a live-updating project */}
           {updateNote && (
             <>
               <span>{" "}|{" "}</span>
-              <span className="topper-update-note">{updateNote}</span> 
+              <span className="topper-update-note">{updateNote}</span>
             </>
           )}
         </div>
