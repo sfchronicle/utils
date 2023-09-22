@@ -126,7 +126,6 @@ let blendHDN = function (meta) {
   HDN.dataLayer.content.keyNlpConsumerGood = [];
   HDN.dataLayer.content.keyNlpOther = [];
   HDN.dataLayer.content.keyNlpUnknown = [];
-  HDN.dataLayer.content.designTemplate = "devhub-sandbox";
 
   // Signal to Blueconic that we are ready for gift button
   HDN.dataLayer.content.giftEnabled = meta.GIFT_ENABLED;
