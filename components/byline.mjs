@@ -7,7 +7,7 @@ import {
   moddateString,
 } from './helpers/datehelpers.mjs'
 
-const Byline = ({ meta, updateNote, updatePrefix, ReplacementTime }) => {
+const Byline = ({ meta, updateNote, updatePrefix, ReplacementTime, url_add }) => {
   const {
     PROJECT: { AUTHORS, ISO_MODDATE, ISO_PUBDATE },
   } = meta
@@ -98,7 +98,7 @@ const Byline = ({ meta, updateNote, updatePrefix, ReplacementTime }) => {
         </div>
         <div className="articleHeader--shareTools">
           <div className="share-list" id="sharebutton-wrapper">
-            <ShareButtons meta={meta} />
+            <ShareButtons meta={meta} urlAdd={url_add} />
           </div>
         </div>
       </div>
