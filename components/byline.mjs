@@ -16,9 +16,11 @@ const Byline = ({ meta, updateNote, updatePrefix, ReplacementTime }) => {
   // check the width of the byline wrapper. if it's less than @md or 672px, 
   // change the display type to "block" to avoid large white spaces with
   // the gift button
-  let bylineContainer = document.getElementById("byline-wrapper")
-  if (bylineContainer && bylineContainer.offsetWidth < 672) {
-    bylineContainer.style.display = "block"
+  if (typeof window !== "undefined" && typeof document !== "undefined") {
+    let bylineContainer = document.getElementById("byline-wrapper")
+    if (bylineContainer && bylineContainer.offsetWidth < 672) {
+      bylineContainer.style.display = "block"
+    }
   }
 
   return (
