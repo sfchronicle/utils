@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import * as geocoderStyles from "../styles/modules/geocoder.module.less";
 
 // This is a singleton event listener that we can use to add/remove event listeners
