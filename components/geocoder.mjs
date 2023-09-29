@@ -66,7 +66,9 @@ const Geocoder = ({
     // POST as form url encoded data
     let formData = new FormData();
     formData.append("query", query);
-    formData.append("region", filterRegion);
+    if(filterRegion != "United States"){
+      formData.append("region", filterRegion);
+    }
     // Remove any existing event listeners
     setSingletonEventListener("keydown");
     // Make req
