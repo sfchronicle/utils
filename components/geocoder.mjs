@@ -23,8 +23,9 @@ const Geocoder = ({
   filterRegion, // You need to test results, but could also pass in a neighbourhood, district, city, county, state or administrative area
   market, // Will filter by the market's state if no filterRegion provided
   resultFunc,
-  buttonTrackingId,
+  // buttonTrackingId,  // To be used for analytics once system is more finalized
   placeholder,
+  inputValueOverride, // Used to clear/change the input value from the parent component
 }) => {
   // Show a loader when we're requesting
   const [loading, setLoading] = useState(false);
@@ -175,6 +176,13 @@ const Geocoder = ({
       search(inputValue);
     }
   };
+
+  // If the parent component passes in a string for inputValueOverride, use it
+  useEffect(() => {
+    if (typeof inputValueOverride === 'string' || inputValueOverride instanceof String) {
+      setInputValue(inputValueOverride)
+    }
+  }, [inputValueOverride])
 
   return (
     <div className={geocoderStyles.wrapper}>
