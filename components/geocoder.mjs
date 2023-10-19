@@ -67,7 +67,7 @@ const Geocoder = ({
     // POST as form url encoded data
     let formData = new FormData();
     formData.append("query", query);
-    if(filterRegion != "United States"){
+    if (filterRegion != "United States") {
       formData.append("region", filterRegion);
     }
     // Remove any existing event listeners
@@ -109,6 +109,12 @@ const Geocoder = ({
         // Handle result
         if (output.data.length === 0) {
           // We could show something saying "No results" ... or we could not
+          if (output.fallback) {
+            // If we're using the fallback, we need to encourage the user to enter city
+            setLocData([
+              { name: "No results, make sure to include city name" },
+            ]);
+          }
         } else {
           // Create a keydown event listener
           setSingletonEventListener("keydown", function resultsKeyHandler(e) {
@@ -181,10 +187,13 @@ const Geocoder = ({
 
   // If the parent component passes in a string for inputValueOverride, use it
   useEffect(() => {
-    if (typeof inputValueOverride === 'string' || inputValueOverride instanceof String) {
-      setInputValue(inputValueOverride)
+    if (
+      typeof inputValueOverride === "string" ||
+      inputValueOverride instanceof String
+    ) {
+      setInputValue(inputValueOverride);
     }
-  }, [inputValueOverride])
+  }, [inputValueOverride]);
 
   return (
     <div className={geocoderStyles.wrapper}>
@@ -212,6 +221,11 @@ const Geocoder = ({
                 className={thisClass}
                 key={i}
                 onClick={() => {
+                  if (
+                    locData[i].name.toLowerCase().indexOf("no results") > -1
+                  ) {
+                    return false;
+                  }
                   setInputValue(locData[i].name);
                   // Call function if it exists
                   if (resultFunc) {
@@ -227,11 +241,13 @@ const Geocoder = ({
                   }}
                 >
                   <div className={geocoderStyles.name}>{loc.name}</div>
-                  <div className={geocoderStyles.details}>
-                    {loc.locality}
-                    {loc.locality && loc.region && ", "}
-                    {loc.region}
-                  </div>
+                  {(loc.locality || loc.region) && (
+                    <div className={geocoderStyles.details}>
+                      {loc.locality}
+                      {loc.locality && loc.region && ", "}
+                      {loc.region}
+                    </div>
+                  )}
                 </button>
               </li>
             );
