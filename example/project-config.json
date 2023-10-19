@@ -2,20 +2,18 @@
   "_comment": "The possible paywall values are 'meter' (hit the paywall after a certain number of free stories), 'paywall' (paywall immediately), 'free' (no wall), or 'meter-no-paywall' (count this against the reader's meter, but never show the paywall on this page)",
   "PAYWALL_SETTING": "meter",
   "EMBEDDED": false,
-  "GOOGLE_SHEETS": ["1DUvYnFdxtBv1AXcDI9X00s_opUSu4uHJmd5LNemCN9E"],
+  "GOOGLE_SHEETS": [
+    "1DUvYnFdxtBv1AXcDI9X00s_opUSu4uHJmd5LNemCN9E"
+  ],
   "GOOGLE_DOCS": [],
-  
   "_domain_explainer": "NOTE: MAIN_DOMAIN will get swapped out based on the MARKEY_KEY when deployed on the server. If you are building it locally for a repo push, you need to set the domain manually here.",
   "MAIN_DOMAIN": "https://projects.sfchronicle.com",
-
   "PROJECT": {
     "_key_explainer": "NOTE: Change MARKET_KEY to deploy to other markets using their domain and settings. Accepted markets include: SFC, Houston, SanAntonio, Albany, CT",
     "MARKET_KEY": "SFC",
-
     "_comment": "IMPORTANT: SUBFOLDER and SLUG for used for file pathing and the deploy script! Take care with your edits to them! NOTE: Stage deploys will automatically go to 'projects/test-proj'",
     "SUBFOLDER": "{%= subfolder_path %}",
     "SLUG": "{%= app_slug %}",
-
     "TITLE": "",
     "DISPLAY_TITLE": "",
     "SOCIAL_TITLE": "",
@@ -27,15 +25,13 @@
     "HEARST_CATEGORY": "Bay Area",
     "KEY_SUBJECTS": "Data",
     "DATE": "January 1, 1970 6:00 PM",
-
     "NEWSLETTER_ID": "SFC_NL_TopStories",
     "NEWSLETTER_PROMO": "Get the Bay Area's best journalism delivered to my inbox daily",
     "NEWSLETTER_LEGAL": "By subscribing, you agree to our <a href=\"https://www.sfchronicle.com/terms_of_use/\">Terms of Use</a> and acknowledge that your information will be used as described in our <a href=\"https://www.sfchronicle.com/privacy_policy/\"> Privacy Notice</a>.",
-
     "AUTHORS": [
       {
-        "AUTHOR_NAME": "",
-        "AUTHOR_PAGE": ""
+        "AUTHOR_NAME": "Lesley Huang",
+        "AUTHOR_PAGE": "www.google.com"
       }
     ]
   }

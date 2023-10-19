@@ -47,8 +47,9 @@ const ImageSlideshow = ({ wcmData, imageList, altList, topperStyle, isLayoutInve
   const getContainerClass = () => {
     switch (topperStyle) {
       case "stacked":
-      case "full-screen":
         return styles.containerStacked;
+      case "full-screen":
+        return styles.containerFullscreen;
       case "small-visual":
         return styles.containerSmallVisual;
       default:
