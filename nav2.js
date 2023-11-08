@@ -1,13 +1,7 @@
 let { getBrands } = require("./brands");
 
 // Handle nav for various markets and include nav options for other links
-let getNav2 = function (
-  meta,
-  urlAdd,
-  forceColor,
-  navLink,
-  navArray
-) {
+let getNav2 = function (meta, urlAdd, forceColor, navLink, navArray) {
   // If we aren't passing meta in, we have to call getSettings here
   if (!meta) {
     let { getSettings } = require("./settings");
@@ -141,7 +135,7 @@ let getNav2 = function (
       >
         ${navLink.text}${dropdownIcon}
       </a>
-    `
+    `;
   }
 
   let rightBlock = `
@@ -149,7 +143,6 @@ let getNav2 = function (
       <div>Subscribe</div>
     </a>
   `;
-  
 
   let navHTML = `<nav class="nav2-container ${invertClass}">
     <div class="nav2-left">
@@ -166,12 +159,12 @@ let getNav2 = function (
           class="nav2-desk-logo"
           alt="Logo"
           src="https://files.sfchronicle.com/static-assets/logos/${marketPrefix}-${color}.png"
-        ></img>
+        />
         <img
           class="nav2-mobile-logo"
           alt="Logo"
           src="https://files.sfchronicle.com/static-assets/logos/${marketPrefix}-square-${color}.png"
-        ></img>
+        />
       </div>
     </a>
     </div>
