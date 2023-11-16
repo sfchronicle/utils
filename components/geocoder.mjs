@@ -81,7 +81,7 @@ const Geocoder = ({
     }
     // We've settled, make the req
     const resp = await fetch(
-      "https://projects.sfchronicle.com/feeds/geocode/v2-test.php",
+      "https://projects.sfchronicle.com/feeds/geocode/v2.php",
       {
         method: "POST",
         body: formData,
