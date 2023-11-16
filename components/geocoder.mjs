@@ -57,7 +57,7 @@ const Geocoder = ({
   }
 
   // We don't want this CONSTANTLY firing, so we debounce it
-  const search = (query) => {
+  const search = async (query) => {
     // Save value of query so we can check if it's the last one
     latestFetchRef.current = query;
     // If we're already loading, don't fire another request, the request will be re-requested after the first one finishes
@@ -72,104 +72,100 @@ const Geocoder = ({
     }
     // Remove any existing event listeners
     setSingletonEventListener("keydown");
-    // Make req
-    fetch("https://projects.sfchronicle.com/feeds/geocode/v2.php", {
-      method: "POST",
-      body: formData,
-    })
-      .then((resp) => {
-        // Sometimes, there's a junk response, so let's handle that gracefully
-        if (!resp || !resp.ok) {
-          return null;
-        }
-        return resp.json();
-      })
-      .then((output) => {
-        // If this is not the latest fetch, bail and fetch latest
-        if (latestFetchRef.current !== query) {
-          setTimeout(() => {
-            // Delay a bit because it seems like we're still typing
-            search(latestFetchRef.current);
-          }, 1000);
-          return;
-        } else {
-          // Uncomment this to see what request was actually honored
-          //console.log('OK VALID RESULTS FOR', latestFetchRef.current)
-        }
-        // Unset loading
-        setLoading(false);
-        // Remove any existing event listeners
-        setSingletonEventListener("keydown");
-        // Show results
-        setLocData(output.data);
-        // Bail early if there's no data
-        if (!output) {
-          return false;
-        }
-        // Handle result
-        if (output.data.length === 0) {
-          // We could show something saying "No results" ... or we could not
-          if (output.fallback) {
-            // If we're using the fallback, we need to encourage the user to enter city
-            setLocData([
-              { name: "No results, make sure to include city name" },
-            ]);
-          }
-        } else {
-          // Create a keydown event listener
-          setSingletonEventListener("keydown", function resultsKeyHandler(e) {
-            setActiveKeyboardIndex((prevIndex) => {
-              let newIndex = prevIndex;
-              switch (e.key) {
-                case "ArrowDown":
-                  // Handle the index
-                  if (prevIndex === null) {
-                    newIndex = 0;
-                  } else if (prevIndex < output.data.length - 1) {
-                    newIndex = prevIndex + 1;
-                  } else {
-                    newIndex = 0;
-                  }
-                  break;
-                case "ArrowUp":
-                  // Handle the index
-                  if (prevIndex === null) {
-                    newIndex = output.data.length - 1;
-                  } else if (prevIndex > 0) {
-                    newIndex = prevIndex - 1;
-                  } else {
-                    newIndex = output.data.length - 1;
-                  }
-                  break;
-                case "Enter":
-                  // Do something with the data
-                  const selectedLocation = output.data[prevIndex];
-                  // Update the input value with the choice
-                  if (selectedLocation) {
-                    setInputValue(selectedLocation.name);
-                    // Call function if it exists
-                    if (resultFunc) {
-                      resultFunc(selectedLocation);
-                    }
-                  }
-                  // Hide the list now
-                  setLocData(null);
+    // Wait for a sec to check if we're still typing
+    await new Promise((resolve) => setTimeout(resolve, 500)); // We can increase this timeout to ease up on requests too
+    // If query doesn't match, we're still typing -- reset
+    if (latestFetchRef.current !== query) {
+      search(latestFetchRef.current);
+      return;
+    }
+    // We've settled, make the req
+    const resp = await fetch(
+      "https://projects.sfchronicle.com/feeds/geocode/v2-test.php",
+      {
+        method: "POST",
+        body: formData,
+      }
+    );
+    if (!resp || !resp.ok) {
+      return null;
+    }
+    const output = await resp.json();
+    // If this is not the latest fetch after we finished getting results, bail and fetch latest
+    if (latestFetchRef.current !== query) {
+      search(latestFetchRef.current);
+      return;
+    }
+    // Unset loading
+    setLoading(false);
+    // Remove any existing event listeners
+    setSingletonEventListener("keydown");
+    // Show results
+    setLocData(output.data);
+    // Bail early if there's no data
+    if (!output) {
+      return false;
+    }
+    if (output.data.length === 0) {
+      // We could show something saying "No results" ... or we could not
+      if (output.fallback) {
+        // If we're using the fallback, we need to encourage the user to enter city
+        setLocData([{ name: "No results, make sure to include city name" }]);
+      }
+    } else {
+      // Create a keydown event listener
+      setSingletonEventListener("keydown", function resultsKeyHandler(e) {
+        setActiveKeyboardIndex((prevIndex) => {
+          let newIndex = prevIndex;
+          switch (e.key) {
+            case "ArrowDown":
+              // Handle the index
+              if (prevIndex === null) {
+                newIndex = 0;
+              } else if (prevIndex < output.data.length - 1) {
+                newIndex = prevIndex + 1;
+              } else {
+                newIndex = 0;
               }
-              return newIndex;
-            });
-          });
-
-          // Start listening for a click outside the div
-          document.addEventListener("click", function resultsClickHandler(e) {
-            // Whether we clicked inside or outside, we hide the list
-            setLocData(null);
-            // Also cancel the keydown listener
-            setSingletonEventListener("keydown");
-            // Received click, cancel this listener
-            this.removeEventListener("click", resultsClickHandler);
-          });
-        }
+              break;
+            case "ArrowUp":
+              // Handle the index
+              if (prevIndex === null) {
+                newIndex = output.data.length - 1;
+              } else if (prevIndex > 0) {
+                newIndex = prevIndex - 1;
+              } else {
+                newIndex = output.data.length - 1;
+              }
+              break;
+            case "Enter":
+              // Do something with the data
+              const selectedLocation = output.data[prevIndex];
+              // Update the input value with the choice
+              if (selectedLocation) {
+                setInputValue(selectedLocation.name);
+                // Call function if it exists
+                if (resultFunc) {
+                  resultFunc(selectedLocation);
+                }
+              }
+              // Hide the list now
+              setLocData(null);
+          }
+          return newIndex;
+        });
       });
+
+      // Start listening for a click outside the div
+      document.addEventListener("click", function resultsClickHandler(e) {
+        // Whether we clicked inside or outside, we hide the list
+        setLocData(null);
+        // Also cancel the keydown listener
+        setSingletonEventListener("keydown");
+        // Received click, cancel this listener
+        this.removeEventListener("click", resultsClickHandler);
+      });
+    }
   };
 
   // Handle the change event
