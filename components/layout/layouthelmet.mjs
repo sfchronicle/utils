@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { Helmet } from 'react-helmet'
-import { appCheck, getBrands2 } from "../../index"
+import { appCheck, getBrands3 } from "../../index"
 
 const LayoutHelmet = ({ meta, url_add, noindex=false, schemaOverride={} }) => {
   let {
@@ -26,7 +26,7 @@ const LayoutHelmet = ({ meta, url_add, noindex=false, schemaOverride={} }) => {
   } = meta
 
   const isApp = appCheck()
-  const thisBrand = getBrands2(MARKET_KEY);
+  const thisBrand = getBrands3(MARKET_KEY);
 
   // Get stylesheet id from market key
   let styleSheetID

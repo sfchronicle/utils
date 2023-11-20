@@ -1,5 +1,5 @@
 import { getBlueconic } from "../../blueconic"
-import { getBrands2 } from "../../brands2"
+import { getBrands3 } from "../../brands3"
 import { appCheck, blendHDN } from "../../index"
 
 /** Used for resizing the WCM Image */
@@ -51,7 +51,7 @@ function appendLayoutScripts(isEmbedded, isAdRemoved, marketKey) {
 
       // Init sailthru
       if (window && window.Sailthru && marketKey) {
-        window.Sailthru.init({ customerId: getBrands2(marketKey).attributes.sailCustomer })
+        window.Sailthru.init({ customerId: getBrands3(marketKey).attributes.sailCustomer })
       }
     }
   }, 5000)
@@ -59,7 +59,7 @@ function appendLayoutScripts(isEmbedded, isAdRemoved, marketKey) {
 
 function formatHDN(isEmbedded, url_add, meta) {
   const isApp = appCheck();
-  const thisBrand = getBrands2(meta.PROJECT.MARKET_KEY);
+  const thisBrand = getBrands3(meta.PROJECT.MARKET_KEY);
 
   // Combine our settings with what Hearst puts on page
   let stringHDN = ''

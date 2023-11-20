@@ -251,6 +251,7 @@ let blendHDN = function (meta) {
 // Grab neighbor files
 let { getBrands } = require("./brands");
 let { getBrands2 } = require("./brands2");
+let { getBrands3 } = require("./brands3");
 let { getSettings } = require("./settings");
 let { getNav } = require("./nav");
 let { getNav2 } = require("./nav2");
@@ -266,6 +267,7 @@ module.exports = {
   getSettings,
   getBrands,
   getBrands2,
+  getBrands3,
   getNav,
   getNav2,
   getSpecialNav,
