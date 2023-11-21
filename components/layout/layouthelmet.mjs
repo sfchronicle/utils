@@ -30,7 +30,7 @@ const LayoutHelmet = ({ meta, url_add, noindex=false, schemaOverride={} }) => {
 
   // Get stylesheet id from market key
   let styleSheetID
-  if ((MARKET_KEY === "SFC") || (MARKET_KEY === "Houston") || (MARKET_KEY === "Albany")) {
+  if (MARKET_KEY === "SFC") {
     styleSheetID = MARKET_KEY
   }
   else {
@@ -126,7 +126,7 @@ const LayoutHelmet = ({ meta, url_add, noindex=false, schemaOverride={} }) => {
         type="image/x-icon"
       />
       <link rel="canonical" href={`${CANONICAL_URL}/${url_add}`} />
-      <link rel="stylesheet" href={`https://files.sfchronicle.com/brand-styles/${styleSheetID}.css`} />
+      <link rel="stylesheet" href={`https://files.sfchronicle.com/brand-styles/plat-styles/${styleSheetID}.css`} />
 
       {(isApp || EMBEDDED || noindex) ? (
         <meta name="robots" content="noindex, nofollow" />
