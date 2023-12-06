@@ -1,9 +1,15 @@
-import React from 'react'
+import React from "react";
 
-import { Helmet } from 'react-helmet'
-import { appCheck, getBrands3 } from "../../index"
+import { Helmet } from "react-helmet";
+import { appCheck, getBrands2, getBrands3 } from "../../index";
 
-const LayoutHelmet = ({ meta, url_add, noindex=false, schemaOverride={} }) => {
+const LayoutHelmet = ({
+  meta,
+  url_add,
+  noindex = false,
+  schemaOverride = {},
+  brandsVer = 2,
+}) => {
   let {
     EMBEDDED,
     MAIN_DOMAIN,
@@ -21,69 +27,82 @@ const LayoutHelmet = ({ meta, url_add, noindex=false, schemaOverride={} }) => {
       MARKET_KEY,
       CANONICAL_URL,
       ANALYTICS_CREDIT,
-      SECTION
+      SECTION,
     },
-  } = meta
+  } = meta;
 
-  const isApp = appCheck()
-  const thisBrand = getBrands3(MARKET_KEY);
-
-  // Get stylesheet id from market key
-  let styleSheetID
-  if (MARKET_KEY === "SFC") {
-    styleSheetID = MARKET_KEY
-  }
-  else {
-    styleSheetID = "default"
+  // Handle style sheet on brands2 vs brands3
+  const isApp = appCheck();
+  let styleSheetID;
+  let thisBrand;
+  if (brandsVer === 2) {
+    thisBrand = getBrands2(MARKET_KEY);
+    if (
+      MARKET_KEY === "SFC" ||
+      MARKET_KEY === "Houston" ||
+      MARKET_KEY === "Albany"
+    ) {
+      styleSheetID = MARKET_KEY;
+    } else {
+      styleSheetID = "default";
+    }
+  } else {
+    thisBrand = getBrands3(MARKET_KEY);
+    if (MARKET_KEY === "SFC") {
+      styleSheetID = "plat-styles/" + MARKET_KEY;
+    } else {
+      styleSheetID = "plat-styles/default";
+    }
   }
 
   // Handle author data
-  let authorObj = []
-  let newAuthor = {}
+  let authorObj = [];
+  let newAuthor = {};
   try {
-    if (!ANALYTICS_CREDIT){
+    if (!ANALYTICS_CREDIT) {
       // If we have authors (not analytics credit), use those
-      AUTHORS.forEach(author => {
+      AUTHORS.forEach((author) => {
         newAuthor = {
-          '@type': 'Person',
+          "@type": "Person",
           name: author.AUTHOR_NAME,
           url: author.AUTHOR_PAGE,
-        }
-        authorObj.push(newAuthor)
-      })
+        };
+        authorObj.push(newAuthor);
+      });
     } else {
       // If we have analytics credit, use that
-      const creditList = ANALYTICS_CREDIT.split(",")
-      creditList.forEach(credit => {
+      const creditList = ANALYTICS_CREDIT.split(",");
+      creditList.forEach((credit) => {
         newAuthor = {
-          '@type': 'Person',
+          "@type": "Person",
           name: credit,
-          url: MAIN_DOMAIN // Not ideal to not have the actual author page, but we don't have it
-        }
-        authorObj.push(newAuthor)
-      })
+          url: MAIN_DOMAIN, // Not ideal to not have the actual author page, but we don't have it
+        };
+        authorObj.push(newAuthor);
+      });
     }
   } catch (err) {
     // If it errored, just set to neutral default
     authorObj = {
-      '@type': 'Person',
+      "@type": "Person",
       name: thisBrand.attributes.siteName,
       url: MAIN_DOMAIN,
-    }
+    };
   }
 
   // Handle special favicon logic
-  let favHref = "/favicon.ico"
-  if (MARKET_KEY === "TK"){
-    favHref = "https://files.sfchronicle.com/devhub-logos/DHlogos-sm.png"
-  } else if (MARKET_KEY === "Seattle"){
-    favHref = "https://www.seattlepi.com/sites/seattlepi/apple-touch-icon-196x196.png"
+  let favHref = "/favicon.ico";
+  if (MARKET_KEY === "TK") {
+    favHref = "https://files.sfchronicle.com/devhub-logos/DHlogos-sm.png";
+  } else if (MARKET_KEY === "Seattle") {
+    favHref =
+      "https://www.seattlepi.com/sites/seattlepi/apple-touch-icon-196x196.png";
   }
 
   // Set section with fallback
-  let articleSection = "Local"
+  let articleSection = "Local";
   if (SECTION) {
-    articleSection = SECTION
+    articleSection = SECTION;
   }
 
   // Set the default schema that will be used as a fallback
@@ -114,21 +133,20 @@ const LayoutHelmet = ({ meta, url_add, noindex=false, schemaOverride={} }) => {
     },
     "articleSection": "${articleSection}",
     "description": "${DESCRIPTION}"
-  }`
+  }`;
 
   return (
     <Helmet>
       <title>{TITLE}</title>
       <meta name="description" content={DESCRIPTION} />
-      <link
-        rel="shortcut icon"
-        href={favHref}
-        type="image/x-icon"
-      />
+      <link rel="shortcut icon" href={favHref} type="image/x-icon" />
       <link rel="canonical" href={`${CANONICAL_URL}/${url_add}`} />
-      <link rel="stylesheet" href={`https://files.sfchronicle.com/brand-styles/plat-styles/${styleSheetID}.css`} />
+      <link
+        rel="stylesheet"
+        href={`https://files.sfchronicle.com/brand-styles/${styleSheetID}.css`}
+      />
 
-      {(isApp || EMBEDDED || noindex) ? (
+      {isApp || EMBEDDED || noindex ? (
         <meta name="robots" content="noindex, nofollow" />
       ) : (
         <meta name="robots" content="max-image-preview:large" />
@@ -147,14 +165,21 @@ const LayoutHelmet = ({ meta, url_add, noindex=false, schemaOverride={} }) => {
       <meta property="og:type" content="article" />
       <meta property="og:title" content={SOCIAL_TITLE} />
       <meta property="og:site_name" content={thisBrand.attributes.siteName} />
-      <meta property="og:url" content={`${MAIN_DOMAIN}/${SUBFOLDER}${OPT_SLASH}${SLUG}/${url_add}`} />
+      <meta
+        property="og:url"
+        content={`${MAIN_DOMAIN}/${SUBFOLDER}${OPT_SLASH}${SLUG}/${url_add}`}
+      />
       <meta property="og:image" content={IMAGE} />
       <meta property="og:description" content={DESCRIPTION} />
 
-      <script data-schema={schemaOverride.type || "NewsArticle"} type="application/ld+json">{schemaOverride.content || schemaContent}</script>
-      
+      <script
+        data-schema={schemaOverride.type || "NewsArticle"}
+        type="application/ld+json"
+      >
+        {schemaOverride.content || schemaContent}
+      </script>
     </Helmet>
-  )
-}
+  );
+};
 
-export default LayoutHelmet
+export default LayoutHelmet;
