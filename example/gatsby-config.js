@@ -1,5 +1,5 @@
 // Add SFC utils
-const { getBrands2 } = require('../index')
+const { getBrands3 } = require('../index')
 const { getSettings } = require('./tempsettings')
 const { DateTime } = require('luxon');
 
@@ -83,7 +83,7 @@ let plugins = [
     resolve: 'gatsby-plugin-less',
     options: {
       lessOptions: {
-        modifyVars: getBrands2(settings.PROJECT.MARKET_KEY).styles,
+        modifyVars: getBrands3(settings.PROJECT.MARKET_KEY).styles,
       },
     },
   },
