@@ -12,9 +12,20 @@ var { google } = require("googleapis");
 var api = google.sheets("v4");
 var writeFile = require("write");
 var authObj = require("./googleauth");
+// Try to import story_settings.sheet.json
+let languageSwap;
+try {
+  const storySettings = require("../../../../src/data/story_settings.sheet.json");
+  if (storySettings) {
+    console.log("WE HAVE STORY SETTINGS", storySettings);
+    languageSwap = storySettings[0].Language_Swap;
+  }
+} catch (err) {
+  // It's ok
+}
 
 var cast = function (str, forceStr) {
-  if (!forceStr){
+  if (!forceStr) {
     if (typeof str !== "string") {
       if (typeof str.value == "string") {
         str = str.value;
@@ -30,37 +41,45 @@ var cast = function (str, forceStr) {
     if (str.toLowerCase() == "true" || str.toLowerCase() == "false") {
       return str.toLowerCase() == "true" ? true : false;
     }
-  } 
+  }
   // To force string, just return string
 
   return str;
 };
 
 let googleAuth = (project, directory = null, forceStr = false) => {
-  return new Promise(resolveFinal => {
+  return new Promise((resolveFinal) => {
     var auth = null;
-    authObj.authenticate({ fallback: false }).then((resp) => {
-      auth = resp;
-      grabSheets(auth, project, directory, forceStr).then(() => resolveFinal()).catch(() => {
-        // If the first attempt failed, then make another req using the fallback
-        authObj.authenticate({ fallback: true }).then((resp) => {
-          auth = resp;
-          grabSheets(auth, project, directory, forceStr).then(() => resolveFinal());
-        });
+    authObj
+      .authenticate({ fallback: false })
+      .then((resp) => {
+        auth = resp;
+        grabSheets(auth, project, directory, forceStr)
+          .then(() => resolveFinal())
+          .catch(() => {
+            // If the first attempt failed, then make another req using the fallback
+            authObj.authenticate({ fallback: true }).then((resp) => {
+              auth = resp;
+              grabSheets(auth, project, directory, forceStr).then(() =>
+                resolveFinal()
+              );
+            });
+          });
+      })
+      .catch(() => {
+        // Failure if we fall back but there's no token
+        auth = authObj.task();
+        grabSheets(auth, project, directory, forceStr).then(() =>
+          resolveFinal()
+        );
       });
-    })
-    .catch(() => {
-      // Failure if we fall back but there's no token
-      auth = authObj.task();
-      grabSheets(auth, project, directory, forceStr).then(() => resolveFinal());
-    });
-  })
+  });
 };
 
 let grabSheets = (auth, project, directory, forceStr) => {
   return new Promise((resolveAll, rejectAll) => {
     var sheetKeys = project.GOOGLE_SHEETS;
-    if (!sheetKeys){
+    if (!sheetKeys) {
       // Try the old way
       sheetKeys = project.sheets;
     }
@@ -91,7 +110,14 @@ let grabSheets = (auth, project, directory, forceStr) => {
   });
 };
 
-let getSheet = async (resolve, reject, auth, spreadsheetId, directory, forceStr) => {
+let getSheet = async (
+  resolve,
+  reject,
+  auth,
+  spreadsheetId,
+  directory,
+  forceStr
+) => {
   let output = await api.spreadsheets
     .get({
       auth,
@@ -116,6 +142,10 @@ let getSheet = async (resolve, reject, auth, spreadsheetId, directory, forceStr)
     });
     var { values } = response.data;
     var header = values.shift();
+    console.log("HEADER", header);
+    if (languageSwap) {
+      console.log("WE HAVE A SWAP VAL", languageSwap);
+    }
     var isKeyed = header.indexOf("key") > -1;
     var isValued = header.indexOf("value") > -1;
     var out = isKeyed ? {} : [];
@@ -127,7 +157,7 @@ let getSheet = async (resolve, reject, auth, spreadsheetId, directory, forceStr)
       row.forEach(function (value, i) {
         var key = header[i];
         obj[key] = cast(value, forceStr);
-        if (value && value !== "FALSE"){
+        if (value && value !== "FALSE") {
           rowSkip = false;
         }
       });
