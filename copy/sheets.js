@@ -22,6 +22,7 @@ try {
   }
 } catch (err) {
   // It's ok
+  console.log("ACTUALLY WE DON'T");
 }
 
 var cast = function (str, forceStr) {
