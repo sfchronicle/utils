@@ -154,7 +154,7 @@ let getSheet = async (
           var substring = header[i].substring(lastIndex + 1).toLowerCase();
           if (substring === languageSwap) {
             // Match! Save the swap index
-            swapIndexes.push(i);
+            swapIndexes.push(i - 1);
           }
         }
       }
