@@ -15,7 +15,7 @@ var authObj = require("./googleauth");
 // Try to import story_settings.sheet.json
 let languageSwap;
 try {
-  const storySettings = require("../../../../src/data/story_settings.sheet.json");
+  const storySettings = require("../../../../../src/data/story_settings.sheet.json");
   if (storySettings) {
     console.log("WE HAVE STORY SETTINGS", storySettings);
     languageSwap = storySettings[0].Language_Swap;
