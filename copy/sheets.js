@@ -144,8 +144,20 @@ let getSheet = async (
     var { values } = response.data;
     var header = values.shift();
     console.log("HEADER", header);
+    var swapIndexes = [];
     if (languageSwap) {
       console.log("WE HAVE A SWAP VAL", languageSwap);
+      for (var i = 0; i < header.length; i++) {
+        var lastIndex = header[i].lastIndexOf("_");
+        if (lastIndex > -1) {
+          // It has an underscore! Check for match
+          var substring = header[i].substring(lastIndex + 1).toLowerCase();
+          if (substring === languageSwap) {
+            // Match! Save the swap index
+            swapIndexes.push(i);
+          }
+        }
+      }
     }
     var isKeyed = header.indexOf("key") > -1;
     var isValued = header.indexOf("value") > -1;
@@ -157,6 +169,18 @@ let getSheet = async (
       var rowSkip = true;
       row.forEach(function (value, i) {
         var key = header[i];
+        // Handle language swap
+        if (swapIndexes.indexOf(i) > -1) {
+          // If we have a swap index, swap the value
+          // NOTE: This assumes the translation is ALWAYS one cell to the right
+          try {
+            console.log("OH WHAAAAAAAT");
+            console.log(row[i + 1]);
+            value = row[i + 1];
+          } catch (err) {
+            // Not great but ok
+          }
+        }
         obj[key] = cast(value, forceStr);
         if (value && value !== "FALSE") {
           rowSkip = false;
