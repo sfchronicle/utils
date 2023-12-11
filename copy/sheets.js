@@ -17,12 +17,10 @@ let languageSwap;
 try {
   const storySettings = require("../../../src/data/story_settings.sheet.json");
   if (storySettings) {
-    console.log("WE HAVE STORY SETTINGS", storySettings);
     languageSwap = storySettings[0].Language_Swap;
   }
 } catch (err) {
   // It's ok
-  console.log("ACTUALLY WE DON'T");
 }
 
 var cast = function (str, forceStr) {
@@ -143,10 +141,8 @@ let getSheet = async (
     });
     var { values } = response.data;
     var header = values.shift();
-    console.log("HEADER", header);
     var swapIndexes = [];
     if (languageSwap) {
-      console.log("WE HAVE A SWAP VAL", languageSwap);
       for (var i = 0; i < header.length; i++) {
         var lastIndex = header[i].lastIndexOf("_");
         if (lastIndex > -1) {
@@ -175,8 +171,6 @@ let getSheet = async (
           // NOTE: This assumes the translation is ALWAYS one cell to the right
           try {
             if (row[i + 1]) {
-              console.log("OH WHAAAAAAAT");
-              console.log(row[i + 1]);
               value = row[i + 1];
             }
           } catch (err) {
