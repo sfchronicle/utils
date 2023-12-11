@@ -174,9 +174,11 @@ let getSheet = async (
           // If we have a swap index, swap the value
           // NOTE: This assumes the translation is ALWAYS one cell to the right
           try {
-            console.log("OH WHAAAAAAAT");
-            console.log(row[i + 1]);
-            value = row[i + 1];
+            if (row[i + 1]) {
+              console.log("OH WHAAAAAAAT");
+              console.log(row[i + 1]);
+              value = row[i + 1];
+            }
           } catch (err) {
             // Not great but ok
           }
