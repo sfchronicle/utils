@@ -153,7 +153,10 @@ let getSheet = async (
         `../../../src/data/${sheet.properties.title}.sheet.json`
       );
       var sheetJSON = JSON.parse(sheetData);
-      if (sheetJSON[0].Market_Key == override) {
+      if (
+        sheetJSON[0].Market_Key === override ||
+        sheet.properties.title === "story_settings"
+      ) {
         // We have a match! THIS sheet is the language swap we should use
         languageSwap = sheetJSON[0].Language_Swap;
       }
