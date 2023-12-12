@@ -146,22 +146,35 @@ let getSheet = async (
   }
   // Now determine which sheet we're deploying by checking override
   let languageSwap;
-  if (override) {
-    for (var sheet of sheets) {
-      // Load up sheet from file as JSON and check market key
-      var sheetData = fs.readFileSync(
-        `../../../src/data/${sheet.properties.title}.sheet.json`
-      );
-      var sheetJSON = JSON.parse(sheetData);
-      if (
-        sheetJSON[0].Market_Key === override ||
-        sheet.properties.title === "story_settings"
-      ) {
-        // We have a match! THIS sheet is the language swap we should use
-        languageSwap = sheetJSON[0].Language_Swap;
+  try {
+    if (override) {
+      console.log("try to read override");
+      for (var sheet of sheets) {
+        // Load up sheet from file as JSON and check market key
+        console.log("reading sheet", sheet.properties.title);
+        var sheetData = fs.readFileSync(
+          `../../../src/data/${sheet.properties.title}.sheet.json`
+        );
+        var sheetJSON = JSON.parse(sheetData);
+        if (sheetJSON[0].Market_Key === override) {
+          // We have a match! THIS sheet is the language swap we should use
+          languageSwap = sheetJSON[0].Language_Swap;
+        }
       }
     }
+    if (!languageSwap) {
+      console.log("try to read story_settings");
+      // If we don't have a language swap set yet, just use story_settings -- could be there was no override
+      var sheetData = fs.readFileSync(
+        `../../../src/data/story_settings.sheet.json`
+      );
+      var sheetJSON = JSON.parse(sheetData);
+      languageSwap = sheetJSON[0].Language_Swap;
+    }
+  } catch (err) {
+    // Not great but ok, we just won't be doing any language swapping
   }
+  console.log("language swap:", languageSwap);
   // Process all other sheets with the language swap
   for (var sheet of sheets) {
     if (sheet.properties.title[0] == "_") continue;
