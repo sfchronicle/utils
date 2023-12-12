@@ -139,7 +139,7 @@ let getSheet = async (
   // Process all other sheets with the language swap
   for (var sheet of sheets) {
     if (sheet.properties.title[0] == "_") continue;
-    processSheetData(
+    await processSheetData(
       auth,
       spreadsheetId,
       sheet,
