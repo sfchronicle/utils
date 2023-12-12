@@ -169,6 +169,7 @@ let getSheet = async (
         `../../../src/data/story_settings.sheet.json`
       );
       var sheetJSON = JSON.parse(sheetData);
+      console.log(sheetJSON[0]);
       languageSwap = sheetJSON[0].Language_Swap;
     }
   } catch (err) {
