@@ -8,8 +8,6 @@
 
 */
 
-var fs = require("fs");
-var path = require("path");
 var { google } = require("googleapis");
 var api = google.sheets("v4");
 var writeFile = require("write");
@@ -38,19 +36,14 @@ var cast = function (str, forceStr) {
   return str;
 };
 
-let googleAuth = (
-  project,
-  directory = null,
-  forceStr = false,
-  override = null
-) => {
+let googleAuth = (project, directory = null, forceStr = false) => {
   return new Promise((resolveFinal) => {
     var auth = null;
     authObj
       .authenticate({ fallback: false })
       .then((resp) => {
         auth = resp;
-        grabSheets(auth, project, directory, forceStr, override)
+        grabSheets(auth, project, directory, forceStr)
           .then(() => resolveFinal())
           .catch(() => {
             // If the first attempt failed, then make another req using the fallback
@@ -72,7 +65,7 @@ let googleAuth = (
   });
 };
 
-let grabSheets = (auth, project, directory, forceStr, override) => {
+let grabSheets = (auth, project, directory, forceStr) => {
   return new Promise((resolveAll, rejectAll) => {
     var sheetKeys = project.GOOGLE_SHEETS;
     if (!sheetKeys) {
@@ -97,7 +90,7 @@ let grabSheets = (auth, project, directory, forceStr, override) => {
           spreadsheetId,
           directory,
           forceStr,
-          override
+          project
         );
       });
       promiseStack.push(promiseItem);
@@ -121,7 +114,7 @@ let getSheet = async (
   spreadsheetId,
   directory,
   forceStr,
-  override
+  project
 ) => {
   let output = await api.spreadsheets
     .get({
@@ -138,53 +131,14 @@ let getSheet = async (
   var book = output.data;
   var { sheets, spreadsheetId } = book;
   console.log("SHEETS", sheets);
-  // Get the story_settings sheets first
-  storySettingSheets = sheets.filter((sheet) => {
-    return sheet.properties.title.indexOf("story_settings") > -1;
-  });
-  for (var sheet of storySettingSheets) {
-    await processSheetData(auth, spreadsheetId, sheet, forceStr, directory);
-  }
-  // Now determine which sheet we're deploying by checking override
   let languageSwap;
-  try {
-    if (override) {
-      console.log("try to read override");
-      for (var sheet of sheets) {
-        // Load up sheet from file as JSON and check market key
-        console.log("reading sheet", sheet.properties.title);
-        var sheetData = fs.readFileSync(
-          path.join(
-            __dirname,
-            `../../../src/data/${sheet.properties.title}.sheet.json`
-          )
-        );
-        var sheetJSON = JSON.parse(sheetData);
-        if (sheetJSON[0].Market_Key === override) {
-          // We have a match! THIS sheet is the language swap we should use
-          languageSwap = sheetJSON[0].Language_Swap;
-        }
-      }
-    }
-    if (!languageSwap) {
-      console.log("try to read story_settings");
-      // If we don't have a language swap set yet, just use story_settings -- could be there was no override
-      var sheetData = fs.readFileSync(
-        path.join(__dirname, `../../../src/data/story_settings.sheet.json`)
-      );
-      var sheetJSON = JSON.parse(sheetData);
-      console.log(sheetJSON[0]);
-      languageSwap = sheetJSON[0].Language_Swap;
-    }
-  } catch (err) {
-    // Not great but ok, we just won't be doing any language swapping
+  if (project.LANGUAGE_SWAP) {
+    languageSwap = project.LANGUAGE_SWAP;
   }
   console.log("language swap:", languageSwap);
   // Process all other sheets with the language swap
   for (var sheet of sheets) {
     if (sheet.properties.title[0] == "_") continue;
-    // Also skip story_settings sheets
-    if (sheet.properties.title.indexOf("story_settings") > -1) continue;
     processSheetData(
       auth,
       spreadsheetId,
