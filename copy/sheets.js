@@ -9,6 +9,7 @@
 */
 
 var fs = require("fs");
+var path = require("path");
 var { google } = require("googleapis");
 var api = google.sheets("v4");
 var writeFile = require("write");
@@ -153,7 +154,10 @@ let getSheet = async (
         // Load up sheet from file as JSON and check market key
         console.log("reading sheet", sheet.properties.title);
         var sheetData = fs.readFileSync(
-          `../../../src/data/${sheet.properties.title}.sheet.json`
+          path.join(
+            __dirname,
+            `../../../src/data/${sheet.properties.title}.sheet.json`
+          )
         );
         var sheetJSON = JSON.parse(sheetData);
         if (sheetJSON[0].Market_Key === override) {
@@ -166,7 +170,7 @@ let getSheet = async (
       console.log("try to read story_settings");
       // If we don't have a language swap set yet, just use story_settings -- could be there was no override
       var sheetData = fs.readFileSync(
-        `../../../src/data/story_settings.sheet.json`
+        path.join(__dirname, `../../../src/data/story_settings.sheet.json`)
       );
       var sheetJSON = JSON.parse(sheetData);
       console.log(sheetJSON[0]);
