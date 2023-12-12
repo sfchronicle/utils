@@ -184,7 +184,7 @@ let getSheet = async (
   for (var sheet of sheets) {
     if (sheet.properties.title[0] == "_") continue;
     // Also skip story_settings sheets
-    if (storySettingSheets.indexOf(sheet) > -1) continue;
+    if (sheet.properties.title.indexOf("story_settings") > -1) continue;
     processSheetData(
       auth,
       spreadsheetId,
