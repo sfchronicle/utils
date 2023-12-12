@@ -12,16 +12,6 @@ var { google } = require("googleapis");
 var api = google.sheets("v4");
 var writeFile = require("write");
 var authObj = require("./googleauth");
-// Try to import story_settings.sheet.json
-let languageSwap;
-try {
-  const storySettings = require("../../../src/data/story_settings.sheet.json");
-  if (storySettings) {
-    languageSwap = storySettings[0].Language_Swap;
-  }
-} catch (err) {
-  // It's ok
-}
 
 var cast = function (str, forceStr) {
   if (!forceStr) {
@@ -93,7 +83,15 @@ let grabSheets = (auth, project, directory, forceStr) => {
     let promiseStack = [];
     for (var spreadsheetId of sheetKeys) {
       let promiseItem = new Promise((resolve, reject) => {
-        getSheet(resolve, reject, auth, spreadsheetId, directory, forceStr);
+        getSheet(
+          resolve,
+          reject,
+          auth,
+          spreadsheetId,
+          directory,
+          forceStr,
+          project
+        );
       });
       promiseStack.push(promiseItem);
     }
@@ -115,7 +113,8 @@ let getSheet = async (
   auth,
   spreadsheetId,
   directory,
-  forceStr
+  forceStr,
+  project
 ) => {
   let output = await api.spreadsheets
     .get({
@@ -131,78 +130,103 @@ let getSheet = async (
   }
   var book = output.data;
   var { sheets, spreadsheetId } = book;
+  console.log("SHEETS", sheets);
+  let languageSwap;
+  if (project.LANGUAGE_SWAP) {
+    languageSwap = project.LANGUAGE_SWAP;
+  }
+  console.log("language swap:", languageSwap);
+  // Process all other sheets with the language swap
   for (var sheet of sheets) {
     if (sheet.properties.title[0] == "_") continue;
-    var response = await api.spreadsheets.values.get({
+    await processSheetData(
       auth,
       spreadsheetId,
-      range: `${sheet.properties.title}!A:AAA`,
-      majorDimension: "ROWS",
-    });
-    var { values } = response.data;
-    var header = values.shift();
-    var swapIndexes = [];
-    if (languageSwap) {
-      for (var i = 0; i < header.length; i++) {
-        var lastIndex = header[i].lastIndexOf("_");
-        if (lastIndex > -1) {
-          // It has an underscore! Check for match
-          var substring = header[i].substring(lastIndex + 1).toLowerCase();
-          if (substring === languageSwap) {
-            // Match! Save the swap index
-            swapIndexes.push(i - 1);
-          }
-        }
-      }
-    }
-    var isKeyed = header.indexOf("key") > -1;
-    var isValued = header.indexOf("value") > -1;
-    var out = isKeyed ? {} : [];
-    for (var row of values) {
-      // skip blank rows
-      if (!row.length) continue;
-      var obj = {};
-      var rowSkip = true;
-      row.forEach(function (value, i) {
-        var key = header[i];
-        // Handle language swap
-        if (swapIndexes.indexOf(i) > -1) {
-          // If we have a swap index, swap the value
-          // NOTE: This assumes the translation is ALWAYS one cell to the right
-          try {
-            if (row[i + 1]) {
-              value = row[i + 1];
-            }
-          } catch (err) {
-            // Not great but ok
-          }
-        }
-        obj[key] = cast(value, forceStr);
-        if (value && value !== "FALSE") {
-          rowSkip = false;
-        }
-      });
-      // If only values in row are garbage or blank-ish, skip
-      if (rowSkip) continue;
-      // Handle actual value
-      if (isKeyed) {
-        out[obj.key] = isValued ? obj.value : obj;
-      } else {
-        out.push(obj);
-      }
-    }
-
-    //set alternate dir if we have it
-    directory = directory || "src/data/";
-    var file_path = `${directory}${sheet.properties.title.replace(
-      /\s+/g,
-      "_"
-    )}.sheet.json`;
-    console.log(`Saving sheet to ${file_path}`);
-    // grunt.file.write(filename, JSON.stringify(out, null, 2));
-    writeFile(file_path, JSON.stringify(out, null, 2));
+      sheet,
+      forceStr,
+      directory,
+      languageSwap
+    );
   }
   resolve("Complete");
+};
+
+const processSheetData = async (
+  auth,
+  spreadsheetId,
+  sheet,
+  forceStr,
+  directory,
+  languageSwap = null
+) => {
+  var response = await api.spreadsheets.values.get({
+    auth,
+    spreadsheetId,
+    range: `${sheet.properties.title}!A:AAA`,
+    majorDimension: "ROWS",
+  });
+  var { values } = response.data;
+  var header = values.shift();
+  var swapIndexes = [];
+  if (languageSwap) {
+    for (var i = 0; i < header.length; i++) {
+      var lastIndex = header[i].lastIndexOf("_");
+      if (lastIndex > -1) {
+        // It has an underscore! Check for match
+        var substring = header[i].substring(lastIndex + 1).toLowerCase();
+        if (substring === languageSwap) {
+          // Match! Save the swap index
+          swapIndexes.push(i - 1);
+        }
+      }
+    }
+  }
+  var isKeyed = header.indexOf("key") > -1;
+  var isValued = header.indexOf("value") > -1;
+  var out = isKeyed ? {} : [];
+  for (var row of values) {
+    // skip blank rows
+    if (!row.length) continue;
+    var obj = {};
+    var rowSkip = true;
+    row.forEach(function (value, i) {
+      var key = header[i];
+      // Handle language swap
+      if (swapIndexes.indexOf(i) > -1) {
+        // If we have a swap index, swap the value
+        // NOTE: This assumes the translation is ALWAYS one cell to the right
+        try {
+          if (row[i + 1]) {
+            value = row[i + 1];
+          }
+        } catch (err) {
+          // Not great but ok
+        }
+      }
+      obj[key] = cast(value, forceStr);
+      if (value && value !== "FALSE") {
+        rowSkip = false;
+      }
+    });
+    // If only values in row are garbage or blank-ish, skip
+    if (rowSkip) continue;
+    // Handle actual value
+    if (isKeyed) {
+      out[obj.key] = isValued ? obj.value : obj;
+    } else {
+      out.push(obj);
+    }
+  }
+
+  //set alternate dir if we have it
+  directory = directory || "src/data/";
+  var file_path = `${directory}${sheet.properties.title.replace(
+    /\s+/g,
+    "_"
+  )}.sheet.json`;
+  console.log(`Saving sheet to ${file_path}`);
+  // grunt.file.write(filename, JSON.stringify(out, null, 2));
+  writeFile(file_path, JSON.stringify(out, null, 2));
 };
 
 module.exports = { googleAuth };
