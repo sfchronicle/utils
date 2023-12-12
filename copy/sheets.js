@@ -142,7 +142,7 @@ let getSheet = async (
     return sheet.properties.title.indexOf("story_settings") > -1;
   });
   for (var sheet of storySettingSheets) {
-    processSheetData(sheet);
+    processSheetData(auth, spreadsheetId, sheet);
   }
   // Now determine which sheet we're deploying by checking override
   let languageSwap;
@@ -164,12 +164,17 @@ let getSheet = async (
     if (sheet.properties.title[0] == "_") continue;
     // Also skip story_settings sheets
     if (storySettingSheets.indexOf(sheet) > -1) continue;
-    processSheetData(sheet, languageSwap);
+    processSheetData(auth, spreadsheetId, sheet, languageSwap);
   }
   resolve("Complete");
 };
 
-const processSheetData = async (sheet, languageSwap = null) => {
+const processSheetData = async (
+  auth,
+  spreadsheetId,
+  sheet,
+  languageSwap = null
+) => {
   var response = await api.spreadsheets.values.get({
     auth,
     spreadsheetId,
