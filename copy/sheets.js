@@ -16,8 +16,10 @@ var authObj = require("./googleauth");
 let languageSwap;
 try {
   const storySettings = require("../../../src/data/story_settings.sheet.json");
+  console.log("storySettings", storySettings);
   if (storySettings) {
     languageSwap = storySettings[0].Language_Swap;
+    console.log("GOT SWAP!", languageSwap);
   }
 } catch (err) {
   // It's ok
@@ -131,6 +133,7 @@ let getSheet = async (
   }
   var book = output.data;
   var { sheets, spreadsheetId } = book;
+  console.log("SHEETS", sheets);
   for (var sheet of sheets) {
     if (sheet.properties.title[0] == "_") continue;
     var response = await api.spreadsheets.values.get({
