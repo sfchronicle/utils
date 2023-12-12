@@ -143,7 +143,7 @@ let getSheet = async (
     return sheet.properties.title.indexOf("story_settings") > -1;
   });
   for (var sheet of storySettingSheets) {
-    processSheetData(auth, spreadsheetId, sheet, forceStr, directory);
+    await processSheetData(auth, spreadsheetId, sheet, forceStr, directory);
   }
   // Now determine which sheet we're deploying by checking override
   let languageSwap;
