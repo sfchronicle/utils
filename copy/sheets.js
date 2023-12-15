@@ -168,7 +168,9 @@ const processSheetData = async (
   var { values } = response.data;
   var header = values.shift();
   var swapIndexes = [];
+  console.log("Swap type:", typeof languageSwap);
   if (languageSwap) {
+    console.log("Running swap logic");
     for (var i = 0; i < header.length; i++) {
       var lastIndex = header[i].lastIndexOf("_");
       if (lastIndex > -1) {
@@ -195,6 +197,7 @@ const processSheetData = async (
       if (swapIndexes.indexOf(i) > -1) {
         // If we have a swap index, swap the value
         // NOTE: This assumes the translation is ALWAYS one cell to the right
+        // If we ever want to have MULTIPLE translations for a single key, we'll need seek out the actual matching key
         try {
           if (row[i + 1]) {
             value = row[i + 1];
