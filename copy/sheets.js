@@ -133,7 +133,7 @@ let getSheet = async (
   console.log("SHEETS", sheets);
   let languageSwap;
   if (project.LANGUAGE_SWAP) {
-    languageSwap = project.LANGUAGE_SWAP;
+    languageSwap = project.LANGUAGE_SWAP.toLowerCase();
   }
   console.log("language swap:", languageSwap);
   // Process all other sheets with the language swap
