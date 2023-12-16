@@ -173,10 +173,12 @@ const processSheetData = async (
     console.log("Running swap logic");
     for (var i = 0; i < header.length; i++) {
       var lastIndex = header[i].lastIndexOf("_");
+      console.log("GET HEADER", header[i], lastIndex);
       if (lastIndex > -1) {
         // It has an underscore! Check for match
         var substring = header[i].substring(lastIndex + 1).toLowerCase();
         if (substring === languageSwap) {
+          console.log("ADD SWAP INDEX", i - 1, "for", header[i]);
           // Match! Save the swap index
           swapIndexes.push(i - 1);
         }
