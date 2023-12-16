@@ -192,6 +192,7 @@ const processSheetData = async (
     var obj = {};
     var rowSkip = true;
     row.forEach(function (value, i) {
+      console.log("swap indexes", swapIndexes, i);
       var key = header[i];
       // Handle language swap
       if (swapIndexes.indexOf(i) > -1) {
