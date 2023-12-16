@@ -185,6 +185,7 @@ const processSheetData = async (
       }
     }
   }
+  console.log("Swap indexes:", swapIndexes);
   var isKeyed = header.indexOf("key") > -1;
   var isValued = header.indexOf("value") > -1;
   var out = isKeyed ? {} : [];
@@ -194,7 +195,6 @@ const processSheetData = async (
     var obj = {};
     var rowSkip = true;
     row.forEach(function (value, i) {
-      console.log("swap indexes", swapIndexes, i);
       var key = header[i];
       // Handle language swap
       if (swapIndexes.indexOf(i) > -1) {
