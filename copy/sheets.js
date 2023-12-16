@@ -200,10 +200,12 @@ const processSheetData = async (
         // If we ever want to have MULTIPLE translations for a single key, we'll need seek out the actual matching key
         try {
           if (row[i + 1]) {
+            console.log("FOUND TRANSLATION ROW DATA, SETTING VALUE");
             value = row[i + 1];
           }
         } catch (err) {
           // Not great but ok
+          console.log("SWAP ERROR", err);
         }
       }
       obj[key] = cast(value, forceStr);
