@@ -135,6 +135,14 @@ const LayoutHelmet = ({
     "description": "${DESCRIPTION}"
   }`;
 
+  // Format the date for WCM, cut off at the period
+  let formattedPubDate = "";
+  try {
+    formattedPubDate = ISO_PUBDATE.split(".")[0].replace("T", " ");
+  } catch (err) {
+    // It's ok
+  }
+
   return (
     <Helmet>
       <title>{TITLE}</title>
@@ -171,6 +179,7 @@ const LayoutHelmet = ({
       />
       <meta property="og:image" content={IMAGE} />
       <meta property="og:description" content={DESCRIPTION} />
+      <meta property="og:datePublished" content={formattedPubDate} />
 
       <script
         data-schema={schemaOverride.type || "NewsArticle"}
