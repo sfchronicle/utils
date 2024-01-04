@@ -71,14 +71,18 @@ let blendHDN = function (meta) {
   let pubdate = "";
   let pubTime = "";
   if (ISO_PUBDATE) {
-    pubdate = ISO_PUBDATE.toString().split("T")[0]; // + " 00:00:00";
+    pubdate = ISO_PUBDATE.toString().split("T")[0] + " 00:00:00";
     const pubdateTime = pubdate + "T" + "00:00:00";
     pubTime = new Date(pubdateTime).getTime();
+  } else {
+    // If we don't have a pubdate, use today
+    pubdate = new Date().toISOString().split("T")[0] + " 00:00:00";
+    pubTime = new Date().getTime();
   }
   let moddate = "";
   let modTime = "";
   if (ISO_MODDATE) {
-    moddate = ISO_MODDATE.toString().split("T")[0]; // + " 00:00:00";
+    moddate = ISO_MODDATE.toString().split("T")[0] + " 00:00:00";
     const moddateTime = moddate + "T" + "00:00:00";
     modTime = new Date(moddateTime).getTime();
   }
