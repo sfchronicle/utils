@@ -91,12 +91,31 @@ const LayoutHelmet = ({
   }
 
   // Handle special favicon logic
+  // NOTE: We considered storing our OWN favicons in S3, but Evan decided not to do that because we DON'T know the URL's domain at this point :( which means we'd need to detect it when the page loads (to support CT/Texcom/Midcom) and that might be too late for the page to use it
   let favHref = "/favicon.ico";
   if (MARKET_KEY === "TK") {
     favHref = "https://files.sfchronicle.com/devhub-logos/DHlogos-sm.png";
   } else if (MARKET_KEY === "Seattle") {
     favHref =
       "https://www.seattlepi.com/sites/seattlepi/apple-touch-icon-196x196.png";
+  } else if (MARKET_KEY === "SFC") {
+    favHref =
+      "https://www.sfchronicle.com/sites/premiumsfgate/apple-touch-icon-196x196.png";
+  } else if (MARKET_KEY === "Houston") {
+    favHref =
+      "https://www.houstonchronicle.com/sites/premiumchron/apple-touch-icon-196x196.png";
+  } else if (MARKET_KEY === "SanAntonio") {
+    // NOTE: EN is cursed with a tiny favicon until product can fix the higher res one
+    favHref = "https://www.expressnews.com/sites/premiummysa/favicon.ico";
+  } else if (MARKET_KEY === "Albany") {
+    favHref =
+      "https://www.timesunion.com/sites/timesunion/apple-touch-icon-152x152.png";
+  } else if (MARKET_KEY === "CT") {
+    // TODO: Fill this in when the sites get swapped
+  } else if (MARKET_KEY === "Texcom") {
+    // TODO: Fill this in when the sites get swapped
+  } else if (MARKET_KEY === "Midcom") {
+    // TODO: Fill this in when the sites get swapped
   }
 
   // Set section with fallback
