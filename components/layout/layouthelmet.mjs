@@ -100,10 +100,11 @@ const LayoutHelmet = ({
       "https://www.seattlepi.com/sites/seattlepi/apple-touch-icon-196x196.png";
   } else if (MARKET_KEY === "SFC") {
     favHref =
-      "https://www.sfchronicle.com/sites/premiumsfgate/apple-touch-icon-196x196.png";
+      "https://www.sfchronicle.com/sites/premiumsfgate/apple-touch-icon-152x152.png";
   } else if (MARKET_KEY === "Houston") {
+    // NOTE: HC is cursed with a tiny favicon until product can fix the higher res one
     favHref =
-      "https://www.houstonchronicle.com/sites/premiumchron/apple-touch-icon-196x196.png";
+      "https://www.houstonchronicle.com/sites/premiumchron/favicon-32x32.png";
   } else if (MARKET_KEY === "SanAntonio") {
     // NOTE: EN is cursed with a tiny favicon until product can fix the higher res one
     favHref = "https://www.expressnews.com/sites/premiummysa/favicon.ico";
