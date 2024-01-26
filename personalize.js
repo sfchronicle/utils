@@ -22,18 +22,22 @@ const getProfileProperty = (property) => {
 };
 
 const setProfileProperty = (property, value) => {
-  if (window) {
-    if (window.blueConicClient) {
-      const profile = window.blueConicClient.profile.getProfile();
-      const properties = [property];
-      profile.loadValues(properties, this, function () {
-        profile.setValue(property, value);
-        return true;
-      });
+  return new Promise((resolve, reject) => {
+    if (window) {
+      if (window.blueConicClient) {
+        const profile = window.blueConicClient.profile.getProfile();
+        const properties = [property];
+        profile.loadValues(properties, this, function () {
+          profile.setValue(property, value);
+          resolve(true);
+        });
+      } else {
+        resolve("Personalize: No BlueConic client found");
+      }
     } else {
-      return "Personalize: No BlueConic client found";
+      resolve("Personalize: No window found");
     }
-  }
+  });
 };
 
 module.exports = { getProfileProperty, setProfileProperty };
