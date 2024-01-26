@@ -15,6 +15,7 @@ const getProfileProperty = (property) => {
       } else {
         resolve("Personalize: No BlueConic client found");
       }
+    } else {
       resolve("Personalize: No window found");
     }
   });
