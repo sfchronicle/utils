@@ -730,19 +730,6 @@ let getFooter = function(meta, forceColor){
 			.pageFooter--right-links .large-footer-link{
 			margin: 7px 0 7px;}
 		}
-		@media (max-width: 640px) {
-			.hed {font-size: calc(3rem - 2px);}
-			.deck {font-size: calc(1.25rem + 1px); text-align: left;}
-			.subhead {font-size: 2rem;}
-			.hed-lg {font-size: calc(3rem - 2px);}
-			.hed-sm {font-size: calc(2.5rem - 2px);}
-			.subhead-sm {font-size: calc(1.5rem - 2px);}
-			.subhead-sans {font-size: calc(1.25rem + 1px);}
-			.serif-copy {font-size: 1rem;}
-			.sans-copy {font-size: calc(1rem + 1px);}
-			.lead-in {font-size: calc(1rem + 1px);}
-			.dropcap:first-letter {font-size: 6rem;}
-		}
 		</style>
 		<div class="large-footer-link">
 		<a href="https://www.sfchronicle.com/mydata/" target="_blank" role="listitem">Your Privacy Choices (Opt Out of Sale/Targeted Ads)</a>
