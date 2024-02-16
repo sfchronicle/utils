@@ -40,7 +40,7 @@ const setProfileProperty = (property, value, merge = false) => {
   return new Promise((resolve, reject) => {
     if (window) {
       if (window.blueConicClient) {
-        // Prepare merging
+        // Prepare merging (note: this only handles objects, not arrays or other types)
         let conditionalPromise = Promise.resolve();
         if (merge && typeof value === "object") {
           conditionalPromise = getProfileProperty(property);
@@ -49,8 +49,10 @@ const setProfileProperty = (property, value, merge = false) => {
         conditionalPromise.then((existingValue) => {
           // Finish merging
           if (merge && typeof value === "object") {
-            console.log("Merging values...", existingValue, value);
-            value = JSON.stringify({ ...existingValue, ...value });
+            console.log("Merging values...", JSON.parse(existingValue), value);
+            value = JSON.stringify(
+              Object.assign({}, JSON.parse(existingValue), value)
+            );
             console.log("Merged value", value);
           }
           // Make sure property to save is a string
@@ -77,4 +79,27 @@ const setProfileProperty = (property, value, merge = false) => {
   });
 };
 
-module.exports = { getProfileProperty, setProfileProperty };
+const clearProfileProperty = (property) => {
+  return new Promise((resolve, reject) => {
+    if (window) {
+      if (window.blueConicClient) {
+        const profile = window.blueConicClient.profile.getProfile();
+        const properties = [property];
+        profile.loadValues(properties, this, function () {
+          profile.setValue(property, "");
+          resolve(true);
+        });
+      } else {
+        resolve("Personalize: No BlueConic client found");
+      }
+    } else {
+      resolve("Personalize: No window found");
+    }
+  });
+};
+
+module.exports = {
+  getProfileProperty,
+  setProfileProperty,
+  clearProfileProperty,
+};
