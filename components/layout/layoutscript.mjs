@@ -13,7 +13,12 @@ const LayoutScript = (domain) => {
   }
   return (
     <>
-      <script src="https://projects.sfchronicle.com/shared/js/jquery.min.js"></script>
+      <script
+        src={
+          "https://projects.sfchronicle.com/shared/js/jquery.min.js?domain=" +
+          domain
+        }
+      ></script>
       {domainString && (
         <script dangerouslySetInnerHTML={{ __html: domainString }}></script>
       )}
