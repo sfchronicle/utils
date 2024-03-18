@@ -1,7 +1,6 @@
 import React from "react";
 
-const LayoutScript = (domain) => {
-  console.log("domain", domain);
+const LayoutScript = ({ domain }) => {
   let domainString = "";
   // Check if domain is string
   if (domain && typeof domain === "string") {
