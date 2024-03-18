@@ -2,7 +2,8 @@ import React from "react";
 
 const LayoutScript = (domain) => {
   let domainString = "";
-  if (domain) {
+  // Check if domain is string
+  if (domain && typeof domain === "string") {
     domain = domain.replace(".com", "");
     domainString = `
       var treg = treg || {};
