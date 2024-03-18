@@ -4,7 +4,7 @@ const LayoutScript = ({ domain }) => {
   let domainString = "";
   // Check if domain is string
   if (domain && typeof domain === "string") {
-    domain = domain.replace(".com", "");
+    domain = domain.replace("https://www.", "").replace(".com", "");
     domainString = `
       var treg = treg || {};
       treg.url_override="realm.${domain}.noux.com";
@@ -12,12 +12,7 @@ const LayoutScript = ({ domain }) => {
   }
   return (
     <>
-      <script
-        src={
-          "https://projects.sfchronicle.com/shared/js/jquery.min.js?domain=" +
-          domain
-        }
-      ></script>
+      <script src="https://projects.sfchronicle.com/shared/js/jquery.min.js"></script>
       {domainString && (
         <script dangerouslySetInnerHTML={{ __html: domainString }}></script>
       )}
