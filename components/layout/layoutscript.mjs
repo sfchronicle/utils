@@ -7,7 +7,7 @@ const LayoutScript = ({ domain }) => {
     domain = domain.replace("https://www.", "").replace(".com", "");
     domainString = `
       var treg = treg || {};
-      treg.url_override="realm.${domain}.noux.com";
+      treg.url_overide="realm.${domain}.noux.com";
     `;
   }
   return (
