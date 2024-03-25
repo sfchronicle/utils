@@ -31,6 +31,10 @@ const LayoutHelmet = ({
     },
   } = meta;
 
+  // Update to handle escaping double quotes
+  const schemaTitle = TITLE ? TITLE.replace(/"/g, '\\"') : "";
+  const schemaDescription = DESCRIPTION ? DESCRIPTION.replace(/"/g, '\\"') : "";
+
   // Handle style sheet on brands2 vs brands3
   const isApp = appCheck();
   let styleSheetID;
@@ -112,7 +116,7 @@ const LayoutHelmet = ({
     favHref =
       "https://www.timesunion.com/sites/timesunion/apple-touch-icon-152x152.png";
   } else if (MARKET_KEY === "CT") {
-    // TODO: Fill this in when the sites get swapped
+    favHref = "https://www.ctinsider.com/sites/premiumctpost/favicon-32x32.png";
   } else if (MARKET_KEY === "Texcom") {
     // TODO: Fill this in when the sites get swapped
   } else if (MARKET_KEY === "Midcom") {
@@ -133,7 +137,7 @@ const LayoutHelmet = ({
       "@type": "WebPage",
       "@id": "${MAIN_DOMAIN}/${SUBFOLDER}${OPT_SLASH}${SLUG}/${url_add}"
     },
-    "headline": "${TITLE}",
+    "headline": "${schemaTitle}",
     "image": {
       "@type": "ImageObject",
       "url": "${IMAGE}"
@@ -152,7 +156,7 @@ const LayoutHelmet = ({
       }
     },
     "articleSection": "${articleSection}",
-    "description": "${DESCRIPTION}"
+    "description": "${schemaDescription}"
   }`;
 
   // Format the date for WCM, cut off at the period
