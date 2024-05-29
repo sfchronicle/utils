@@ -98,7 +98,7 @@ let blendHDN = function (meta) {
   HDN.dataLayer.paywall = {};
 
   // HDN.dataLayer object for content and href data
-  HDN.dataLayer.content.title = TITLE;
+  HDN.dataLayer.content.title = meta.DISPLAY_TITLE || TITLE;
   HDN.dataLayer.content.subtitle = "";
   HDN.dataLayer.content.objectId = `${SUBFOLDER}${slash}${SLUG}/${URL_ADD}`;
   HDN.dataLayer.content.objectType = "project";
