@@ -20,10 +20,15 @@ function appendLayoutScripts(isEmbedded, isAdRemoved, marketKey) {
   // React Helmet is actually terrible and runs these scripts twice, so we are including them async ourselves
   // Run analytics and resizing scripts right away so we take care of that
   if (!isEmbedded) {
+    // Add new md5 script
     let script = document.createElement("script");
     script.type = "text/javascript";
-    script.src = "https://nexus.ensighten.com/hearst/news/Bootstrap.js";
+    script.src = "https://projects.sfchronicle.com/shared/js/md5.js";
     document.body.appendChild(script);
+    let script2 = document.createElement("script");
+    script2.type = "text/javascript";
+    script2.src = "https://nexus.ensighten.com/hearst/news/Bootstrap.js";
+    document.body.appendChild(script2);
   } else {
     let script = document.createElement("script");
     script.type = "text/javascript";
