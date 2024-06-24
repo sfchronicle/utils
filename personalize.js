@@ -12,7 +12,7 @@ const getProfileProperty = (property) => {
             // Return a valid result or null
             value = value || null;
             console.log("getProfileProperty VAL", value);
-            innerResolve(value);
+            innerResolve({ existingValue: value, profile: profile });
           });
         } else {
           attempts++;
@@ -41,15 +41,12 @@ const setProfileProperty = (property, value, merge = false) => {
     if (window) {
       if (window.blueConicClient) {
         // Prepare merging (note: this only handles objects, not arrays or other types)
-        let conditionalPromise = Promise.resolve();
-        if (merge && typeof value === "object") {
-          conditionalPromise = getProfileProperty(property);
-        }
+        const thisPromise = getProfileProperty(property);
 
-        conditionalPromise.then((existingValue) => {
+        thisPromise.then(({ existingValue, profile }) => {
+          console.log("Output data", existingValue, profile);
           // Finish merging
           if (merge && typeof value === "object") {
-            console.log("Merging values...", JSON.parse(existingValue), value);
             value = JSON.stringify(
               Object.assign({}, JSON.parse(existingValue), value)
             );
@@ -62,13 +59,9 @@ const setProfileProperty = (property, value, merge = false) => {
           } else if (typeof value === "boolean" || typeof value === "number") {
             value = value.toString();
           }
-
-          const profile = window.blueConicClient.profile.getProfile();
-          const properties = [property];
-          profile.loadValues(properties, this, function () {
-            profile.setValue(property, value);
-            resolve(true);
-          });
+          // Profile is already loaded from the getProfileProperty call
+          profile.setValue(property, value);
+          resolve(true);
         });
       } else {
         resolve("Personalize: No BlueConic client found");
