@@ -44,7 +44,12 @@ const setProfileProperty = (property, value, merge = false) => {
         const thisPromise = getProfileProperty(property);
 
         thisPromise.then(({ existingValue, profile }) => {
-          console.log("Output data", existingValue, profile);
+          console.log(
+            "Output data",
+            existingValue,
+            "New value coming in",
+            value
+          );
           // Finish merging
           if (merge && typeof value === "object") {
             value = JSON.stringify(
