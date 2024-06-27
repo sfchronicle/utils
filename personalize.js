@@ -66,6 +66,7 @@ const setProfileProperty = (property, value, merge = false) => {
           }
           // Profile is already loaded from the getProfileProperty call
           profile.setValue(property, value);
+          window.blueConicClient.profile.updateProfile();
           resolve(true);
         });
       } else {
@@ -84,7 +85,7 @@ const clearProfileProperty = (property) => {
         const profile = window.blueConicClient.profile.getProfile();
         const properties = [property];
         profile.loadValues(properties, this, function () {
-          profile.setValue(property, "");
+          profile.setValue(property, null);
           resolve(true);
         });
       } else {
