@@ -197,6 +197,7 @@ let grabDocs = (
                   },
                 };
 
+                //if the parent of the aTag has a style attribute, we need to pass that along
                 if (
                   aTag.parent.attribs.style &&
                   typeof aTag.parent.attribs.style === "string" &&
