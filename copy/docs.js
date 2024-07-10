@@ -197,9 +197,9 @@ let grabDocs = (
                   },
                 };
 
-                if (
+                if (aTag.parent.attribs.style && (
                   aTag.parent.attribs.style.includes("font-style:italic") ||
-                  aTag.parent.attribs.style.includes("font-weight:700")
+                  aTag.parent.attribs.style.includes("font-weight:700"))
                 ) {
                   aTag["parent"] = {
                     attribs: {
