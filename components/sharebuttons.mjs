@@ -1,44 +1,44 @@
-import React, {useEffect, useState} from 'react'
-import * as shareStyles from '../styles/modules/share.module.less'
-import { appCheck } from '../appcheck.js'
+import React, { useEffect, useState } from "react";
+import * as shareStyles from "../styles/modules/share.module.less";
+import { appCheck } from "../appcheck.js";
 
 const ShareButtons = ({ meta, urlAdd }) => {
   // We need to run appCheck in useEffect because we need to wait for the DOM to be ready
-  let [hideSocial, setHideSocial] = useState(false)
+  let [hideSocial, setHideSocial] = useState(false);
   useEffect(() => {
     if (appCheck()) {
-      setHideSocial(true)
+      setHideSocial(true);
     }
-  }, [])
+  }, []);
 
   // Extension to URL if passed in
   if (!urlAdd) {
-    urlAdd = ''
+    urlAdd = "";
   }
 
   let facebookClick = (e) => {
-    const link = e.currentTarget.getAttribute('href')
-    e.preventDefault()
+    const link = e.currentTarget.getAttribute("href");
+    e.preventDefault();
     if (link) {
-      window.open(link, 'facebook-share-dialog', 'width=626,height=436')
+      window.open(link, "facebook-share-dialog", "width=626,height=436");
     }
-  }
+  };
 
-  let subfolder = ''
+  let subfolder = "";
   if (meta.PROJECT.SUBFOLDER) {
-    subfolder = meta.PROJECT.SUBFOLDER + '/'
+    subfolder = meta.PROJECT.SUBFOLDER + "/";
   }
 
   return (
     <div className={shareStyles.wrapper} id="sharebutton-box">
-      {!hideSocial &&
+      {!hideSocial && (
         <>
           {/* Twitter */}
           <a
-            href={`https://twitter.com/intent/tweet?url=${meta.MAIN_DOMAIN}%2F${subfolder}${meta.PROJECT.SLUG}%2F${urlAdd}&text=${meta.PROJECT.TWITTER_TEXT}`}
+            href={`https://x.com/intent/post?url=${meta.MAIN_DOMAIN}%2F${subfolder}${meta.PROJECT.SLUG}%2F${urlAdd}&text=${meta.PROJECT.TWITTER_TEXT}`}
             className={shareStyles.link}
           >
-            <svg
+            {/* <svg
               className={shareStyles.svg}
               data-icon="twitter"
               role="img"
@@ -51,6 +51,21 @@ const ShareButtons = ({ meta, urlAdd }) => {
                 data-name="Twitter Logo"
                 fill="currentColor"
                 d="M222 51.29c.15 2.16.15 4.34.15 6.52 0 66.74-50.8 143.69-143.69 143.69A142.91 142.91 0 0 1 1 178.82a102.72 102.72 0 0 0 12 .72 101.29 101.29 0 0 0 62.72-21.66 50.53 50.53 0 0 1-47.18-35.07 50.35 50.35 0 0 0 22.8-.86 50.53 50.53 0 0 1-40.52-49.5v-.64a50.25 50.25 0 0 0 22.92 6.32 50.55 50.55 0 0 1-15.6-67.42 143.38 143.38 0 0 0 104.08 52.77 50.55 50.55 0 0 1 86.06-46.06 101.19 101.19 0 0 0 32.06-12.26 50.66 50.66 0 0 1-22.2 27.93 100.89 100.89 0 0 0 29-7.94A102.84 102.84 0 0 1 222 51.29z"
+              />
+            </svg> */}
+            <svg
+              className={shareStyles.svg}
+              data-icon="twitter"
+              role="img"
+              aria-hidden="true"
+              focusable="false"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 512 512"
+            >
+              <path
+                data-name="Twitter Logo"
+                fill="currentColor"
+                d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"
               />
             </svg>
           </a>
@@ -77,7 +92,7 @@ const ShareButtons = ({ meta, urlAdd }) => {
             </svg>
           </a>
         </>
-      }
+      )}
       {/* Email */}
       <a
         href={`mailto:?subject=${meta.PROJECT.TITLE}&body=${meta.PROJECT.DESCRIPTION}%0A%0A${meta.MAIN_DOMAIN}%2F${subfolder}${meta.PROJECT.SLUG}%2F${urlAdd}`}
@@ -100,7 +115,7 @@ const ShareButtons = ({ meta, urlAdd }) => {
         </svg>
       </a>
     </div>
-  )
-}
+  );
+};
 
-export default ShareButtons
+export default ShareButtons;
