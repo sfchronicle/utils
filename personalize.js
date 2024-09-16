@@ -1,4 +1,5 @@
 // NOTE: This will only work on a deployed URL!
+// To get the stored value back, get it from "existingValue"
 const getProfileProperty = (property) => {
   return new Promise((resolve, reject) => {
     if (window) {
