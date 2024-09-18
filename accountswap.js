@@ -35,7 +35,7 @@ const pollForAccount = async function (i, isNav) {
     }
     // Check again after 1 sec
     return await setTimeout(async () => {
-      return pollForAccount(i + 1);
+      return pollForAccount(i + 1, isNav);
     }, 1000);
   }
 };
