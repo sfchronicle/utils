@@ -71,8 +71,10 @@ const listenForRegSuccess = () => {
           }
         }
       };
-      // Kick off check
-      checkForTarget(resolve);
+      // Kick off check after a short delay
+      setTimeout(() => {
+        checkForTarget(resolve);
+      }, 200);
     } else {
       console.log("Regwall: No window found");
       resolve(false);
