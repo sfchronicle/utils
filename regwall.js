@@ -1,6 +1,6 @@
 // NOTE: Script meant to be called when the regwall is requested
 // This script will listen for a successful registration, then run a function passed to it
-const listenForRegSuccess = (resultFunc, resultParams) => {
+const listenForRegSuccess = () => {
   return new Promise((resolve, reject) => {
     if (window) {
       let attempts = 0;
@@ -13,12 +13,34 @@ const listenForRegSuccess = (resultFunc, resultParams) => {
           const observerCallback = (entries, observer) => {
             entries.forEach((entry) => {
               if (!entry.isIntersecting) {
-                // Wait for element to leave view, run the provided function
-                console.log("Element is out of view!");
-                // Perform your action here
-                resultFunc(resultParams);
+                // Disconnect the observer
                 observer.disconnect();
-                innerResolve(true);
+                // Check the dataLayer for a successful registration (the regwall sends the event to GA)
+                const dataLayer = window.dataLayer;
+                let foundRegSuccess = false;
+                if (dataLayer && dataLayer.length) {
+                  for (let i = 0; i < dataLayer.length; i++) {
+                    // Make sure this item is not an array
+                    if (Array.isArray(dataLayer[i])) {
+                      continue;
+                    }
+                    if (
+                      dataLayer[i].label &&
+                      dataLayer[i].label.indexOf("Successfull Submission") > -1
+                    ) {
+                      foundRegSuccess = true;
+                      break;
+                    }
+                  }
+                }
+                if (foundRegSuccess) {
+                  // Perform your action here
+                  console.log("Registration successful!");
+                  innerResolve(true);
+                } else {
+                  console.log("User did not register");
+                  innerResolve(false);
+                }
               }
             });
           };
@@ -44,14 +66,16 @@ const listenForRegSuccess = (resultFunc, resultParams) => {
               checkForTarget(innerResolve);
             }, 200);
           } else {
-            innerResolve("Regwall: No target found after many attempts");
+            console.log("Regwall: Target element not found after attempts");
+            innerResolve(false);
           }
         }
       };
       // Kick off check
       checkForTarget(resolve);
     } else {
-      resolve("Regwall: No window found");
+      console.log("Regwall: No window found");
+      resolve(false);
     }
   });
 };
