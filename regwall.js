@@ -17,6 +17,7 @@ const listenForRegSuccess = (resultFunc, resultParams) => {
                 console.log("Element is out of view!");
                 // Perform your action here
                 resultFunc(resultParams);
+                observer.disconnect();
                 innerResolve(true);
               }
             });
