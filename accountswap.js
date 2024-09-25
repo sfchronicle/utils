@@ -24,7 +24,9 @@ const pollForAccount = async function (i, isNav) {
       const subButtonText = document.querySelector("#nav2-sub-box div");
       if (subButton && subButtonText) {
         subButton.setAttribute("href", accountURL);
+        console.log("innertext", subButtonText.innerText);
         subButtonText.innerText = "Account";
+        console.log("innertext", subButtonText.innerText);
       }
     }
     return true;
