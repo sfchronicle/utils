@@ -23,8 +23,12 @@ const pollForAccount = async function (i, isNav) {
       const subButton = document.querySelector("#nav2-sub-box");
       const subButtonText = document.querySelector("#nav2-sub-box div");
       if (subButton && subButtonText) {
-        subButton.setAttribute("href", accountURL);
         console.log("innertext", subButtonText.innerText);
+        if (!subButtonText.innerText) {
+          // If there's no innerText, keep waiting
+          return await pollForAccount(i + 1, isNav);
+        }
+        subButton.setAttribute("href", accountURL);
         subButtonText.innerText = "Account";
         console.log("innertext", subButtonText.innerText);
       }
