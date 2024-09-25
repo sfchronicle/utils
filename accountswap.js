@@ -26,6 +26,7 @@ const pollForAccount = async function (i, isNav) {
         console.log("innertext", subButtonText.innerText);
         if (!subButtonText.innerText) {
           // If there's no innerText, keep waiting
+          await new Promise((resolve) => setTimeout(resolve, 1000));
           return await pollForAccount(i + 1, isNav);
         }
         subButton.setAttribute("href", accountURL);
