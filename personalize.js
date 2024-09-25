@@ -87,6 +87,7 @@ const clearProfileProperty = (property) => {
         const properties = [property];
         profile.loadValues(properties, this, function () {
           profile.setValue(property, null);
+          window.blueConicClient.profile.updateProfile();
           resolve(true);
         });
       } else {
