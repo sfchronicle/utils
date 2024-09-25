@@ -86,7 +86,7 @@ const clearProfileProperty = (property) => {
         const profile = window.blueConicClient.profile.getProfile();
         const properties = [property];
         profile.loadValues(properties, this, function () {
-          profile.setValue(property, null);
+          profile.setValue(property, ""); // Empty string to clear
           window.blueConicClient.profile.updateProfile();
           resolve(true);
         });
