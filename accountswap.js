@@ -23,15 +23,17 @@ const pollForAccount = async function (i, isNav) {
       const subButton = document.querySelector("#nav2-sub-box");
       const subButtonText = document.querySelector("#nav2-sub-box div");
       if (subButton && subButtonText) {
-        console.log("innertext", subButtonText.innerText);
         if (!subButtonText.innerText) {
           // If there's no innerText, keep waiting
           await new Promise((resolve) => setTimeout(resolve, 1000));
           return await pollForAccount(i + 1, isNav);
         }
-        subButton.setAttribute("href", accountURL);
         subButtonText.innerText = "Account";
-        console.log("innertext", subButtonText.innerText);
+        // subButton.setAttribute("href", accountURL);
+        // Instead of having a true link, set click event to run treg.realm.iframeProfile.NavigateToIndex()
+        subButton.onclick = function () {
+          window.treg.realm.iframeProfile.NavigateToIndex();
+        };
       }
     }
     return true;
