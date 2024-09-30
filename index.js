@@ -99,7 +99,7 @@ let blendHDN = function (meta) {
 
   // HDN.dataLayer object for content and href data
   HDN.dataLayer.content.title = meta.DISPLAY_TITLE || TITLE;
-  HDN.dataLayer.content.subtitle = "";
+  HDN.dataLayer.content.subtitle = meta.PROJECT.DECK || "";
   HDN.dataLayer.content.objectId = `${SUBFOLDER}${slash}${SLUG}/${URL_ADD}`;
   HDN.dataLayer.content.objectType = "project";
 
