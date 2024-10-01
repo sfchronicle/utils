@@ -29,11 +29,12 @@ const pollForAccount = async function (i, isNav) {
           return await pollForAccount(i + 1, isNav);
         }
         subButtonText.innerText = "Account";
-        // subButton.setAttribute("href", accountURL);
         // Instead of having a true link, set click event to run treg.realm.iframeProfile.NavigateToIndex()
         subButton.onclick = function () {
           window.treg.realm.iframeProfile.NavigateToIndex();
         };
+        // Remove the old href since we're relying on the method
+        subButton.removeAttribute("href");
       }
     }
     return true;
