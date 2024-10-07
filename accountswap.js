@@ -12,18 +12,12 @@ const pollForAccount = async function (i, isNav) {
     i = 0;
   }
   // Safecheck for treg since it might not be global yet
-  console.log(
-    "treg",
-    window.treg,
-    window.treg.identity,
-    window.treg.identity.id
-  );
-  if (
-    window &&
-    window.treg &&
-    window.treg.identity &&
-    window.treg.identity.id
-  ) {
+  if (window && window.treg && window.treg.identity) {
+    // Now we have all the vars to know if we're logged in
+    if (!window.treg.identity.id) {
+      // If we don't have an identity, we're not logged in
+      return false;
+    }
     if (isNav) {
       // We got a valid entitlement! Let's see if the button exists and swap our new one in
       const subButton = document.querySelector("#nav2-sub-box");
@@ -49,12 +43,11 @@ const pollForAccount = async function (i, isNav) {
     return true;
   } else {
     if (i > 10) {
-      // If we've waited 10 seconds and there's still no entitlement, assume we aren't getting one
+      // If we've waited 5 seconds and there's still no entitlement, assume we aren't getting one
       return false;
     }
-    // Check again after 1 sec
-    // Check again after 1 sec using a Promise with async/await
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    // Check again after 0.5 sec using a Promise with async/await
+    await new Promise((resolve) => setTimeout(resolve, 500));
     return await pollForAccount(i + 1, isNav);
   }
 };
