@@ -12,6 +12,12 @@ const pollForAccount = async function (i, isNav) {
     i = 0;
   }
   // Safecheck for treg since it might not be global yet
+  console.log(
+    "treg",
+    window.treg,
+    window.treg.identity,
+    window.treg.identity.id
+  );
   if (
     window &&
     window.treg &&
