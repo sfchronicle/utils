@@ -5,13 +5,10 @@ const LayoutScript = ({ domain }) => {
   // Check if domain is string
   if (domain && typeof domain === "string") {
     // To handle multi-site publishing, we need to set the domain on client
-    if (typeof window !== "undefined") {
-      // Only save the text between https://www. and .com, ignore all text after that
-      try {
-        domain = window.location.href.match(/https:\/\/www\.(.*?)\.com/)[1];
-      } catch (err) {
-        // It's ok
-      }
+    try {
+      domain = window.location.href.match(/https:\/\/www\.(.*?)\.com/)[1];
+    } catch (err) {
+      // It's ok
     }
     // Fallback handling for domain
     domain = domain.replace("https://www.", "").replace(".com", "");
