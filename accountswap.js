@@ -28,8 +28,8 @@ const pollForAccount = async function (i, isNav) {
           await new Promise((resolve) => setTimeout(resolve, 1000));
           return await pollForAccount(i + 1, isNav);
         }
-        subButtonText.innerText = "Account";
-        subButton.setAttribute("href", accountURL);
+        // Change the inner HTML
+        subButton.innerHTML = `<div id="#nav2-sub-box" href="${accountURL}">Account</div>`;
         // Instead of having a true link, set click event to run treg.realm.iframeProfile.NavigateToIndex()
         if (window.treg.realm.iframeProfile) {
           subButton.onclick = function (e) {

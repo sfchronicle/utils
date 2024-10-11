@@ -27,8 +27,8 @@ let getNav2 = function (meta, urlAdd, forceColor, navLink, navArray) {
   }
 
   let {
-    attributes: { marketPrefix, invert, subscribeLink },
-  } = getBrands(meta.PROJECT.MARKET_KEY);
+    attributes: { marketPrefix, invert, subscribeLink, signinLink },
+  } = getBrands3(meta.PROJECT.MARKET_KEY);
   // Handle various CT domains
   if (typeof window !== "undefined") {
     switch (window.location.origin) {
@@ -138,11 +138,22 @@ let getNav2 = function (meta, urlAdd, forceColor, navLink, navArray) {
     `;
   }
 
+  // Using style tags just to make this easy
   let rightBlock = `
-    <a id="nav2-sub-box" href="${subscribeLink}" target="_blank">
+    <a id="nav2-sub-box" style="font-weight: 700;" href="${subscribeLink}" target="_blank">
       <div>Subscribe</div>
     </a>
   `;
+
+  // If there's a signin link, add it here
+  if (signinLink) {
+    rightBlock =
+      `
+    <a id="nav2-sub-box" style="margin: 0; font-weight: 700;" href="${signinLink}" target="_blank">
+      <span>Sign in</span>
+    </a>
+    <span style="font-size: 14px; padding: 2px 0 2px;">or</span>` + rightBlock;
+  }
 
   let navHTML = `<nav class="nav2-container ${invertClass}">
     <div class="nav2-left">
