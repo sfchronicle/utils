@@ -11,6 +11,17 @@ const pollForAccount = async function (i, isNav) {
   if (!i) {
     i = 0;
   }
+  // Add a click event to signin to load it with a return URL
+  //
+  if (isNav) {
+    const signinButton = document.querySelector(".hnp-signin");
+    if (signinButton) {
+      // Change the href to include the return URL params
+      signinButton.href = `${
+        signinButton.href
+      }?prevousLocation=${encodeURIComponent(window.location.href)}`;
+    }
+  }
   // Safecheck for treg since it might not be global yet
   if (window && window.treg && window.treg.identity) {
     // Now we have all the vars to know if we're logged in
