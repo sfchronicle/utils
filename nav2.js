@@ -1,4 +1,4 @@
-let { getBrands3 } = require("./brands");
+let { getBrands3 } = require("./brands3");
 
 // Handle nav for various markets and include nav options for other links
 let getNav2 = function (meta, urlAdd, forceColor, navLink, navArray) {
