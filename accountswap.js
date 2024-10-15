@@ -11,15 +11,16 @@ const pollForAccount = async function (i, isNav) {
   if (!i) {
     i = 0;
   }
-  // Add a click event to signin to load it with a return URL
-  //
+  // Add a click event to signin
   if (isNav) {
     const signinButton = document.querySelector(".hnp-signin");
     if (signinButton) {
-      // Change the href to include the return URL params
-      signinButton.href = `${
-        signinButton.href
-      }?prevousLocation=${encodeURIComponent(window.location.href)}`;
+      // Add event listener to signin button
+      signinButton.onclick = function (e) {
+        treg.realm.core.login();
+        e.preventDefault();
+        e.stopPropagation();
+      };
     }
   }
   // Safecheck for treg since it might not be global yet
@@ -31,18 +32,19 @@ const pollForAccount = async function (i, isNav) {
     }
     if (isNav) {
       // We got a valid entitlement! Let's see if the button exists and swap our new one in
-      const subButton = document.querySelector("#nav2-sub-box");
-      const subButtonText = document.querySelector("#nav2-sub-box div");
-      if (subButton && subButtonText) {
-        if (!subButtonText.innerText) {
+      const rightBlock = document.querySelector(".nav2-right");
+      if (rightBlock) {
+        if (!rightBlock.innerText) {
           // If there's no innerText, keep waiting
           await new Promise((resolve) => setTimeout(resolve, 1000));
           return await pollForAccount(i + 1, isNav);
         }
         // Change the inner HTML
-        subButton.innerHTML = `<div id="#nav2-sub-box" href="${accountURL}">Account</div>`;
+        rightBlock.innerHTML = `<div id="#nav2-sub-box" href="${accountURL}">Account</div>`;
         // Instead of having a true link, set click event to run treg.realm.iframeProfile.NavigateToIndex()
         if (window.treg.realm.iframeProfile) {
+          // Find the newly swapped button
+          const subButton = document.querySelector("#nav2-sub-box");
           subButton.onclick = function (e) {
             window.treg.realm.iframeProfile.NavigateToIndex();
             e.preventDefault();

@@ -27,7 +27,7 @@ let getNav2 = function (meta, urlAdd, forceColor, navLink, navArray) {
   }
 
   let {
-    attributes: { marketPrefix, invert, subscribeLink, signinLink },
+    attributes: { marketPrefix, invert, subscribeLink },
   } = getBrands3(meta.PROJECT.MARKET_KEY);
   // Handle various CT domains
   if (typeof window !== "undefined") {
@@ -145,15 +145,13 @@ let getNav2 = function (meta, urlAdd, forceColor, navLink, navArray) {
     </a>
   `;
 
-  // If there's a signin link, add it here
-  // if (signinLink) {
-  //   rightBlock =
-  //     `
-  //   <a id="nav2-sub-box" class="hnp-signin" style="margin: 0; font-weight: 700;" href="${signinLink}">
-  //     <span>Sign in</span>
-  //   </a>
-  //   <span style="font-size: 14px; padding: 2px 0 2px;">or</span>` + rightBlock;
-  // }
+  // Add sign-in here (we can comment this out if we want to remove this)
+  rightBlock =
+    `
+  <a id="nav2-sub-box" class="hnp-signin" style="margin: 0; font-weight: 700;" href="/realm">
+    <span>Sign in</span>
+  </a>
+  <span style="font-size: 14px; padding: 2px 0 2px;">or</span>` + rightBlock;
 
   let navHTML = `<nav class="nav2-container ${invertClass}">
     <div class="nav2-left">
