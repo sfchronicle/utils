@@ -40,7 +40,7 @@ const pollForAccount = async function (i, isNav) {
           return await pollForAccount(i + 1, isNav);
         }
         // Change the inner HTML
-        rightBlock.innerHTML = `<div id="nav2-sub-box" href="${accountURL}">Account</div>`;
+        rightBlock.innerHTML = `<a id="nav2-sub-box" href="${accountURL}"><div>Account</div></a>`;
         // Instead of having a true link, set click event to run treg.realm.iframeProfile.NavigateToIndex()
         if (window.treg.realm.iframeProfile) {
           // Find the newly swapped button
