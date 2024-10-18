@@ -2,6 +2,8 @@ import { getBlueconic } from "../../blueconic";
 import { getBrands3 } from "../../brands3";
 import { appCheck, blendHDN } from "../../index";
 
+const currentEnv = process.env.GATSBY_DEPLOY_ENV;
+
 /** Used for resizing the WCM Image */
 function debounce(fn, ms) {
   let timer;
@@ -14,7 +16,7 @@ function debounce(fn, ms) {
   };
 }
 
-function appendLayoutScripts(isEmbedded, isAdRemoved, marketKey) {
+function appendLayoutScripts(isEmbedded, isAdRemoved, marketKey, category) {
   const isApp = appCheck();
 
   // React Helmet is actually terrible and runs these scripts twice, so we are including them async ourselves
@@ -38,11 +40,48 @@ function appendLayoutScripts(isEmbedded, isAdRemoved, marketKey) {
   }
 
   if (!isEmbedded && !isAdRemoved) {
-    let script = document.createElement("script");
-    script.type = "text/javascript";
-    script.id = "adPositionManagerScriptTag";
-    script.src = "https://aps.hearstnp.com/Scripts/loadAds.js";
-    document.body.appendChild(script);
+    // If category is passed, that means we're supporting HTL
+    if (category) {
+      // Set ad params
+      if (typeof window.HDN !== "undefined") {
+        window.HDN.dataLayer.visit = window.HDN.dataLayer.visit || {};
+        window.HDN.dataLayer.visit.urlHash = window.location.hash;
+      }
+      // Get the domain off the URL
+      const domain = window.location.origin;
+      const fullURL = window.location.href;
+      const shortDomain = domain.replace("https://www.", "");
+      const script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src = `https://htlbid.com/v3/${shortDomain}/hnpbid.js`;
+      document.body.appendChild(script);
+      // Add stylesheet
+      const link = document.createElement("link");
+      link.rel = "stylesheet";
+      link.href = `https://htlbid.com/v3/${shortDomain}/hnpbid.css`;
+      document.head.appendChild(link);
+      // Add vars
+      window.hnpbid = window.hnpbid || {};
+      window.hnpbid.cmd = window.hnpbid.cmd || [];
+      window.hnpbid.cmd.push(() => {
+        window.hnpbid.setTargeting(
+          "is_testing",
+          currentEnv === "production" ? "no" : "yes"
+        ); // Set to "no" for production
+        window.hnpbid.setTargeting("is_home", "no"); // Set to "yes" on the homepage
+        window.hnpbid.setTargeting("post_id", `${fullURL}`);
+        window.hnpbid.setTargeting("category", category || "news");
+        // init
+        window.hnpbid.layout();
+      });
+    } else {
+      // If no category, this is the old version and we're supporting Juice (expires in Nov 2024)
+      let script = document.createElement("script");
+      script.type = "text/javascript";
+      script.id = "adPositionManagerScriptTag";
+      script.src = "https://aps.hearstnp.com/Scripts/loadAds.js";
+      document.body.appendChild(script);
+    }
   }
 
   // Wait a beat, then add to body so it doesn't mess with the head (which Helmet seems to want to manage)
