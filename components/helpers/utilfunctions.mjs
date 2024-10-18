@@ -61,31 +61,33 @@ function appendLayoutScripts(isEmbedded, isAdRemoved, marketKey, category) {
       link.rel = "stylesheet";
       link.href = `https://htlbid.com/v3/${shortDomain}/hnpbid.css`;
       document.head.appendChild(link);
-      // Add vars
-      if (window.hnpbid) {
-        console.log("hnpbid exists");
-        window.hnpbid = window.hnpbid || {};
-        window.hnpbid.cmd = window.hnpbid.cmd || [];
-        window.hnpbid.cmd.push(() => {
-          window.hnpbid.setTargeting(
-            "is_testing",
-            currentEnv === "production" ? "no" : "yes"
-          ); // Set to "no" for production
-          window.hnpbid.setTargeting("is_home", "no"); // Set to "yes" on the homepage
-          window.hnpbid.setTargeting("post_id", `${fullURL}`);
-          window.hnpbid.setTargeting("category", category || "news");
-          // init
-          window.hnpbid.layout();
-        });
-      } else {
-        console.log("hnpbid does not exist");
-        // If global var was not defined, start Juice
-        let script = document.createElement("script");
-        script.type = "text/javascript";
-        script.id = "adPositionManagerScriptTag";
-        script.src = "https://aps.hearstnp.com/Scripts/loadAds.js";
-        document.body.appendChild(script);
-      }
+      setTimeout(() => {
+        // Add vars after timeout
+        if (window.hnpbid) {
+          console.log("hnpbid exists");
+          window.hnpbid = window.hnpbid || {};
+          window.hnpbid.cmd = window.hnpbid.cmd || [];
+          window.hnpbid.cmd.push(() => {
+            window.hnpbid.setTargeting(
+              "is_testing",
+              currentEnv === "production" ? "no" : "yes"
+            ); // Set to "no" for production
+            window.hnpbid.setTargeting("is_home", "no"); // Set to "yes" on the homepage
+            window.hnpbid.setTargeting("post_id", `${fullURL}`);
+            window.hnpbid.setTargeting("category", category || "news");
+            // init
+            window.hnpbid.layout();
+          });
+        } else {
+          console.log("hnpbid does not exist");
+          // If global var was not defined, start Juice
+          let script = document.createElement("script");
+          script.type = "text/javascript";
+          script.id = "adPositionManagerScriptTag";
+          script.src = "https://aps.hearstnp.com/Scripts/loadAds.js";
+          document.body.appendChild(script);
+        }
+      }, 1000);
     } else {
       console.log("juice fallback");
       // If no category, this is the old version and we're supporting Juice (expires in Nov 2024)
