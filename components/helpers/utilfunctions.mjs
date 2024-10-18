@@ -18,6 +18,7 @@ function debounce(fn, ms) {
 
 function appendLayoutScripts(isEmbedded, isAdRemoved, marketKey, category) {
   const isApp = appCheck();
+  console.log("utils current env", currentEnv);
 
   // React Helmet is actually terrible and runs these scripts twice, so we are including them async ourselves
   // Run analytics and resizing scripts right away so we take care of that
