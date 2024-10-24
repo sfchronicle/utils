@@ -174,7 +174,7 @@ const LayoutHelmet = ({
       <link rel="shortcut icon" href={favHref} type="image/x-icon" />
       <link rel="canonical" href={`${CANONICAL_URL}/${url_add}`} />
       <link
-        rel="stylesheet"
+        rel="preload"
         href={`https://files.sfchronicle.com/brand-styles/${styleSheetID}.css`}
       />
 
