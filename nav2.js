@@ -149,7 +149,7 @@ let getNav2 = function (meta, urlAdd, forceColor, navLink, navArray) {
   rightBlock =
     `
   <a id="nav2-sub-box" class="hnp-signin" style="margin: 0; font-weight: 700;" href="/realm">
-    <span>Sign in</span>
+    <span>Sign&nbsp;in</span>
   </a>
   <span style="font-size: 14px; padding: 2px 0 2px;">or</span>` + rightBlock;
 
