@@ -85,7 +85,16 @@ function appendLayoutScripts(isEmbedded, isAdRemoved, marketKey, category) {
             ); // Set to "no" for production
             window.hnpbid.setTargeting("is_home", "no"); // Set to "yes" on the homepage
             window.hnpbid.setTargeting("post_id", `${fullURL}`);
-            window.hnpbid.setTargeting("category", category || "news");
+            // Split category on , and loop through
+            if (!category) {
+              category = "news";
+            }
+            const categoryArray = category.split(",");
+            let i = 1;
+            categoryArray.forEach((cat) => {
+              window.hnpbid.setTargeting("section" + i, cat);
+              i++;
+            });
             // init
             window.hnpbid.layout();
           });
