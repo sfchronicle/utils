@@ -1,7 +1,14 @@
 let { getBrands3 } = require("./brands3");
 
 // Handle nav for various markets and include nav options for other links
-let getNav2 = function (meta, urlAdd, forceColor, navLink, navArray) {
+let getNav2 = function (
+  meta,
+  urlAdd,
+  forceColor,
+  navLink,
+  navArray,
+  overrides
+) {
   // If we aren't passing meta in, we have to call getSettings here
   if (!meta) {
     let { getSettings } = require("./settings");
@@ -123,6 +130,21 @@ let getNav2 = function (meta, urlAdd, forceColor, navLink, navArray) {
     subfolder = meta.PROJECT.SUBFOLDER + "/";
   }
 
+  // Handle overrides assignment
+  let desktopIcon = `https://files.sfchronicle.com/static-assets/logos/${marketPrefix}-${color}.png`;
+  let mobileIcon = `https://files.sfchronicle.com/static-assets/logos/${marketPrefix}-square-${color}.png`;
+  if (overrides) {
+    if (overrides.desktopIcon) {
+      desktopIcon = overrides.desktopIcon;
+    }
+    if (overrides.mobileIcon) {
+      mobileIcon = overrides.mobileIcon;
+    }
+    if (overrides.subscribeLink) {
+      subscribeLink = overrides.subscribeLink;
+    }
+  }
+
   // If a link object was provided, format the insert
   let navLinkInsert = "";
   if (navLink && navLink.url !== "") {
@@ -167,12 +189,12 @@ let getNav2 = function (meta, urlAdd, forceColor, navLink, navArray) {
         <img
           class="nav2-desk-logo"
           alt="Logo"
-          src="https://files.sfchronicle.com/static-assets/logos/${marketPrefix}-${color}.png"
+          src="${desktopIcon}"
         />
         <img
           class="nav2-mobile-logo"
           alt="Logo"
-          src="https://files.sfchronicle.com/static-assets/logos/${marketPrefix}-square-${color}.png"
+          src="${mobileIcon}"
         />
       </div>
     </a>
