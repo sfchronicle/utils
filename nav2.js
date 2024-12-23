@@ -133,6 +133,7 @@ let getNav2 = function (
   // Handle overrides assignment
   let desktopIcon = `https://files.sfchronicle.com/static-assets/logos/${marketPrefix}-${color}.png`;
   let mobileIcon = `https://files.sfchronicle.com/static-assets/logos/${marketPrefix}-square-${color}.png`;
+  let iconLink = "/";
   if (overrides) {
     if (overrides.desktopIcon) {
       desktopIcon = overrides.desktopIcon;
@@ -142,6 +143,9 @@ let getNav2 = function (
     }
     if (overrides.subscribeLink) {
       subscribeLink = overrides.subscribeLink;
+    }
+    if (overrides.iconLink) {
+      iconLink = overrides.iconLink;
     }
   }
 
@@ -181,7 +185,7 @@ let getNav2 = function (
     </div>
     <div class="nav2-center">
     <a
-      href="/"
+      href="${iconLink}"
       target="_blank"
       rel="noopener noreferrer"
     >
