@@ -7,7 +7,13 @@ const getProfileProperty = (property) => {
       const checkForBlueConic = (innerResolve) => {
         if (window.blueConicClient) {
           const profile = window.blueConicClient.profile.getProfile();
-          const properties = [property];
+          // Check if property is an array
+          let properties = [];
+          if (Array.isArray(property)) {
+            properties = property;
+          } else {
+            properties = [property];
+          }
           profile.loadValues(properties, this, function () {
             var value = profile.getValue(property);
             // Return a valid result or null
