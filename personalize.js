@@ -9,17 +9,24 @@ const getProfileProperty = (property) => {
           const profile = window.blueConicClient.profile.getProfile();
           // Check if property is an array
           let properties = [];
+          let isArray = false;
           if (Array.isArray(property)) {
             properties = property;
+            isArray = true;
           } else {
             properties = [property];
           }
           profile.loadValues(properties, this, function () {
-            var value = profile.getValue(property);
-            // Return a valid result or null
-            value = value || null;
-            console.log("getProfileProperty VAL", value);
-            innerResolve({ existingValue: value, profile: profile });
+            if (isArray) {
+              console.log("getProfileProperty ARRAY VAL", properties);
+              innerResolve({ properties: properties, profile: profile });
+            } else {
+              var value = profile.getValue(property);
+              // Return a valid result or null
+              value = value || null;
+              console.log("getProfileProperty VAL", value);
+              innerResolve({ existingValue: value, profile: profile });
+            }
           });
         } else {
           attempts++;
