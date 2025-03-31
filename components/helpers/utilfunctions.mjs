@@ -16,7 +16,13 @@ function debounce(fn, ms) {
   };
 }
 
-function appendLayoutScripts(isEmbedded, isAdRemoved, marketKey, category) {
+function appendLayoutScripts(
+  isEmbedded,
+  isAdRemoved,
+  marketKey,
+  category,
+  enableBC
+) {
   const isApp = appCheck();
 
   // React Helmet is actually terrible and runs these scripts twice, so we are including them async ourselves
@@ -121,7 +127,7 @@ function appendLayoutScripts(isEmbedded, isAdRemoved, marketKey, category) {
 
   // Wait a beat, then add to body so it doesn't mess with the head (which Helmet seems to want to manage)
   setTimeout(() => {
-    if (!isEmbedded && !isApp) {
+    if (!isEmbedded && (!isApp || enableBC)) {
       let blueconicURL = getBlueconic(window.location.origin);
       let script = document.createElement("script");
       script.type = "text/javascript";
