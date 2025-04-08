@@ -45,9 +45,9 @@ let getBrands3 = function (market) {
         siteName: "The San Francisco Chronicle",
         twitter: "sfchronicle",
         gaAccount: "UA-1616916-26",
-        //subscribeLink: "https://www.sfchronicle.com/subproject",
-        subscribeLink:
-          "https://subscription.sfchronicle.com/checkout/684/1444?origin=button&ipid=project&variant=devhub",
+        subscribeLink: "https://www.sfchronicle.com/subproject",
+        // subscribeLink:
+        //   "https://subscription.sfchronicle.com/checkout/684/1444?origin=button&ipid=project&variant=devhub",
         sailCustomer: "fca2a0390286f0e53120a668534d9529",
         sailSiteName: "san-francisco-chronicle",
         siteId: 35,
