@@ -21,7 +21,8 @@ function appendLayoutScripts(
   isAdRemoved,
   marketKey,
   category,
-  enableBC
+  enableBC,
+  slug
 ) {
   const isApp = appCheck();
 
@@ -94,6 +95,10 @@ function appendLayoutScripts(
             // Split category on , and loop through
             if (!category) {
               category = "news";
+            }
+            // Set targeting slug if we have one
+            if (slug) {
+              window.hnpbid.setTargeting("page", slug);
             }
             const categoryArray = category.split(",");
             let i = 1;
