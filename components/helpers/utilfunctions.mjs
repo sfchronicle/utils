@@ -1,6 +1,7 @@
 import { getBlueconic } from "../../blueconic";
 import { getBrands3 } from "../../brands3";
 import { appCheck, blendHDN, getSettings } from "../../index";
+import systemSettings from "../../../../src/data/system_settings.sheet.json"; // to test on Monday
 
 const currentEnv = process.env.GATSBY_DEPLOY_ENV;
 
@@ -201,9 +202,10 @@ function trackEvent(
   elementContent = null,
   elementText = null
 ) {
+  console.log(systemSettings);
   const storySettings = getSettings();
   // [systemSettings] = require("../../../../src/data/story_settings.sheet.json");
-  const systemSettings = require("../../../../src/data/system_settings.sheet.json");
+  // const systemSettings = require("../../../../src/data/system_settings.sheet.json");
   const elementVariant = `${systemSettings.Repo}|${systemSettings.Project_Type}`;
   const linkUrl = `${storySettings.PROJECT.SUBFOLDER}/${storySettings.PROJECT.SLUG}`;
   const urlHash = window.HDN.dataLayer.visit.urlHash;
