@@ -166,6 +166,10 @@ const processSheetData = async (
     majorDimension: "ROWS",
   });
   var { values } = response.data;
+  if (!values || !values.length) {
+    console.log("No data found in sheet", sheet.properties.title);
+    return;
+  }
   var header = values.shift();
   var swapIndexes = [];
   console.log("Swap type:", typeof languageSwap);
