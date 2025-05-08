@@ -1,4 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
+import { trackEvent } from "./helpers/utilfunctions.mjs";
 import * as geocoderStyles from "../styles/modules/geocoder.module.less";
 
 // This is a singleton event listener that we can use to add/remove event listeners
@@ -23,9 +24,9 @@ const Geocoder = ({
   filterRegion, // You need to test results, but could also pass in a neighbourhood, district, city, county, state or administrative area
   market, // Will filter by the market's state if no filterRegion provided
   resultFunc,
-  // buttonTrackingId,  // To be used for analytics once system is more finalized
   placeholder,
   inputValueOverride, // Used to clear/change the input value from the parent component
+  buttonTrackingId = "SelectAnAddress", // A string sent as part of the onClick tracking event - can be used as an 'id' of sorts (e.g. "ScriptTool")
 }) => {
   // Show a loader when we're requesting
   const [loading, setLoading] = useState(false);
@@ -148,6 +149,7 @@ const Geocoder = ({
                 if (resultFunc) {
                   resultFunc(selectedLocation);
                 }
+                trackEvent("Click", "Dropdown", "Geocoder", buttonTrackingId);
               }
               // Hide the list now
               setLocData(null);
@@ -227,6 +229,7 @@ const Geocoder = ({
                   if (resultFunc) {
                     resultFunc(locData[i]);
                   }
+                  trackEvent("Click", "Dropdown", "Geocoder", buttonTrackingId);
                 }}
               >
                 <button
