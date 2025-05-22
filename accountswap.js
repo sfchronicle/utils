@@ -2,27 +2,34 @@
 // Any domain + /realm/ should work for an account link
 const accountURL = "/realm/";
 
-const pollForAccount = async function (i, isNav) {
+const pollForAccount = async function (i, isNav, attachedRealm) {
   // Assume it's nav
   if (isNav === undefined) {
     isNav = true;
   }
+  if (attachedRealm === undefined) {
+    attachedRealm = false;
+  }
   // Start the iterator
   if (!i) {
     i = 0;
-    // Add a click event to signin
-    if (isNav) {
-      const signinButton = document.querySelector(".hnp-signin");
-      if (signinButton) {
-        console.log("Found signin button");
-        // Add event listener to signin button
-        signinButton.onclick = function (e) {
-          console.log("Clicked signin button");
-          window.treg.realm.core.login();
-          e.preventDefault();
-          e.stopPropagation();
-        };
-      }
+  }
+  // Add a click event to signin
+  if (isNav && !attachedRealm) {
+    const signinButton = document.querySelector(".hnp-signin");
+    console.log("Signin button, looking for .hnp-signin");
+    if (signinButton) {
+      console.log("Found signin button");
+      // Add event listener to signin button
+      attachedRealm = true;
+      signinButton.onclick = function (e) {
+        console.log("Clicked signin button");
+        window.treg.realm.core.login();
+        e.preventDefault();
+        e.stopPropagation();
+      };
+    } else {
+      console.log("Didn't find signin button this time");
     }
   }
   // Safecheck for treg since it might not be global yet
@@ -63,7 +70,7 @@ const pollForAccount = async function (i, isNav) {
     }
     // Check again after 0.5 sec using a Promise with async/await
     await new Promise((resolve) => setTimeout(resolve, 500));
-    return await pollForAccount(i + 1, isNav);
+    return await pollForAccount(i + 1, isNav, attachedRealm);
   }
 };
 
