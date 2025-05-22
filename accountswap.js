@@ -10,17 +10,19 @@ const pollForAccount = async function (i, isNav) {
   // Start the iterator
   if (!i) {
     i = 0;
-  }
-  // Add a click event to signin
-  if (isNav) {
-    const signinButton = document.querySelector(".hnp-signin");
-    if (signinButton) {
-      // Add event listener to signin button
-      signinButton.onclick = function (e) {
-        treg.realm.core.login();
-        e.preventDefault();
-        e.stopPropagation();
-      };
+    // Add a click event to signin
+    if (isNav) {
+      const signinButton = document.querySelector(".hnp-signin");
+      if (signinButton) {
+        console.log("Found signin button");
+        // Add event listener to signin button
+        signinButton.onclick = function (e) {
+          console.log("Clicked signin button");
+          window.treg.realm.core.login();
+          e.preventDefault();
+          e.stopPropagation();
+        };
+      }
     }
   }
   // Safecheck for treg since it might not be global yet
