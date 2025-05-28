@@ -2,76 +2,73 @@
 // Any domain + /realm/ should work for an account link
 const accountURL = "/realm/";
 
-const pollForAccount = async function (i, isNav, attachedRealm) {
-  // Assume it's nav
-  if (isNav === undefined) {
-    isNav = true;
-  }
-  if (attachedRealm === undefined) {
-    attachedRealm = false;
-  }
-  // Start the iterator
-  if (!i) {
-    i = 0;
-  }
-  // Add a click event to signin
-  if (isNav && !attachedRealm) {
+// Attach the sign-in handler to the .hnp-signin button if not already attached
+const attachSigninHandler = async function () {
+  let attachedRealm = false;
+  let tries = 0;
+  const maxTries = 20; // 20 * 500ms = 10 seconds
+  while (!attachedRealm && tries < maxTries) {
     const signinButton = document.querySelector(".hnp-signin");
-    console.log("Signin button, looking for .hnp-signin");
-    if (signinButton) {
-      console.log("Found signin button");
-      // Add event listener to signin button
-      attachedRealm = true;
+    if (signinButton && !signinButton.dataset.realmAttached) {
+      signinButton.dataset.realmAttached = "true";
+      console.log("Attaching signin handler");
       signinButton.onclick = function (e) {
-        console.log("Clicked signin button");
-        window.treg.realm.core.login();
+        if (window.treg?.realm?.core) {
+          console.log("Logging in!");
+          window.treg.realm.core.login();
+        }
         e.preventDefault();
         e.stopPropagation();
       };
+      attachedRealm = true;
     } else {
-      console.log("Didn't find signin button this time");
+      // Wait and try again
+      await new Promise((resolve) => setTimeout(resolve, 500));
+      tries++;
     }
   }
-  // Safecheck for treg since it might not be global yet
-  if (window && window.treg && window.treg.identity) {
-    // Now we have all the vars to know if we're logged in
-    if (!window.treg.identity.id) {
-      // If we don't have an identity, we're not logged in
-      return false;
-    }
-    if (isNav) {
-      // We got a valid entitlement! Let's see if the button exists and swap our new one in
+};
+
+// Swap the Subscribe button for the Account button if logged in
+const swapSubscribeForAccount = async function () {
+  let swapped = false;
+  let tries = 0;
+  const maxTries = 20; // 20 * 500ms = 10 seconds
+  while (!swapped && tries < maxTries) {
+    if (window?.treg?.identity?.id) {
       const rightBlock = document.querySelector(".nav2-right");
       if (rightBlock) {
         if (!rightBlock.innerText) {
           // If there's no innerText, keep waiting
           await new Promise((resolve) => setTimeout(resolve, 1000));
-          return await pollForAccount(i + 1, isNav);
+          continue;
         }
-        // Change the inner HTML
         rightBlock.innerHTML = `<a id="nav2-sub-box" href="${accountURL}"><div>Account</div></a>`;
-        // Instead of having a true link, set click event to run treg.realm.iframeProfile.NavigateToIndex()
-        if (window.treg.realm.iframeProfile) {
-          // Find the newly swapped button
+        if (window.treg?.realm?.iframeProfile) {
           const subButton = document.querySelector("#nav2-sub-box");
-          subButton.onclick = function (e) {
-            window.treg.realm.iframeProfile.NavigateToIndex();
-            e.preventDefault();
-            e.stopPropagation();
-          };
+          if (subButton) {
+            subButton.onclick = function (e) {
+              window.treg.realm.iframeProfile.NavigateToIndex();
+              e.preventDefault();
+              e.stopPropagation();
+            };
+          }
         }
+        swapped = true;
       }
+    } else {
+      // Wait and try again
+      await new Promise((resolve) => setTimeout(resolve, 500));
+      tries++;
     }
-    return true;
-  } else {
-    if (i > 10) {
-      // If we've waited 5 seconds and there's still no entitlement, assume we aren't getting one
-      return false;
-    }
-    // Check again after 0.5 sec using a Promise with async/await
-    await new Promise((resolve) => setTimeout(resolve, 500));
-    return await pollForAccount(i + 1, isNav, attachedRealm);
   }
+};
+
+// Launch both processes
+const pollForAccount = async function () {
+  // Launch both async processes, but don't wait for them to finish (they are self-terminating)
+  attachSigninHandler();
+  swapSubscribeForAccount();
 };
 
 module.exports = { pollForAccount };
