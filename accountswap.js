@@ -8,13 +8,12 @@ const attachSigninHandler = async function () {
   let tries = 0;
   const maxTries = 20; // 20 * 500ms = 10 seconds
   while (!attachedRealm && tries < maxTries) {
+    tries++;
     const signinButton = document.querySelector(".hnp-signin");
     if (signinButton && !signinButton.dataset.realmAttached) {
       signinButton.dataset.realmAttached = "true";
-      console.log("Attaching signin handler");
       signinButton.onclick = function (e) {
-        if (window.treg?.realm?.core) {
-          console.log("Logging in!");
+        if (window?.treg?.realm?.core) {
           window.treg.realm.core.login();
         }
         e.preventDefault();
@@ -24,7 +23,6 @@ const attachSigninHandler = async function () {
     } else {
       // Wait and try again
       await new Promise((resolve) => setTimeout(resolve, 500));
-      tries++;
     }
   }
 };
@@ -35,16 +33,12 @@ const swapSubscribeForAccount = async function () {
   let tries = 0;
   const maxTries = 20; // 20 * 500ms = 10 seconds
   while (!swapped && tries < maxTries) {
+    tries++;
     if (window?.treg?.identity?.id) {
       const rightBlock = document.querySelector(".nav2-right");
-      if (rightBlock) {
-        if (!rightBlock.innerText) {
-          // If there's no innerText, keep waiting
-          await new Promise((resolve) => setTimeout(resolve, 1000));
-          continue;
-        }
+      if (rightBlock && rightBlock.innerText) {
         rightBlock.innerHTML = `<a id="nav2-sub-box" href="${accountURL}"><div>Account</div></a>`;
-        if (window.treg?.realm?.iframeProfile) {
+        if (window?.treg?.realm?.iframeProfile) {
           const subButton = document.querySelector("#nav2-sub-box");
           if (subButton) {
             subButton.onclick = function (e) {
@@ -52,15 +46,12 @@ const swapSubscribeForAccount = async function () {
               e.preventDefault();
               e.stopPropagation();
             };
+            swapped = true;
           }
         }
-        swapped = true;
       }
-    } else {
-      // Wait and try again
-      await new Promise((resolve) => setTimeout(resolve, 500));
-      tries++;
     }
+    await new Promise((resolve) => setTimeout(resolve, 500));
   }
 };
 
