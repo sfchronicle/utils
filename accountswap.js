@@ -34,7 +34,7 @@ const swapSubscribeForAccount = async function () {
   const maxTries = 20; // 20 * 500ms = 10 seconds
   while (!swapped && tries < maxTries) {
     tries++;
-    if (window?.treg?.identity?.id) {
+    if (window && window.treg && window.treg.identity && window.treg.identity.id) {
       const rightBlock = document.querySelector(".nav2-right");
       if (rightBlock && rightBlock.innerText) {
         rightBlock.innerHTML = `<a id="nav2-sub-box" href="${accountURL}"><div>Account</div></a>`;
