@@ -67,6 +67,37 @@ let getSettings = function () {
     if (fullAuthors.length === 0) {
       fullAuthors = null;
     }
+
+    // Default newsletter based by market
+    let defaultNewsletter, defaultNewsletterPromo, defaultNewsletterLegal;
+    switch (storySettings.Market_Key) {
+      case 'SFC':
+        defaultNewsletter = 'SFC_TheMustRead';
+        defaultNewsletterPromo = `The Chronicle's most popular stories and best reads of the moment.`;
+        defaultNewsletterLegal = `By subscribing, you agree to our <a href="https://www.sfchronicle.com/terms_of_use/">Terms of Use</a> and acknowledge that your information will be used as described in our <a href="https://www.sfchronicle.com/privacy_policy/"> Privacy Notice</a>.`;
+        break
+      case 'Houston':
+        defaultNewsletter = 'HC_The713';
+        defaultNewsletterPromo = `A morning newsletter that keeps you connected to Houston in 5 minutes or less.`;
+        defaultNewsletterLegal = `By subscribing, you agree to our <a href="https://www.houstonchronicle.com/terms_of_use/">Terms of Use</a> and acknowledge that your information will be used as described in our <a href="https://www.houstonchronicle.com/privacy_policy/"> Privacy Notice</a>.`;
+        break
+      case 'SanAntonio':
+        defaultNewsletter = 'SAEN_OnOurRadar';
+        defaultNewsletterPromo = `Get the mid-morning scoop on developing news in San Antonio.`;
+        defaultNewsletterLegal = `By subscribing, you agree to our <a href="https://www.expressnews.com/terms_of_use/">Terms of Use</a> and acknowledge that your information will be used as described in our <a href="https://www.expressnews.com/privacy_policy/"> Privacy Notice</a>.`;
+        break
+      case 'Albany':
+        defaultNewsletter = 'ALB_SundayRead';
+        defaultNewsletterPromo = `Answering the week’s biggest questions and delivering them to your inbox.`;
+        defaultNewsletterLegal = `By subscribing, you agree to our <a href="https://www.timesunion.com/termsofservice/">Terms of Use</a> and acknowledge that your information will be used as described in our <a href="https://www.timesunion.com/privacypolicy/"> Privacy Notice</a>.`;
+        break
+      case 'CT':
+        defaultNewsletter = 'ct_ins_morning_briefing';
+        defaultNewsletterPromo = `Stay connected to Connecticut's stories with a daily digest of top headlines.`;
+        defaultNewsletterLegal = `By subscribing, you agree to our <a href="https://www.ctinsider.com/tos/">Terms of Use</a> and acknowledge that your information will be used as described in our <a href="https://www.ctinsider.com/privacy/"> Privacy Notice</a>.`;
+        break
+    }
+
     // Populate with sheet settings
     settings = {
       PAYWALL_SETTING: storySettings.Paywall,
@@ -100,15 +131,18 @@ let getSettings = function () {
         NEWSLETTER_ID:
           storySettings.NewsletterID ||
           storySettings.Custom_Sailthru_ID ||
-          projectSettings.NEWSLETTER_ID,
+          projectSettings.NEWSLETTER_ID ||
+          defaultNewsletter,
         NEWSLETTER_PROMO:
           storySettings.NewsletterPromo ||
           storySettings.Custom_Signup_Text ||
-          projectSettings.NEWSLETTER_PROMO,
+          projectSettings.NEWSLETTER_PROMO ||
+          defaultNewsletterPromo,
         NEWSLETTER_LEGAL:
           storySettings.NewsletterLegal ||
           storySettings.TOS_Text ||
-          projectSettings.NEWSLETTER_LEGAL,
+          projectSettings.NEWSLETTER_LEGAL ||
+          defaultNewsletterLegal,
         // Newer things
         RELATED_LINKS_HED: storySettings.Related_Links_Hed,
         SECTION:
