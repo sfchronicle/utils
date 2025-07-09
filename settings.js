@@ -73,7 +73,7 @@ let getSettings = function () {
     switch (storySettings.Market_Key) {
       case 'SFC':
         defaultNewsletter = 'SFC_TheMustRead';
-        defaultNewsletterPromo = `The Chronicle's most popular stories and best reads of the moment.`;
+        defaultNewsletterPromo = `The Chronicle’s most popular stories and best reads of the moment.`;
         defaultNewsletterLegal = `By subscribing, you agree to our <a href="https://www.sfchronicle.com/terms_of_use/">Terms of Use</a> and acknowledge that your information will be used as described in our <a href="https://www.sfchronicle.com/privacy_policy/"> Privacy Notice</a>.`;
         break
       case 'Houston':
@@ -93,7 +93,7 @@ let getSettings = function () {
         break
       case 'CT':
         defaultNewsletter = 'ct_ins_morning_briefing';
-        defaultNewsletterPromo = `Stay connected to Connecticut's stories with a daily digest of top headlines.`;
+        defaultNewsletterPromo = `Stay connected to Connecticut’s stories with a daily digest of top headlines.`;
         defaultNewsletterLegal = `By subscribing, you agree to our <a href="https://www.ctinsider.com/tos/">Terms of Use</a> and acknowledge that your information will be used as described in our <a href="https://www.ctinsider.com/privacy/"> Privacy Notice</a>.`;
         break
     }
