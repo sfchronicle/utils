@@ -38,12 +38,7 @@ let blendHDN = function (meta) {
   if (MARKET_KEY === "CT") {
     BASE_DOMAIN = "ctinsider.com";
   }
-  let siteDomain;
-  if (CANONICAL_URL) {
-    siteDomain = CANONICAL_URL.match("^(.+?).com")[0];
-  } else {
-    siteDomain = MAIN_DOMAIN;
-  }
+  const siteDomain = MAIN_DOMAIN;
   // Check if we need a slash
   let slash = OPT_SLASH;
 
