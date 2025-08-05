@@ -199,6 +199,23 @@ let getBrands3 = function (market) {
         siteId: 20,
       },
     },
+    Austin: {
+      styles: {
+        "@brand": "#1665CF",
+        "@brand-secondary": "#303030",
+      },
+      attributes: {
+        marketPrefix: "statesman",
+        siteName: "Austin American-Statesman",
+        twitter: "statesman",
+        invert: true,
+        gaAccount: "UA-1616916-99",
+        subscribeLink: "https://subscription.statesman.com/checkout/",
+        sailCustomer: "fa8760dbd3762de6fd3247e7362c70af",
+        sailSiteName: "statesman",
+        siteId: 100,
+      },
+    },
     /* Misc */
     TK: {
       styles: {

@@ -159,6 +159,10 @@ let blendHDN = function (meta) {
       HDN.dataLayer.source.authorTitle = "Connecticut Digital Staff";
       HDN.dataLayer.source.originalSourceSite = "CT";
       break;
+    case "Austin":
+      HDN.dataLayer.source.authorTitle = "Austin American-Statesman Staff";
+      HDN.dataLayer.source.originalSourceSite = "statesman";
+      break;
   }
 
   // HDN.dataLayer object for sharing information

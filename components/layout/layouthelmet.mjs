@@ -121,6 +121,9 @@ const LayoutHelmet = ({
     // TODO: Fill this in when the sites get swapped
   } else if (MARKET_KEY === "Midcom") {
     // TODO: Fill this in when the sites get swapped
+  } else if (MARKET_KEY === "Austin") {
+    favHref =
+      "https://www.statesman.com/sites/statesman/apple-touch-icon-196x196.png";
   }
 
   // Set section with fallback

@@ -44,6 +44,7 @@ const Geocoder = ({
         break;
       case "Houston":
       case "SanAntonio":
+      case "Austin":
         filterRegion = "Texas";
         break;
       case "Albany":
