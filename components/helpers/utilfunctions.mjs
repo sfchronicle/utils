@@ -216,7 +216,7 @@ function trackEvent(
 
   if (window.dataLayer) {
     // this is NOT an embed, so push to the dataLayer
-    const urlHash = window.HDN.dataLayer.visit.urlHash;
+    const urlHash = window.HDN.dataLayer?.visit?.urlHash;
 
     window.dataLayer.push({
       event: event, //REQUIRED; Fixed value
