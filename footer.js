@@ -1,4 +1,4 @@
-let { getBrands } = require("./brands");
+let { getBrands3 } = require("./brands3");
 
 // Handle nav for various markets and include nav options for other links
 let getFooter = function (meta, forceColor) {
@@ -12,7 +12,7 @@ let getFooter = function (meta, forceColor) {
 
   let {
     attributes: { marketPrefix, invert },
-  } = getBrands(meta.PROJECT.MARKET_KEY);
+  } = getBrands3(meta.PROJECT.MARKET_KEY);
 
   // Handle various CT domains
   let eedition = "";
