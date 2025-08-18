@@ -38,8 +38,8 @@ const ShareButtons = ({ meta, urlAdd, location = "Byline" }) => {
           <a
             href={`https://www.facebook.com/sharer/sharer.php?u=${meta.MAIN_DOMAIN}%2F${subfolder}${meta.PROJECT.SLUG}%2F${urlAdd}`}
             className={shareStyles.link}
-            onClick={() => {
-              facebookClick();
+            onClick={(e) => {
+              facebookClick(e);
               trackEvent("Click", "Button", "Share", `Facebook|${location}`);
             }}
           >
