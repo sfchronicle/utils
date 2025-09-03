@@ -27,7 +27,7 @@ const LayoutHelmet = ({
       MARKET_KEY,
       CANONICAL_URL,
       ANALYTICS_CREDIT,
-      SECTION,
+      HEARST_CATEGORY,
     },
   } = meta;
 
@@ -128,8 +128,8 @@ const LayoutHelmet = ({
 
   // Set section with fallback
   let articleSection = "Local";
-  if (SECTION) {
-    articleSection = SECTION;
+  if (HEARST_CATEGORY && typeof HEARST_CATEGORY === "string") {
+    articleSection = HEARST_CATEGORY.split(",")[0];
   }
 
   // Set the default schema that will be used as a fallback
