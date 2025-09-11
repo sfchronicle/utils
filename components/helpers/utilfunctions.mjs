@@ -41,12 +41,7 @@ function appendLayoutScripts(
       j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
       f.parentNode.insertBefore(j, f);
     })(window, document, "script", "dataLayer", "GTM-P38VLD8M");
-    // Add new md5 script
-    let script = document.createElement("script");
-    script.type = "text/javascript";
-    script.src = "https://projects.sfchronicle.com/shared/js/md5.js";
-    document.body.appendChild(script);
-    // NO MORE ENSIGHTEN!
+    // NO MORE ENSIGHTEN OR MD5!
   } else {
     let script = document.createElement("script");
     script.type = "text/javascript";
