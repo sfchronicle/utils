@@ -72,8 +72,9 @@ function appendLayoutScripts(
       link.rel = "stylesheet";
       link.href = `https://htlbid.com/v3/${shortDomain}/hnpbid.css`;
       document.head.appendChild(link);
-      setTimeout(() => {
-        // Add vars after timeout
+      // Poll for hnpbid every 200ms for up to 10 seconds
+      const pollForHnpbid = (attempt = 0, maxAttempts = 50) => {
+        // 50 attempts * 200ms = 10 seconds
         if (window.hnpbid) {
           console.log("hnpbid exists");
           window.hnpbid = window.hnpbid || {};
@@ -102,24 +103,13 @@ function appendLayoutScripts(
             // init
             window.hnpbid.layout();
           });
+        } else if (attempt < maxAttempts) {
+          setTimeout(() => pollForHnpbid(attempt + 1, maxAttempts), 200);
         } else {
-          console.log("hnpbid does not exist");
-          // If global var was not defined, start Juice
-          let script = document.createElement("script");
-          script.type = "text/javascript";
-          script.id = "adPositionManagerScriptTag";
-          script.src = "https://aps.hearstnp.com/Scripts/loadAds.js";
-          document.body.appendChild(script);
+          console.log("hnpbid does not exist! ads disabled");
         }
-      }, 1000);
-    } else {
-      console.log("juice fallback");
-      // If no category, this is the old version and we're supporting Juice (expires in Nov 2024)
-      let script = document.createElement("script");
-      script.type = "text/javascript";
-      script.id = "adPositionManagerScriptTag";
-      script.src = "https://aps.hearstnp.com/Scripts/loadAds.js";
-      document.body.appendChild(script);
+      };
+      pollForHnpbid();
     }
   }
 
