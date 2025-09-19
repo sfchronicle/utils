@@ -42,7 +42,7 @@ let getBrands3 = function (market) {
       },
       attributes: {
         marketPrefix: "sf",
-        siteName: "The San Francisco Chronicle",
+        siteName: "San Francisco Chronicle",
         twitter: "sfchronicle",
         gaAccount: "UA-1616916-26",
         subscribeLink: "https://www.sfchronicle.com/subproject",
