@@ -51,6 +51,7 @@ let getBrands3 = function (market) {
         sailCustomer: "fca2a0390286f0e53120a668534d9529",
         sailSiteName: "san-francisco-chronicle",
         siteId: 35,
+        siteCode: "premiumsfgate",
       },
     },
 
@@ -70,6 +71,7 @@ let getBrands3 = function (market) {
         sailCustomer: "48e30b5083cf6bf47c519651453c9e8a",
         sailSiteName: "houston-chronicle",
         siteId: 33,
+        siteCode: "premiumchron",
       },
     },
 
@@ -89,6 +91,7 @@ let getBrands3 = function (market) {
         sailCustomer: "5bb9eee089bdc2e27cbd265535ad1f90",
         sailSiteName: "times-union",
         siteId: 3,
+        siteCode: "timesunion",
       },
     },
 
@@ -108,6 +111,7 @@ let getBrands3 = function (market) {
         sailCustomer: "aec52c4681ed63b5beab139a2584f0d4",
         sailSiteName: "san-antonio-express-news",
         siteId: 36,
+        siteCode: "premiummysa",
       },
     },
 
@@ -127,6 +131,7 @@ let getBrands3 = function (market) {
         sailCustomer: "9b21160afa226c9f84d27b47c3d52364",
         sailSiteName: "ct-insider",
         siteId: 61,
+        siteCode: "premiumctpost",
       },
     },
 
@@ -146,6 +151,7 @@ let getBrands3 = function (market) {
         sailCustomer: "4a181de0b63a131cf27f8ea9485e5e1c",
         sailSiteName: "midland-reporter-telegram",
         siteId: 57,
+        siteCode: "mrt",
       },
     },
     Midcom: {
@@ -163,6 +169,7 @@ let getBrands3 = function (market) {
         sailCustomer: "4a181de0b63a131cf27f8ea9485e5e1c",
         sailSiteName: "midland-daily-news",
         siteId: 61,
+        siteCode: "ourmidland",
       },
     },
     Conroe: {
@@ -180,6 +187,7 @@ let getBrands3 = function (market) {
         sailCustomer: "4a181de0b63a131cf27f8ea9485e5e1c",
         sailSiteName: "the-courier-of-montgomery-county",
         siteId: 68,
+        siteCode: "yourconroenews",
       },
     },
     Seattle: {
@@ -197,6 +205,7 @@ let getBrands3 = function (market) {
         sailCustomer: "da30899589786517b0c0cead37a48b06",
         sailSiteName: "seattle-post-intelligencer",
         siteId: 20,
+        siteCode: "seattlepi",
       },
     },
     Austin: {
@@ -214,6 +223,7 @@ let getBrands3 = function (market) {
         sailCustomer: "fa8760dbd3762de6fd3247e7362c70af",
         sailSiteName: "statesman",
         siteId: 100,
+        siteCode: "statesman",
       },
     },
     /* Misc */
@@ -227,6 +237,7 @@ let getBrands3 = function (market) {
         siteName: "Hearst Digital News",
         twitter: "Hearst",
         invert: true,
+        siteCode: "timesunion",
       },
     },
   };
