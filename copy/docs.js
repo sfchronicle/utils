@@ -72,9 +72,11 @@ let grabDocs = (
           .get({
             fileId,
           })
-          .catch(() => {
+          .catch((err) => {
             // Maybe service account we doesn't have permissions -- try with normal token
-            reject();
+            console.error("Error getting file metadata for fileId:", fileId);
+            console.error("Full error:", err);
+            reject(err);
           });
         if (!meta) {
           return;
@@ -96,185 +98,185 @@ let grabDocs = (
         //build file path
         var file_path = `${directory}${filename}.json`;
 
-        drive.files.export({ fileId: fileId, mimeType: "text/html" }, function (
-          err,
-          docHtml
-        ) {
-          //Here's the parser
-          var handler = new htmlparser.DomHandler(function (error, dom) {
-            //First, we establish the tag handlers object that will parse
-            //different tags in different ways
-            //zoom down below the tagHandles object...
-            var tagHandlers = {
-              //the whole body of the doc comes thru here and is passed thru the _base key
-              _base: function (tag) {
-                var str = "";
-                //for each tag in the body...
-                tag.children.forEach(function (child) {
-                  //...if the tag is in the tagHandles object, run the function
-                  //we do this because there are lots of tags that we don't want to parse
-                  if ((func = tagHandlers[child.name || child.type]))
-                    // console.log('LOG 4: printing the child ***********************')
-                    // console.log(child)
+        drive.files.export(
+          { fileId: fileId, mimeType: "text/html" },
+          function (err, docHtml) {
+            //Here's the parser
+            var handler = new htmlparser.DomHandler(function (error, dom) {
+              //First, we establish the tag handlers object that will parse
+              //different tags in different ways
+              //zoom down below the tagHandles object...
+              var tagHandlers = {
+                //the whole body of the doc comes thru here and is passed thru the _base key
+                _base: function (tag) {
+                  var str = "";
+                  //for each tag in the body...
+                  tag.children.forEach(function (child) {
+                    //...if the tag is in the tagHandles object, run the function
+                    //we do this because there are lots of tags that we don't want to parse
+                    if ((func = tagHandlers[child.name || child.type]))
+                      // console.log('LOG 4: printing the child ***********************')
+                      // console.log(child)
 
-                    str += func(child);
-                  // console.log("start of a string ***********************")
-                  // console.log(str)
-                });
-                return str;
-              },
-              text: function (textTag) {
-                // console.log('LOG 6: and finally a text tag ***********************')
-                // console.log(textTag)
+                      str += func(child);
+                    // console.log("start of a string ***********************")
+                    // console.log(str)
+                  });
+                  return str;
+                },
+                text: function (textTag) {
+                  // console.log('LOG 6: and finally a text tag ***********************')
+                  // console.log(textTag)
 
-                var styledTag = textTag.data;
-                if (textTag.parent.attribs.style !== undefined) {
-                  if (
-                    textTag.parent.attribs.style.includes("font-style:italic")
-                  ) {
-                    styledTag = "<i>" + styledTag + "</i>";
+                  var styledTag = textTag.data;
+                  if (textTag.parent.attribs.style !== undefined) {
+                    if (
+                      textTag.parent.attribs.style.includes("font-style:italic")
+                    ) {
+                      styledTag = "<i>" + styledTag + "</i>";
+                    }
+                    if (
+                      textTag.parent.attribs.style.includes("font-weight:700")
+                    ) {
+                      styledTag = "<b>" + styledTag + "</b>";
+                    }
                   }
+                  return styledTag;
+                },
+                span: function (spanTag) {
+                  //we rerun span tags thru _base to catch any nested tags
+                  //eventually, we're trying to get to a text tag
+                  return tagHandlers._base(spanTag);
+                },
+                p: function (pTag) {
+                  //we rerun p tags thru _base to catch any nested tags
+                  //eventually, we're trying to get to a text tag
+                  return tagHandlers._base(pTag) + "\n";
+                },
+                a: function (aTag) {
+                  var href = aTag.attribs.href;
+                  if (href === undefined) return "";
+
+                  // extract real URLs from Google's tracking
+                  // from: http://www.google.com/url?q=http%3A%2F%2Fwww.sfchronicle.com...
+                  // to: http://www.sfchronicle.com...
                   if (
-                    textTag.parent.attribs.style.includes("font-weight:700")
+                    aTag.attribs.href &&
+                    url.parse(aTag.attribs.href, true).query &&
+                    url.parse(aTag.attribs.href, true).query.q
                   ) {
-                    styledTag = "<b>" + styledTag + "</b>";
+                    href = url.parse(aTag.attribs.href, true).query.q;
                   }
-                }
-                return styledTag;
-              },
-              span: function (spanTag) {
-                //we rerun span tags thru _base to catch any nested tags
-                //eventually, we're trying to get to a text tag
-                return tagHandlers._base(spanTag);
-              },
-              p: function (pTag) {
-                //we rerun p tags thru _base to catch any nested tags
-                //eventually, we're trying to get to a text tag
-                return tagHandlers._base(pTag) + "\n";
-              },
-              a: function (aTag) {
-                var href = aTag.attribs.href;
-                if (href === undefined) return "";
+                  // console.log('LOG 5: printing an a tag ***********************')
+                  // console.log(aTag)
 
-                // extract real URLs from Google's tracking
-                // from: http://www.google.com/url?q=http%3A%2F%2Fwww.sfchronicle.com...
-                // to: http://www.sfchronicle.com...
-                if (
-                  aTag.attribs.href &&
-                  url.parse(aTag.attribs.href, true).query &&
-                  url.parse(aTag.attribs.href, true).query.q
-                ) {
-                  href = url.parse(aTag.attribs.href, true).query.q;
-                }
-                // console.log('LOG 5: printing an a tag ***********************')
-                // console.log(aTag)
+                  //ok if there is a bold/italics with a link, we need to do something special
+                  //because that info is with the aTag parent and not registered in the parents
+                  //of the children of the aTag.
+                  //console.log((aTag.children).length)
+                  //looks like an aTag only ever has 1 child so we can probably send it right to
+                  //text... but we probably need to reconstruct the element
+                  //so text parser expects this syntax:
+                  // { type: 'text',
+                  //   data: 'this is the text',
+                  //   parent: {
+                  //     attribs: {
+                  //       style: '-webkit-text-decoration-skip:none;color:#1155cc;font-weight:700;text-decoration:underline;text-decoration-skip-ink:none;font-style:italic'
+                  //     }
+                  //   }
+                  // }
+                  //so we need to reconstruct the aTag object to include the style info
+                  //and then send it to the text parser
 
-                //ok if there is a bold/italics with a link, we need to do something special
-                //because that info is with the aTag parent and not registered in the parents
-                //of the children of the aTag.
-                //console.log((aTag.children).length)
-                //looks like an aTag only ever has 1 child so we can probably send it right to
-                //text... but we probably need to reconstruct the element
-                //so text parser expects this syntax:
-                // { type: 'text',
-                //   data: 'this is the text',
-                //   parent: {
-                //     attribs: {
-                //       style: '-webkit-text-decoration-skip:none;color:#1155cc;font-weight:700;text-decoration:underline;text-decoration-skip-ink:none;font-style:italic'
-                //     }
-                //   }
-                // }
-                //so we need to reconstruct the aTag object to include the style info
-                //and then send it to the text parser
-
-                aTag = {
-                  type: "text",
-                  data: aTag.children[0].data,
-                  parent: {
-                    attribs: {
-                      style: aTag.parent.attribs.style,
-                    },
-                  },
-                };
-
-                //if the parent of the aTag has a style attribute, we need to pass that along
-                if (
-                  aTag.parent.attribs.style &&
-                  typeof aTag.parent.attribs.style === "string" &&
-                  (aTag.parent.attribs.style.includes("font-style:italic") ||
-                    aTag.parent.attribs.style.includes("font-weight:700"))
-                ) {
-                  aTag["parent"] = {
-                    attribs: {
-                      style: aTag.parent.attribs.style,
+                  aTag = {
+                    type: "text",
+                    data: aTag.children[0].data,
+                    parent: {
+                      attribs: {
+                        style: aTag.parent.attribs.style,
+                      },
                     },
                   };
-                }
 
-                var str = '<a target="_blank" href="' + href + '">';
-                str += tagHandlers.text(aTag);
-                str += "</a>";
-                return str;
-              },
-              li: function (tag) {
-                return "* " + tagHandlers._base(tag) + "\n";
-              },
-            };
+                  //if the parent of the aTag has a style attribute, we need to pass that along
+                  if (
+                    aTag.parent.attribs.style &&
+                    typeof aTag.parent.attribs.style === "string" &&
+                    (aTag.parent.attribs.style.includes("font-style:italic") ||
+                      aTag.parent.attribs.style.includes("font-weight:700"))
+                  ) {
+                    aTag["parent"] = {
+                      attribs: {
+                        style: aTag.parent.attribs.style,
+                      },
+                    };
+                  }
 
-            //special cases for lists
-            ["ul", "ol"].forEach(function (tag) {
-              tagHandlers[tag] = tagHandlers.span;
+                  var str = '<a target="_blank" href="' + href + '">';
+                  str += tagHandlers.text(aTag);
+                  str += "</a>";
+                  return str;
+                },
+                li: function (tag) {
+                  return "* " + tagHandlers._base(tag) + "\n";
+                },
+              };
+
+              //special cases for lists
+              ["ul", "ol"].forEach(function (tag) {
+                tagHandlers[tag] = tagHandlers.span;
+              });
+
+              //and headers
+              ["h1", "h2", "h3", "h4", "h5", "h6"].forEach(function (tag) {
+                tagHandlers[tag] = tagHandlers.p;
+              });
+
+              //dom is something that the htmlparser2 produces from our docHtml.data
+              //let's look at it
+              // console.log('LOG 2: printing the dom ***********************')
+              // console.log(dom)
+              var body = dom[0].children[1];
+
+              //all of our content is nested in dom[0].children[1] object
+              //let's look at it
+              // console.log('LOG 3: printing the body ***********************')
+              // console.log(body)
+
+              //now let's jump back to the tagHandlers object
+              var parsedText = tagHandlers._base(body);
+
+              // Convert html entities into the characters as they exist in the google doc
+              var entities = new Entities();
+              parsedText = entities.decode(parsedText);
+
+              // Remove smart quotes from inside tags
+              parsedText = parsedText.replace(/<[^<>]*>/g, function (match) {
+                return match.replace(/”|“/g, '"').replace(/‘|’/g, "'");
+              });
+
+              // Parse with Archie
+              var parsed = archieml.load(parsedText);
+
+              // Create the file
+              writeFile(file_path, JSON.stringify(parsed, null, 2));
             });
 
-            //and headers
-            ["h1", "h2", "h3", "h4", "h5", "h6"].forEach(function (tag) {
-              tagHandlers[tag] = tagHandlers.p;
-            });
+            var parser = new htmlparser.Parser(handler);
 
-            //dom is something that the htmlparser2 produces from our docHtml.data
-            //let's look at it
-            // console.log('LOG 2: printing the dom ***********************')
-            // console.log(dom)
-            var body = dom[0].children[1];
+            //This what the google doc html looks like
+            //A lot of crappy tags we don't want.
+            // console.log('LOG 1: printing the docHtml ***********************')
+            // console.log(docHtml)
 
-            //all of our content is nested in dom[0].children[1] object
-            //let's look at it
-            // console.log('LOG 3: printing the body ***********************')
-            // console.log(body)
-
-            //now let's jump back to the tagHandlers object
-            var parsedText = tagHandlers._base(body);
-
-            // Convert html entities into the characters as they exist in the google doc
-            var entities = new Entities();
-            parsedText = entities.decode(parsedText);
-
-            // Remove smart quotes from inside tags
-            parsedText = parsedText.replace(/<[^<>]*>/g, function (match) {
-              return match.replace(/”|“/g, '"').replace(/‘|’/g, "'");
-            });
-
-            // Parse with Archie
-            var parsed = archieml.load(parsedText);
-
-            // Create the file
-            writeFile(file_path, JSON.stringify(parsed, null, 2));
-          });
-
-          var parser = new htmlparser.Parser(handler);
-
-          //This what the google doc html looks like
-          //A lot of crappy tags we don't want.
-          // console.log('LOG 1: printing the docHtml ***********************')
-          // console.log(docHtml)
-
-          //now we parse the docHtml.data with our parser!
-          parser.write(docHtml.data);
-          parser.done();
-          console.log("\x1b[32m", file_path + " created successfully");
-          // Exit the promise
-          resolve(true);
-        });
+            //now we parse the docHtml.data with our parser!
+            parser.write(docHtml.data);
+            parser.done();
+            console.log("\x1b[32m", file_path + " created successfully");
+            // Exit the promise
+            resolve(true);
+          }
+        );
       }
     );
   });
