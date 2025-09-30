@@ -121,11 +121,9 @@ let getSheet = async (
       auth,
       spreadsheetId,
     })
-    .catch((err) => {
-      // Maybe service account we doesn't have permissions -- try with normal token
-      console.error("Error getting file metadata for fileId:", fileId);
-      console.error("Full error:", err);
-      reject(err);
+    .catch(() => {
+      // This might fail if we don't have access
+      reject();
     });
   if (!output) {
     return;
