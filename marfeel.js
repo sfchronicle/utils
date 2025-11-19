@@ -23,6 +23,7 @@ let getMarfeelMarket = function (MARKET_KEY) {
       marfeelMarket = "Dallas";
       break;
     case "Texcom":
+    case "Midcom":
     case "Conroe":
       marfeelMarket = "Communities";
       break;
@@ -32,10 +33,12 @@ let getMarfeelMarket = function (MARKET_KEY) {
     case "Albany":
       marfeelMarket = "Albany";
       break;
+    case "Seattle":
+      marfeelMarket = "Seattle";
+      break;
   }
 
   return marfeelMarket;
 };
 
 module.exports = { getMarfeelMarket };
-

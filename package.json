@@ -1,6 +1,6 @@
 {
   "name": "sfc-utils",
-  "version": "1.4.190",
+  "version": "1.4.191",
   "author": "ewagstaff <evanjwagstaff@gmail.com>",
   "dependencies": {
     "archieml": "^0.4.2",
