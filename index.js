@@ -263,6 +263,7 @@ let { getSpecialNav } = require("./specialnav");
 let { getFooter } = require("./footer");
 let { getTopper } = require("./topper");
 let { getBlueconic } = require("./blueconic");
+let { getMarfeelMarket } = require("./marfeel");
 let { pollForAccount } = require("./accountswap");
 
 module.exports = {
@@ -279,4 +280,5 @@ module.exports = {
   getTopper,
   getBlueconic,
   pollForAccount,
+  getMarfeelMarket,
 };
