@@ -2,7 +2,7 @@ import React from "react";
 
 import { Helmet } from "react-helmet";
 import { appCheck, getBrands2, getBrands3 } from "../../index";
-import getMarfeelMarket from "../../marfeel";
+import { getMarfeelMarket } from "../../marfeel";
 
 const LayoutHelmet = ({
   meta,
