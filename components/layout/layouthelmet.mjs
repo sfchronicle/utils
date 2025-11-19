@@ -2,6 +2,7 @@ import React from "react";
 
 import { Helmet } from "react-helmet";
 import { appCheck, getBrands2, getBrands3 } from "../../index";
+import getMarfeelMarket from "../../marfeel";
 
 const LayoutHelmet = ({
   meta,
@@ -213,6 +214,11 @@ const LayoutHelmet = ({
       <meta property="og:image" content={IMAGE} />
       <meta property="og:description" content={DESCRIPTION} />
       <meta property="og:datePublished" content={formattedPubDate} />
+
+      <meta
+        property="mrf:tags"
+        content={`market:${getMarfeelMarket(MARKET_KEY)}`}
+      ></meta>
 
       <script
         data-schema={schemaOverride.type || "NewsArticle"}
