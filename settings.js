@@ -131,15 +131,18 @@ let getSettings = function () {
         NEWSLETTER_ID:
           storySettings.NewsletterID ||
           storySettings.Custom_Sailthru_ID ||
-          defaultNewsletter,
+          defaultNewsletter ||
+          projectSettings.NEWSLETTER_ID,
         NEWSLETTER_PROMO:
           storySettings.NewsletterPromo ||
           storySettings.Custom_Signup_Text ||
-          defaultNewsletterPromo,
+          defaultNewsletterPromo ||
+          projectSettings.NEWSLETTER_PROMO,
         NEWSLETTER_LEGAL:
           storySettings.NewsletterLegal ||
           storySettings.TOS_Text ||
-          defaultNewsletterLegal,
+          defaultNewsletterLegal ||
+          projectSettings.NEWSLETTER_LEGAL,
         // Newer things
         RELATED_LINKS_HED: storySettings.Related_Links_Hed,
         SECTION:
