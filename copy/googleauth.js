@@ -46,8 +46,12 @@ var fallbackAuth = function () {
 };
 
 var authenticate = function ({ fallback }) {
+  console.log("\n========== GOOGLEAUTH: authenticate() called ==========");
+  console.log("GOOGLEAUTH: fallback parameter =", fallback);
+
   if (fallback) {
     return new Promise((resolve, reject) => {
+      console.log("GOOGLEAUTH: Using fallback auth path");
       console.log(
         "Service account failed, falling back to regular token (to use the service account, share this sheet or doc with sfchronicle-gatsby@zinc-proton-250521.iam.gserviceaccount.com)"
       );
@@ -57,13 +61,22 @@ var authenticate = function ({ fallback }) {
   // Try to use the service account first
   return new Promise((resolve, reject) => {
     try {
+      console.log("GOOGLEAUTH: Attempting service account authentication...");
+
       // If it's coming from EC2, pull from project
       if (process.env.GOOGLE_OAUTH_SYSTEM === "EC2") {
         serviceAccountCreds = "../service-account-google-creds.json";
       }
 
+      console.log("GOOGLEAUTH: Loading credentials from:", serviceAccountCreds);
+
       var serviceAccountJSON = fs.readFileSync(serviceAccountCreds, "utf-8");
       serviceAccountJSON = JSON.parse(serviceAccountJSON);
+
+      console.log(
+        "GOOGLEAUTH: Service account email:",
+        serviceAccountJSON.client_email
+      );
 
       // configure a JWT auth client
       let jwtClient = new google.auth.JWT(
@@ -75,20 +88,33 @@ var authenticate = function ({ fallback }) {
           "https://www.googleapis.com/auth/drive",
         ]
       );
+
+      console.log("GOOGLEAUTH: JWT client created, authorizing...");
+
       //authenticate request
       jwtClient.authorize(function (err, tokens) {
         if (err) {
-          console.log("Stage 1 error, fallback auth");
+          console.log("GOOGLEAUTH: Stage 1 error during jwtClient.authorize()");
+          console.log("GOOGLEAUTH: Error details:", err.message || err);
           resolve(fallbackAuth());
         } else {
           console.log("Successfully connected to service account!");
+          console.log(
+            "GOOGLEAUTH: Token type:",
+            tokens ? tokens.token_type : "unknown"
+          );
+          console.log(
+            "GOOGLEAUTH: Token expires:",
+            tokens ? tokens.expiry_date : "unknown"
+          );
           // Return the jwtClient as auth
           resolve(jwtClient);
         }
       });
     } catch (err) {
       // It's ok if it errors, we have the fallback
-      console.log("Stage 2 error, fallback auth");
+      console.log("GOOGLEAUTH: Stage 2 error (catch block)");
+      console.log("GOOGLEAUTH: Error details:", err.message || err);
       resolve(fallbackAuth());
     }
   });
