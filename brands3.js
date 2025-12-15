@@ -226,6 +226,25 @@ let getBrands3 = function (market) {
         siteCode: "statesman",
       },
     },
+    Dallas: {
+      styles: {
+        "@brand": "#1665CF",
+        "@brand-secondary": "#303030",
+      },
+      attributes: {
+        marketPrefix: "dallasnews",
+        siteName: "Dallas Morning News",
+        twitter: "dallasnews",
+        invert: true,
+        // We're faking all this stuff below until Dallas is actually in WCM
+        gaAccount: "UA-1616916-99",
+        subscribeLink: "https://join.dallasnews.com/",
+        sailCustomer: "",
+        sailSiteName: "",
+        siteId: 101,
+        siteCode: "dallasnews",
+      },
+    },
     /* Misc */
     TK: {
       styles: {
