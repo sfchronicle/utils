@@ -121,6 +121,9 @@ let getBlueconic = function (domain) {
     case "statesman.com":
       subdomain = "t235";
       break;
+    case "dallasnews.com":
+      subdomain = "p569";
+      break;
   }
 
   // If we found a subdomain, swap in the new script
