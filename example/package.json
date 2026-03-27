@@ -6,7 +6,7 @@
   "dependencies": {
     "axios": "0.27.2",
     "css.gg": "2.0.0",
-    "gatsby": "4.13.0",
+    "gatsby": "4.25.5",
     "gatsby-plugin-htaccess": "1.4.0",
     "gatsby-plugin-html-attributes": "1.0.5",
     "gatsby-plugin-less": "6.13.0",
