@@ -236,11 +236,10 @@ let getBrands3 = function (market) {
         siteName: "Dallas Morning News",
         twitter: "dallasnews",
         invert: true,
-        // We're faking all this stuff below until Dallas is actually in WCM
         gaAccount: "UA-1616916-99",
-        subscribeLink: "https://join.dallasnews.com/",
-        sailCustomer: "",
-        sailSiteName: "",
+        subscribeLink: "https://subscription.dallasnews.com/",
+        sailCustomer: "54a7348a6246e8483fe32f4979403990",
+        sailSiteName: "dallasnews",
         siteId: 101,
         siteCode: "dallasnews",
       },
@@ -266,7 +265,7 @@ let getBrands3 = function (market) {
     styles: Object.assign(defaultObj.styles, marketObj[market].styles),
     attributes: Object.assign(
       defaultObj.attributes,
-      marketObj[market].attributes
+      marketObj[market].attributes,
     ),
   };
   return combinedStyles;
