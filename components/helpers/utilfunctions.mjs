@@ -23,7 +23,7 @@ function appendLayoutScripts(
   marketKey,
   category,
   enableBC,
-  slug
+  slug,
 ) {
   const isApp = appCheck();
 
@@ -63,6 +63,10 @@ function appendLayoutScripts(
       const fullURL = window.location.href;
       const shortDomain = domain.replace("https://www.", "");
       const script = document.createElement("script");
+      // Dallas is a special flower
+      if (shortDomain === "dallasnews.com") {
+        shortDomain = "dallasmorningnews.com";
+      }
       // Try to get the htlbid URL to see if it's enabled
       script.type = "text/javascript";
       script.src = `https://htlbid.com/v3/${shortDomain}/hnpbid.js`;
@@ -82,7 +86,7 @@ function appendLayoutScripts(
           window.hnpbid.cmd.push(() => {
             window.hnpbid.setTargeting(
               "is_testing",
-              currentEnv === "production" ? "no" : "yes"
+              currentEnv === "production" ? "no" : "yes",
             ); // Set to "no" for production
             window.hnpbid.setTargeting("is_home", "no"); // Set to "yes" on the homepage
             window.hnpbid.setTargeting("post_id", `${fullURL}`);
@@ -182,7 +186,7 @@ function trackEvent(
   eventType,
   elementName = null,
   elementContent = null,
-  elementText = null
+  elementText = null,
 ) {
   // all of these variables are used regardless of if it's an embed
   const storySettings = getSettings();
