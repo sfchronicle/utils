@@ -61,7 +61,7 @@ function appendLayoutScripts(
       // Get the domain off the URL
       const domain = window.location.origin;
       const fullURL = window.location.href;
-      const shortDomain = domain.replace("https://www.", "");
+      let shortDomain = domain.replace("https://www.", "");
       const script = document.createElement("script");
       // Dallas is a special flower
       if (shortDomain === "dallasnews.com") {
