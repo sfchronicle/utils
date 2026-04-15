@@ -8,7 +8,7 @@ let settings = getSettings()
 let marketKeyArray = [
   { markets: ['SFC'], zone: 'America/Los_Angeles' },
   {
-    markets: ['Houston', 'SanAntonio', 'Texcom', 'Austin'],
+    markets: ['Houston', 'SanAntonio', 'Texcom', 'Austin','Dallas'],
     zone: 'America/Chicago',
   },
   { markets: ['Albany', 'CT', 'Midcom'], zone: 'America/New_York' },

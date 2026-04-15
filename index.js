@@ -163,6 +163,10 @@ let blendHDN = function (meta) {
       HDN.dataLayer.source.authorTitle = "Austin American-Statesman Staff";
       HDN.dataLayer.source.originalSourceSite = "statesman";
       break;
+    case "Dallas":
+      HDN.dataLayer.source.authorTitle = "Dallas Morning News Staff";
+      HDN.dataLayer.source.originalSourceSite = "dallasnews";
+      break;
   }
 
   // HDN.dataLayer object for sharing information
