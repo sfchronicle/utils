@@ -786,6 +786,60 @@ let getFooter = function (meta, forceColor) {
         },
       ],
     },
+    Dallas: {
+      About: [
+        {
+          text: 'Our Company',
+          link: 'https://www.hearst.com/the-dallas-morning-news',
+        },
+        {
+          text: 'Privacy',
+          link: '/privacy/',
+        },
+        {
+          text: 'DAA Industry Opt-Out',
+          link: '/privacy/#daaindustryoptout',
+        },
+        {
+          text: 'Terms of Use',
+          link: '/terms/',
+        },
+        {
+          text: 'Advertising',
+          link: 'https://mediumgiant.co/advertise-with-the-dallas-morning-news/',
+        },
+        {
+          text: 'Careers',
+          link: '/careers',
+        },
+      ],
+      Contact: [
+        {
+          text: 'Archives',
+          link: '/archive/search/subscriber/',
+        },
+        {
+          text: 'Customer Service',
+          link: '/help/',
+        },
+        {
+          text: 'Frequently Asked Questions',
+          link: '/subscriberfaqs/',
+        },
+        {
+          text: 'Newsroom Contacts',
+          link: '/contact/staff/',
+        },
+        {
+          text: 'Our Use of AI',
+          link: '/ai_use/',
+        },
+        {
+          text: 'Ethics Policy',
+          link: '/standards/',
+        },
+      ],
+    },
     TK: {
       About: [
         {
