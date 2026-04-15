@@ -126,6 +126,10 @@ const LayoutHelmet = ({
     favHref =
       "https://www.statesman.com/sites/statesman/apple-touch-icon-196x196.png";
   }
+  else if (MARKET_KEY === "Dallas") {
+    favHref =
+      "https://www.dallasnews.com/sites/dallasnews/apple-touch-icon-196x196.png";
+  }
 
   // Set section with fallback
   let articleSection = "Local";
