@@ -200,40 +200,33 @@ function trackEvent(
     event = "hnp_impression";
   }
 
+  const baseEvent = {
+    event: event, //REQUIRED; Fixed value
+    element_name: elementName, //REQUIRED; One of a list of tags/types of elements on the page (e.g. Button, Map, Tooltip, ToggleButton, Dropdown). TO DO: create a consistent list of this
+    element_content: elementContent, //REQUIRED; One of a list of subtypes of element types (e.g. Button) on the page (e.g. Geocoder, Searchbar, Prev/Next). TO DO: create a consistent list of this, maybe
+    element_variant: elementVariant, //REQUIRED; Template type (e.g. custom-repo-name|gatsby) (top-list|plat)
+    element_text: elementText, //REQUIRED; What was the actual text or alt-text of the thing that was clicked (InnerHTML or id specific to that element)
+    component_type: null, //OPTIONAL; If BC components uses Storybook components: Organism or molecule from storybook (whatever the highest level component from storybook that the clicked on item belongs to)
+    component_subtype: null, //OPTIONAL; If BC components uses Storybook components: Variant of the component_type from storybook
+    component_detail: null, //OPTIONAL; If BC components uses Storybook components: WCM TITLE|Position|Atom from storybook. This pipe-delimited structure is required. When values are not available for a given position, leave the position blank so the order of information doesn't change. e.g. something|| or something||something_else
+    zone: null, // OPTIONAL; For WCM components. The WCM zone the component was displayed in.
+    link_url: linkUrl, //REQUIRED; What is the slug of the project?
+    outbound: false, //REQUIRED; Boolean indicating whether the link that was clicked took the user to a different domain.
+    source_system: "devhub", //REQUIRED; What platform powered the element? One of cookie, blueconic, realm, castle, devhub, treg, legacy obits, sailthru, casper, wordpress, hnp-jwplayer, event_data_service (other options required discussion with BI/DE)
+  };
+
   if (window.dataLayer) {
     // this is NOT an embed, so push to the dataLayer
     const urlHash = window.HDN.dataLayer?.visit?.urlHash;
 
     window.dataLayer.push({
-      event: event, //REQUIRED; Fixed value
-      element_name: elementName, //REQUIRED; One of a list of tags/types of elements on the page (e.g. Button, Map, Tooltip, ToggleButton, Dropdown). TO DO: create a consistent list of this
-      element_content: elementContent, //REQUIRED; One of a list of subtypes of element types (e.g. Button) on the page (e.g. Geocoder, Searchbar, Prev/Next). TO DO: create a consistent list of this, maybe
-      element_variant: elementVariant, //REQUIRED; Template type (e.g. custom-repo-name|gatsby) (top-list|plat)
-      element_text: elementText, //REQUIRED; What was the actual text or alt-text of the thing that was clicked (InnerHTML or id specific to that element)
-      component_type: null, //OPTIONAL; If BC components uses Storybook components: Organism or molecule from storybook (whatever the highest level component from storybook that the clicked on item belongs to)
-      component_subtype: null, //OPTIONAL; If BC components uses Storybook components: Variant of the component_type from storybook
-      component_detail: null, //OPTIONAL; If BC components uses Storybook components: WCM TITLE|Position|Atom from storybook. This pipe-delimited structure is required. When values are not available for a given position, leave the position blank so the order of information doesn't change. e.g. something|| or something||something_else
-      zone: null, // OPTIONAL; For WCM components. The WCM zone the component was displayed in.
-      link_url: linkUrl, //REQUIRED; What is the slug of the project?
+      ...baseEvent,
       url_hash: urlHash, // REQUIRED;
-      outbound: false, //REQUIRED; Boolean indicating whether the link that was clicked took the user to a different domain.
-      source_system: "devhub", //REQUIRED; What platform powered the element? One of cookie, blueconic, realm, castle, devhub, treg, legacy obits, sailthru, casper, wordpress, hnp-jwplayer, event_data_service (other options required discussion with BI/DE)
     });
   } else {
     // this IS an embed, so use this special logic
     var embed_event = {
-      event: event, //REQUIRED; Fixed value
-      element_name: elementName, //REQUIRED; One of a list of tags/types of elements on the page (e.g. Button, Map, Tooltip, ToggleButton, Dropdown). TO DO: create a consistent list of this
-      element_content: elementContent, //REQUIRED; One of a list of subtypes of element types (e.g. Button) on the page (e.g. Geocoder, Searchbar, Prev/Next). TO DO: create a consistent list of this, maybe
-      element_variant: elementVariant, //REQUIRED; Template type (e.g. custom-repo-name|gatsby) (top-list|plat)
-      element_text: elementText, //REQUIRED; What was the actual text or alt-text of the thing that was clicked (InnerHTML or id specific to that element)
-      component_type: null, //OPTIONAL; If BC components uses Storybook components: Organism or molecule from storybook (whatever the highest level component from storybook that the clicked on item belongs to)
-      component_subtype: null, //OPTIONAL; If BC components uses Storybook components: Variant of the component_type from storybook
-      component_detail: null, //OPTIONAL; If BC components uses Storybook components: WCM TITLE|Position|Atom from storybook. This pipe-delimited structure is required. When values are not available for a given position, leave the position blank so the order of information doesn't change. e.g. something|| or something||something_else
-      zone: null, // OPTIONAL; For WCM components. The WCM zone the component was displayed in.
-      link_url: linkUrl, //REQUIRED; What is the slug of the project?
-      outbound: false, //REQUIRED; Boolean indicating whether the link that was clicked took the user to a different domain.
-      source_system: "devhub", //REQUIRED; What platform powered the element? One of cookie, blueconic, realm, castle, devhub, treg, legacy obits, sailthru, casper, wordpress, hnp-jwplayer, event_data_service (other options required discussion with BI/DE)
+      ...baseEvent,
       iframe_event: true,
     };
 
