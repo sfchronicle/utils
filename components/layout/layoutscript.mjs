@@ -1,6 +1,6 @@
 import React from "react";
 
-const LayoutScript = ({ domain }) => {
+const LayoutScript = ({ domain, newMarketing = false }) => {
   let domainString = "";
   // Check if domain is string
   if (domain && typeof domain === "string") {
@@ -16,11 +16,18 @@ const LayoutScript = ({ domain }) => {
   }
   return (
     <>
-      <script src="https://projects.sfchronicle.com/shared/js/jquery.min.js"></script>
+      {newMarketing && (
+        <script src="https://d29h410fx4s4sw.cloudfront.net/marketing/marketing.umd.min.js"></script>
+      )}
       {domainString && (
         <script dangerouslySetInnerHTML={{ __html: domainString }}></script>
       )}
-      <script src="https://treg.hearstnp.com/treg.js"></script>
+      {!newMarketing && (
+        <script src="https://projects.sfchronicle.com/shared/js/jquery.min.js"></script>
+      )}
+      {!newMarketing && (
+        <script src="https://treg.hearstnp.com/treg.js"></script>
+      )}
     </>
   );
 };
