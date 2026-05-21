@@ -36,20 +36,20 @@ var cast = function (str, forceStr) {
   return str;
 };
 
-let googleAuth = (project, directory = null, forceStr = false) => {
+let googleAuth = (project, directory = null, forceStr = false, options = {}) => {
   return new Promise((resolveFinal) => {
     var auth = null;
     authObj
       .authenticate({ fallback: false })
       .then((resp) => {
         auth = resp;
-        grabSheets(auth, project, directory, forceStr)
+        grabSheets(auth, project, directory, forceStr, options)
           .then(() => resolveFinal())
           .catch(() => {
             // If the first attempt failed, then make another req using the fallback
             authObj.authenticate({ fallback: true }).then((resp) => {
               auth = resp;
-              grabSheets(auth, project, directory, forceStr).then(() =>
+              grabSheets(auth, project, directory, forceStr, options).then(() =>
                 resolveFinal()
               );
             });
@@ -58,14 +58,14 @@ let googleAuth = (project, directory = null, forceStr = false) => {
       .catch(() => {
         // Failure if we fall back but there's no token
         auth = authObj.task();
-        grabSheets(auth, project, directory, forceStr).then(() =>
+        grabSheets(auth, project, directory, forceStr, options).then(() =>
           resolveFinal()
         );
       });
   });
 };
 
-let grabSheets = (auth, project, directory, forceStr) => {
+let grabSheets = (auth, project, directory, forceStr, options = {}) => {
   return new Promise((resolveAll, rejectAll) => {
     var sheetKeys = project.GOOGLE_SHEETS;
     if (!sheetKeys) {
@@ -90,7 +90,8 @@ let grabSheets = (auth, project, directory, forceStr) => {
           spreadsheetId,
           directory,
           forceStr,
-          project
+          project,
+          options
         );
       });
       promiseStack.push(promiseItem);
@@ -114,7 +115,8 @@ let getSheet = async (
   spreadsheetId,
   directory,
   forceStr,
-  project
+  project,
+  options = {}
 ) => {
   let output = await api.spreadsheets
     .get({
@@ -137,8 +139,16 @@ let getSheet = async (
   }
   console.log("language swap:", languageSwap);
   // Process all other sheets with the language swap
+  const sheetNames = Array.isArray(options.sheetNames)
+    ? options.sheetNames
+    : [];
   for (var sheet of sheets) {
     if (sheet.properties.title[0] == "_") continue;
+    if (
+      sheetNames.length &&
+      sheetNames.indexOf(sheet.properties.title) === -1
+    )
+      continue;
     await processSheetData(
       auth,
       spreadsheetId,
