@@ -25,7 +25,6 @@ const LayoutScript = ({ domain, marketingVer = 1 }) => {
     <>
       {marketingVer === 2 && (
         <>
-          <script src="https://d29h410fx4s4sw.cloudfront.net/marketing/marketing.umd.min.js"></script>
           <script
             type="text/javascript"
             dangerouslySetInnerHTML={{ __html: newRelicBrowserConfig }}
