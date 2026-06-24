@@ -11,6 +11,34 @@ var serviceAccountCreds = path.join(
   os.homedir(),
   "service-account-google-creds.json"
 );
+var authRetryDelayMs = 10000;
+var authRetryCount = 3;
+
+var wait = function (ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+};
+
+var authorizeWithRetry = async function (jwtClient) {
+  for (var attempt = 1; attempt <= authRetryCount + 1; attempt++) {
+    try {
+      return await jwtClient.authorize();
+    } catch (err) {
+      console.log(
+        `GOOGLEAUTH: jwtClient.authorize() attempt ${attempt} failed:`,
+        err.message || err
+      );
+
+      if (attempt > authRetryCount) {
+        throw err;
+      }
+
+      console.log(
+        `GOOGLEAUTH: Waiting ${authRetryDelayMs / 1000} seconds before retrying service account authentication...`
+      );
+      await wait(authRetryDelayMs);
+    }
+  }
+};
 
 var authenticate = function () {
   console.log("\n========== GOOGLEAUTH: authenticate() called ==========");
@@ -48,12 +76,8 @@ var authenticate = function () {
       console.log("GOOGLEAUTH: JWT client created, authorizing...");
 
       //authenticate request
-      jwtClient.authorize(function (err, tokens) {
-        if (err) {
-          console.log("GOOGLEAUTH: Stage 1 error during jwtClient.authorize()");
-          console.log("GOOGLEAUTH: Error details:", err.message || err);
-          reject(err);
-        } else {
+      authorizeWithRetry(jwtClient)
+        .then((tokens) => {
           console.log("Successfully connected to service account!");
           console.log(
             "GOOGLEAUTH: Token type:",
@@ -65,8 +89,12 @@ var authenticate = function () {
           );
           // Return the jwtClient as auth
           resolve(jwtClient);
-        }
-      });
+        })
+        .catch((err) => {
+          console.log("GOOGLEAUTH: Stage 1 error during jwtClient.authorize()");
+          console.log("GOOGLEAUTH: Error details:", err.message || err);
+          reject(err);
+        });
     } catch (err) {
       console.log("GOOGLEAUTH: Stage 2 error (catch block)");
       console.log("GOOGLEAUTH: Error details:", err.message || err);
