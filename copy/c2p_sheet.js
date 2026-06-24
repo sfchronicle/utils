@@ -18,54 +18,42 @@ var path = require("path");
 
 let googleAuth = (configData) => {
   var auth = null;
-  authObj
-    .authenticate({ fallback: false })
+  return authObj
+    .authenticate()
     .then((resp) => {
       auth = resp;
-      createSheet(auth, false, configData).catch(() => {
-        // If the first attempt failed, then make another req using the fallback
-        authObj.authenticate({ fallback: true }).then((resp) => {
-          auth = resp;
-          createSheet(auth, true, configData);
-        });
-      });
+      return createSheet(auth, configData);
     })
-    .catch(() => {
-      // Failure if we fall back but there's no token
-      auth = authObj.task();
-      createSheet(auth, true, configData);
+    .catch((err) => {
+      throw err;
     });
 };
 
-let createSheet = (auth, fallback, configData) => {
+let createSheet = (auth, configData) => {
   return new Promise((resolveAll, rejectAll) => {
     let gmail;
-    if (!fallback) {
-      // Only need gmail to share if it's not a fallback
-      try {
-        let credsLocation = path.join(os.homedir(), ".credentials.json");
-        let credsData = JSON.parse(fs.readFileSync(credsLocation, "utf-8"));
-        gmail = credsData.gmail;
-      } catch (err) {
-        // If we had any trouble getting the gmail address, fail out
-        console.log(err);
-        rejectAll();
-        return;
-      }
-      if (!gmail) {
-        // If gmail is blank, fail out
-        console.log("'gmail' is blank in credentials file!");
-        rejectAll();
-        return;
-      }
+    try {
+      let credsLocation = path.join(os.homedir(), ".credentials.json");
+      let credsData = JSON.parse(fs.readFileSync(credsLocation, "utf-8"));
+      gmail = credsData.gmail;
+    } catch (err) {
+      // If we had any trouble getting the gmail address, fail out
+      console.log(err);
+      rejectAll(err);
+      return;
+    }
+    if (!gmail) {
+      // If gmail is blank, fail out
+      rejectAll(new Error("'gmail' is blank in credentials file!"));
+      return;
     }
 
     const drive = google.drive({ version: "v3", auth });
     const templateId = "1DUvYnFdxtBv1AXcDI9X00s_opUSu4uHJmd5LNemCN9E";
     const body = { title: "New C2P sheet", name: configData.PROJECT.SLUG };
-    if (configData.PROJECT.MARKET_KEY === "SFC"){
+    if (configData.PROJECT.MARKET_KEY === "SFC") {
       // If this is SFC, make sure it's created in the shared folder
-      body.parents = ['1_jnRs3xOYDxm27y7TZB9gkudzTRmcd7x'];
+      body.parents = ["1_jnRs3xOYDxm27y7TZB9gkudzTRmcd7x"];
     }
     const createOptions = {
       fileId: templateId, // Base template
@@ -76,6 +64,12 @@ let createSheet = (auth, fallback, configData) => {
     drive.files.copy(
       createOptions,
       (err, resp) => {
+        if (err) {
+          console.log("An error prevented the creation of this sheet!");
+          rejectAll(err);
+          return;
+        }
+
         // Make edits to the sheet to match the repo details
         let resources = {
           auth: auth,
@@ -116,71 +110,54 @@ let createSheet = (auth, fallback, configData) => {
         writeFile("project-config.json", JSON.stringify(configData, null, 2));
 
         // Okay, now give the team permissions
-        if (err) {
-          console.log("An error prevented the creation of this sheet!");
-          rejectAll();
-        } else {
-          // If this is a fallback, it was created with the user's account, so we shouldn't need to share it -- finish up
-          if (fallback) {
-            console.log(
-              "The above errors were a failure to create the new sheet with a service account! Your default token was used instead."
-            );
-            console.log(
-              "Your new C2P sheet should be live at this URL:",
-              `https://docs.google.com/spreadsheets/d/${resp.data.id}/edit`
-            );
-            resolveAll();
-          } else {
-            const permission = {
-              type: "user",
-              role: "writer",
-              emailAddress: gmail,
-            };
-            drive.permissions.create(
-              {
-                resource: permission,
-                fileId: resp.data.id, // Modify the created file
-              },
-              (permErr, permResp) => {
-                if (permErr) {
-                  console.log("An error prevented the sharing of this sheet!");
-                  rejectAll();
-                } else {
-                  console.log(
-                    "Your new C2P sheet should be live at this URL:",
-                    `https://docs.google.com/spreadsheets/d/${resp.data.id}/edit`
-                  );
-                  console.log(
-                    `NOTE: It may take a few seconds before your gmail, ${gmail}, has access`
-                  );
-                  // Now share with the service account
-                  const permission2 = {
-                    type: "user",
-                    role: "writer",
-                    emailAddress: "sfchronicle-gatsby@zinc-proton-250521.iam.gserviceaccount.com",
-                  };
-                  drive.permissions.create(
-                    {
-                      resource: permission2,
-                      fileId: resp.data.id, // Modify the created file
-                    },
-                    (permErr, permResp) => {
-                      if (permErr) {
-                        console.log("An error prevented the sharing of this sheet with the service account!");
-                        rejectAll();
-                      } else {
-                        console.log(
-                          `Sheet also shared with service account for quick deploying!`
-                        );
-                        resolveAll();
-                      }
-                    }
-                  )
+        const permission = {
+          type: "user",
+          role: "writer",
+          emailAddress: gmail,
+        };
+        drive.permissions.create(
+          {
+            resource: permission,
+            fileId: resp.data.id, // Modify the created file
+          },
+          (permErr, permResp) => {
+            if (permErr) {
+              console.log("An error prevented the sharing of this sheet!");
+              rejectAll(permErr);
+            } else {
+              console.log(
+                "Your new C2P sheet should be live at this URL:",
+                `https://docs.google.com/spreadsheets/d/${resp.data.id}/edit`
+              );
+              console.log(
+                `NOTE: It may take a few seconds before your gmail, ${gmail}, has access`
+              );
+              // Now share with the service account
+              const permission2 = {
+                type: "user",
+                role: "writer",
+                emailAddress: "sfchronicle-gatsby@zinc-proton-250521.iam.gserviceaccount.com",
+              };
+              drive.permissions.create(
+                {
+                  resource: permission2,
+                  fileId: resp.data.id, // Modify the created file
+                },
+                (permErr, permResp) => {
+                  if (permErr) {
+                    console.log("An error prevented the sharing of this sheet with the service account!");
+                    rejectAll(permErr);
+                  } else {
+                    console.log(
+                      `Sheet also shared with service account for quick deploying!`
+                    );
+                    resolveAll();
+                  }
                 }
-              }
-            );
+              )
+            }
           }
-        }
+        );
       }
     );
   });

@@ -21,22 +21,14 @@ var Entities = require("html-entities").AllHtmlEntities;
 
 let googleAuth = (config, directory = null, filenames = null, useID = null) => {
   var auth = null;
-  authObj
-    .authenticate({ fallback: false })
+  return authObj
+    .authenticate()
     .then((resp) => {
       auth = resp;
-      grabDocs(auth, config, directory, filenames, useID).catch(() => {
-        // If the first attempt failed, then make another req using the fallback
-        authObj.authenticate({ fallback: true }).then((resp) => {
-          auth = resp;
-          grabDocs(auth, config, directory, filenames, useID);
-        });
-      });
+      return grabDocs(auth, config, directory, filenames, useID);
     })
-    .catch(() => {
-      // Failure if we fall back but there's no token
-      auth = authObj.task();
-      grabDocs(auth, config, directory, filenames, useID);
+    .catch((err) => {
+      throw err;
     });
 };
 
@@ -72,9 +64,8 @@ let grabDocs = (
           .get({
             fileId,
           })
-          .catch(() => {
-            // Maybe service account we doesn't have permissions -- try with normal token
-            reject();
+          .catch((err) => {
+            reject(err);
           });
         if (!meta) {
           return;

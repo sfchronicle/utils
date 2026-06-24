@@ -37,31 +37,17 @@ var cast = function (str, forceStr) {
 };
 
 let googleAuth = (project, directory = null, forceStr = false, options = {}) => {
-  return new Promise((resolveFinal) => {
+  return new Promise((resolveFinal, rejectFinal) => {
     var auth = null;
     authObj
-      .authenticate({ fallback: false })
+      .authenticate()
       .then((resp) => {
         auth = resp;
         grabSheets(auth, project, directory, forceStr, options)
           .then(() => resolveFinal())
-          .catch(() => {
-            // If the first attempt failed, then make another req using the fallback
-            authObj.authenticate({ fallback: true }).then((resp) => {
-              auth = resp;
-              grabSheets(auth, project, directory, forceStr, options).then(() =>
-                resolveFinal()
-              );
-            });
-          });
+          .catch((err) => rejectFinal(err));
       })
-      .catch(() => {
-        // Failure if we fall back but there's no token
-        auth = authObj.task();
-        grabSheets(auth, project, directory, forceStr, options).then(() =>
-          resolveFinal()
-        );
-      });
+      .catch((err) => rejectFinal(err));
   });
 };
 
@@ -74,10 +60,10 @@ let grabSheets = (auth, project, directory, forceStr, options = {}) => {
     }
 
     if (!sheetKeys || !sheetKeys.length) {
-      console.log(
-        "You must specify a spreadsheet key in project.json or auth.json!"
+      rejectAll(
+        new Error("You must specify a spreadsheet key in project.json or auth.json!")
       );
-      return false;
+      return;
     }
 
     let promiseStack = [];
@@ -123,9 +109,9 @@ let getSheet = async (
       auth,
       spreadsheetId,
     })
-    .catch(() => {
+    .catch((err) => {
       // This might fail if we don't have access
-      reject();
+      reject(err);
     });
   if (!output) {
     return;
