@@ -40,9 +40,11 @@ const LayoutScript = ({ domain, marketingVer = 1 }) => {
         <script dangerouslySetInnerHTML={{ __html: domainString }}></script>
       )}
       {marketingVer === 1 && (
-        <script src="https://projects.sfchronicle.com/shared/js/jquery.min.js"></script>
+        <>
+          <script src="https://projects.sfchronicle.com/shared/js/jquery.min.js"></script>
+          <script src="https://treg.hearstnp.com/treg.js"></script>
+        </>
       )}
-      <script src="https://treg.hearstnp.com/treg.js"></script>
     </>
   );
 };
