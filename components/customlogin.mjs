@@ -1,25 +1,31 @@
 import React, { useEffect, useState } from 'react'
+import { hasValidRealmAccessToken } from '../accountswap'
 
-const getTregState = () => {
+const getTregState = (strict) => {
   if (typeof window === 'undefined') {
     return {}
   }
 
   return {
     id: window.treg?.identity?.id,
+    isLoggedIn: strict
+      ? hasValidRealmAccessToken()
+      : window.treg?.identity?.id !== undefined &&
+        window.treg?.identity?.id !== null,
     core: window.treg?.realm?.core,
     iframeProfile: window.treg?.realm?.iframeProfile,
   }
 }
 
-const CustomLogin = () => {
+const CustomLogin = ({ strict = false }) => {
   const [treg, setTreg] = useState({})
 
   useEffect(() => {
     const updateTreg = () => {
-      const nextState = getTregState()
+      const nextState = getTregState(strict)
       setTreg((currentState) =>
         currentState.id === nextState.id &&
+        currentState.isLoggedIn === nextState.isLoggedIn &&
         currentState.core === nextState.core &&
         currentState.iframeProfile === nextState.iframeProfile
           ? currentState
@@ -57,7 +63,7 @@ const CustomLogin = () => {
     event.stopPropagation()
   }
 
-  if (treg.id !== undefined && treg.id !== null) {
+  if (treg.isLoggedIn) {
     return (
       <a href='#account' onClick={handleAccount}>
         Account
