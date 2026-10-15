@@ -7,7 +7,7 @@ const newRelicBrowserConfig = `
 ;NREUM.info={beacon:"bam.nr-data.net",errorBeacon:"bam.nr-data.net",licenseKey:"NRJS-bef5859a29fb3c538c2",applicationID:"626880230",sa:1};
 `;
 
-const LayoutScript = ({ domain, marketingVer = 1 }) => {
+const LayoutScript = ({ domain, marketingVer = 1, newRelic = false }) => {
   let domainString = "";
   // Check if domain is string
   if (domain && typeof domain === "string") {
@@ -23,7 +23,7 @@ const LayoutScript = ({ domain, marketingVer = 1 }) => {
   }
   return (
     <>
-      {marketingVer === 2 && (
+      {newRelic && (
         <>
           <script
             type="text/javascript"
