@@ -36,7 +36,7 @@ var cast = function (str, forceStr) {
   return str;
 };
 
-let googleAuth = (project, directory = null, forceStr = false, options = {}) => {
+let googleAuthGoogle = (project, directory = null, forceStr = false, options = {}) => {
   return new Promise((resolveFinal, rejectFinal) => {
     var auth = null;
     authObj
@@ -234,7 +234,25 @@ const processSheetData = async (
   )}.sheet.json`;
   console.log(`Saving sheet to ${file_path}`);
   // grunt.file.write(filename, JSON.stringify(out, null, 2));
-  writeFile(file_path, JSON.stringify(out, null, 2));
+  await writeFile(file_path, JSON.stringify(out, null, 2));
 };
 
-module.exports = { googleAuth };
+const googleAuth = (project, directory = null, forceStr = false, options = {}) => {
+  if (project && project.SHEETS_BACKEND === "sharepoint") {
+    return require("./sharepoint-sheets").pullSharePointSheets(
+      project,
+      directory,
+      forceStr,
+      options
+    );
+  }
+  return googleAuthGoogle(project, directory, forceStr, options);
+};
+
+const sharePointSheets = require("./sharepoint-sheets");
+module.exports = {
+  googleAuth,
+  getGoogleSheetDefinitions: sharePointSheets.getGoogleSheetDefinitions,
+  migrateGoogleSheetsToSharePoint: sharePointSheets.migrateGoogleSheetsToSharePoint,
+  pullSharePointSheets: sharePointSheets.pullSharePointSheets,
+};
