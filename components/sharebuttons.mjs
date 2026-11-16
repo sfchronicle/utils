@@ -100,7 +100,7 @@ const ShareButtons = ({ meta, urlAdd, location = "Byline" }) => {
           </a>
           {/* Bluesky */}
           <a
-            href={`https://bsky.app/intent/compose?text=${meta.PROJECT.TWITTER_TEXT}&url=${meta.MAIN_DOMAIN}%2F${subfolder}${meta.PROJECT.SLUG}%${urlAdd}`}
+            href={`https://bsky.app/intent/compose?text=${encodeURIComponent(meta.PROJECT.TWITTER_TEXT)}&url=${encodeURIComponent(`${meta.MAIN_DOMAIN}/${subfolder}${meta.PROJECT.SLUG}/${urlAdd}`)}`}
             className={shareStyles.link}
             onClick={() => {
               trackEvent("Click", "Button", "Share", `Bluesky|${location}`);
