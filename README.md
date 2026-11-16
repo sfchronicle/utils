@@ -11,6 +11,11 @@ googleAuth(project, null, true)
 
 `brands.js` has all the LESS settings that are specific to each brand. They are applied to the project in `gatsby-config.js` using the modifyVars config option. Since it's done at build time, we can only make brand distinctions by deployable market. We cannot use this same override strategy to make a style change between CTPost and New Haven Register, for example (since they are both CT market).
 
+`styles/typography/sfc.css` and `styles/typography/default.css` provide the
+legacy typography styles with a namespaced secondary-font variable that does
+not conflict with Castle's `--secondary` color. These are separate assets; the
+existing hosted stylesheets and `brands3` variables remain unchanged.
+
 `nav.js` and `footer.js` both export the HTML needed for each markets' nav and footer settings. The styles controlling the actual look of these features exists at the project level.
 
 `nav2.js` overhauls our existing nav and includes styles that are bundled in this repo, giving us an extra level of control.
